@@ -35,9 +35,8 @@ public class CharacterDash : CharacterBase
         base.Start();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Dash();
         ProcessCooldowns();
     }
 
@@ -55,10 +54,10 @@ public class CharacterDash : CharacterBase
 
     private void DashPressed(InputAction.CallbackContext context)
     {
-        ProcessAbility();
+        ProcessAbilityRequest();
     }
 
-    protected override void ProcessAbility()
+    protected override void ProcessAbilityRequest()
     {
         if (!isDashing && dashCooldownTimer >= dashCooldown)
         {
@@ -80,6 +79,8 @@ public class CharacterDash : CharacterBase
         velocityBeforeDash = _rb.velocity;
         isDashing = true;
 
+        _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
+
         StartParticles(dashParticales);
     }
 
@@ -93,23 +94,20 @@ public class CharacterDash : CharacterBase
         StopParticles(dashParticales);
     }
 
-    private void Dash()
+    protected override void ProcessCooldowns()
     {
         if (isDashing)
         {
-            _rb.velocity = velocityBeforeDash * dashSpeedMultiplayer;
     
             dashingTimer += Time.deltaTime;
             if (dashingTimer >= dashDuration)
             {
                 AbilityDeactivate();
             }
+        } else
+        {
+            dashCooldownTimer += Time.deltaTime;
         }
-    }
-
-    protected override void ProcessCooldowns()
-    {
-        dashCooldownTimer += Time.deltaTime;
     }
 
     protected override void StartParticles(List<ParticleSystem> particleList)
@@ -119,6 +117,6 @@ public class CharacterDash : CharacterBase
 
     protected override void StopParticles(List<ParticleSystem> particleList)
     {
-        base.StartParticles(particleList);
+        base.StopParticles(particleList);
     }
 }

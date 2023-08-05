@@ -16,7 +16,6 @@ public class CharacterBase : MonoBehaviour
     protected InputManager _inputManager;
 
 
-    
     protected virtual void Awake()
     {
         _inputManager = new InputManager();
@@ -47,31 +46,37 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    protected virtual void ProcessAbility()
+    // Run logic to active the ablitiy
+    protected virtual void ProcessAbilityRequest()
     {
 
     }
 
+    // Runs onces when the ability is activated
     protected virtual void AbilityActivate()
     {
 
     }
 
+    // Runs onces when the ability is dectivated
     protected virtual void AbilityDeactivate()
     {
 
     }
 
+    // Handle ability cooldowns
     protected virtual void ProcessCooldowns()
     {
 
     }
 
+    // HandleInputs
     protected virtual void HandleInput()
     {
        
     }
 
+    // Run logic behide particles
     protected virtual void HandleParticals()
     {
 

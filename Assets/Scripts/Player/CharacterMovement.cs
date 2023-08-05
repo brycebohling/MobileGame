@@ -55,10 +55,20 @@ public class CharacterMovement : CharacterBase
 
     private void FixedUpdate()
     {
-        ProcessAbility();
+        ProcessAbilityRequest();
+    }
+
+    protected override void AbilityActivate()
+    {
+        StartParticles(walkParticles);
+    }
+
+    protected override void AbilityDeactivate()
+    {
+        StopParticles(walkParticles);
     }
     
-    protected override void ProcessAbility()
+    protected override void ProcessAbilityRequest()
     {
         foreach (CharacterStates.MovementStates state in BlockingMovementStates)
         {
@@ -66,6 +76,11 @@ public class CharacterMovement : CharacterBase
             {
                 return;
             }
+        }
+
+        if (_characterStatesScript._movementState == CharacterStates.MovementStates.Walking)
+        {
+            AbilityActivate();
         }
 
         _characterStatesScript._movementState = CharacterStates.MovementStates.Walking;
@@ -81,19 +96,6 @@ public class CharacterMovement : CharacterBase
     private void SetMovement()
     {
         movementSpeed = moveDir * walkSpeed;
-    }
-
-    protected override void HandleParticals()
-    {
-
-        if (movementSpeed != Vector2.zero)
-        {
-            StartParticles(walkParticles);
-            
-        } else
-        {
-            StopParticles(walkParticles);
-        }
     }
 
     protected override void StartParticles(List<ParticleSystem> particleList)
