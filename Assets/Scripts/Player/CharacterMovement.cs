@@ -66,10 +66,10 @@ public class CharacterMovement : CharacterBase
             {
                 return;
             }
-
-            _characterStatesScript._movementState = CharacterStates.MovementStates.Walking;
-            _rb.velocity = movementSpeed;
         }
+
+        _characterStatesScript._movementState = CharacterStates.MovementStates.Walking;
+        _rb.velocity = movementSpeed;
     }
 
 

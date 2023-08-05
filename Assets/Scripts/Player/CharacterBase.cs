@@ -52,7 +52,17 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    protected virtual void ResetAbility()
+    protected virtual void AbilityActivate()
+    {
+
+    }
+
+    protected virtual void AbilityDeactivate()
+    {
+
+    }
+
+    protected virtual void ProcessCooldowns()
     {
 
     }
@@ -89,7 +99,7 @@ public class CharacterBase : MonoBehaviour
             {
                 particleSystem.Stop();
                 ParticleSystem.EmissionModule em = particleSystem.GetComponent<ParticleSystem>().emission;
-                em.enabled = false;    
+                em.enabled = false;  
             }
         }
     }

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterMovement))]
 public class CharacterDash : CharacterBase
 {
     [Header("Blocking States")]
     public CharacterStates.MovementStates[] BlockingMovementStates;
     public CharacterStates.CharacterConditions[] BlockingConditionStates;
-    
+
+    [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
-    [SerializeField] bool invisibleInDash;
+
+    [Header("Particles")]
+    [SerializeField] List<ParticleSystem> dashParticales;
 
     InputAction dashKeys;
 
@@ -33,21 +35,10 @@ public class CharacterDash : CharacterBase
         base.Start();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            _rb.velocity = velocityBeforeDash * dashSpeedMultiplayer * Time.deltaTime;
-
-            dashingTimer += Time.deltaTime;
-            if (dashingTimer >= dashDuration)
-            {
-                ResetAbility();
-            }
-        } else
-        {
-            dashCooldownTimer += Time.deltaTime;
-        }
+        Dash();
+        ProcessCooldowns();
     }
 
     protected override void OnEnable()
@@ -69,26 +60,65 @@ public class CharacterDash : CharacterBase
 
     protected override void ProcessAbility()
     {
-        Debug.Log("trying to dash");
         if (!isDashing && dashCooldownTimer >= dashCooldown)
-
-        foreach (CharacterStates.MovementStates state in BlockingMovementStates)
         {
-            if (state == _characterStatesScript._movementState)
+            foreach (CharacterStates.MovementStates state in BlockingMovementStates)
             {
-                return;
+                if (state == _characterStatesScript._movementState)
+                {
+                    return;
+                }
             }
-            Debug.Log("dash");
-            _characterStatesScript._movementState = CharacterStates.MovementStates.Dashing;
-            velocityBeforeDash = _rb.velocity;
-            isDashing = true;
+
+            AbilityActivate();
         }
     }
 
-    protected override void ResetAbility()
+    protected override void AbilityActivate()
     {
-        isDashing = false;
-        dashCooldownTimer = 0;
+        _characterStatesScript._movementState = CharacterStates.MovementStates.Dashing;
+        velocityBeforeDash = _rb.velocity;
+        isDashing = true;
+
+        StartParticles(dashParticales);
+    }
+
+    protected override void AbilityDeactivate()
+    {
         _characterStatesScript._movementState = CharacterStates.MovementStates.Idle;
+        isDashing = false;
+        dashingTimer = 0;
+        dashCooldownTimer = 0;
+        
+        StopParticles(dashParticales);
+    }
+
+    private void Dash()
+    {
+        if (isDashing)
+        {
+            _rb.velocity = velocityBeforeDash * dashSpeedMultiplayer;
+    
+            dashingTimer += Time.deltaTime;
+            if (dashingTimer >= dashDuration)
+            {
+                AbilityDeactivate();
+            }
+        }
+    }
+
+    protected override void ProcessCooldowns()
+    {
+        dashCooldownTimer += Time.deltaTime;
+    }
+
+    protected override void StartParticles(List<ParticleSystem> particleList)
+    {
+        base.StartParticles(particleList);
+    }
+
+    protected override void StopParticles(List<ParticleSystem> particleList)
+    {
+        base.StartParticles(particleList);
     }
 }
