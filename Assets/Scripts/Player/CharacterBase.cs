@@ -46,8 +46,19 @@ public class CharacterBase : MonoBehaviour
 
     }
 
+    // HandleInputs
+    protected virtual void HandleInput()
+    {
+       
+    }
+
     // Run logic to active the ablitiy
     protected virtual void ProcessAbilityRequest()
+    {
+        
+    }
+
+    protected virtual void ApplyAbility()
     {
 
     }
@@ -70,24 +81,16 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    // HandleInputs
-    protected virtual void HandleInput()
+    protected virtual void HandleParticles()
     {
-       
+        
     }
-
-    // Run logic behide particles
-    protected virtual void HandleParticals()
-    {
-
-    }
-
 
     protected virtual void StartParticles(List<ParticleSystem> particleList)
     {
         foreach (ParticleSystem particleSystem in particleList)
         {
-            if (!particleSystem.isPlaying)
+            if (!particleSystem.isEmitting)
             {
                 particleSystem.Play();
                 ParticleSystem.EmissionModule em = particleSystem.GetComponent<ParticleSystem>().emission;
@@ -100,11 +103,11 @@ public class CharacterBase : MonoBehaviour
     {
         foreach (ParticleSystem particleSystem in particleList)
         {
-            if (particleSystem.isPlaying)
+            if (particleSystem.isEmitting)
             {
                 particleSystem.Stop();
                 ParticleSystem.EmissionModule em = particleSystem.GetComponent<ParticleSystem>().emission;
-                em.enabled = false;  
+                em.enabled = false;   
             }
         }
     }

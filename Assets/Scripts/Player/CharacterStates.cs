@@ -18,6 +18,6 @@ public class CharacterStates : MonoBehaviour
         Dashing,
     }
 
-    public CharacterStates.MovementStates _movementState;
-    public CharacterStates.CharacterConditions _characterConditionState;
+    public CharacterStates.MovementStates movementState;
+    public CharacterStates.CharacterConditions conditionState;
 }

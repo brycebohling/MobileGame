@@ -7,7 +7,7 @@ public class CharacterDash : CharacterBase
 {
     [Header("Blocking States")]
     public CharacterStates.MovementStates[] BlockingMovementStates;
-    public CharacterStates.CharacterConditions[] BlockingConditionStates;
+    public CharacterStates.CharacterConditions[] BlockingAbilityStates;
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
@@ -63,7 +63,7 @@ public class CharacterDash : CharacterBase
         {
             foreach (CharacterStates.MovementStates state in BlockingMovementStates)
             {
-                if (state == _characterStatesScript._movementState)
+                if (state == _characterStatesScript.movementState)
                 {
                     return;
                 }
@@ -75,7 +75,7 @@ public class CharacterDash : CharacterBase
 
     protected override void AbilityActivate()
     {
-        _characterStatesScript._movementState = CharacterStates.MovementStates.Dashing;
+        _characterStatesScript.movementState = CharacterStates.MovementStates.Dashing;
         velocityBeforeDash = _rb.velocity;
         isDashing = true;
 
@@ -86,7 +86,7 @@ public class CharacterDash : CharacterBase
 
     protected override void AbilityDeactivate()
     {
-        _characterStatesScript._movementState = CharacterStates.MovementStates.Idle;
+        _characterStatesScript.movementState = CharacterStates.MovementStates.Idle;
         isDashing = false;
         dashingTimer = 0;
         dashCooldownTimer = 0;
