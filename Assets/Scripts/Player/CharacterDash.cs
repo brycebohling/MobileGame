@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CharacterStates))]
 public class CharacterDash : CharacterBase
 {
     [Header("Blocking States")]
     public CharacterStates.MovementStates[] BlockingMovementStates;
-    public CharacterStates.CharacterConditions[] BlockingAbilityStates;
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
@@ -63,7 +64,7 @@ public class CharacterDash : CharacterBase
         {
             foreach (CharacterStates.MovementStates state in BlockingMovementStates)
             {
-                if (state == _characterStatesScript.movementState)
+                if (state == _characterStatesScript.MovementState)
                 {
                     return;
                 }
@@ -75,7 +76,7 @@ public class CharacterDash : CharacterBase
 
     protected override void AbilityActivate()
     {
-        _characterStatesScript.movementState = CharacterStates.MovementStates.Dashing;
+        _characterStatesScript.MovementState = CharacterStates.MovementStates.Dashing;
         velocityBeforeDash = _rb.velocity;
         isDashing = true;
 
@@ -86,7 +87,7 @@ public class CharacterDash : CharacterBase
 
     protected override void AbilityDeactivate()
     {
-        _characterStatesScript.movementState = CharacterStates.MovementStates.Idle;
+        _characterStatesScript.MovementState = CharacterStates.MovementStates.Idle;
         isDashing = false;
         dashingTimer = 0;
         dashCooldownTimer = 0;

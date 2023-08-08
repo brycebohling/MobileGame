@@ -9,15 +9,9 @@ public class CharacterStates : MonoBehaviour
         Walking,
         Idle,
         Dashing,
+        Attacking,
+        Partolling,
     }
 
-    public enum CharacterConditions
-    {
-        Walking,
-        Idle,
-        Dashing,
-    }
-
-    public CharacterStates.MovementStates movementState;
-    public CharacterStates.CharacterConditions conditionState;
+    public CharacterStates.MovementStates MovementState;
 }

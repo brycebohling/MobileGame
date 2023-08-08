@@ -1,16 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CharacterStates))]
 public class CharacterMovement : CharacterBase
 {   
     [Header("Blocking States")]
     public CharacterStates.MovementStates[] BlockingMovementStates;
-    public CharacterStates.CharacterConditions[] BlockingAbilityStates;
 
     [Header("Speeds")]
     [SerializeField] float walkSpeed;
@@ -19,7 +18,6 @@ public class CharacterMovement : CharacterBase
     [SerializeField] List<ParticleSystem> walkParticles;
 
     
-
     InputAction movementKeys;
     public Vector2 moveDir;
     Vector2 movementSpeed;
@@ -72,13 +70,13 @@ public class CharacterMovement : CharacterBase
             SetMovement();
             ProcessAbilityRequest();
 
-        } else if (_characterStatesScript.movementState == CharacterStates.MovementStates.Walking)
+        } else if (_characterStatesScript.MovementState == CharacterStates.MovementStates.Walking)
         {
             _rb.velocity = Vector2.zero;
             canUseAbility = false;
             AbilityDeactivate();
 
-            _characterStatesScript.movementState = CharacterStates.MovementStates.Idle;
+            _characterStatesScript.MovementState = CharacterStates.MovementStates.Idle;
         }
     }
 
@@ -91,7 +89,7 @@ public class CharacterMovement : CharacterBase
     {
         foreach (CharacterStates.MovementStates state in BlockingMovementStates)
         {
-            if (state == _characterStatesScript.movementState)
+            if (state == _characterStatesScript.MovementState)
             {
                 if (firstTimeBlocked) 
                 {
@@ -109,7 +107,7 @@ public class CharacterMovement : CharacterBase
             AbilityActivate();
         }
 
-        _characterStatesScript.movementState = CharacterStates.MovementStates.Walking;
+        _characterStatesScript.MovementState = CharacterStates.MovementStates.Walking;
         canUseAbility = true;
     }
 
