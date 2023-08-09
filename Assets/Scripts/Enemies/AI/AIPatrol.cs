@@ -8,12 +8,14 @@ public class AIPatrol : AIBase
     public AIStates.States[] BlockingActionStates;
     [SerializeField] float patrolRadius;
     [SerializeField] float patrolSpeed;
-    [SerializeField] float timeBetweenMovementMin;
-    [SerializeField] float timeBetweenMovementMax;
+    [SerializeField] float tbMovementMin;
+    [SerializeField] float tbMovementMax;
+    [SerializeField] float moveTimeBeforeReroute;
     [SerializeField] float requiredDistanceFromPoint;
 
     Vector2 startPos;
-    float timeBetweenNextMovement;
+    float tbNextMovement;
+    float timeTillReroute;
     bool isMovingToPoint;
     Vector2 movePoint;
 
@@ -44,7 +46,8 @@ public class AIPatrol : AIBase
 
     protected override void RestAction()
     {
-        timeBetweenNextMovement = 0;
+        tbNextMovement = 0;
+        timeTillReroute = 0;
         isMovingToPoint = false;
         movePoint = Vector2.zero;
     }
@@ -58,18 +61,26 @@ public class AIPatrol : AIBase
                 _rb.velocity = Vector2.zero;
 
                 isMovingToPoint = false;
-                timeBetweenNextMovement = Random.Range(timeBetweenMovementMin, timeBetweenMovementMax);
-            }
-        } else
-        {
-            if (timeBetweenNextMovement <= 0)
-            {
-                MoveToNextPoint(GetMovePos());
-                _aIStatesScript.State = AIStates.States.Patrolling;
-                
+                tbNextMovement = Random.Range(tbMovementMin, tbMovementMax);
             } else
             {
-                timeBetweenNextMovement -= Time.deltaTime;
+                timeTillReroute += Time.deltaTime;
+
+                if (timeTillReroute >= moveTimeBeforeReroute)
+                {
+                    MoveToNextPoint(GetMovePos());
+                }
+            }
+
+        } else
+        {
+            if (tbNextMovement <= 0)
+            {
+                MoveToNextPoint(GetMovePos());
+
+            } else
+            {
+                tbNextMovement -= Time.deltaTime;
 
                 _aIStatesScript.State = AIStates.States.Idle;
             }
@@ -88,6 +99,8 @@ public class AIPatrol : AIBase
         _rb.velocity = moveDir * patrolSpeed;
 
         isMovingToPoint = true;
+        _aIStatesScript.State = AIStates.States.Patrolling;
+        timeTillReroute = 0;
     }
 
 

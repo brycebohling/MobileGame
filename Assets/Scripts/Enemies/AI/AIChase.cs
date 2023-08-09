@@ -7,6 +7,7 @@ public class AIChase : AIBase
     public AIStates.States[] BlockingActionStates;
     [SerializeField] float chaseSpeed;
     [SerializeField] float targetingRadius;
+    [SerializeField] float rotationSpeed;
     [SerializeField] LayerMask playerLayer;
 
 
@@ -58,7 +59,6 @@ public class AIChase : AIBase
     private void MoveToClosestPlayer(Vector2 closestPlayer)
     {
         Vector2 moveDir = (closestPlayer - (Vector2)transform.position).normalized;
-
         _rb.velocity = moveDir * chaseSpeed;
     }
 

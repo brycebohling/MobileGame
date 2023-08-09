@@ -6353,7 +6353,8 @@ GameObject:
   - component: {fileID: 1763918392}
   - component: {fileID: 1763918393}
   - component: {fileID: 1763918395}
-  - component: {fileID: 1763918394}
+  - component: {fileID: 1763918397}
+  - component: {fileID: 1763918396}
   - component: {fileID: 1763918391}
   m_Layer: 0
   m_Name: AITest
@@ -6422,7 +6423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763918387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.01, y: 0, z: 0}
+  m_LocalPosition: {x: 2.81, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6484,24 +6485,10 @@ MonoBehaviour:
   BlockingActionStates: 0200000003000000
   patrolRadius: 4
   patrolSpeed: 2
-  timeBetweenMovementMin: 0.5
-  timeBetweenMovementMax: 1.5
+  tbMovementMin: 0.5
+  tbMovementMax: 2
+  moveTimeBeforeReroute: 5
   requiredDistanceFromPoint: 0.5
---- !u!114 &1763918394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763918387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 561fc704481d7401391243aa20a5ede6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BlockingActionStates: 
-  dmg: 0
-  tbAttacks: 0
 --- !u!114 &1763918395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6517,6 +6504,38 @@ MonoBehaviour:
   BlockingActionStates: 02000000
   chaseSpeed: 2
   targetingRadius: 4
+  rotationSpeed: 720
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &1763918396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763918387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d8be3e5a0db408e90469b583faabda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1763918397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763918387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561fc704481d7401391243aa20a5ede6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockingActionStates: 
+  dmg: 0
+  tbAttacks: 0
+  attackRadius: 1.25
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
