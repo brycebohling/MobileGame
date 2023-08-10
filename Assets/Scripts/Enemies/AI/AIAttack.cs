@@ -41,31 +41,28 @@ public class AIAttack : AIBase
 
         if (hitPlayers.Length != 0)
         {
-            float closestPlayerDistance = 10000;
-            Vector2 closestPlayerPos = Vector2.zero;
-
+            Vector2 closestPlayerPos = hitPlayers[0].transform.position - transform.position;
+            
             foreach (RaycastHit2D hitPlayer in hitPlayers)
             {
-                if (Vector2.Distance(transform.position, hitPlayer.transform.position) < closestPlayerDistance)
+                if (((Vector2)hitPlayer.transform.position - (Vector2)transform.position).sqrMagnitude < closestPlayerPos.sqrMagnitude)
                 {
-                    closestPlayerDistance = Vector2.Distance(transform.position, hitPlayer.transform.position);
                     closestPlayerPos = hitPlayer.transform.position;
                 }
             }
 
-            AttackPlayer(closestPlayerPos);
-
-            _aIStatesScript.State = AIStates.States.Attacking;
-
-        } else if (_aIStatesScript.State == AIStates.States.Attacking)
-        {
-            _aIStatesScript.State = AIStates.States.Idle;
+            // AttackPlayer(closestPlayerPos);
         }
     }
 
     private void AttackPlayer(Vector2 closestPlayer)
     {
-        attackScript.StartAttack();
+        attackScript.StartAttack(closestPlayer);
+    }
+
+    private void EndAttackPlayer(Vector2 closestPlayer)
+    {
+        _aIStatesScript.State = AIStates.States.Idle;
     }
 
     private void OnDrawGizmos()

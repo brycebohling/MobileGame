@@ -6356,8 +6356,9 @@ GameObject:
   - component: {fileID: 1763918397}
   - component: {fileID: 1763918396}
   - component: {fileID: 1763918391}
+  - component: {fileID: 1763918398}
   m_Layer: 0
-  m_Name: AITest
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6404,7 +6405,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 1670065338, guid: 11776d7534de84505bcb5c63d772efc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6423,7 +6424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763918387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.81, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6520,6 +6521,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8be3e5a0db408e90469b583faabda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temp: {fileID: 7502968413870402573, guid: 06ce68c41694e4333b60b934c3612ae3, type: 3}
+  jumpForce: {x: 2, y: 3}
+  gravityScale: 3
+  jumpDistance: 3
 --- !u!114 &1763918397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6532,13 +6537,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561fc704481d7401391243aa20a5ede6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 
+  BlockingActionStates: 02000000
   dmg: 0
   tbAttacks: 0
   attackRadius: 1.25
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!95 &1763918398
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763918387}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 20da6a80df11241f19d6d3653b996a4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1774151590
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IAttacker
 {
-    void StartAttack();
+    void StartAttack(Vector2 closestPlayer);
+
+    void EndAttack();
 }

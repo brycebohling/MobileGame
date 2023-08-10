@@ -34,14 +34,14 @@ public class AIChase : AIBase
 
         if (hitPlayers.Length != 0)
         {
-            float closestPlayerDistance = 10000;
-            Vector2 closestPlayerPos = Vector2.zero;
+            Vector2 closestPlayerDistance = hitPlayers[0].transform.position - transform.position;
+            Vector2 closestPlayerPos = hitPlayers[0].transform.position;
 
             foreach (RaycastHit2D hitPlayer in hitPlayers)
             {
-                if (Vector2.Distance(transform.position, hitPlayer.transform.position) < closestPlayerDistance)
+                if (((Vector2)hitPlayer.transform.position - (Vector2)transform.position).sqrMagnitude < closestPlayerDistance.sqrMagnitude)
                 {
-                    closestPlayerDistance = Vector2.Distance(transform.position, hitPlayer.transform.position);
+                    closestPlayerDistance = hitPlayer.transform.position - transform.position;
                     closestPlayerPos = hitPlayer.transform.position;
                 }
             }
