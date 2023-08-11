@@ -64,13 +64,13 @@ public class CharacterBase : MonoBehaviour
     }
 
     // Runs onces when the ability is activated
-    protected virtual void AbilityActivate()
+    protected virtual void OnAbilityActivate()
     {
 
     }
 
     // Runs onces when the ability is dectivated
-    protected virtual void AbilityDeactivate()
+    protected virtual void OnAbilityDeactivate()
     {
 
     }

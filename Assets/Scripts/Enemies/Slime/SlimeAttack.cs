@@ -1,76 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AIStates))]
-public class SlimeAttack : MonoBehaviour, IAttacker
+public class SlimeAttack : AIBase
 {
-    [SerializeField] Transform temp;
+    public AIStates.States[] BlockingActionStates;
+    [SerializeField] float attackSpeed;
+    [SerializeField] float targetingRadius;
+    [SerializeField] LayerMask playerLayer;
 
-    [SerializeField] Animator bodyAnim;
-    [SerializeField] Vector2 jumpForce;
-    [SerializeField] float gravityScale;
-    [SerializeField] float jumpDistance;
-    
-    bool hasAuthToRunScript;
-
-    Rigidbody2D rb;
-    AIStates aIStatesScript;
-
-    const string SLIME_START_JUMP = "StartJump";
-    const string SLIME_Mid_JUMP = "MidJump";
-    const string SLIME_End_JUMP = "EndJump";
-
-    bool isStartOfJump;
-    bool isMidJump;
-    bool isEndOfJump;
-
-    Vector2 targetPos;
-
-
-    void Awake()
+    protected override void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        aIStatesScript = gameObject.GetComponent<AIStates>();
+        base.Start();
     }
 
-    void Update()
+    private void Update()
     {
-        if (!hasAuthToRunScript) return;
-
+        if (IsActionAuth(BlockingActionStates))
+        {
+            HandleAction();
+        }
     }
 
-    public void StartAttack(Vector2 closestPlayer)
+    protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
     {
-        hasAuthToRunScript = true;
-        targetPos = closestPlayer;
-        StartJump();
-        rb.gravityScale = gravityScale;
+        return base.IsActionAuth(blockingActionStates);
+    } 
 
-        aIStatesScript.State = AIStates.States.Attacking;
+    protected override void HandleAction()
+    {
+        
     }
 
-    public void EndAttack()
+    private void OnDrawGizmos()
     {
-        hasAuthToRunScript = false;
-        rb.gravityScale = 0;
-
-        aIStatesScript.State = AIStates.States.Idle;
-    }
-
-    private void StartJump()
-    {
-        Helpers.ChangeAnimationState(bodyAnim, SLIME_START_JUMP);
-        isStartOfJump = true;
-
-        Vector2 playerDir = (targetPos - (Vector2)transform.position).normalized;
-        Vector2 landPoint = playerDir * jumpDistance + (Vector2)transform.position;
-
-        Instantiate(temp, landPoint, Quaternion.identity);
-
-        // control point in mid of jump
-
-        rb.velocity = new Vector2(playerDir.x * jumpForce.x, Mathf.Sqrt(-2.0f * Physics2D.gravity.y * jumpForce.y));
+        Gizmos.DrawWireSphere(transform.position, targetingRadius);
     }
 }

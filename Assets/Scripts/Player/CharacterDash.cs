@@ -34,6 +34,8 @@ public class CharacterDash : CharacterBase
     protected override void Start()
     {
         base.Start();
+
+        dashCooldownTimer = dashCooldown;
     }
 
     private void Update()
@@ -70,11 +72,11 @@ public class CharacterDash : CharacterBase
                 }
             }
 
-            AbilityActivate();
+            OnAbilityActivate();
         }
     }
 
-    protected override void AbilityActivate()
+    protected override void OnAbilityActivate()
     {
         _characterStatesScript.MovementState = CharacterStates.MovementStates.Dashing;
         velocityBeforeDash = _rb.velocity;
@@ -85,7 +87,7 @@ public class CharacterDash : CharacterBase
         StartParticles(dashParticales);
     }
 
-    protected override void AbilityDeactivate()
+    protected override void OnAbilityDeactivate()
     {
         _characterStatesScript.MovementState = CharacterStates.MovementStates.Idle;
         isDashing = false;
@@ -103,7 +105,7 @@ public class CharacterDash : CharacterBase
             dashingTimer += Time.deltaTime;
             if (dashingTimer >= dashDuration)
             {
-                AbilityDeactivate();
+                OnAbilityDeactivate();
             }
         } else
         {

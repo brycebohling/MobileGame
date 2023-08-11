@@ -7,7 +7,6 @@ public class AIChase : AIBase
     public AIStates.States[] BlockingActionStates;
     [SerializeField] float chaseSpeed;
     [SerializeField] float targetingRadius;
-    [SerializeField] float rotationSpeed;
     [SerializeField] LayerMask playerLayer;
 
 
@@ -30,30 +29,25 @@ public class AIChase : AIBase
 
     protected override void HandleAction()
     {
-        RaycastHit2D[] hitPlayers = Physics2D.CircleCastAll(transform.position, targetingRadius, Vector2.zero, 0, playerLayer);
-
-        if (hitPlayers.Length != 0)
+        if (IsPlayerInRange(targetingRadius, playerLayer))
         {
-            Vector2 closestPlayerDistance = hitPlayers[0].transform.position - transform.position;
-            Vector2 closestPlayerPos = hitPlayers[0].transform.position;
-
-            foreach (RaycastHit2D hitPlayer in hitPlayers)
-            {
-                if (((Vector2)hitPlayer.transform.position - (Vector2)transform.position).sqrMagnitude < closestPlayerDistance.sqrMagnitude)
-                {
-                    closestPlayerDistance = hitPlayer.transform.position - transform.position;
-                    closestPlayerPos = hitPlayer.transform.position;
-                }
-            }
-
-            MoveToClosestPlayer(closestPlayerPos);
-
+            MoveToClosestPlayer(FindClosesetPlayerInRange(targetingRadius, playerLayer));
             _aIStatesScript.State = AIStates.States.Chasing;
 
         } else if (_aIStatesScript.State == AIStates.States.Chasing)
         {
             _aIStatesScript.State = AIStates.States.Idle;
         }
+    }
+
+    protected override bool IsPlayerInRange(float attackRadius, LayerMask playerLayer)
+    {
+        return base.IsPlayerInRange(attackRadius, playerLayer);
+    }
+
+    protected override Vector2 FindClosesetPlayerInRange(float attackRadius, LayerMask playerLayer)
+    {
+        return base.FindClosesetPlayerInRange(attackRadius, playerLayer);
     }
 
     private void MoveToClosestPlayer(Vector2 closestPlayer)

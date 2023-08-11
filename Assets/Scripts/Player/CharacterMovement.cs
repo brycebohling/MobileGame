@@ -74,7 +74,7 @@ public class CharacterMovement : CharacterBase
         {
             _rb.velocity = Vector2.zero;
             canUseAbility = false;
-            AbilityDeactivate();
+            OnAbilityDeactivate();
 
             _characterStatesScript.MovementState = CharacterStates.MovementStates.Idle;
         }
@@ -93,7 +93,7 @@ public class CharacterMovement : CharacterBase
             {
                 if (firstTimeBlocked) 
                 {
-                    AbilityDeactivate();
+                    OnAbilityDeactivate();
                     firstTimeBlocked = false;
                 }
 
@@ -104,7 +104,7 @@ public class CharacterMovement : CharacterBase
 
         if (isAbilityDeactivated)
         {
-            AbilityActivate();
+            OnAbilityActivate();
         }
 
         _characterStatesScript.MovementState = CharacterStates.MovementStates.Walking;
@@ -116,14 +116,14 @@ public class CharacterMovement : CharacterBase
         _rb.velocity = movementSpeed;
     }
 
-    protected override void AbilityActivate()
+    protected override void OnAbilityActivate()
     {
         StartParticles(walkParticles);
         isAbilityDeactivated = false;
         firstTimeBlocked = true;
     }
 
-    protected override void AbilityDeactivate()
+    protected override void OnAbilityDeactivate()
     {
         StopParticles(walkParticles);
 
