@@ -41,17 +41,19 @@ public class AIAttack : AIBase
 
         if (hitPlayers.Length != 0)
         {
-            Vector2 closestPlayerPos = hitPlayers[0].transform.position - transform.position;
-            
+            Vector2 closestPlayerDistance = hitPlayers[0].transform.position - transform.position;
+            Vector2 closestPlayerPos = hitPlayers[0].transform.position;
+
             foreach (RaycastHit2D hitPlayer in hitPlayers)
             {
-                if (((Vector2)hitPlayer.transform.position - (Vector2)transform.position).sqrMagnitude < closestPlayerPos.sqrMagnitude)
+                if (((Vector2)hitPlayer.transform.position - (Vector2)transform.position).sqrMagnitude < closestPlayerDistance.sqrMagnitude)
                 {
+                    closestPlayerDistance = hitPlayer.transform.position - transform.position;
                     closestPlayerPos = hitPlayer.transform.position;
                 }
             }
 
-            // AttackPlayer(closestPlayerPos);
+            AttackPlayer(closestPlayerPos);
         }
     }
 
