@@ -25,7 +25,7 @@ public class AIBase : MonoBehaviour
     private void Initialization()
     {
         _rb = gameObject?.GetComponent<Rigidbody2D>();
-        _animator = gameObject?.GetComponent<Animator>();
+        _animator = gameObject?.GetComponentInChildren<Animator>();
         _spriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
         _healthScript = gameObject?.GetComponent<Health>();
         _aIStatesScript = gameObject?.GetComponent<AIStates>();
@@ -125,19 +125,14 @@ public class AIBase : MonoBehaviour
         
     }
 
-    protected virtual void StartAnimation()
+    protected virtual void StartAnimation(Animator anim, AnimationClip animClip)
     {
-
+        Helpers.ChangeAnimationState(anim, animClip.name);
     }
 
-    protected virtual void InProgressAnimation()
+    protected virtual void StopAnimation(Animator anim)
     {
-        
-    }
-
-    protected virtual void StopAnimation()
-    {
-        
+        Helpers.ChangeAnimationState(anim, _aIStatesScript.baseAnimationClip.name);
     }
 
     protected virtual bool IsPlayerInRange(float attackRadius, LayerMask playerLayer)

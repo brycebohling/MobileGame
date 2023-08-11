@@ -12,6 +12,7 @@ public class AIPatrol : AIBase
     [SerializeField] float tbMovementMax;
     [SerializeField] float moveTimeBeforeReroute;
     [SerializeField] float requiredDistanceFromPoint;
+    [SerializeField] AnimationClip walkAnim;
 
     Vector2 startPos;
     float tbNextMovement;
@@ -19,8 +20,9 @@ public class AIPatrol : AIBase
     bool isMovingToPoint;
     Vector2 movePoint;
 
-    
+    Vector2 currentVelocity;
 
+    
     protected override void Start()
     {
         base.Start();
@@ -39,6 +41,16 @@ public class AIPatrol : AIBase
         HandleAction();
     }
 
+    void FixedUpdate()
+    {
+        if (!IsActionAuth(BlockingActionStates)) return;
+
+        if (_aIStatesScript.State == AIStates.States.Patrolling)
+        {
+            _rb.velocity = currentVelocity;
+        }
+    }
+
     protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
     {
         return base.IsActionAuth(blockingActionStates);
@@ -50,18 +62,23 @@ public class AIPatrol : AIBase
         timeTillReroute = 0;
         isMovingToPoint = false;
         movePoint = Vector2.zero;
+
+        StopAnimation(_animator);
     }
 
     protected override void HandleAction()
     {
         if (isMovingToPoint)
         {
+            StartAnimation(_animator, walkAnim);
+
             if (Vector2.Distance(transform.position, movePoint) < requiredDistanceFromPoint)
             {
-                _rb.velocity = Vector2.zero;
+                currentVelocity = Vector2.zero;
 
                 isMovingToPoint = false;
                 tbNextMovement = Random.Range(tbMovementMin, tbMovementMax);
+
             } else
             {
                 timeTillReroute += Time.deltaTime;
@@ -96,13 +113,17 @@ public class AIPatrol : AIBase
     private void MoveToNextPoint(Vector2 nextPoint)
     {
         Vector2 moveDir = (nextPoint - (Vector2)transform.position).normalized;
-        _rb.velocity = moveDir * patrolSpeed;
+        currentVelocity = moveDir * patrolSpeed;
 
         isMovingToPoint = true;
         _aIStatesScript.State = AIStates.States.Patrolling;
         timeTillReroute = 0;
     }
 
+    protected override void StartAnimation(Animator anim, AnimationClip animClip)
+    {
+        base.StartAnimation(anim, animClip);
+    }
 
     private void OnDrawGizmos()
     {

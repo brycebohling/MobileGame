@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 78228594}
   - component: {fileID: 78228596}
   - component: {fileID: 78228595}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FootStepParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5669,14 +5669,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 807341529}
+  - component: {fileID: 807341533}
   - component: {fileID: 807341530}
   - component: {fileID: 807341532}
-  - component: {fileID: 807341533}
+  - component: {fileID: 807341535}
   - component: {fileID: 807341531}
   - component: {fileID: 807341534}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5689,7 +5690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807341527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5741,7 +5742,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &807341532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5808,6 +5809,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &807341535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807341527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  startingHealth: 100
+  IFrames: 0.5
 --- !u!1 &880005743
 GameObject:
   m_ObjectHideFlags: 0
@@ -5970,7 +5986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1050869833}
   - component: {fileID: 1050869834}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6030,8 +6046,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -52924993
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6389,7 +6405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1399222142}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6490,8 +6506,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1903843589
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1670065338, guid: 11776d7534de84505bcb5c63d772efc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6578,10 +6594,11 @@ GameObject:
   - component: {fileID: 1763918392}
   - component: {fileID: 1763918393}
   - component: {fileID: 1763918395}
-  - component: {fileID: 1763918397}
   - component: {fileID: 1763918396}
+  - component: {fileID: 1763918397}
   - component: {fileID: 1763918391}
-  m_Layer: 0
+  - component: {fileID: 1763918398}
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6596,7 +6613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763918387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 3.56, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6630,7 +6647,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1763918392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6644,6 +6661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 1
+  baseAnimationClip: {fileID: 7400000, guid: 8c8fbdd3f3be24427ab8b537bad9a757, type: 2}
 --- !u!114 &1763918393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6658,11 +6676,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockingActionStates: 0200000003000000
   patrolRadius: 4
-  patrolSpeed: 2
+  patrolSpeed: 1
   tbMovementMin: 0.5
   tbMovementMax: 2
   moveTimeBeforeReroute: 5
   requiredDistanceFromPoint: 0.5
+  walkAnim: {fileID: 7400000, guid: eb9a9ca52ba924df3aaa993460154cd3, type: 2}
 --- !u!114 &1763918395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6676,9 +6695,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockingActionStates: 02000000
-  chaseSpeed: 2
+  chaseSpeed: 1.25
   targetingRadius: 4
-  rotationSpeed: 720
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -6694,11 +6712,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8be3e5a0db408e90469b583faabda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temp: {fileID: 7502968413870402573, guid: 06ce68c41694e4333b60b934c3612ae3, type: 3}
-  spriteAnim: {fileID: 1604182989}
-  jumpForce: {x: 1, y: 1}
-  gravityScale: 1
-  jumpDistance: 1
+  BlockingActionStates: 
+  attackSpeed: 1.25
+  targetingRadius: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1763918397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6708,16 +6727,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763918387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 561fc704481d7401391243aa20a5ede6, type: 3}
+  m_Script: {fileID: 11500000, guid: e78adb7e4202d47f0af3fed3ba5952ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 02000000
-  dmg: 0
-  tbAttacks: 0
-  attackRadius: 1.25
-  playerLayer:
+  collisionDmg: 10
+--- !u!58 &1763918398
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763918387}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.2}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1774151590
 GameObject:
   m_ObjectHideFlags: 0
@@ -6729,7 +6777,7 @@ GameObject:
   - component: {fileID: 1774151591}
   - component: {fileID: 1774151593}
   - component: {fileID: 1774151592}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: DashParticales
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,10 @@ public class AIStates : MonoBehaviour
         Idle,
         Attacking,
         Chasing,
+        Damaged,
     }
 
     public States State;
+
+    public AnimationClip baseAnimationClip;
 }

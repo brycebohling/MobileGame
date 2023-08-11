@@ -9,6 +9,8 @@ public class AIChase : AIBase
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
 
+    Vector2 currentVelocity;
+
 
     protected override void Start()
     {
@@ -20,6 +22,16 @@ public class AIChase : AIBase
         if (!IsActionAuth(BlockingActionStates)) return;
 
         HandleAction();
+    }
+
+    void FixedUpdate()
+    {
+        if (!IsActionAuth(BlockingActionStates)) return;
+        
+        if (_aIStatesScript.State == AIStates.States.Chasing)
+        {
+            _rb.velocity = currentVelocity;
+        }
     }
 
     protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
@@ -53,7 +65,7 @@ public class AIChase : AIBase
     private void MoveToClosestPlayer(Vector2 closestPlayer)
     {
         Vector2 moveDir = (closestPlayer - (Vector2)transform.position).normalized;
-        _rb.velocity = moveDir * chaseSpeed;
+        currentVelocity = moveDir * chaseSpeed;
     }
 
     private void OnDrawGizmos()

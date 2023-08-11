@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class Helpers
 {
-    public static void ChangeAnimationState(Animator animator, string stateName)
+    public static void ChangeAnimationState(Animator animator, string newState)
     {
-        animator.Play(stateName);
+        animator.Play(newState);
     }
 
     public static bool IsAnimationPlaying(Animator animator, string stateName)

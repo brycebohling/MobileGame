@@ -12,6 +12,9 @@ public class SlimeAttack : AIBase
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
 
+    Vector2 currentVelocity;
+
+
     protected override void Start()
     {
         base.Start();
@@ -19,9 +22,18 @@ public class SlimeAttack : AIBase
 
     private void Update()
     {
-        if (IsActionAuth(BlockingActionStates))
+        if (!IsActionAuth(BlockingActionStates)) return;
+        
+        HandleAction();
+    }
+
+    void FixedUpdate()
+    {
+        if (!IsActionAuth(BlockingActionStates)) return;
+
+        if (_aIStatesScript.State == AIStates.States.Attacking)
         {
-            HandleAction();
+            _rb.velocity = currentVelocity;
         }
     }
 
@@ -32,7 +44,31 @@ public class SlimeAttack : AIBase
 
     protected override void HandleAction()
     {
-        
+        if (IsPlayerInRange(targetingRadius, playerLayer))
+        {
+            MoveToClosestPlayer(FindClosesetPlayerInRange(targetingRadius, playerLayer));
+            _aIStatesScript.State = AIStates.States.Attacking;
+
+        } else if (_aIStatesScript.State == AIStates.States.Attacking)
+        {
+            _aIStatesScript.State = AIStates.States.Idle;
+        }
+    }
+
+    private void MoveToClosestPlayer(Vector2 closestPlayer)
+    {
+        Vector2 moveDir = (closestPlayer - (Vector2)transform.position).normalized;
+        currentVelocity = moveDir * attackSpeed;
+    }
+
+    protected override bool IsPlayerInRange(float attackRadius, LayerMask playerLayer)
+    {
+        return base.IsPlayerInRange(attackRadius, playerLayer);
+    }
+
+    protected override Vector2 FindClosesetPlayerInRange(float attackRadius, LayerMask playerLayer)
+    {
+        return base.FindClosesetPlayerInRange(attackRadius, playerLayer);
     }
 
     private void OnDrawGizmos()
