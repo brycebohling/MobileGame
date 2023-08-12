@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class CharacterDash : CharacterBase
 {
     [Header("Blocking States")]
-    public CharacterStates.MovementStates[] BlockingMovementStates;
+    public CharacterStates.States[] BlockingMovementStates;
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
@@ -64,9 +64,9 @@ public class CharacterDash : CharacterBase
     {
         if (!isDashing && dashCooldownTimer >= dashCooldown)
         {
-            foreach (CharacterStates.MovementStates state in BlockingMovementStates)
+            foreach (CharacterStates.States state in BlockingMovementStates)
             {
-                if (state == _characterStatesScript.MovementState)
+                if (state == _characterStatesScript.State)
                 {
                     return;
                 }
@@ -78,7 +78,7 @@ public class CharacterDash : CharacterBase
 
     protected override void OnAbilityActivate()
     {
-        _characterStatesScript.MovementState = CharacterStates.MovementStates.Dashing;
+        _characterStatesScript.State = CharacterStates.States.Dashing;
         velocityBeforeDash = _rb.velocity;
         isDashing = true;
 
@@ -89,7 +89,7 @@ public class CharacterDash : CharacterBase
 
     protected override void OnAbilityDeactivate()
     {
-        _characterStatesScript.MovementState = CharacterStates.MovementStates.Idle;
+        _characterStatesScript.State = CharacterStates.States.Idle;
         isDashing = false;
         dashingTimer = 0;
         dashCooldownTimer = 0;

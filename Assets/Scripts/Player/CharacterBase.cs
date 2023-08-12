@@ -12,6 +12,7 @@ public class CharacterBase : MonoBehaviour
     protected Health _characterHealthScript;
     protected CharacterMovement _characterMovementScript;
     protected CharacterStates _characterStatesScript;
+    protected Health _healthScript;
 
     protected InputManager _inputManager;
 
@@ -34,6 +35,7 @@ public class CharacterBase : MonoBehaviour
         _characterHealthScript = gameObject?.GetComponent<Health>();
         _characterMovementScript = gameObject?.GetComponent<CharacterMovement>();
         _characterStatesScript = gameObject?.GetComponent<CharacterStates>();
+        _healthScript = gameObject?.GetComponent<Health>();
     }
 
     protected virtual void OnEnable()
@@ -56,6 +58,19 @@ public class CharacterBase : MonoBehaviour
     protected virtual void ProcessAbilityRequest()
     {
         
+    }
+
+    protected virtual bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    {
+        foreach (CharacterStates.States state in blockingActionStates)
+        {
+            if (state == _characterStatesScript.State)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     protected virtual void ApplyAbility()

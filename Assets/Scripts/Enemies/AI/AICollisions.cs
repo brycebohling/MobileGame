@@ -5,13 +5,14 @@ using UnityEngine;
 public class AICollisions : AIBase
 {
     [SerializeField] float collisionDmg;
+    [SerializeField] float knockBackForce;
 
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.CompareTag("Player"))      
         {
-            other.gameObject.GetComponent<Health>().DamageObject(collisionDmg, transform.position);
+            other.gameObject.GetComponent<Health>().DamageObject(collisionDmg, knockBackForce, transform.position);
         }
     }
 }

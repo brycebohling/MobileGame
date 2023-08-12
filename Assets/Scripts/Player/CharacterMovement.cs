@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class CharacterMovement : CharacterBase
 {   
     [Header("Blocking States")]
-    public CharacterStates.MovementStates[] BlockingMovementStates;
+    public CharacterStates.States[] BlockingMovementStates;
 
     [Header("Speeds")]
     [SerializeField] float walkSpeed;
@@ -70,13 +70,13 @@ public class CharacterMovement : CharacterBase
             SetMovement();
             ProcessAbilityRequest();
 
-        } else if (_characterStatesScript.MovementState == CharacterStates.MovementStates.Walking)
+        } else if (_characterStatesScript.State == CharacterStates.States.Walking)
         {
             _rb.velocity = Vector2.zero;
             canUseAbility = false;
             OnAbilityDeactivate();
 
-            _characterStatesScript.MovementState = CharacterStates.MovementStates.Idle;
+            _characterStatesScript.State = CharacterStates.States.Idle;
         }
     }
 
@@ -87,9 +87,9 @@ public class CharacterMovement : CharacterBase
 
     protected override void ProcessAbilityRequest()
     {
-        foreach (CharacterStates.MovementStates state in BlockingMovementStates)
+        foreach (CharacterStates.States state in BlockingMovementStates)
         {
-            if (state == _characterStatesScript.MovementState)
+            if (state == _characterStatesScript.State)
             {
                 if (firstTimeBlocked) 
                 {
@@ -107,7 +107,7 @@ public class CharacterMovement : CharacterBase
             OnAbilityActivate();
         }
 
-        _characterStatesScript.MovementState = CharacterStates.MovementStates.Walking;
+        _characterStatesScript.State = CharacterStates.States.Walking;
         canUseAbility = true;
     }
 

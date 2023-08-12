@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Health : MonoBehaviour
 {
     public event Action OnDeath;
+    public event Action<float, Vector2> OnDamaged;
 
     [SerializeField] float maxHealth;
     [SerializeField] float startingHealth;
@@ -19,6 +21,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = startingHealth;
+        currentIFrames = IFrames;
     }
 
     void Update()
@@ -26,18 +29,21 @@ public class Health : MonoBehaviour
         HandleTimers();
     }
 
-    public void DamageObject(float dmg, Vector2 senderPos)
+    public void DamageObject(float dmg, float knockBackForce, Vector2 senderPos)
     {
-        if (!isInvincible && currentIFrames > IFrames)
+        if (!isInvincible && currentIFrames >= IFrames)
         {
             currentHealth -= dmg;
 
             if (currentHealth <= 0)
             {
-                Death();
+                OnDeath?.Invoke();
+
             } else
             {
                 currentIFrames = 0;
+
+                OnDamaged?.Invoke(knockBackForce, senderPos);
             }
         }
     }
@@ -55,10 +61,5 @@ public class Health : MonoBehaviour
     private void HandleTimers()
     {
         currentIFrames += Time.deltaTime;
-    }
-
-    private void Death()
-    {
-        OnDeath?.Invoke();
     }
 }

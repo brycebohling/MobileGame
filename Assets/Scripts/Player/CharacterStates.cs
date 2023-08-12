@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CharacterStates : MonoBehaviour
 {
-    public enum MovementStates
+    public enum States
     {
         Walking,
         Idle,
         Dashing,
         Attacking,
-        Partolling,
+        Damaged,
     }
 
-    public CharacterStates.MovementStates MovementState;
+    public CharacterStates.States State;
 }
