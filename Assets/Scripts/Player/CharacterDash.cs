@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -93,6 +94,7 @@ public class CharacterDash : CharacterBase
         isDashing = false;
         dashingTimer = 0;
         dashCooldownTimer = 0;
+        _rb.velocity = Vector2.zero;
         
         StopParticles(dashParticales);
     }
