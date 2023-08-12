@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class AIChase : AIBase
 {
+    [SerializeField] AIPath aiPath;
+
     public AIStates.States[] BlockingActionStates;
     [SerializeField] float chaseSpeed;
     [SerializeField] float targetingRadius;
