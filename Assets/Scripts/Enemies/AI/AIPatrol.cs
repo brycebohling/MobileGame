@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AIPath))]
 public class AIPatrol : AIBase
 {
     public AIStates.States[] BlockingActionStates;
@@ -19,8 +21,7 @@ public class AIPatrol : AIBase
     float timeTillReroute;
     bool isMovingToPoint;
     Vector2 movePoint;
-
-    Vector2 currentVelocity;
+    bool isActivated;
 
     
     protected override void Start()
@@ -34,21 +35,16 @@ public class AIPatrol : AIBase
     {
         if (!IsActionAuth(BlockingActionStates))
         {
-            RestAction();
+            if (isActivated)
+            {
+                OnActionDeactivate();
+            }
+            
             return;
         } 
 
         HandleAction();
-    }
-
-    void FixedUpdate()
-    {
-        if (!IsActionAuth(BlockingActionStates)) return;
-
-        if (_aIStatesScript.State == AIStates.States.Patrolling)
-        {
-            _rb.velocity = currentVelocity;
-        }
+        isActivated = true;
     }
 
     protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
@@ -56,8 +52,10 @@ public class AIPatrol : AIBase
         return base.IsActionAuth(blockingActionStates);
     }
 
-    protected override void RestAction()
+    protected override void OnActionDeactivate()
     {
+        isActivated = false;
+
         tbNextMovement = 0;
         timeTillReroute = 0;
         isMovingToPoint = false;
@@ -74,8 +72,6 @@ public class AIPatrol : AIBase
 
             if (Vector2.Distance(transform.position, movePoint) < requiredDistanceFromPoint)
             {
-                currentVelocity = Vector2.zero;
-
                 isMovingToPoint = false;
                 tbNextMovement = Random.Range(tbMovementMin, tbMovementMax);
 
@@ -113,8 +109,10 @@ public class AIPatrol : AIBase
     private void MoveToNextPoint(Vector2 nextPoint)
     {
         Vector2 moveDir = (nextPoint - (Vector2)transform.position).normalized;
-        currentVelocity = moveDir * patrolSpeed;
 
+        _aiPathScript.destination = nextPoint;
+        _aiPathScript.maxSpeed = patrolSpeed;
+        
         isMovingToPoint = true;
         _aIStatesScript.State = AIStates.States.Patrolling;
         timeTillReroute = 0;

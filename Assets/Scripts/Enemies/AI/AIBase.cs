@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class AIBase : MonoBehaviour
@@ -9,6 +10,7 @@ public class AIBase : MonoBehaviour
     protected Animator _animator;
     protected SpriteRenderer _spriteRenderer;
     protected Health _healthScript;
+    protected AIPath _aiPathScript;
 
     
 
@@ -29,6 +31,7 @@ public class AIBase : MonoBehaviour
         _spriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
         _healthScript = gameObject?.GetComponent<Health>();
         _aIStatesScript = gameObject?.GetComponent<AIStates>();
+        _aiPathScript = gameObject?.GetComponent<AIPath>();
     }
 
     protected virtual void OnEnable()
@@ -52,11 +55,6 @@ public class AIBase : MonoBehaviour
         }
 
         return true;
-    }
-
-    protected virtual void RestAction()
-    {
-
     }
 
     protected virtual void HandleAction()

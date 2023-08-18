@@ -5,14 +5,10 @@ using UnityEngine;
 
 public class AIChase : AIBase
 {
-    [SerializeField] AIPath aiPath;
-
     public AIStates.States[] BlockingActionStates;
     [SerializeField] float chaseSpeed;
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
-
-    Vector2 currentVelocity;
 
 
     protected override void Start()
@@ -25,16 +21,6 @@ public class AIChase : AIBase
         if (!IsActionAuth(BlockingActionStates)) return;
 
         HandleAction();
-    }
-
-    void FixedUpdate()
-    {
-        if (!IsActionAuth(BlockingActionStates)) return;
-        
-        if (_aIStatesScript.State == AIStates.States.Chasing)
-        {
-            _rb.velocity = currentVelocity;
-        }
     }
 
     protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
@@ -68,7 +54,9 @@ public class AIChase : AIBase
     private void MoveToClosestPlayer(Vector2 closestPlayer)
     {
         Vector2 moveDir = (closestPlayer - (Vector2)transform.position).normalized;
-        currentVelocity = moveDir * chaseSpeed;
+
+        _aiPathScript.destination = closestPlayer;
+        _aiPathScript.maxSpeed = chaseSpeed;
     }
 
     private void OnDrawGizmos()

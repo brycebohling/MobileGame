@@ -54,12 +54,6 @@ public class CharacterBase : MonoBehaviour
        
     }
 
-    // Run logic to active the ablitiy
-    protected virtual void ProcessAbilityRequest()
-    {
-        
-    }
-
     protected virtual bool IsActionAuth(CharacterStates.States[] blockingActionStates)
     {
         foreach (CharacterStates.States state in blockingActionStates)
@@ -73,19 +67,19 @@ public class CharacterBase : MonoBehaviour
         return true;
     }
 
-    protected virtual void ApplyAbility()
+    protected virtual void ApplyAction()
     {
 
     }
 
     // Runs onces when the ability is activated
-    protected virtual void OnAbilityActivate()
+    protected virtual void OnActionActivate()
     {
 
     }
 
     // Runs onces when the ability is dectivated
-    protected virtual void OnAbilityDeactivate()
+    protected virtual void OnActionDeactivate()
     {
 
     }

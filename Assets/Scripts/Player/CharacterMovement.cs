@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class CharacterMovement : CharacterBase
 {   
     [Header("Blocking States")]
-    public CharacterStates.States[] BlockingMovementStates;
+    public CharacterStates.States[] BlockingActionStates;
 
     [Header("Speeds")]
     [SerializeField] float walkSpeed;
@@ -22,10 +22,7 @@ public class CharacterMovement : CharacterBase
     public Vector2 moveDir;
     Vector2 movementSpeed;
 
-    bool firstTimeBlocked = true;
-    bool canUseAbility;
-    bool isAbilityDeactivated = true;
-        
+    bool isActivated;
 
     protected override void Awake()
     {
@@ -50,14 +47,18 @@ public class CharacterMovement : CharacterBase
 
     void Update()
     {
+        if (!IsActionAuth(BlockingActionStates)) return;
+
         HandleInput();
     }
 
     private void FixedUpdate()
     {
-        if (canUseAbility)
+        if (!IsActionAuth(BlockingActionStates)) return;
+        
+        if (moveDir != Vector2.zero)
         {
-            ApplyAbility();
+            ApplyAction();
         }
     }
 
@@ -68,15 +69,18 @@ public class CharacterMovement : CharacterBase
         if (moveDir != Vector2.zero)
         {
             SetMovement();
-            ProcessAbilityRequest();
+
+            if (!isActivated)
+            {
+                OnActionActivate();
+            }
 
         } else if (_characterStatesScript.State == CharacterStates.States.Walking)
         {
             _rb.velocity = Vector2.zero;
-            canUseAbility = false;
-            OnAbilityDeactivate();
-
             _characterStatesScript.State = CharacterStates.States.Idle;
+
+            OnActionDeactivate();
         }
     }
 
@@ -85,49 +89,30 @@ public class CharacterMovement : CharacterBase
         movementSpeed = moveDir * walkSpeed;
     }
 
-    protected override void ProcessAbilityRequest()
+    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
     {
-        foreach (CharacterStates.States state in BlockingMovementStates)
-        {
-            if (state == _characterStatesScript.State)
-            {
-                if (firstTimeBlocked) 
-                {
-                    OnAbilityDeactivate();
-                    firstTimeBlocked = false;
-                }
-
-                canUseAbility = false;
-                return;
-            }
-        }
-
-        if (isAbilityDeactivated)
-        {
-            OnAbilityActivate();
-        }
-
-        _characterStatesScript.State = CharacterStates.States.Walking;
-        canUseAbility = true;
+        return base.IsActionAuth(blockingActionStates);
     }
 
-    protected override void ApplyAbility()
+    protected override void ApplyAction()
     {
         _rb.velocity = movementSpeed;
+
+        _characterStatesScript.State = CharacterStates.States.Walking;
     }
 
-    protected override void OnAbilityActivate()
+    protected override void OnActionActivate()
     {
+        isActivated = true;
+
         StartParticles(walkParticles);
-        isAbilityDeactivated = false;
-        firstTimeBlocked = true;
     }
 
-    protected override void OnAbilityDeactivate()
+    protected override void OnActionDeactivate()
     {
-        StopParticles(walkParticles);
+        isActivated = false;
 
-        isAbilityDeactivated = true;
+        StopParticles(walkParticles);
     }
 
     protected override void StartParticles(List<ParticleSystem> particleList)

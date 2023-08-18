@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class CharacterDash : CharacterBase
 {
     [Header("Blocking States")]
-    public CharacterStates.States[] BlockingMovementStates;
+    public CharacterStates.States[] BlockingActionStates;
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
@@ -58,26 +58,25 @@ public class CharacterDash : CharacterBase
 
     private void DashPressed(InputAction.CallbackContext context)
     {
-        ProcessAbilityRequest();
+        if (!IsActionAuth(BlockingActionStates)) return;
+        
+        OnActionActivate();
     }
 
-    protected override void ProcessAbilityRequest()
+    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
     {
-        if (!isDashing && dashCooldownTimer >= dashCooldown)
-        {
-            foreach (CharacterStates.States state in BlockingMovementStates)
-            {
-                if (state == _characterStatesScript.State)
-                {
-                    return;
-                }
-            }
+        bool isActionNotBlocking = base.IsActionAuth(blockingActionStates);
 
-            OnAbilityActivate();
+        if (isActionNotBlocking && dashCooldownTimer >= dashCooldown)
+        {
+            return true;
+        } else
+        {
+            return false;
         }
     }
 
-    protected override void OnAbilityActivate()
+    protected override void OnActionActivate()
     {
         _characterStatesScript.State = CharacterStates.States.Dashing;
         velocityBeforeDash = _rb.velocity;
@@ -88,7 +87,7 @@ public class CharacterDash : CharacterBase
         StartParticles(dashParticales);
     }
 
-    protected override void OnAbilityDeactivate()
+    protected override void OnActionDeactivate()
     {
         _characterStatesScript.State = CharacterStates.States.Idle;
         isDashing = false;
@@ -103,11 +102,10 @@ public class CharacterDash : CharacterBase
     {
         if (isDashing)
         {
-    
             dashingTimer += Time.deltaTime;
             if (dashingTimer >= dashDuration)
             {
-                OnAbilityDeactivate();
+                OnActionDeactivate();
             }
         } else
         {
