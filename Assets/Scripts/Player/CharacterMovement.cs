@@ -14,6 +14,9 @@ public class CharacterMovement : CharacterBase
     [Header("Speeds")]
     [SerializeField] float walkSpeed;
 
+    [Header("Animations")]
+    [SerializeField] AnimationClip walkAnim;
+
     [Header("Particales")]
     [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> walkParticles;
@@ -78,9 +81,6 @@ public class CharacterMovement : CharacterBase
 
         } else if (_characterStatesScript.State == CharacterStates.States.Walking)
         {
-            _rb.velocity = Vector2.zero;
-            _characterStatesScript.State = CharacterStates.States.Idle;
-
             OnActionDeactivate();
         }
     }
@@ -106,12 +106,18 @@ public class CharacterMovement : CharacterBase
     {
         isActivated = true;
 
+        StartAnimation(_animator, walkAnim);
+
         StartParticles(walkParticles, particleSpawn.position);
     }
 
     protected override void OnActionDeactivate()
     {
         isActivated = false;
+        _rb.velocity = Vector2.zero;
+        _characterStatesScript.State = CharacterStates.States.Idle;
+
+        StopAnimation(_animator);
 
         StopParticles(walkParticles);
     }

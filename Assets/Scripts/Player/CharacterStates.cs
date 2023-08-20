@@ -14,4 +14,5 @@ public class CharacterStates : MonoBehaviour
     }
 
     public CharacterStates.States State;
+    public AnimationClip baseAnimationClip;
 }

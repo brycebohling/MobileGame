@@ -16,6 +16,9 @@ public class CharacterDash : CharacterBase
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
 
+    [Header("Animations")]
+    [SerializeField] AnimationClip dashAnim;
+
     [Header("Particles")]
     [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> dashParticales;
@@ -66,9 +69,9 @@ public class CharacterDash : CharacterBase
 
     protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
     {
-        bool isActionNotBlocking = base.IsActionAuth(blockingActionStates);
+        bool isNotBlockingAction = base.IsActionAuth(blockingActionStates);
 
-        if (isActionNotBlocking && dashCooldownTimer >= dashCooldown)
+        if (isNotBlockingAction && dashCooldownTimer >= dashCooldown)
         {
             return true;
         } else
@@ -85,6 +88,8 @@ public class CharacterDash : CharacterBase
 
         _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
 
+        StartAnimation(_animator, dashAnim);
+
         StartParticles(dashParticales, particleSpawn.position);
     }
 
@@ -96,6 +101,8 @@ public class CharacterDash : CharacterBase
         dashCooldownTimer = 0;
         _rb.velocity = Vector2.zero;
         
+        StopAnimation(_animator);
+
         StopParticles(dashParticales);
     }
 

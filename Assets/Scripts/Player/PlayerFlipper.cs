@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerFlipper : CharacterBase
+{
+    [Header("Blocking States")]
+    public CharacterStates.States[] BlockingActionStates;
+
+
+    protected override void Start()
+    {
+        base.Start();    
+    }
+
+    void Update()
+    {
+        if (!IsActionAuth(BlockingActionStates)) return;
+
+        ApplyAction();
+    }
+
+    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    {
+        bool isNotBlockingAction = base.IsActionAuth(blockingActionStates);
+
+        if (isNotBlockingAction)
+        {
+            if (_rb.velocity.x > 0 && transform.localScale.x != 1)
+            {
+                return true;
+
+            } else if (_rb.velocity.x < 0 && transform.localScale.x != -1)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+
+        } else
+        {
+            return false;
+        }
+    }
+
+    protected override void ApplyAction()
+    {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;    
+        transform.localScale = localScale;
+    }
+}

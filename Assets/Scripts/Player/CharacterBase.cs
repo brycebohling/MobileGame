@@ -30,7 +30,7 @@ public class CharacterBase : MonoBehaviour
     private void Initialization()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = gameObject?.GetComponent<Animator>();
+        _animator = gameObject?.GetComponentInChildren<Animator>();
         _characterSprite = gameObject?.GetComponentInChildren<SpriteRenderer>();
         _characterHealthScript = gameObject?.GetComponent<Health>();
         _characterMovementScript = gameObject?.GetComponent<CharacterMovement>();
@@ -138,19 +138,14 @@ public class CharacterBase : MonoBehaviour
         
     }
 
-    protected virtual void StartAnimation()
+    protected virtual void StartAnimation(Animator anim, AnimationClip animClip)
     {
-
+        Helpers.ChangeAnimationState(anim, animClip.name);
     }
 
-    protected virtual void InProgressAnimation()
+    protected virtual void StopAnimation(Animator anim)
     {
-        
-    }
-
-    protected virtual void StopAnimation()
-    {
-        
+        Helpers.ChangeAnimationState(anim, _characterStatesScript.baseAnimationClip.name);
     }
 
     protected virtual void Death()
