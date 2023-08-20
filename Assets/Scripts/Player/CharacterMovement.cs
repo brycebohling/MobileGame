@@ -15,6 +15,7 @@ public class CharacterMovement : CharacterBase
     [SerializeField] float walkSpeed;
 
     [Header("Particales")]
+    [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> walkParticles;
 
     
@@ -105,7 +106,7 @@ public class CharacterMovement : CharacterBase
     {
         isActivated = true;
 
-        StartParticles(walkParticles);
+        StartParticles(walkParticles, particleSpawn.position);
     }
 
     protected override void OnActionDeactivate()
@@ -113,15 +114,5 @@ public class CharacterMovement : CharacterBase
         isActivated = false;
 
         StopParticles(walkParticles);
-    }
-
-    protected override void StartParticles(List<ParticleSystem> particleList)
-    {
-        base.StartParticles(particleList);
-    }
-
-    protected override void StopParticles(List<ParticleSystem> particleList)
-    {
-        base.StopParticles(particleList);
     }
 }

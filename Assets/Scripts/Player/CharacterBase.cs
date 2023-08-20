@@ -95,12 +95,14 @@ public class CharacterBase : MonoBehaviour
         
     }
 
-    protected virtual void StartParticles(List<ParticleSystem> particleList)
+    protected virtual void StartParticles(List<ParticleSystem> particleList, Vector3 pos)
     {
         foreach (ParticleSystem particleSystem in particleList)
         {
             if (!particleSystem.isEmitting)
             {
+                particleSystem.transform.position = pos;
+
                 particleSystem.Play();
                 ParticleSystem.EmissionModule em = particleSystem.GetComponent<ParticleSystem>().emission;
                 em.enabled = true;

@@ -17,6 +17,7 @@ public class CharacterDash : CharacterBase
     [SerializeField] float dashCooldown;
 
     [Header("Particles")]
+    [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> dashParticales;
 
     InputAction dashKeys;
@@ -25,7 +26,7 @@ public class CharacterDash : CharacterBase
     float dashingTimer;
     float dashCooldownTimer;
     Vector2 velocityBeforeDash;
-    
+
 
     protected override void Awake()
     {
@@ -84,7 +85,7 @@ public class CharacterDash : CharacterBase
 
         _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
 
-        StartParticles(dashParticales);
+        StartParticles(dashParticales, particleSpawn.position);
     }
 
     protected override void OnActionDeactivate()
@@ -111,15 +112,5 @@ public class CharacterDash : CharacterBase
         {
             dashCooldownTimer += Time.deltaTime;
         }
-    }
-
-    protected override void StartParticles(List<ParticleSystem> particleList)
-    {
-        base.StartParticles(particleList);
-    }
-
-    protected override void StopParticles(List<ParticleSystem> particleList)
-    {
-        base.StopParticles(particleList);
     }
 }
