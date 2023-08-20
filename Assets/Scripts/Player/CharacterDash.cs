@@ -25,7 +25,7 @@ public class CharacterDash : CharacterBase
     float dashingTimer;
     float dashCooldownTimer;
     Vector2 velocityBeforeDash;
-
+    
 
     protected override void Awake()
     {

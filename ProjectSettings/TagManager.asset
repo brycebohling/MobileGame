@@ -44,9 +44,6 @@ TagManager:
   - name: Ground
     uniqueID: 3371974115
     locked: 0
-  - name: Walls
-    uniqueID: 1923945105
-    locked: 0
   - name: Enemy
     uniqueID: 1903843589
     locked: 0
@@ -55,4 +52,7 @@ TagManager:
     locked: 0
   - name: Particales
     uniqueID: 1848453131
+    locked: 0
+  - name: Walls
+    uniqueID: 1923945105
     locked: 0

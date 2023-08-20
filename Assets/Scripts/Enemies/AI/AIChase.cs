@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 
+[RequireComponent(typeof(AIPath))]
 public class AIChase : AIBase
 {
     public AIStates.States[] BlockingActionStates;
     [SerializeField] float chaseSpeed;
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] AnimationClip walkAnim;
+
+    bool isActivated;
 
 
     protected override void Start()
@@ -28,6 +32,18 @@ public class AIChase : AIBase
         return base.IsActionAuth(blockingActionStates);
     }
 
+    protected override void OnActionActivate()
+    {
+        isActivated = true;
+        StartAnimation(_animator, walkAnim);
+    }
+
+    protected override void OnActionDeactivate()
+    {
+        isActivated = false;
+        StopAnimation(_animator);
+    }
+
     protected override void HandleAction()
     {
         if (IsPlayerInRange(targetingRadius, playerLayer))
@@ -35,9 +51,16 @@ public class AIChase : AIBase
             MoveToClosestPlayer(FindClosesetPlayerInRange(targetingRadius, playerLayer));
             _aIStatesScript.State = AIStates.States.Chasing;
 
+            if (!isActivated)
+            {
+                OnActionActivate();
+            }
+
         } else if (_aIStatesScript.State == AIStates.States.Chasing)
         {
             _aIStatesScript.State = AIStates.States.Idle;
+
+            OnActionDeactivate();
         }
     }
 

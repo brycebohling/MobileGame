@@ -12,7 +12,6 @@ public class AIBase : MonoBehaviour
     protected Health _healthScript;
     protected AIPath _aiPathScript;
 
-    
 
     protected virtual void Awake()
     {
@@ -57,17 +56,17 @@ public class AIBase : MonoBehaviour
         return true;
     }
 
-    protected virtual void HandleAction()
-    {
-
-    }
-
     protected virtual void OnActionActivate()
     {
 
     }
 
     protected virtual void OnActionDeactivate()
+    {
+
+    }
+
+    protected virtual void HandleAction()
     {
 
     }

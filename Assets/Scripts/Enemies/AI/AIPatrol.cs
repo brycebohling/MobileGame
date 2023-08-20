@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AIPath))]
 public class AIPatrol : AIBase
 {
@@ -60,16 +59,12 @@ public class AIPatrol : AIBase
         timeTillReroute = 0;
         isMovingToPoint = false;
         movePoint = Vector2.zero;
-
-        StopAnimation(_animator);
     }
 
     protected override void HandleAction()
     {
         if (isMovingToPoint)
         {
-            StartAnimation(_animator, walkAnim);
-
             if (Vector2.Distance(transform.position, movePoint) < requiredDistanceFromPoint)
             {
                 isMovingToPoint = false;
@@ -96,6 +91,7 @@ public class AIPatrol : AIBase
                 tbNextMovement -= Time.deltaTime;
 
                 _aIStatesScript.State = AIStates.States.Idle;
+                StopAnimation(_animator);
             }
         }
     }
@@ -116,11 +112,8 @@ public class AIPatrol : AIBase
         isMovingToPoint = true;
         _aIStatesScript.State = AIStates.States.Patrolling;
         timeTillReroute = 0;
-    }
 
-    protected override void StartAnimation(Animator anim, AnimationClip animClip)
-    {
-        base.StartAnimation(anim, animClip);
+        StartAnimation(_animator, walkAnim);
     }
 
     private void OnDrawGizmos()
