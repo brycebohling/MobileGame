@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeaponMouseFollower : CharacterBase
+public class PlayerWeaponMouseFollower : PlayerBase
 {
     
     

@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBase : MonoBehaviour
+public class PlayerBase : MonoBehaviour
 {
     protected Animator _animator;
     protected Rigidbody2D _rb;
 
-    protected SpriteRenderer _characterSprite;
-    protected Health _characterHealthScript;
-    protected CharacterMovement _characterMovementScript;
-    protected CharacterStates _characterStatesScript;
+    protected SpriteRenderer _playerSprite;
+    protected Health _playerHealthScript;
+    protected PlayerMovement _playerMovementScript;
+    protected PlayerStates _playerStatesScript;
     protected Health _healthScript;
 
     protected InputManager _inputManager;
@@ -31,10 +31,10 @@ public class CharacterBase : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = gameObject?.GetComponentInChildren<Animator>();
-        _characterSprite = gameObject?.GetComponentInChildren<SpriteRenderer>();
-        _characterHealthScript = gameObject?.GetComponent<Health>();
-        _characterMovementScript = gameObject?.GetComponent<CharacterMovement>();
-        _characterStatesScript = gameObject?.GetComponent<CharacterStates>();
+        _playerSprite = gameObject?.GetComponentInChildren<SpriteRenderer>();
+        _playerHealthScript = gameObject?.GetComponent<Health>();
+        _playerMovementScript = gameObject?.GetComponent<PlayerMovement>();
+        _playerStatesScript = gameObject?.GetComponent<PlayerStates>();
         _healthScript = gameObject?.GetComponent<Health>();
     }
 
@@ -54,11 +54,11 @@ public class CharacterBase : MonoBehaviour
        
     }
 
-    protected virtual bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    protected virtual bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
-        foreach (CharacterStates.States state in blockingActionStates)
+        foreach (PlayerStates.States state in blockingActionStates)
         {
-            if (state == _characterStatesScript.State)
+            if (state == _playerStatesScript.State)
             {
                 return false;
             }
@@ -145,7 +145,7 @@ public class CharacterBase : MonoBehaviour
 
     protected virtual void StopAnimation(Animator anim)
     {
-        Helpers.ChangeAnimationState(anim, _characterStatesScript.baseAnimationClip.name);
+        Helpers.ChangeAnimationState(anim, _playerStatesScript.baseAnimationClip.name);
     }
 
     protected virtual void Death()

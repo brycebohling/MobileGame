@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CharacterStates))]
-public class CharacterMovement : CharacterBase
+[RequireComponent(typeof(PlayerStates))]
+public class PlayerMovement : PlayerBase
 {   
     [Header("Blocking States")]
-    public CharacterStates.States[] BlockingActionStates;
+    public PlayerStates.States[] BlockingActionStates;
 
     [Header("Speeds")]
     [SerializeField] float walkSpeed;
@@ -79,7 +79,7 @@ public class CharacterMovement : CharacterBase
                 OnActionActivate();
             }
 
-        } else if (_characterStatesScript.State == CharacterStates.States.Walking)
+        } else if (_playerStatesScript.State == PlayerStates.States.Walking)
         {
             OnActionDeactivate();
         }
@@ -90,7 +90,7 @@ public class CharacterMovement : CharacterBase
         movementSpeed = moveDir * walkSpeed;
     }
 
-    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
         return base.IsActionAuth(blockingActionStates);
     }
@@ -99,7 +99,7 @@ public class CharacterMovement : CharacterBase
     {
         _rb.velocity = movementSpeed;
 
-        _characterStatesScript.State = CharacterStates.States.Walking;
+        _playerStatesScript.State = PlayerStates.States.Walking;
     }
 
     protected override void OnActionActivate()
@@ -115,7 +115,7 @@ public class CharacterMovement : CharacterBase
     {
         isActivated = false;
         _rb.velocity = Vector2.zero;
-        _characterStatesScript.State = CharacterStates.States.Idle;
+        _playerStatesScript.State = PlayerStates.States.Idle;
 
         StopAnimation(_animator);
 

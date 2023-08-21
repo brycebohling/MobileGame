@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStates : MonoBehaviour
+public class PlayerStates : MonoBehaviour
 {
     public enum States
     {
@@ -13,6 +13,6 @@ public class CharacterStates : MonoBehaviour
         Damaged,
     }
 
-    public CharacterStates.States State;
+    public PlayerStates.States State;
     public AnimationClip baseAnimationClip;
 }

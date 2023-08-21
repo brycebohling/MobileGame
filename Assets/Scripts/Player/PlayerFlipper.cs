@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerFlipper : CharacterBase
+public class PlayerFlipper : PlayerBase
 {
     [Header("Blocking States")]
-    public CharacterStates.States[] BlockingActionStates;
+    public PlayerStates.States[] BlockingActionStates;
 
     [Header("Speeds")]
     [SerializeField] float minimumVelocityToFlip; 
@@ -24,7 +24,7 @@ public class PlayerFlipper : CharacterBase
         ApplyAction();
     }
 
-    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
         bool isNotBlockingAction = base.IsActionAuth(blockingActionStates);
 
@@ -37,7 +37,7 @@ public class PlayerFlipper : CharacterBase
             } else if (_rb.velocity.x < -minimumVelocityToFlip && transform.localScale.x != -1)
             {
                 return true;
-                
+
             } else
             {
                 return false;

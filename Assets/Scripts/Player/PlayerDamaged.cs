@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class PlayerDamaged : CharacterBase
+public class PlayerDamaged : PlayerBase
 {
     [SerializeField] float damagedTime;
     float damagedTimer = 0;
@@ -32,13 +32,13 @@ public class PlayerDamaged : CharacterBase
         if (damagedTimer >= damagedTime)
         {
             _rb.velocity = Vector2.zero;
-            _characterStatesScript.State = CharacterStates.States.Idle;
+            _playerStatesScript.State = PlayerStates.States.Idle;
         }
     }
 
-    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
-        if (_characterStatesScript.State == CharacterStates.States.Damaged)
+        if (_playerStatesScript.State == PlayerStates.States.Damaged)
         {
             return true;
         } else
@@ -52,7 +52,7 @@ public class PlayerDamaged : CharacterBase
         KnockBack(knockBackForce, senderPos);
         damagedTimer = 0;
 
-        _characterStatesScript.State = CharacterStates.States.Damaged;
+        _playerStatesScript.State = PlayerStates.States.Damaged;
     }
 
     private void KnockBack(float knockBackForce, Vector2 senderPos)
@@ -60,6 +60,6 @@ public class PlayerDamaged : CharacterBase
         Vector2 dir = ((Vector2)transform.position - senderPos).normalized;
         _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
-        _characterStatesScript.State = CharacterStates.States.Damaged;
+        _playerStatesScript.State = PlayerStates.States.Damaged;
     }
 }

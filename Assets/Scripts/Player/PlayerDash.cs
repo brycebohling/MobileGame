@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CharacterStates))]
-public class CharacterDash : CharacterBase
+[RequireComponent(typeof(PlayerStates))]
+public class PlayerDash : PlayerBase
 {
     [Header("Blocking States")]
-    public CharacterStates.States[] BlockingActionStates;
+    public PlayerStates.States[] BlockingActionStates;
 
     [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
@@ -67,7 +67,7 @@ public class CharacterDash : CharacterBase
         OnActionActivate();
     }
 
-    protected override bool IsActionAuth(CharacterStates.States[] blockingActionStates)
+    protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
         bool isNotBlockingAction = base.IsActionAuth(blockingActionStates);
 
@@ -82,7 +82,7 @@ public class CharacterDash : CharacterBase
 
     protected override void OnActionActivate()
     {
-        _characterStatesScript.State = CharacterStates.States.Dashing;
+        _playerStatesScript.State = PlayerStates.States.Dashing;
         velocityBeforeDash = _rb.velocity;
         isDashing = true;
 
@@ -95,7 +95,7 @@ public class CharacterDash : CharacterBase
 
     protected override void OnActionDeactivate()
     {
-        _characterStatesScript.State = CharacterStates.States.Idle;
+        _playerStatesScript.State = PlayerStates.States.Idle;
         isDashing = false;
         dashingTimer = 0;
         dashCooldownTimer = 0;
