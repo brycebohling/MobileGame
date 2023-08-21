@@ -30,11 +30,11 @@ public class PlayerFlipper : PlayerBase
 
         if (isNotBlockingAction)
         {
-            if (_rb.velocity.x > minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
+            if (_playerRb.velocity.x > minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
             {
                 return true;
 
-            } else if (_rb.velocity.x < -minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
+            } else if (_playerRb.velocity.x < -minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
             {
                 return true;
 

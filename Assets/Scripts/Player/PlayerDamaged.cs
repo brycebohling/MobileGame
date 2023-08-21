@@ -31,7 +31,7 @@ public class PlayerDamaged : PlayerBase
         damagedTimer += Time.deltaTime;
         if (damagedTimer >= damagedTime)
         {
-            _rb.velocity = Vector2.zero;
+            _playerRb.velocity = Vector2.zero;
             _playerStatesScript.State = PlayerStates.States.Idle;
         }
     }
@@ -58,7 +58,7 @@ public class PlayerDamaged : PlayerBase
     private void KnockBack(float knockBackForce, Vector2 senderPos)
     {
         Vector2 dir = ((Vector2)transform.position - senderPos).normalized;
-        _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
+        _playerRb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
         _playerStatesScript.State = PlayerStates.States.Damaged;
     }

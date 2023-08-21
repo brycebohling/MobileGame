@@ -97,7 +97,7 @@ public class PlayerMovement : PlayerBase
 
     protected override void ApplyAction()
     {
-        _rb.velocity = movementSpeed;
+        _playerRb.velocity = movementSpeed;
 
         _playerStatesScript.State = PlayerStates.States.Walking;
     }
@@ -106,7 +106,7 @@ public class PlayerMovement : PlayerBase
     {
         isActivated = true;
 
-        StartAnimation(_animator, walkAnim);
+        StartAnimation(_playerAnimator, walkAnim);
 
         StartParticles(walkParticles, particleSpawn.position);
     }
@@ -114,10 +114,10 @@ public class PlayerMovement : PlayerBase
     protected override void OnActionDeactivate()
     {
         isActivated = false;
-        _rb.velocity = Vector2.zero;
+        _playerRb.velocity = Vector2.zero;
         _playerStatesScript.State = PlayerStates.States.Idle;
 
-        StopAnimation(_animator);
+        StopAnimation(_playerAnimator);
 
         StopParticles(walkParticles);
     }

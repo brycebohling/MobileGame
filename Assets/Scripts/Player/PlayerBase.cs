@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
-    protected Animator _animator;
-    protected Rigidbody2D _rb;
-
+    protected Animator _playerAnimator;
+    protected Rigidbody2D _playerRb;
     protected SpriteRenderer _playerSpriteSpriteRenderer;
+
     protected Health _playerHealthScript;
     protected PlayerMovement _playerMovementScript;
     protected PlayerStates _playerStatesScript;
@@ -29,8 +29,8 @@ public class PlayerBase : MonoBehaviour
 
     private void Initialization()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _animator = gameObject?.GetComponentInChildren<Animator>();
+        _playerRb = GetComponent<Rigidbody2D>();
+        _playerAnimator = gameObject?.GetComponentInChildren<Animator>();
         _playerSpriteSpriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
         _playerHealthScript = gameObject?.GetComponent<Health>();
         _playerMovementScript = gameObject?.GetComponent<PlayerMovement>();
@@ -63,7 +63,6 @@ public class PlayerBase : MonoBehaviour
                 return false;
             }
         }
-
         return true;
     }
 
