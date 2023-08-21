@@ -23,7 +23,7 @@ public class CharacterMovement : CharacterBase
 
     
     InputAction movementKeys;
-    public Vector2 moveDir;
+    Vector2 moveDir;
     Vector2 movementSpeed;
 
     bool isActivated;
