@@ -8,6 +8,9 @@ public class PlayerFlipper : CharacterBase
     [Header("Blocking States")]
     public CharacterStates.States[] BlockingActionStates;
 
+    [Header("Speeds")]
+    [SerializeField] float minimumVelocityToFlip; 
+
 
     protected override void Start()
     {
@@ -27,13 +30,14 @@ public class PlayerFlipper : CharacterBase
 
         if (isNotBlockingAction)
         {
-            if (_rb.velocity.x > 0 && transform.localScale.x != 1)
+            if (_rb.velocity.x > minimumVelocityToFlip && transform.localScale.x != 1)
             {
                 return true;
 
-            } else if (_rb.velocity.x < 0 && transform.localScale.x != -1)
+            } else if (_rb.velocity.x < -minimumVelocityToFlip && transform.localScale.x != -1)
             {
                 return true;
+                
             } else
             {
                 return false;

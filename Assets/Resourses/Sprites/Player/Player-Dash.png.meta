@@ -131,14 +131,35 @@ TextureImporter:
         width: 31
         height: 32
       alignment: 9
-      pivot: {x: 0.535, y: 0.4}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f425329f46a5c43908bbee51d38cfc5e
-      internalID: -1731664702
+      spriteID: b9e313d704fd34e7199280f311ce2607
+      internalID: 1383582091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Dash_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 0
+        width: 31
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b380804f56914d219d76b7073635fbf
+      internalID: -1163843988
       vertices: []
       indices: 
       edges: []
@@ -154,7 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player-Dash_0: -1731664702
+      Player-Dash_0: 1383582091
+      Player-Dash_1: -1163843988
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
