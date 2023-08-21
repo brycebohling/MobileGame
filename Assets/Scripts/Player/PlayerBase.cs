@@ -8,7 +8,7 @@ public class PlayerBase : MonoBehaviour
     protected Animator _animator;
     protected Rigidbody2D _rb;
 
-    protected SpriteRenderer _playerSprite;
+    protected SpriteRenderer _playerSpriteSpriteRenderer;
     protected Health _playerHealthScript;
     protected PlayerMovement _playerMovementScript;
     protected PlayerStates _playerStatesScript;
@@ -31,7 +31,7 @@ public class PlayerBase : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = gameObject?.GetComponentInChildren<Animator>();
-        _playerSprite = gameObject?.GetComponentInChildren<SpriteRenderer>();
+        _playerSpriteSpriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
         _playerHealthScript = gameObject?.GetComponent<Health>();
         _playerMovementScript = gameObject?.GetComponent<PlayerMovement>();
         _playerStatesScript = gameObject?.GetComponent<PlayerStates>();

@@ -30,11 +30,11 @@ public class PlayerFlipper : PlayerBase
 
         if (isNotBlockingAction)
         {
-            if (_rb.velocity.x > minimumVelocityToFlip && transform.localScale.x != 1)
+            if (_rb.velocity.x > minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
             {
                 return true;
 
-            } else if (_rb.velocity.x < -minimumVelocityToFlip && transform.localScale.x != -1)
+            } else if (_rb.velocity.x < -minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
             {
                 return true;
 
@@ -51,8 +51,8 @@ public class PlayerFlipper : PlayerBase
 
     protected override void ApplyAction()
     {
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;    
-        transform.localScale = localScale;
+        Vector3 spriteLocalScale = _playerSpriteSpriteRenderer.transform.localScale;
+        spriteLocalScale.x *= -1;    
+        _playerSpriteSpriteRenderer.transform.localScale = spriteLocalScale;
     }
 }
