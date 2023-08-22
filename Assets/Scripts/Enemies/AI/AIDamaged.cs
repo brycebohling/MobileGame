@@ -9,6 +9,11 @@ public class AIDamaged : AIBase
     float damagedTimer = 0;
 
 
+    protected override void Awake()
+    {
+        base.Start();
+    }
+
     protected override void OnEnable() 
     {
         _healthScript.OnDamaged += Damaged;
@@ -26,6 +31,7 @@ public class AIDamaged : AIBase
         damagedTimer += Time.deltaTime;
         if (damagedTimer >= damagedTime)
         {
+            _aiPathScript.canMove = true;
             _aIStatesScript.State = AIStates.States.Idle;
         }
     }
@@ -52,8 +58,9 @@ public class AIDamaged : AIBase
     private void KnockBack(float knockBackForce, Vector2 senderPos)
     {
         Vector2 dir = ((Vector2)transform.position - senderPos).normalized;
-        _rb.AddForce(dir * knockBackForce);
+        _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
+        _aiPathScript.canMove = false;
         _aIStatesScript.State = AIStates.States.Damaged;
     }
 }

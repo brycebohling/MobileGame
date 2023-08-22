@@ -9198,7 +9198,7 @@ MonoBehaviour:
   BlockingActionStates: 
   attackPoint: {fileID: 502986362}
   dmg: 10
-  knockBackForce: 4
+  knockBackForce: 5
   attackRadius: 0.8
   enemyLayer:
     serializedVersion: 2
@@ -9369,6 +9369,8 @@ GameObject:
   - component: {fileID: 1763918393}
   - component: {fileID: 1763918395}
   - component: {fileID: 1763918397}
+  - component: {fileID: 1763918403}
+  - component: {fileID: 1763918404}
   - component: {fileID: 1763918396}
   - component: {fileID: 1763918399}
   - component: {fileID: 1763918391}
@@ -9452,7 +9454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 0200000003000000
+  BlockingActionStates: 020000000300000004000000
   patrolRadius: 2.39
   patrolSpeed: 1
   tbMovementMin: 0.5
@@ -9472,7 +9474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 02000000
+  BlockingActionStates: 0200000004000000
   chaseSpeed: 1.25
   targetingRadius: 4
   playerLayer:
@@ -9491,7 +9493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8be3e5a0db408e90469b583faabda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 
+  BlockingActionStates: 04000000
   attackSpeed: 1.25
   targetingRadius: 1
   playerLayer:
@@ -9558,8 +9560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  startingHealth: 20
+  maxHealth: 100
+  startingHealth: 100
   IFrames: 0
 --- !u!114 &1763918400
 MonoBehaviour:
@@ -9646,6 +9648,33 @@ MonoBehaviour:
   version: 1
   unwrap: 1
   splitAtEveryPortal: 0
+--- !u!114 &1763918403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763918387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df5acfc7902848a9bb9f80667179e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagedTime: 0.1
+--- !u!114 &1763918404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763918387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9698f521fb4b04052b73a301f3f83b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticles: []
+  particleTime: 0
 --- !u!1 &1774151590
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class DefaultSword : PlayerMeleeBase
 
     private void OnEnable()
     {
-        attackkeys = _inputManager.Player.Dash;
+        attackkeys = _inputManager.Player.Fire;
         attackkeys.Enable();
         attackkeys.performed += AttackPressed;
     }
@@ -67,10 +67,11 @@ public class DefaultSword : PlayerMeleeBase
         }
 
         Helpers.ChangeAnimationState(_meleeAnimator, _attackAnimList[lastAttackAnimIndex].name);
-        lastAttackAnimIndex++;
-        if (_attackAnimList.Count >= lastAttackAnimIndex++)
+
+        if (_attackAnimList.Count <= lastAttackAnimIndex + 1)
         {
             lastAttackAnimIndex = 0;
+
         } else
         {
             lastAttackAnimIndex++;

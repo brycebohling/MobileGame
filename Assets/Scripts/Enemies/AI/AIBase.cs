@@ -81,12 +81,14 @@ public class AIBase : MonoBehaviour
         
     }
 
-    protected virtual void StartParticles(List<ParticleSystem> particleList)
+    protected virtual void StartParticles(List<ParticleSystem> particleList, Vector3 pos)
     {
         foreach (ParticleSystem particleSystem in particleList)
         {
             if (!particleSystem.isEmitting)
             {
+                particleSystem.transform.position = pos;
+
                 particleSystem.Play();
                 ParticleSystem.EmissionModule em = particleSystem.GetComponent<ParticleSystem>().emission;
                 em.enabled = true;
@@ -168,15 +170,5 @@ public class AIBase : MonoBehaviour
 
         Debug.Log("Should never run this.");
         return Vector2.zero;
-    }
-
-    protected virtual void Death()
-    {
-        
-    }
-
-    protected virtual void Respawn()
-    {
-		
     }
 }

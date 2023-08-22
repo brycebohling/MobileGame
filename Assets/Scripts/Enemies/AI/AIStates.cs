@@ -11,6 +11,7 @@ public class AIStates : MonoBehaviour
         Attacking,
         Chasing,
         Damaged,
+        Dead,
     }
 
     public States State;
