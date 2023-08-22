@@ -51,7 +51,15 @@ public class PlayerMovement : PlayerBase
 
     void Update()
     {
-        if (!IsActionAuth(BlockingActionStates)) return;
+        if (!IsActionAuth(BlockingActionStates)) 
+        {
+            if (isActivated)
+            {
+                isActivated = false;
+            }
+
+            return;
+        }
 
         HandleInput();
     }
@@ -114,6 +122,7 @@ public class PlayerMovement : PlayerBase
     protected override void OnActionDeactivate()
     {
         isActivated = false;
+
         _playerRb.velocity = Vector2.zero;
         _playerStatesScript.State = PlayerStates.States.Idle;
 

@@ -127,11 +127,6 @@ public class PlayerBase : MonoBehaviour
 
     }
 
-    protected virtual void InProgressSFX()
-    {
-
-    }
-
     protected virtual void StopSFX()
     {
         
@@ -145,15 +140,5 @@ public class PlayerBase : MonoBehaviour
     protected virtual void StopAnimation(Animator anim)
     {
         Helpers.ChangeAnimationState(anim, _playerStatesScript.baseAnimationClip.name);
-    }
-
-    protected virtual void Death()
-    {
-        
-    }
-
-    protected virtual void Respawn()
-    {
-		
     }
 }

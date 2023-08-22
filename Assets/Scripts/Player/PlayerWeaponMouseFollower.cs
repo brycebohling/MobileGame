@@ -85,27 +85,3 @@ public class PlayerWeaponMouseFollower : PlayerBase
         isWeaponOnTheRight = !isWeaponOnTheRight;
     }
 }
-
-
-// if (weaponPivot.localEulerAngles.z < 90 && weaponPivot.localEulerAngles.z > 0 || weaponPivot.localEulerAngles.z > 270)
-// {
-//     if (weaponPivot.localScale.x != 1)
-//     {
-//         FlipWeapon();
-//     }
-
-//     weaponPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-// } else
-// {
-//     if (weaponPivot.localScale.x != -1)
-//     {
-//         FlipWeapon();
-//     }
-
-//     weaponPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-//     Vector3 weaponLocalEulerAngles = weaponPivot.localEulerAngles;
-//     weaponLocalEulerAngles.x -= 180;    
-//     weaponPivot.localEulerAngles = weaponLocalEulerAngles;
-// }
