@@ -109,6 +109,14 @@ public class AIBase : MonoBehaviour
         }
     }
 
+    protected virtual void InstantiateParticales(List<ParticleSystem> particleList, Vector3 pos)
+    {
+        foreach (ParticleSystem particleSystem in particleList)
+        {
+            Instantiate(particleSystem, pos, Quaternion.identity);
+        }
+    }
+
     protected virtual void StartSFX()
     {
 

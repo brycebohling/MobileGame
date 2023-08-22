@@ -554,7 +554,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1635,8 +1635,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1754,7 +1754,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: f92a7806c1c0e43e0a84711838f2ae70, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -6457,7 +6457,7 @@ CompositeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915107130}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -9718,7 +9718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 020000000300000004000000
+  BlockingActionStates: 02000000030000000400000005000000
   patrolRadius: 2.39
   patrolSpeed: 1
   tbMovementMin: 0.5
@@ -9738,7 +9738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 0200000004000000
+  BlockingActionStates: 020000000400000005000000
   chaseSpeed: 1.25
   targetingRadius: 4
   playerLayer:
@@ -9775,6 +9775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e78adb7e4202d47f0af3fed3ba5952ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlockingActionStates: 
   collisionDmg: 10
   knockBackForce: 5
 --- !u!58 &1763918398
@@ -9824,8 +9825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 20
+  startingHealth: 20
   IFrames: 0
 --- !u!114 &1763918400
 MonoBehaviour:
@@ -9937,8 +9938,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9698f521fb4b04052b73a301f3f83b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathParticles: []
-  particleTime: 0
+  deathParticles:
+  - {fileID: 4564461473034981521, guid: 50c7fdb626f0241cdaee31cd0457e1b6, type: 3}
+  particleTime: 10
 --- !u!1 &1774151590
 GameObject:
   m_ObjectHideFlags: 0
@@ -11437,8 +11439,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -11556,7 +11558,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: f92a7806c1c0e43e0a84711838f2ae70, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
