@@ -58,9 +58,11 @@ public class AIDamaged : AIBase
     private void KnockBack(float knockBackForce, Vector2 senderPos)
     {
         Vector2 dir = ((Vector2)transform.position - senderPos).normalized;
+
+        _rb.velocity = Vector2.zero;
         _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
         _aiPathScript.canMove = false;
         _aIStatesScript.State = AIStates.States.Damaged;
     }
-}
+}   
