@@ -6076,6 +6076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockingActionStates: 
+  isFlippingTowardsWeapon: 1
   minimumVelocityToFlip: 0.0001
 --- !u!114 &807341539
 MonoBehaviour:
@@ -6091,6 +6092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockingActionStates: 
   weaponPivot: {fileID: 415843940}
+  playCamera: {fileID: 519420031}
+  isWeaponOnTheRight: 1
 --- !u!1 &880005743
 GameObject:
   m_ObjectHideFlags: 0

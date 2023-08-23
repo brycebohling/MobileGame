@@ -8,13 +8,22 @@ public class PlayerFlipper : PlayerBase
     [Header("Blocking States")]
     public PlayerStates.States[] BlockingActionStates;
 
+    [Header("FlipTowardsWeapon")]
+    [SerializeField] bool isFlippingTowardsWeapon; // Requires PlayerWeaponMouseFollower Script
+
     [Header("Speeds")]
     [SerializeField] float minimumVelocityToFlip; 
-
+    
+    PlayerWeaponMouseFollower playerWeaponMouseFollowerScript;
 
     protected override void Start()
     {
-        base.Start();    
+        base.Start();
+
+        if (isFlippingTowardsWeapon)
+        {
+            playerWeaponMouseFollowerScript = transform.root.GetComponent<PlayerWeaponMouseFollower>();
+        }
     }
 
     void Update()
@@ -30,18 +39,46 @@ public class PlayerFlipper : PlayerBase
 
         if (isNotBlockingAction)
         {
-            if (_playerRb.velocity.x > minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
+            if (isFlippingTowardsWeapon)
             {
-                return true;
-
-            } else if (_playerRb.velocity.x < -minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
-            {
-                return true;
+                return CanFlipTowardsWeapon();
 
             } else
             {
-                return false;
+                return CanFlipTowardsVelocity();
             }
+
+        } else
+        {
+            return false;
+        }
+    }
+
+    private bool CanFlipTowardsWeapon()
+    {
+        if (playerWeaponMouseFollowerScript.isWeaponOnTheRight && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
+        {
+            return true;
+
+        } else if (!playerWeaponMouseFollowerScript.isWeaponOnTheRight && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
+        {
+            return true;
+            
+        } else
+        {
+            return false;
+        }
+    }
+
+    private bool CanFlipTowardsVelocity()
+    {
+        if (_playerRb.velocity.x > minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
+        {
+            return true;
+
+        } else if (_playerRb.velocity.x < -minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
+        {
+            return true;
 
         } else
         {

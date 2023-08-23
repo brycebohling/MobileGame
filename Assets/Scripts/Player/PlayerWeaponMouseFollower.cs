@@ -12,10 +12,13 @@ public class PlayerWeaponMouseFollower : PlayerBase
     [Header("Weapon")]
     [SerializeField] Transform weaponPivot;
 
+    [Header("References")]
+    [SerializeField] Camera playCamera;
+
     Vector3 mouseLocalPosition;
     Vector3 mouseWorldPosition;
 
-    bool isWeaponOnTheRight = true;
+    public bool isWeaponOnTheRight = true;
 
     protected override void Start()
     {
@@ -32,7 +35,7 @@ public class PlayerWeaponMouseFollower : PlayerBase
     protected override void ApplyAction()
     {
         mouseLocalPosition = Mouse.current.position.ReadValue();
-        mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseLocalPosition);
+        mouseWorldPosition = playCamera.ScreenToWorldPoint(mouseLocalPosition);
 
         Vector3 mouseRelativeToPlayPosition = mouseWorldPosition - _playerSpriteSpriteRenderer.transform.position;
         float angle = Mathf.Atan2(mouseRelativeToPlayPosition.y, mouseRelativeToPlayPosition.x) * Mathf.Rad2Deg;
