@@ -6062,6 +6062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagedTime: 0.1
+  damagedAnim: {fileID: 7400000, guid: c24fc55f094244e6895b6dab13ec12e3, type: 2}
 --- !u!114 &807341538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6668,6 +6669,7 @@ GameObject:
   - component: {fileID: 1050869833}
   - component: {fileID: 1050869834}
   - component: {fileID: 1050869835}
+  - component: {fileID: 1050869836}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -6710,7 +6712,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 74142eced7a264766baf96677cf4ea8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6763,6 +6765,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1050869836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050869832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &1067074592
 GameObject:
   m_ObjectHideFlags: 0
@@ -9478,6 +9496,7 @@ GameObject:
   - component: {fileID: 1604182993}
   - component: {fileID: 1604182992}
   - component: {fileID: 1604182989}
+  - component: {fileID: 1604182994}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -9526,7 +9545,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9865db112f7a0481991c474bdcee52bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9573,6 +9592,22 @@ Transform:
   m_Father: {fileID: 1763918389}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1604182994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604182988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &1731945024
 GameObject:
   m_ObjectHideFlags: 0
@@ -9635,7 +9670,6 @@ GameObject:
   - component: {fileID: 1763918397}
   - component: {fileID: 1763918403}
   - component: {fileID: 1763918404}
-  - component: {fileID: 1763918396}
   - component: {fileID: 1763918399}
   - component: {fileID: 1763918391}
   - component: {fileID: 1763918398}
@@ -9718,7 +9752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 02000000030000000400000005000000
+  BlockingActionStates: 030000000400000005000000
   patrolRadius: 2.39
   patrolSpeed: 1
   tbMovementMin: 0.5
@@ -9738,31 +9772,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 020000000400000005000000
+  BlockingActionStates: 0400000005000000
   chaseSpeed: 1.25
-  targetingRadius: 4
+  targetingRadius: 3.58
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
   walkAnim: {fileID: 7400000, guid: eb9a9ca52ba924df3aaa993460154cd3, type: 2}
---- !u!114 &1763918396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763918387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d8be3e5a0db408e90469b583faabda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BlockingActionStates: 04000000
-  attackSpeed: 1.25
-  targetingRadius: 1
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1763918397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9825,8 +9841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  startingHealth: 20
+  maxHealth: 100
+  startingHealth: 100
   IFrames: 0
 --- !u!114 &1763918400
 MonoBehaviour:
@@ -9926,6 +9942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagedTime: 0.1
+  damagedAnim: {fileID: 7400000, guid: c24fc55f094244e6895b6dab13ec12e3, type: 2}
 --- !u!114 &1763918404
 MonoBehaviour:
   m_ObjectHideFlags: 0

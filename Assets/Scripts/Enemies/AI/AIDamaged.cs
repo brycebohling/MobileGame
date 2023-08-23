@@ -8,6 +8,9 @@ public class AIDamaged : AIBase
     [SerializeField] float damagedTime;
     float damagedTimer = 0;
 
+    [Header("Animations")]
+    [SerializeField] AnimationClip damagedAnim;
+
 
     protected override void Awake()
     {
@@ -51,6 +54,8 @@ public class AIDamaged : AIBase
     {
         KnockBack(knockBackForce, senderPos);
         damagedTimer = 0;
+
+        StartAnimation(_animator, damagedAnim);
 
         _aIStatesScript.State = AIStates.States.Damaged;
     }

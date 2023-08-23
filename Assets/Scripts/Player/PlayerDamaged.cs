@@ -8,6 +8,9 @@ public class PlayerDamaged : PlayerBase
     [SerializeField] float damagedTime;
     float damagedTimer = 0;
 
+    [Header("Animations")]
+    [SerializeField] AnimationClip damagedAnim;
+
 
     protected override void Awake() 
     {
@@ -51,6 +54,8 @@ public class PlayerDamaged : PlayerBase
     {
         KnockBack(knockBackForce, senderPos);
         damagedTimer = 0;
+
+        StartAnimation(_playerAnimator, damagedAnim);
 
         _playerStatesScript.State = PlayerStates.States.Damaged;
     }
