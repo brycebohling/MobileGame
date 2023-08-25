@@ -7,8 +7,10 @@ using UnityEngine.Tilemaps;
 public class TilemapSpawner : MonoBehaviour
 {
     [SerializeField] private Tilemap floorTilemap;
+    [SerializeField] private Tilemap wallTilemap;
 
     [SerializeField] private TileBase floorTile;
+    [SerializeField] private TileBase wallTop;
 
     public void SpawnFloorTiles(IEnumerable<Vector2Int> floorPosition)
     {
@@ -32,5 +34,11 @@ public class TilemapSpawner : MonoBehaviour
     public void Clear()
     {
         floorTilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
+    }
+
+    internal void SpawnSingleBasicWall(Vector2Int position)
+    {
+        SpawnSingleTile(wallTilemap, wallTop, position);
     }
 }
