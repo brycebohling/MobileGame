@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Enemy
   - Environment
-  - 
+  - Walls
   - 
   - 
   - 
@@ -53,12 +53,12 @@ TagManager:
   - name: Player
     uniqueID: 4242042303
     locked: 0
-  - name: Weapons
-    uniqueID: 3233497741
-    locked: 0
   - name: Particales
     uniqueID: 1848453131
     locked: 0
   - name: WallsFront
     uniqueID: 1923945105
+    locked: 0
+  - name: Weapons
+    uniqueID: 3233497741
     locked: 0
