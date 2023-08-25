@@ -5,22 +5,16 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class RandomWalkMapGenerator : MonoBehaviour
+public class RandomWalkMapGenerator : AbstractDungeonGenerator
 {
-    [SerializeField] protected Vector2Int startPosition = Vector2Int.zero;
+    [SerializeField] private RandomWalkSO randomWalkParameters;
 
-    [SerializeField] private int iteration = 10;
-    public int walkLength = 10;
-    public bool startRandomlyEachIteration = true;
-
-    public void RunProceduralGeneration()
+    protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
-        
-        foreach (var position in floorPositions)
-        {
-            Debug.Log(position);
-        }
+
+        tilemapSpawnerScript.Clear();
+        tilemapSpawnerScript.SpawnFloorTiles(floorPositions);
     }
 
     protected HashSet<Vector2Int> RunRandomWalk()
@@ -28,12 +22,12 @@ public class RandomWalkMapGenerator : MonoBehaviour
         var currentPostion = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
 
-        for (int i = 0; i < iteration; i++)
+        for (int i = 0; i < randomWalkParameters.iteration; i++)
         {
-            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, walkLength);
+            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, randomWalkParameters.walkLength);
             floorPositions.UnionWith(path);
 
-            if (startRandomlyEachIteration)
+            if (randomWalkParameters.startRandomlyEachIteration)
             {
                 currentPostion = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
             }
