@@ -7,17 +7,14 @@ public static class WallGenerator
 {
     public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapSpawner tilemapSpawnerScript)
     {
-        var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
-        var cornerWallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
+        // var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
+        // var cornerWallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
+        var wallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
 
-        CreateBasicWalls(tilemapSpawnerScript, basicWallPositions, floorPositions);
-        CreateCornerWalls(tilemapSpawnerScript, cornerWallPositions, floorPositions);
-    }
+        // CreateBasicWalls(tilemapSpawnerScript, basicWallPositions, floorPositions);
+        // CreateCornerWalls(tilemapSpawnerScript, cornerWallPositions, floorPositions);
 
-    private static void CreateCornerWalls(TilemapSpawner tilemapSpawnerScript, HashSet<Vector2Int> cornerWallPositions,
-        HashSet<Vector2Int> floorPositions)
-    {
-        foreach (var position in cornerWallPositions)
+        foreach (var position in wallPositions)
         {
             string neighbourBinaryType = "";
 
@@ -35,34 +32,59 @@ public static class WallGenerator
                 }
             }
 
-            tilemapSpawnerScript.SpawnSingleCornerWall(position, neighbourBinaryType);
+            tilemapSpawnerScript.SpawnSingleWall(position, neighbourBinaryType);
         }
     }
 
-    private static void CreateBasicWalls(TilemapSpawner tilemapSpawnerScript, HashSet<Vector2Int> basicWallPositions,
-        HashSet<Vector2Int> floorPositions)
-    {
-        foreach (var position in basicWallPositions)
-        {
-            string neighbourBinaryType = "";
+    // private static void CreateCornerWalls(TilemapSpawner tilemapSpawnerScript, HashSet<Vector2Int> cornerWallPositions,
+    //     HashSet<Vector2Int> floorPositions)
+    // {
+    //     foreach (var position in cornerWallPositions)
+    //     {
+    //         string neighbourBinaryType = "";
 
-            foreach (var direction in Direction2D.cardinalDirectionsList)
-            {
-                var neighbourPosition = position + direction;
+    //         foreach (var direction in Direction2D.eightDirectionList)
+    //         {
+    //             var neighbourPosition = position + direction;
 
-                if (floorPositions.Contains(neighbourPosition))
-                {
-                    neighbourBinaryType += "1";
+    //             if (floorPositions.Contains(neighbourPosition))
+    //             {
+    //                 neighbourBinaryType += "1";
 
-                } else
-                {
-                    neighbourBinaryType += "0";
-                }
-            }
+    //             } else
+    //             {
+    //                 neighbourBinaryType += "0";
+    //             }
+    //         }
 
-            tilemapSpawnerScript.SpawnSingleBasicWall(position, neighbourBinaryType);
-        }
-    }
+    //         tilemapSpawnerScript.SpawnSingleCornerWall(position, neighbourBinaryType);
+    //     }
+    // }
+
+    // private static void CreateBasicWalls(TilemapSpawner tilemapSpawnerScript, HashSet<Vector2Int> basicWallPositions,
+    //     HashSet<Vector2Int> floorPositions)
+    // {
+    //     foreach (var position in basicWallPositions)
+    //     {
+    //         string neighbourBinaryType = "";
+
+    //         foreach (var direction in Direction2D.cardinalDirectionsList)
+    //         {
+    //             var neighbourPosition = position + direction;
+
+    //             if (floorPositions.Contains(neighbourPosition))
+    //             {
+    //                 neighbourBinaryType += "1";
+
+    //             } else
+    //             {
+    //                 neighbourBinaryType += "0";
+    //             }
+    //         }
+
+    //         tilemapSpawnerScript.SpawnSingleBasicWall(position, neighbourBinaryType);
+    //     }
+    // }
 
     private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionsList)
     {
