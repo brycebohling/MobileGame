@@ -59,8 +59,6 @@ public class TilemapSpawner : MonoBehaviour
     {
         int typeAsInt = Convert.ToInt32(binaryType, 2);
         TileBase tile = null;
-
-        // Debug.Log(position + "       " + binaryType);
         
         if (WallTypesHelper.wallTop.Contains(typeAsInt))
         {
@@ -134,6 +132,10 @@ public class TilemapSpawner : MonoBehaviour
         if (tile != null)
         {
             SpawnSingleTile(wallTilemap, tile, position);
+
+        } else
+        {
+            Debug.Log("Null tile at " + position + "   " + binaryType);
         }
     }
 }
