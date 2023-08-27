@@ -9,7 +9,7 @@ public static class WallGenerator
     {
         // var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
         // var cornerWallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
-        var wallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
+        var wallPositions = FindWallsInDirections(floorPositions, Direction2D.eightDirectionList);
 
         // CreateBasicWalls(tilemapSpawnerScript, basicWallPositions, floorPositions);
         // CreateCornerWalls(tilemapSpawnerScript, cornerWallPositions, floorPositions);
