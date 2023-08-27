@@ -25,6 +25,9 @@ public class TilemapSpawner : MonoBehaviour
     [SerializeField] TileBase wallOuterCornerUpLeft;
     [SerializeField] TileBase wallFillRight;
     [SerializeField] TileBase wallFillLeft;
+    [SerializeField] TileBase wallFillUp;
+    [SerializeField] TileBase wallFillDown;
+    [SerializeField] TileBase wallFillUpAndDown;
     
 
     public void SpawnFloorTiles(IEnumerable<Vector2Int> floorPosition)
@@ -57,7 +60,7 @@ public class TilemapSpawner : MonoBehaviour
         int typeAsInt = Convert.ToInt32(binaryType, 2);
         TileBase tile = null;
 
-        Debug.Log(position + "       " + binaryType);
+        // Debug.Log(position + "       " + binaryType);
         
         if (WallTypesHelper.wallTop.Contains(typeAsInt))
         {
@@ -117,6 +120,15 @@ public class TilemapSpawner : MonoBehaviour
         } else if (WallTypesHelper.wallFillLeft.Contains(typeAsInt))
         {
             tile = wallFillLeft;
+        } else if (WallTypesHelper.wallFillUp.Contains(typeAsInt))
+        {
+            tile = wallFillUp;
+        } else if (WallTypesHelper.wallFillDown.Contains(typeAsInt))
+        {
+            tile = wallFillDown;
+        } else if (WallTypesHelper.wallFillUpAndDown.Contains(typeAsInt))
+        {
+            tile = wallFillUpAndDown;
         }
 
         if (tile != null)

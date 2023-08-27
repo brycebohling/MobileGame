@@ -13,10 +13,28 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
     [SerializeField] [Range(0, 10)] private int offset = 1;
     [SerializeField] private bool randomWalkRooms = false;
 
+    [SerializeField] bool debugCreationTime;
+
+    float createStartTime;
+    bool createdDungeon;
+
 
     protected override void RunProceduralGeneration()
     {
+        createdDungeon = false;
+        if (debugCreationTime)
+        {
+            StartCoroutine(StartTime());
+        }
+
         CreateRooms();
+    }
+
+    private IEnumerator StartTime()
+    {
+        createStartTime = Time.time;
+        yield return createdDungeon;
+        Debug.Log("Created in " + Mathf.Round((Time.time - createStartTime) * 1000f) + "ms");
     }
 
     private void CreateRooms()
@@ -46,6 +64,11 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
         tilemapSpawnerScript.SpawnFloorTiles(floor);
         WallGenerator.CreateWalls(floor, tilemapSpawnerScript);
+
+        if (debugCreationTime)
+        {
+            createdDungeon = true;
+        }
     }
 
     private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
