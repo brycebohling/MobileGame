@@ -10,9 +10,7 @@ public class TilemapSpawner : MonoBehaviour
     [SerializeField] Tilemap wallTilemap;
 
     [SerializeField] TileBase floorTile;
-    [SerializeField] TileBase wallFull;
-    [SerializeField] TileBase wallTop;
-    [SerializeField] TileBase wallBottom;
+    [SerializeField] TileBase wallMain;
     [SerializeField] TileBase wallSideRight;
     [SerializeField] TileBase wallSideLeft;
     [SerializeField] TileBase wallInnerCornerDownRight;
@@ -21,13 +19,21 @@ public class TilemapSpawner : MonoBehaviour
     [SerializeField] TileBase wallInnerCornerTopLeft;
     [SerializeField] TileBase wallOuterCornerDownRight;
     [SerializeField] TileBase wallOuterCornerDownLeft;
-    [SerializeField] TileBase wallOuterCornerUpRight;
-    [SerializeField] TileBase wallOuterCornerUpLeft;
+    [SerializeField] TileBase wallOuterCornerTopRight;
+    [SerializeField] TileBase wallOuterCornerTopLeft;
+    [SerializeField] TileBase wallFill;
     [SerializeField] TileBase wallFillRight;
     [SerializeField] TileBase wallFillLeft;
-    [SerializeField] TileBase wallFillUp;
+    [SerializeField] TileBase wallFillTop;
     [SerializeField] TileBase wallFillDown;
-    [SerializeField] TileBase wallFillUpAndDown;
+    [SerializeField] TileBase wallDoubleCenter;
+    [SerializeField] TileBase wallDoubleTopRL;
+    [SerializeField] TileBase wallDoubleTopR;
+    [SerializeField] TileBase wallDoubleTopL;
+    [SerializeField] TileBase wallDoubleDownRL;
+    [SerializeField] TileBase wallDoubleDownR;
+    [SerializeField] TileBase wallDoubleDownL;
+    
     
 
     public void SpawnFloorTiles(IEnumerable<Vector2Int> floorPosition)
@@ -60,9 +66,9 @@ public class TilemapSpawner : MonoBehaviour
         int typeAsInt = Convert.ToInt32(binaryType, 2);
         TileBase tile = null;
         
-        if (WallTypesHelper.wallTop.Contains(typeAsInt))
+        if (WallTypesHelper.wallMain.Contains(typeAsInt))
         {
-            tile = wallTop;
+            tile = wallMain;
 
         } else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
         {
@@ -72,13 +78,9 @@ public class TilemapSpawner : MonoBehaviour
         {
             tile = wallSideLeft;
 
-        } else if (WallTypesHelper.wallBottom.Contains(typeAsInt))
+        } else if (WallTypesHelper.wallFill.Contains(typeAsInt))
         {
-            tile = wallBottom;
-
-        } else if (WallTypesHelper.wallFull.Contains(typeAsInt))
-        {
-            tile = wallFull;
+            tile = wallFill;
 
         } else if (WallTypesHelper.wallInnerCornerDownRight.Contains(typeAsInt))
         {
@@ -104,13 +106,14 @@ public class TilemapSpawner : MonoBehaviour
         {
             tile = wallOuterCornerDownLeft;
 
-        } else if (WallTypesHelper.wallOuterCornerUpRight.Contains(typeAsInt))
+        } else if (WallTypesHelper.wallOuterCornerTopRight.Contains(typeAsInt))
         {
-            tile = wallOuterCornerUpRight;
+            tile = wallOuterCornerTopRight;
 
-        } else if (WallTypesHelper.wallOuterCornerUpLeft.Contains(typeAsInt))
+        } else if (WallTypesHelper.wallOuterCornerTopLeft.Contains(typeAsInt))
         {
-            tile = wallOuterCornerUpLeft;
+            tile = wallOuterCornerTopLeft;
+
         } else if (WallTypesHelper.wallFillRight.Contains(typeAsInt))
         {
             tile = wallFillRight;
@@ -118,15 +121,43 @@ public class TilemapSpawner : MonoBehaviour
         } else if (WallTypesHelper.wallFillLeft.Contains(typeAsInt))
         {
             tile = wallFillLeft;
-        } else if (WallTypesHelper.wallFillUp.Contains(typeAsInt))
+            
+        } else if (WallTypesHelper.wallFillTop.Contains(typeAsInt))
         {
-            tile = wallFillUp;
+            tile = wallFillTop;
+
         } else if (WallTypesHelper.wallFillDown.Contains(typeAsInt))
         {
             tile = wallFillDown;
-        } else if (WallTypesHelper.wallFillUpAndDown.Contains(typeAsInt))
+
+        } else if (WallTypesHelper.wallDoubleCenter.Contains(typeAsInt))
         {
-            tile = wallFillUpAndDown;
+            tile = wallDoubleCenter;
+
+        } else if (WallTypesHelper.wallDoubleTopRL.Contains(typeAsInt))
+        {
+            tile = wallDoubleTopRL;
+
+        } else if (WallTypesHelper.wallDoubleTopR.Contains(typeAsInt))
+        {
+            tile = wallDoubleTopR;
+
+        } else if (WallTypesHelper.wallDoubleTopL.Contains(typeAsInt))
+        {
+            tile = wallDoubleTopL;
+
+        } else if (WallTypesHelper.wallDoubleDownRL.Contains(typeAsInt))
+        {
+            tile = wallDoubleDownRL;
+
+        } else if (WallTypesHelper.wallDoubleDownR.Contains(typeAsInt))
+        {
+            tile = wallDoubleDownR;
+
+        } else if (WallTypesHelper.wallDoubleDownL.Contains(typeAsInt))
+        {
+            tile = wallDoubleDownL;
+
         }
 
         if (tile != null)

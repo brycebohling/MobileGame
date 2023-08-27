@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Tileset-WallSideRight
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1644237538, guid: 3af5c7d606a6c4858ae7f9d564f8935b, type: 3}
+  m_Sprite: {fileID: 1479383745, guid: e886d4e155b4c47678b1ae37fc878e8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
