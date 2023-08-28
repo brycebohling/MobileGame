@@ -33,6 +33,7 @@ public static class WallTypesHelper
         0b11001001,
         0b10001100,
         0b10011000,
+        0b10001000,
     };
 
     public static HashSet<int> wallSideRight = new()
@@ -150,6 +151,11 @@ public static class WallTypesHelper
         0b11101110,
         0b10111110,
         0b11111010,
+        0b10101111,
+        0b10111010,
+        0b10101110,
+        0b10101011,
+        0b10101010,
     };
 
     public static HashSet<int> wallFillRight = new()
@@ -167,6 +173,9 @@ public static class WallTypesHelper
         0b11101000,
         0b11101001,
         0b10101101,
+        0b10101100,
+        0b10101000,
+        0b10101001,
     };
 
     public static HashSet<int> wallFillLeft = new()
@@ -184,6 +193,10 @@ public static class WallTypesHelper
         0b10011110,
         0b10001011,
         0b11001011,
+        0b11011010,
+        0b10011010,
+        0b10001010,
+        0b11001010,
     };
 
     public static HashSet<int> wallFillTop = new()
@@ -218,6 +231,13 @@ public static class WallTypesHelper
         0b11010010,
         0b10010100,
         0b10110100,
+        0b10100010,
+        0b10010010,
+        0b10100101,
+        0b10100100,
+        0b10100110,
+        0b10110110,
+        0b10110010,
     };
 
     public static HashSet<int> wallFillDown = new()
@@ -250,6 +270,10 @@ public static class WallTypesHelper
         0b01101101,
         0b01101001,
         0b00101101,
+        0b01001010,
+        0b00101011,
+        0b00101001,
+        0b01101010,
     };
 
     public static HashSet<int> wallDoubleCenter = new()
@@ -283,7 +307,6 @@ public static class WallTypesHelper
 
     public static HashSet<int> wallDoubleTopRL = new()
     {
-        0b01010100,
         0b00010100,
     };
 
@@ -301,6 +324,7 @@ public static class WallTypesHelper
         0b00110100,
         0b01100100,
         0b00100100,
+        0b01010100,
     };
 
     public static HashSet<int> wallDoubleDownRL = new()
