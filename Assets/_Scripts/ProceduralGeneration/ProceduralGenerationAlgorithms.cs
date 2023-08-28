@@ -7,7 +7,7 @@ public static class ProceduralGenerationAlgorithms
 {
     public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength)
     {
-        HashSet<Vector2Int> path = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> path = new();
 
         path.Add(startPosition);
         var previousPosition = startPosition;
@@ -24,7 +24,7 @@ public static class ProceduralGenerationAlgorithms
 
     public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength)
     {
-        List<Vector2Int> corridor = new List<Vector2Int>();
+        List<Vector2Int> corridor = new();
         var direction = Direction2D .GetRandomCardinalDirection();
         var currentPosition = startPosition;
         corridor.Add(currentPosition);
@@ -40,8 +40,8 @@ public static class ProceduralGenerationAlgorithms
 
     public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
     {
-        Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
-        List<BoundsInt> roomsList = new List<BoundsInt>();
+        Queue<BoundsInt> roomsQueue = new();
+        List<BoundsInt> roomsList = new();
         roomsQueue.Enqueue(spaceToSplit);
         
         while (roomsQueue.Count > 0)

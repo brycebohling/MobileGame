@@ -22,7 +22,7 @@ public class RandomWalkMapGenerator : AbstractDungeonGenerator
     protected HashSet<Vector2Int> RunRandomWalk(RandomWalkSO paramenters, Vector2Int position)
     {
         var currentPostion = position;
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floorPositions = new();
 
         for (int i = 0; i < paramenters.iteration; i++)
         {

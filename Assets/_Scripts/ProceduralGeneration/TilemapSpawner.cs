@@ -36,6 +36,8 @@ public class TilemapSpawner : MonoBehaviour
     
     
 
+    [SerializeField] RandomWalkMapGenerator randomWalkMapGeneratorScript;
+
     public void SpawnFloorTiles(IEnumerable<Vector2Int> floorPosition)
     {
         SpawnTiles(floorPosition, floorTilemap, floorTile);
