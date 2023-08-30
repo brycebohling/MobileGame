@@ -6,12 +6,12 @@ using Random = UnityEngine.Random;
 
 public class RoomFirstMapGenerator : RandomWalkMapGenerator
 {
-    [SerializeField] private int minRoomWidth = 4;
-    [SerializeField] private int minRoomHeight = 4;
-    [SerializeField] private int dungeonWidth = 20;
-    [SerializeField] private int dungeonHeight = 20;
-    [SerializeField] [Range(0, 10)] private int offset = 1;
-    [SerializeField] private bool randomWalkRooms = false;
+    [SerializeField] int minRoomWidth = 4;
+    [SerializeField] int minRoomHeight = 4;
+    [SerializeField] int dungeonWidth = 20;
+    [SerializeField] int dungeonHeight = 20;
+    [SerializeField] [Range(0, 10)] int offset = 1;
+    [SerializeField] bool randomWalkRooms = false;
 
     [SerializeField] bool debugCreationTime;
 
@@ -42,7 +42,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition, new Vector3Int(dungeonWidth, dungeonHeight)),
             minRoomWidth, minRoomHeight);
         
-        HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floor = new();
 
         if (randomWalkRooms)
         {
@@ -52,7 +52,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
             floor = CreateSimpleRooms(roomsList);
         }
 
-        List<Vector2Int> roomCenter = new List<Vector2Int>();
+        List<Vector2Int> roomCenter = new();
 
         foreach (var room in roomsList)
         {
@@ -73,7 +73,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
     private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
     {
-        HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floor = new();
 
         for (int i = 0; i < roomsList.Count; i++)
         {
@@ -96,7 +96,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
     private HashSet<Vector2Int> ConnectRooms(List<Vector2Int> roomCenters)
     {
-        HashSet<Vector2Int> corridors = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> corridors = new();
         var currentRoomCenter = roomCenters[Random.Range(0, roomCenters.Count)];
         roomCenters.Remove(currentRoomCenter);
 
@@ -114,7 +114,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
     private HashSet<Vector2Int> CreateCorridor(Vector2Int currentRoomCenter, Vector2Int destination)
     {   
-        HashSet<Vector2Int> corridor = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> corridor = new();
         var position = currentRoomCenter;
         corridor.Add(position);
 
@@ -170,7 +170,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
     private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomsList)
     {
-        HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floor = new();
 
         foreach (var room in roomsList)
         {

@@ -33,7 +33,7 @@ public static class WallGenerator
 
     private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionsList)
     {
-        HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> wallPositions = new();
 
         foreach (var position in floorPositions)
         {
