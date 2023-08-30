@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class RandomWalkMapGenerator : AbstractDungeonGenerator
 {
     [SerializeField] protected RandomWalkSO randomWalkParameters;
+    [SerializeField] protected int width;
 
 
     protected override void RunProceduralGeneration()
@@ -26,7 +27,7 @@ public class RandomWalkMapGenerator : AbstractDungeonGenerator
 
         for (int i = 0; i < paramenters.iteration; i++)
         {
-            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, paramenters.walkLength);
+            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, paramenters.walkLength, width);
             floorPositions.UnionWith(path);
 
             if (paramenters.startRandomlyEachIteration)

@@ -1,40 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 using Random = UnityEngine.Random;
 
 public static class ProceduralGenerationAlgorithms
 {
-    public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength)
+    public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength, int pathWidth)
     {
         HashSet<Vector2Int> path = new()
         {
             startPosition
         };
-        
+
         var previousPosition = startPosition;
+        Vector2Int direction = Direction2D.GetRandomCardinalDirection();
+        List<Vector2Int> sideDirections = GetSideDirections(direction);
+        
+        for (int i = 2; i < pathWidth + 1; i++)
+        {
+            path.Add(previousPosition + sideDirections[i % 2] * i / 2);
+        }
 
         for (int i = 0; i < walkLength; i++)
         {
-            var newPosition = previousPosition + Direction2D.GetRandomCardinalDirection();
+            direction = Direction2D.GetRandomCardinalDirection();
+
+            var newPosition = previousPosition + direction;
             path.Add(newPosition);
+
+            sideDirections = GetSideDirections(direction);
+
+            Vector2Int directionFromCell = newPosition - previousPosition;
+
+            // if (direction != Vector2Int.zero && directionFromCell != direction)
+            // {
+                for (int y = 2; y < pathWidth + 1; y++)
+                {
+                    path.Add(newPosition + sideDirections[y % 2] * y / 2);    
+                }
+            // }
+
             previousPosition = newPosition;
         }
 
         return path;
     }
 
-    public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength)
+    public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength, int corridorWidth)
     {
-        List<Vector2Int> corridor = new();
-        var direction = Direction2D .GetRandomCardinalDirection();
-        var currentPosition = startPosition;
-        corridor.Add(currentPosition);
+        List<Vector2Int> corridor = new()
+        {
+            startPosition
+        };
+
+        var direction = Direction2D.GetRandomCardinalDirection();
+        var newPosition = startPosition;
+
+        List<Vector2Int> sideDirections = GetSideDirections(direction);
+
+        for (int i = 2; i < corridorWidth + 1; i++)
+        {
+            corridor.Add(newPosition + sideDirections[i % 2] * i / 2);
+        }
         
         for (int i = 0; i < corridorLength; i++)
         {
-            currentPosition += direction;
-            corridor.Add(currentPosition);
+            newPosition += direction;
+            corridor.Add(newPosition);
+
+            for (int y = 2; y < corridorWidth + 1; y++)
+            {
+                corridor.Add(newPosition + sideDirections[y % 2] * y / 2);    
+            }
         }
 
         return corridor;
@@ -106,5 +145,31 @@ public static class ProceduralGenerationAlgorithms
             new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
         roomsQueue.Enqueue(room1);
         roomsQueue.Enqueue(room2);
+    }
+
+    private static List<Vector2Int> GetSideDirections(Vector2Int direction)
+    {
+        if (direction == Vector2Int.up)
+        {
+            return new List<Vector2Int> { Vector2Int.right, Vector2Int.left };
+        }
+
+        if (direction == Vector2Int.right)
+        {
+            return new List<Vector2Int> { Vector2Int.up, Vector2Int.down };
+        }
+
+        if (direction == Vector2Int.down)
+        {
+            return new List<Vector2Int> { Vector2Int.right, Vector2Int.left };
+        }
+
+        if (direction == Vector2Int.left)
+        {
+            return new List<Vector2Int> { Vector2Int.up, Vector2Int.down };
+        }
+
+        Debug.Log("Error");
+        return new List<Vector2Int> { Vector2Int.zero, Vector2Int.zero };
     }
 }
