@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a4713463d61a482095b395217e9bdf2, type: 3}
-  m_Name: RandomWalkParaments_Small Dungeon
+  m_Name: RandomWalkParaments_Big Room
   m_EditorClassIdentifier: 
-  iteration: 20
-  walkLength: 20
-  walkWidth: 2
-  startRandomlyEachIteration: 1
+  iteration: 50
+  walkLength: 100
+  walkWidth: 1
+  startRandomPosEachIteration: 1

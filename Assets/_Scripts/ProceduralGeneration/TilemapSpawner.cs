@@ -33,14 +33,21 @@ public class TilemapSpawner : MonoBehaviour
     [SerializeField] TileBase wallDoubleDownRL;
     [SerializeField] TileBase wallDoubleDownR;
     [SerializeField] TileBase wallDoubleDownL;
-    
-    
+
+    [SerializeField] TileBase corridorTile;
 
     [SerializeField] RandomWalkMapGenerator randomWalkMapGeneratorScript;
+
+
 
     public void SpawnFloorTiles(IEnumerable<Vector2Int> floorPosition)
     {
         SpawnTiles(floorPosition, floorTilemap, floorTile);
+    }
+
+    public void SpawnCorridorTile(IEnumerable<Vector2Int> corridorPositions)
+    {
+        SpawnTiles(corridorPositions, floorTilemap, corridorTile);
     }
 
     private void SpawnTiles(IEnumerable<Vector2Int> postions, Tilemap tilemap, TileBase tile)

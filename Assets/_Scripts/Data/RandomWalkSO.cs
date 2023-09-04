@@ -7,6 +7,7 @@ public class RandomWalkSO : ScriptableObject
 {
     public int iteration = 10;
     public int walkLength = 10;
-    public bool startRandomlyEachIteration = true;
+    public int walkWidth = 3;
+    public bool startRandomPosEachIteration = true;
     
 }

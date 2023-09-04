@@ -3,44 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.Events;
 
 public class RoomFirstMapGenerator : RandomWalkMapGenerator
 {
-    [SerializeField] int minRoomWidth = 4;
-    [SerializeField] int minRoomHeight = 4;
+    [SerializeField] int maxRoomWidth = 4;
+    [SerializeField] int maxRoomHeight = 4;
     [SerializeField] int dungeonWidth = 20;
     [SerializeField] int dungeonHeight = 20;
     [SerializeField] [Range(0, 10)] int offset = 1;
     [SerializeField] bool randomWalkRooms = false;
-
     [SerializeField] bool debugCreationTime;
+    
+    public UnityEvent OnDungeonLayoutGenerated;
 
-    float createStartTime;
-    bool createdDungeon;
+    float startCreationTime;
+    
 
 
     protected override void RunProceduralGeneration()
     {
-        createdDungeon = false;
-        if (debugCreationTime)
-        {
-            StartCoroutine(StartTime());
-        }
+        startCreationTime = Time.realtimeSinceStartup;
 
         CreateRooms();
+
+        OnDungeonLayoutGenerated?.Invoke();
     }
 
-    private IEnumerator StartTime()
+    public void DebugDungeonCreationTime()
     {
-        createStartTime = Time.time;
-        yield return createdDungeon;
-        Debug.Log("Created in " + Mathf.Round((Time.time - createStartTime) * 1000f) + "ms");
+        if (!debugCreationTime) return;
+        
+        Debug.Log("Created in " + Mathf.Round((Time.realtimeSinceStartup - startCreationTime) * 1000f) + "ms");
     }
 
     private void CreateRooms()
     {
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition, new Vector3Int(dungeonWidth, dungeonHeight)),
-            minRoomWidth, minRoomHeight);
+            maxRoomWidth, maxRoomHeight);
         
         HashSet<Vector2Int> floor = new();
 
@@ -63,12 +63,8 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         floor.UnionWith(corridors);
 
         tilemapSpawnerScript.SpawnFloorTiles(floor);
+        tilemapSpawnerScript.SpawnCorridorTile(corridors);
         WallGenerator.CreateWalls(floor, tilemapSpawnerScript);
-
-        if (debugCreationTime)
-        {
-            createdDungeon = true;
-        }
     }
 
     private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
@@ -79,15 +75,14 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         {
             var roomBounds = roomsList[i];
             var roomCenter = new Vector2Int(Mathf.RoundToInt(roomBounds.center.x), Mathf.RoundToInt(roomBounds.center.y));
-            var roomFloor = RunRandomWalk(randomWalkParameters, roomCenter);
+
+            var roomFloor = RunRandomWalk(randomWalkParameters, roomCenter,
+                offset, roomBounds.xMin, roomBounds.xMax, roomBounds.yMin, roomBounds.yMax);
+
 
             foreach (var position in roomFloor)
             {
-                if (position.x >= (roomBounds.xMin + offset) && position.x <= (roomBounds.xMax - offset) && 
-                    position.y >= (roomBounds.yMin + offset) && position.y <= (roomBounds.yMax - offset))
-                {
-                    floor.Add(position);
-                }
+                floor.Add(position);
             }
         }
 

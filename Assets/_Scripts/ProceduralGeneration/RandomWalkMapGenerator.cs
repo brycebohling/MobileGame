@@ -8,29 +8,30 @@ using Random = UnityEngine.Random;
 public class RandomWalkMapGenerator : AbstractDungeonGenerator
 {
     [SerializeField] protected RandomWalkSO randomWalkParameters;
-    [SerializeField] protected int width;
 
 
     protected override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
+        // HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
 
-        tilemapSpawnerScript.Clear();
-        tilemapSpawnerScript.SpawnFloorTiles(floorPositions);
-        WallGenerator.CreateWalls(floorPositions, tilemapSpawnerScript);
+        // tilemapSpawnerScript.Clear();
+        // tilemapSpawnerScript.SpawnFloorTiles(floorPositions);
+        // WallGenerator.CreateWalls(floorPositions, tilemapSpawnerScript);
     }
 
-    protected HashSet<Vector2Int> RunRandomWalk(RandomWalkSO paramenters, Vector2Int position)
+    protected HashSet<Vector2Int> RunRandomWalk(RandomWalkSO paramenters, Vector2Int position,
+        int offset, int xMinBounds, int xMaxBounds, int yMinBounds, int yMaxBounds)
     {
         var currentPostion = position;
         HashSet<Vector2Int> floorPositions = new();
 
         for (int i = 0; i < paramenters.iteration; i++)
         {
-            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, paramenters.walkLength, width);
+            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, paramenters.walkLength, paramenters.walkWidth,
+                offset, xMinBounds, xMaxBounds, yMinBounds, yMaxBounds);
             floorPositions.UnionWith(path);
 
-            if (paramenters.startRandomlyEachIteration)
+            if (paramenters.startRandomPosEachIteration)
             {
                 currentPostion = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
             }

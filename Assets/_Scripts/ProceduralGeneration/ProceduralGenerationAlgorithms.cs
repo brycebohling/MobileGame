@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 using Random = UnityEngine.Random;
 
 public static class ProceduralGenerationAlgorithms
 {
-    public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength, int pathWidth)
+    public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength, int walkWidth,
+        int offset, int xMinBounds, int xMaxBounds, int yMinBounds, int yMaxBounds)
     {
         HashSet<Vector2Int> path = new()
         {
@@ -15,34 +14,45 @@ public static class ProceduralGenerationAlgorithms
         };
 
         var previousPosition = startPosition;
-        Vector2Int direction = Direction2D.GetRandomCardinalDirection();
-        List<Vector2Int> sideDirections = GetSideDirections(direction);
-        
-        for (int i = 2; i < pathWidth + 1; i++)
+
+        for (int i = 0; i < walkWidth; i++)
         {
-            path.Add(previousPosition + sideDirections[i % 2] * i / 2);
+            var currentUpPostion = previousPosition + Vector2Int.up * i;
+            path.Add(currentUpPostion);
+
+            for (int x = 1; x < walkWidth; x++)
+            {
+                path.Add(currentUpPostion + Vector2Int.right * x);    
+            }   
         }
 
-        for (int i = 0; i < walkLength; i++)
+        for (int i = 0; i < walkLength / walkWidth; i++)
         {
-            direction = Direction2D.GetRandomCardinalDirection();
+            Vector2Int direction = Direction2D.GetRandomCardinalDirection();
 
-            var newPosition = previousPosition + direction;
-            path.Add(newPosition);
+            var newPosition = previousPosition + direction * walkWidth;
+            
+            if (newPosition.x >= (xMinBounds + offset) && newPosition.x <= (xMaxBounds - offset) && 
+                newPosition.y >= (yMinBounds + offset) && newPosition.y <= (yMaxBounds - offset) &&
+                newPosition.x + walkWidth >= (xMinBounds + offset) && newPosition.x + walkWidth<= (xMaxBounds - offset) && 
+                newPosition.y + walkWidth>= (yMinBounds + offset) && newPosition.y + walkWidth<= (yMaxBounds - offset))
+            {
+                path.Add(newPosition);   
 
-            sideDirections = GetSideDirections(direction);
-
-            Vector2Int directionFromCell = newPosition - previousPosition;
-
-            // if (direction != Vector2Int.zero && directionFromCell != direction)
-            // {
-                for (int y = 2; y < pathWidth + 1; y++)
+                for (int x = 0; x < walkWidth; x++)
                 {
-                    path.Add(newPosition + sideDirections[y % 2] * y / 2);    
-                }
-            // }
+                    var currentUpPostion = newPosition + Vector2Int.up * x;
+                    path.Add(currentUpPostion);
 
-            previousPosition = newPosition;
+                    for (int y = 1; y < walkWidth; y++)
+                    {
+                        path.Add(currentUpPostion + Vector2Int.right * y);    
+                    }   
+                }
+
+                previousPosition = newPosition;
+
+            }
         }
 
         return path;
@@ -79,7 +89,7 @@ public static class ProceduralGenerationAlgorithms
         return corridor;
     }
 
-    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
+    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int maxWidth, int maxHeight)
     {
         Queue<BoundsInt> roomsQueue = new();
         List<BoundsInt> roomsList = new();
@@ -89,15 +99,15 @@ public static class ProceduralGenerationAlgorithms
         {
             var room = roomsQueue.Dequeue();
 
-            if (room.size.y >= minHeight && room.size.x >= minWidth)
+            if (room.size.y >= maxHeight && room.size.x >= maxWidth)
             {
                 if (Random.value < 0.5f)
                 {
-                    if (room.size.y >= minHeight * 2)
+                    if (room.size.y >= maxHeight * 2)
                     {
                         SplitHorizontally(roomsQueue, room);
 
-                    } else if (room.size.x >= minWidth * 2)
+                    } else if (room.size.x >= maxWidth * 2)
                     {
                         SplitVertically(roomsQueue, room);
 
@@ -108,11 +118,11 @@ public static class ProceduralGenerationAlgorithms
 
                 } else
                 {
-                    if (room.size.x >= minWidth * 2)
+                    if (room.size.x >= maxWidth * 2)
                     {
                         SplitVertically(roomsQueue, room);
 
-                    } else if (room.size.y >= minHeight * 2)
+                    } else if (room.size.y >= maxHeight * 2)
                     {
                         SplitHorizontally(roomsQueue, room);
 

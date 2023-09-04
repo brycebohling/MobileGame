@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: RandomWalkParaments_Test
   m_EditorClassIdentifier: 
   iteration: 1
-  walkLength: 3
+  walkLength: 5
+  walkWidth: 2
   startRandomlyEachIteration: 0
