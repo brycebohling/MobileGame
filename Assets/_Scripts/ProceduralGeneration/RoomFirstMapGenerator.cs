@@ -17,9 +17,10 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
     
     public UnityEvent OnDungeonLayoutGenerated;
 
-    float startCreationTime;
+    public List<Room> roomsList = new();
 
-    List<Room> roomsList = new();
+    float startCreationTime;
+    
 
     [SerializeField] Transform roomOutline;
     List<Transform> roomOutlineList = new();
