@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -35,9 +36,6 @@ public class TilemapSpawner : MonoBehaviour
     [SerializeField] TileBase wallDoubleDownL;
 
     [SerializeField] TileBase corridorTile;
-
-    [SerializeField] RandomWalkMapGenerator randomWalkMapGeneratorScript;
-
 
 
     public void SpawnFloorTiles(IEnumerable<Vector2Int> floorPosition)

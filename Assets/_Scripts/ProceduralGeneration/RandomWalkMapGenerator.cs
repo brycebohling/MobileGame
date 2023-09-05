@@ -24,7 +24,7 @@ public class RandomWalkMapGenerator : AbstractDungeonGenerator
     {
         var currentPostion = position;
         HashSet<Vector2Int> floorPositions = new();
-
+        
         for (int i = 0; i < paramenters.iteration; i++)
         {
             var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, paramenters.walkLength, paramenters.walkWidth,

@@ -15,29 +15,18 @@ public static class ProceduralGenerationAlgorithms
 
         var previousPosition = startPosition;
 
-        for (int i = 0; i < walkWidth; i++)
-        {
-            var currentUpPostion = previousPosition + Vector2Int.up * i;
-            path.Add(currentUpPostion);
-
-            for (int x = 1; x < walkWidth; x++)
-            {
-                path.Add(currentUpPostion + Vector2Int.right * x);    
-            }   
-        }
-
         for (int i = 0; i < walkLength / walkWidth; i++)
         {
             Vector2Int direction = Direction2D.GetRandomCardinalDirection();
 
-            var newPosition = previousPosition + direction * walkWidth;
+            var newPosition = previousPosition + (direction * walkWidth);
             
             if (newPosition.x >= (xMinBounds + offset) && newPosition.x <= (xMaxBounds - offset) && 
                 newPosition.y >= (yMinBounds + offset) && newPosition.y <= (yMaxBounds - offset) &&
-                newPosition.x + walkWidth >= (xMinBounds + offset) && newPosition.x + walkWidth<= (xMaxBounds - offset) && 
-                newPosition.y + walkWidth>= (yMinBounds + offset) && newPosition.y + walkWidth<= (yMaxBounds - offset))
+                (newPosition.x + walkWidth) >= (xMinBounds + offset) && (newPosition.x + walkWidth) <= (xMaxBounds - offset) && 
+                (newPosition.y + walkWidth) >= (yMinBounds + offset) && (newPosition.y + walkWidth) <= (yMaxBounds - offset))
             {
-                path.Add(newPosition);   
+                path.Add(newPosition);
 
                 for (int x = 0; x < walkWidth; x++)
                 {
@@ -105,11 +94,25 @@ public static class ProceduralGenerationAlgorithms
                 {
                     if (room.size.y >= maxHeight * 2)
                     {
-                        SplitHorizontally(roomsQueue, room);
+                        // split horizontally 
+
+                        var ySplit = Random.Range(1, room.size.y);
+                        BoundsInt room1 = new (room.min, new Vector3Int(room.size.x, ySplit, room.min.z));
+                        BoundsInt room2 = new (new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z),
+                            new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
+                        roomsQueue.Enqueue(room1);
+                        roomsQueue.Enqueue(room2);
 
                     } else if (room.size.x >= maxWidth * 2)
                     {
-                        SplitVertically(roomsQueue, room);
+                        // split vertically
+
+                        var xSplit = Random.Range(1, room.size.x);
+                        BoundsInt room1 = new (room.min, new Vector3Int(xSplit, room.size.y, room.size.z));
+                        BoundsInt room2 = new (new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z),
+                            new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
+                        roomsQueue.Enqueue(room1);
+                        roomsQueue.Enqueue(room2);
 
                     } else
                     {
@@ -120,11 +123,25 @@ public static class ProceduralGenerationAlgorithms
                 {
                     if (room.size.x >= maxWidth * 2)
                     {
-                        SplitVertically(roomsQueue, room);
+                        // split vertically
+
+                        var xSplit = Random.Range(1, room.size.x);
+                        BoundsInt room1 = new (room.min, new Vector3Int(xSplit, room.size.y, room.size.z));
+                        BoundsInt room2 = new (new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z),
+                            new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
+                        roomsQueue.Enqueue(room1);
+                        roomsQueue.Enqueue(room2);
 
                     } else if (room.size.y >= maxHeight * 2)
                     {
-                        SplitHorizontally(roomsQueue, room);
+                        // split horizontally
+
+                        var ySplit = Random.Range(1, room.size.y);
+                        BoundsInt room1 = new (room.min, new Vector3Int(room.size.x, ySplit, room.min.z));
+                        BoundsInt room2 = new (new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z),
+                            new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
+                        roomsQueue.Enqueue(room1);
+                        roomsQueue.Enqueue(room2);
 
                     } else
                     {
@@ -157,7 +174,7 @@ public static class ProceduralGenerationAlgorithms
         roomsQueue.Enqueue(room2);
     }
 
-    private static List<Vector2Int> GetSideDirections(Vector2Int direction)
+    public static List<Vector2Int> GetSideDirections(Vector2Int direction)
     {
         if (direction == Vector2Int.up)
         {

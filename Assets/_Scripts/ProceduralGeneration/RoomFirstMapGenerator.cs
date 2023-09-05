@@ -18,8 +18,12 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
     public UnityEvent OnDungeonLayoutGenerated;
 
     float startCreationTime;
-    
 
+
+    [SerializeField] Transform roomOutline;
+    List<Transform> roomOutlineList = new();
+
+    
 
     protected override void RunProceduralGeneration()
     {
@@ -52,14 +56,30 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
             floor = CreateSimpleRooms(roomsList);
         }
 
-        List<Vector2Int> roomCenter = new();
+        List<Vector2Int> roomCenters = new();
+
+        /* debugging start */
+        foreach (var outline in roomOutlineList)
+        {
+            if (outline == null) continue;
+            DestroyImmediate(outline.gameObject);
+        }
+        roomOutlineList.Clear();
+        /* debugging end */
 
         foreach (var room in roomsList)
         {
-            roomCenter.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));    
+
+            /* for debugging start */
+            var spawnedOutline = Instantiate(roomOutline, new Vector2(Mathf.RoundToInt(room.center.x), Mathf.RoundToInt(room.center.y)), Quaternion.identity);
+            spawnedOutline.localScale = room.size;
+            roomOutlineList.Add(spawnedOutline);
+            /* for debugging end */
         }
 
-        HashSet<Vector2Int> corridors = ConnectRooms(roomCenter);
+        HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+
         floor.UnionWith(corridors);
 
         tilemapSpawnerScript.SpawnFloorTiles(floor);
@@ -79,10 +99,9 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
             var roomFloor = RunRandomWalk(randomWalkParameters, roomCenter,
                 offset, roomBounds.xMin, roomBounds.xMax, roomBounds.yMin, roomBounds.yMax);
 
-
             foreach (var position in roomFloor)
             {
-                floor.Add(position);
+                floor.Add(position);    
             }
         }
 
@@ -112,19 +131,27 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         HashSet<Vector2Int> corridor = new();
         var position = currentRoomCenter;
         corridor.Add(position);
+        List<Vector2Int> sideDirections = new();
 
         while (position.y != destination.y)
         {
             if (destination.y > position.y)
             {
                 position += Vector2Int.up;
+                sideDirections = ProceduralGenerationAlgorithms.GetSideDirections(Vector2Int.up);
 
             } else if (destination.y < position.y)
             {
                 position += Vector2Int.down;
+                sideDirections = ProceduralGenerationAlgorithms.GetSideDirections(Vector2Int.down);
             }
 
             corridor.Add(position);
+
+            for (int y = 2; y < randomWalkParameters.walkWidth + 1; y++)
+            {
+                corridor.Add(position + sideDirections[y % 2] * y / 2);    
+            }
         }
 
         while (position.x != destination.x)
@@ -132,13 +159,20 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
             if (destination.x > position.x)
             {
                 position += Vector2Int.right;
+                sideDirections = ProceduralGenerationAlgorithms.GetSideDirections(Vector2Int.right);
 
             } else if (destination.x < position.x)
             {
                 position += Vector2Int.left;
+                sideDirections = ProceduralGenerationAlgorithms.GetSideDirections(Vector2Int.left);
             }
 
             corridor.Add(position);
+
+            for (int y = 2; y < randomWalkParameters.walkWidth + 1; y++)
+            {
+                corridor.Add(position + sideDirections[y % 2] * y / 2);    
+            }
         }
 
         return corridor;

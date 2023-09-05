@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4713463d61a482095b395217e9bdf2, type: 3}
   m_Name: RandomWalkParaments_Test
   m_EditorClassIdentifier: 
-  iteration: 1
-  walkLength: 5
+  iteration: 300
+  walkLength: 10
   walkWidth: 2
-  startRandomlyEachIteration: 0
+  startRandomPosEachIteration: 1
