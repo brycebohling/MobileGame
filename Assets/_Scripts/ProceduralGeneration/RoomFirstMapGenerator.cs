@@ -17,7 +17,8 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
     
     public UnityEvent OnDungeonLayoutGenerated;
 
-    public List<Room> roomsList = new();
+    public List<Room> RoomList = new();
+    public HashSet<Vector2Int> Path = new();
 
     float startCreationTime;
     
@@ -30,7 +31,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
     protected override void RunProceduralGeneration()
     {
         startCreationTime = Time.realtimeSinceStartup;
-        roomsList.Clear();
+        RoomList.Clear();
 
         CreateRooms();
 
@@ -81,12 +82,12 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
             /* for debugging end */
         }
 
-        HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+        Path = ConnectRooms(roomCenters);
 
-        floor.UnionWith(corridors);
+        floor.UnionWith(Path);
 
         tilemapSpawnerScript.SpawnFloorTiles(floor);
-        tilemapSpawnerScript.SpawnCorridorTile(corridors);
+        tilemapSpawnerScript.SpawnCorridorTile(Path);
         WallGenerator.CreateWalls(floor, tilemapSpawnerScript);
     }
 
@@ -104,7 +105,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
             Room room = new(roomCenter, roomFloor);
 
-            roomsList.Add(room);
+            RoomList.Add(room);
 
             foreach (var position in roomFloor)
             {
@@ -138,7 +139,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
             }
 
             Room room = new(roomCenter, roomFloor);
-            roomsList.Add(room);
+            RoomList.Add(room);
         }
 
         return floor;

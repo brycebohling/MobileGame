@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "PropParameters_", menuName = "PCG/PropSO")]
 public class PropSO : ScriptableObject
 {
     [Header("Prop Data")]

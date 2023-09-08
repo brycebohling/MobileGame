@@ -16,9 +16,9 @@ public class RoomDataExtractor : MonoBehaviour
 
     public void ProcessRooms()
     {
-        if (roomFirstMapGeneratorScript != null) return;
+        if (roomFirstMapGeneratorScript == null) return;
 
-        foreach (Room room in roomFirstMapGeneratorScript.roomsList)
+        foreach (Room room in roomFirstMapGeneratorScript.RoomList)
         {
             foreach (Vector2Int tilePosition in room.FloorTiles)
             {
