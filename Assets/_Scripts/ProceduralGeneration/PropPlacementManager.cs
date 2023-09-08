@@ -10,9 +10,7 @@ public class PropPlacementManager : MonoBehaviour
     RoomFirstMapGenerator roomFirstMapGeneratorScript;
 
     [SerializeField] List<PropSO> propsToPlace;
-    [SerializeField, Range(0, 1)] float cornerPropPlacementChance;
-
-    [SerializeField] GameObject propPrefab;
+    [SerializeField] Transform propParentPrefab;
 
     public UnityEvent OnFinishedPropPlacement;
 
@@ -40,17 +38,17 @@ public class PropPlacementManager : MonoBehaviour
             List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
-            if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.TopRight);
+            if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.BottomLeft);
 
             List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
-            if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.TopLeft);
+            if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.BottomLeft);
 
             List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
-            if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.TopRight);
+            if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.BottomLeft);
 
             List<PropSO> innerProps = propsToPlace.Where(x => x.Inner)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
@@ -168,33 +166,18 @@ public class PropPlacementManager : MonoBehaviour
         return freePositions;
     }
 
-    private GameObject PlacePropGameObjectAt(Room room, Vector2Int placementPosition, PropSO propToPlace)
+    private Transform PlacePropGameObjectAt(Room room, Vector2Int placementPosition, PropSO propToPlace)
     {
-        GameObject prop = Instantiate(propPrefab);
-        SpriteRenderer propSpriteRenderer = prop.GetComponentInChildren<SpriteRenderer>();
+        Transform propParent = Instantiate(propParentPrefab);
+        Transform prop = Instantiate(propToPlace.PropPrefab, Vector2.zero, Quaternion.identity, propParent.transform);
 
-        propSpriteRenderer.sprite = propToPlace.PropSprite;
+        propParent.localPosition = (Vector2)placementPosition;
 
-        CapsuleCollider2D collider = propSpriteRenderer.gameObject.AddComponent<CapsuleCollider2D>();
-        collider.offset = Vector2.zero;
-
-        if (propToPlace.PropSize.x > propToPlace.PropSize.y)
-        {
-            collider.direction = CapsuleDirection2D.Horizontal;
-        }
-        
-        float colliderPercent = 0.8f;
-
-        Vector2 size = new (propToPlace.PropSize.x * colliderPercent, propToPlace.PropSize.y * colliderPercent);
-        collider.size = size;
-
-        prop.transform.localPosition = (Vector2)placementPosition;
-
-        propSpriteRenderer.transform.localPosition = (Vector2)propToPlace.PropSize * 0.5f;
+        prop.localPosition = (Vector2)propToPlace.PropSize * 0.5f;
 
         room.PropPositions.Add(placementPosition);
-        room.PropObjectReference.Add(prop);
-        return prop;
+        room.PropObjectReference.Add(propParent.gameObject);
+        return propParent;
     }
 
     private void PlaceGroupObjects(Room room, Vector2Int groupOriginPosition, PropSO propToPlace, int searchOffset)
@@ -228,25 +211,25 @@ public class PropPlacementManager : MonoBehaviour
         }
     }
 
-    private void PlaceCornerProps(Room room, List<PropSO> cornerProps)
-    {
-        float tempChance = cornerPropPlacementChance;
+    // private void PlaceCornerProps(Room room, List<PropSO> cornerProps)
+    // {
+    //     float tempChance = cornerPropPlacementChance;
 
-        foreach (Vector2Int cornerTile in room.CornerTiles)
-        {
-            if (UnityEngine.Random.value < tempChance)
-            {
-                PropSO propToPlace = cornerProps[UnityEngine.Random.Range(0, cornerProps.Count)];
+    //     foreach (Vector2Int cornerTile in room.CornerTiles)
+    //     {
+    //         if (UnityEngine.Random.value < tempChance)
+    //         {
+    //             PropSO propToPlace = cornerProps[UnityEngine.Random.Range(0, cornerProps.Count)];
 
-                PlacePropGameObjectAt(room, cornerTile, propToPlace);
+    //             PlacePropGameObjectAt(room, cornerTile, propToPlace);
 
-                if (propToPlace.PlaceAsGroup)
-                {
-                    PlaceGroupObjects(room, cornerTile, propToPlace, 1);
-                }
-            }
-        }
-    }
+    //             if (propToPlace.PlaceAsGroup)
+    //             {
+    //                 PlaceGroupObjects(room, cornerTile, propToPlace, 1);
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 public enum PlacementOriginCorner

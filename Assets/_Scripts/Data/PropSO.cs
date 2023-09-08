@@ -6,7 +6,7 @@ using UnityEngine;
 public class PropSO : ScriptableObject
 {
     [Header("Prop Data")]
-    public Sprite PropSprite;
+    public Transform PropPrefab;
     public Vector2Int PropSize = Vector2Int.one;
 
     [Space, Header("Placement Type")]
@@ -16,6 +16,7 @@ public class PropSO : ScriptableObject
     public bool NearWallDown;
     public bool NearWallRight;
     public bool NearWallLeft;
+    public bool mustBeAccessible;
     [Min(1)] public int PlacementQuantityMin = 1;
     [Min(1)] public int PlacementQuantityMax = 1;
 

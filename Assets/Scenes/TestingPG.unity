@@ -5609,8 +5609,9 @@ MonoBehaviour:
   propsToPlace:
   - {fileID: 11400000, guid: 1308b2cb74a69474d92bc37491e3500d, type: 2}
   - {fileID: 11400000, guid: 6abdd280b55394477b1b939b37097737, type: 2}
-  cornerPropPlacementChance: 0.5
-  propPrefab: {fileID: 3064645859637230617, guid: 17bf4c63592f84829be59717e9dc2a60, type: 3}
+  - {fileID: 11400000, guid: 64b5ae67b02ff4dd28de9ff13972ce47, type: 2}
+  - {fileID: 11400000, guid: 94ab8483aab75471f9fdd1ae6000f22b, type: 2}
+  propParentPrefab: {fileID: 6312586571603541136, guid: 17bf4c63592f84829be59717e9dc2a60, type: 3}
   OnFinishedPropPlacement:
     m_PersistentCalls:
       m_Calls: []

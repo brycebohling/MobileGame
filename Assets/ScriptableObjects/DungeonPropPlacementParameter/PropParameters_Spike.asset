@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
   m_Name: PropParameters_Spike
   m_EditorClassIdentifier: 
-  PropSprite: {fileID: -643940219, guid: 7aa97feebc3e949bfb4ab210dcde004a, type: 3}
+  PropPrefab: {fileID: 592386840313463073, guid: 0ac760caa96bd4bfc827c3bbaf1606d1, type: 3}
   PropSize: {x: 1, y: 1}
   Corner: 0
   Inner: 1

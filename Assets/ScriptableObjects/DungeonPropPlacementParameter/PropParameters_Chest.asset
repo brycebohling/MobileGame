@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
   m_Name: PropParameters_Chest
   m_EditorClassIdentifier: 
-  PropSprite: {fileID: -1825435233, guid: f566fc451e63e47049b287e8edae12fd, type: 3}
+  PropPrefab: {fileID: 4451386331211034679, guid: e920ad16f82e14975948746006affba9, type: 3}
   PropSize: {x: 1, y: 1}
   Corner: 1
   Inner: 0

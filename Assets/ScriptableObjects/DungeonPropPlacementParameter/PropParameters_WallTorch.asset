@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
   m_Name: PropParameters_WallTorch
   m_EditorClassIdentifier: 
-  PropSprite: {fileID: -643940219, guid: 7aa97feebc3e949bfb4ab210dcde004a, type: 3}
+  PropPrefab: {fileID: 7514807292402792796, guid: 4b2e6379865b248e39c63444585fd29f, type: 3}
   PropSize: {x: 1, y: 1}
   Corner: 0
-  Inner: 1
+  Inner: 0
   NearWallUp: 0
   NearWallDown: 0
   NearWallRight: 0
   NearWallLeft: 0
   PlacementQuantityMin: 4
   PlacementQuantityMax: 8
-  PlaceAsGroup: 1
+  PlaceAsGroup: 0
   GroupMinCount: 1
-  GroupMaxCount: 3
+  GroupMaxCount: 1
