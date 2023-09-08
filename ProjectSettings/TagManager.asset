@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 3371974115
     locked: 0
+  - name: Prop
+    uniqueID: 1426420797
+    locked: 0
   - name: WallsBack
     uniqueID: 1446328575
     locked: 0

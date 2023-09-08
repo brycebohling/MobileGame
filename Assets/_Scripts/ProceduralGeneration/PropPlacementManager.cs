@@ -24,31 +24,38 @@ public class PropPlacementManager : MonoBehaviour
     public void ProcessToRooms()
     {
         if (roomFirstMapGeneratorScript == null) return;
-
+        
         foreach (Room room in roomFirstMapGeneratorScript.RoomList)
         {
             List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner).ToList();
-            PlaceCornerProps(room, cornerProps);
+
+            // if (cornerProps.Count != 0) PlaceCornerProps(room, cornerProps);
+            if (cornerProps.Count != 0) PlaceProps(room, cornerProps, room.CornerTiles, PlacementOriginCorner.BottomLeft);
 
             List<PropSO> leftWallProps = propsToPlace.Where(x => x.NearWallLeft)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-            PlaceProps(room, leftWallProps, room.NearWallTilesLeft, PlacementOriginCorner.BottomLeft);
+
+            if (leftWallProps.Count != 0) PlaceProps(room, leftWallProps, room.NearWallTilesLeft, PlacementOriginCorner.BottomLeft);
 
             List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-            PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.TopRight);
+
+            if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.TopRight);
 
             List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-            PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.TopLeft);
+
+            if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.TopLeft);
 
             List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-            PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.TopRight);
+
+            if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.TopRight);
 
             List<PropSO> innerProps = propsToPlace.Where(x => x.Inner)
                 .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-            PlaceProps(room, innerProps, room.InnerTiles, PlacementOriginCorner.BottomLeft);
+
+            if (innerProps.Count != 0) PlaceProps(room, innerProps, room.InnerTiles, PlacementOriginCorner.BottomLeft);
         }
 
         OnFinishedPropPlacement?.Invoke();
@@ -235,7 +242,7 @@ public class PropPlacementManager : MonoBehaviour
 
                 if (propToPlace.PlaceAsGroup)
                 {
-                    PlaceGroupObjects(room, cornerTile, propToPlace, 2);
+                    PlaceGroupObjects(room, cornerTile, propToPlace, 1);
                 }
             }
         }
