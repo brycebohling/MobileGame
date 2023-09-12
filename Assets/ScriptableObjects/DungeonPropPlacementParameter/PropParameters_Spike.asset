@@ -16,12 +16,13 @@ MonoBehaviour:
   PropSize: {x: 1, y: 1}
   Corner: 0
   Inner: 1
-  NearWallUp: 0
-  NearWallDown: 0
-  NearWallRight: 0
-  NearWallLeft: 0
+  NearWallUp: 1
+  NearWallDown: 1
+  NearWallRight: 1
+  NearWallLeft: 1
+  mustBeAccessible: 0
   PlacementQuantityMin: 4
   PlacementQuantityMax: 8
-  PlaceAsGroup: 0
+  PlaceAsGroup: 1
   GroupMinCount: 1
   GroupMaxCount: 3

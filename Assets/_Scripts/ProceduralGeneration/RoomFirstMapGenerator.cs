@@ -123,7 +123,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         foreach (var area in roomAreas)
         {
             HashSet<Vector2Int> roomFloor = new();
-            var roomBounds = roomAreas[1];
+            var roomBounds = area;
             var roomCenter = new Vector2Int(Mathf.RoundToInt(roomBounds.center.x), Mathf.RoundToInt(roomBounds.center.y));
 
             for (int col = offset; col < area.size.x - offset; col++)

@@ -20,6 +20,7 @@ MonoBehaviour:
   NearWallDown: 0
   NearWallRight: 0
   NearWallLeft: 0
+  mustBeAccessible: 1
   PlacementQuantityMin: 1
   PlacementQuantityMax: 1
   PlaceAsGroup: 0
