@@ -270,7 +270,6 @@ public class PropPlacementManager : MonoBehaviour
 
         pathQueue.Enqueue(startPos);
 
-        bool isAccessible = false;
         while (pathQueue.Count > 0) 
         {
             Vector2Int currentTile = pathQueue.Dequeue();
@@ -284,34 +283,20 @@ public class PropPlacementManager : MonoBehaviour
                 {                    
                     visitedPaths.Add(edge);
 
-                    // foreach (var position in endPositions)
-                    // {
-                    //     if (edge == position)
-                    //     {
-                    //         isAccessible = true;
-                    //         break;
-                    //     } 
-
-                    //     pathQueue.Enqueue(edge);
-                    // }
-
-                    if (edge == endPositions[0])
+                    foreach (var position in endPositions)
                     {
-                        isAccessible = true;
-                        break;
-                    } 
+                        if (edge == position)
+                        {
+                            Debug.Log("found");
+                            return true;
+                        }
+                    }
 
                     pathQueue.Enqueue(edge);
                 }
             }
         }
 
-        if (isAccessible)
-        {
-            Debug.Log("found");
-            return true;
-        }  
-        
         Debug.Log("not found");
         return false;
     }
