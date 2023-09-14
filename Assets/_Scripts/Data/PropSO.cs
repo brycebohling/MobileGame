@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PropParameters_", menuName = "PCG/PropSO")]
@@ -17,6 +18,8 @@ public class PropSO : ScriptableObject
     public bool NearWallRight;
     public bool NearWallLeft;
     public bool mustBeAccessible;
+    public bool mustBePlacedAndAccessible;
+    public bool isBrakable;
     [Min(1)] public int PlacementQuantityMin = 1;
     [Min(1)] public int PlacementQuantityMax = 1;
 

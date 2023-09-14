@@ -14,6 +14,7 @@ public class PropPlacementManager : MonoBehaviour
 
     public UnityEvent OnFinishedPropPlacement;
 
+
     private void Awake() 
     {
         roomFirstMapGeneratorScript = FindObjectOfType<RoomFirstMapGenerator>();
@@ -25,91 +26,118 @@ public class PropPlacementManager : MonoBehaviour
         
         foreach (Room room in roomFirstMapGeneratorScript.RoomList)
         {
-            // List<PropSO> accessibleProps = propsToPlace.Where(x => x.mustBeAccessible).ToList()
-            //     .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-            // PlaceAccessibleProps(room, accessibleProps);
+            PlaceMustHaveProps(room);
 
-            // List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner && !x.mustBeAccessible).ToList()
-            //     .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
- 
-            // if (cornerProps.Count != 0) PlaceProps(room, cornerProps, room.CornerTiles, PlacementOriginCorner.BottomLeft);
-
-            List<PropSO> leftWallProps = propsToPlace.Where(x => x.NearWallLeft && !x.mustBeAccessible)
-                .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-
-            if (leftWallProps.Count != 0) PlaceProps(room, leftWallProps, room.NearWallTilesLeft, PlacementOriginCorner.BottomLeft);
-
-            List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft && !x.mustBeAccessible)
-                .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-
-            if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.BottomLeft);
-
-            List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp && !x.mustBeAccessible)
-                .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-
-            if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.BottomLeft);
-
-            List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown && !x.mustBeAccessible)
-                .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-
-            if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.BottomLeft);
-
-            List<PropSO> innerProps = propsToPlace.Where(x => x.Inner && !x.mustBeAccessible)
-                .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-
-            if (innerProps.Count != 0) PlaceProps(room, innerProps, room.InnerTiles, PlacementOriginCorner.BottomLeft);
-
-            List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner && x.mustBeAccessible).ToList()
-                .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
- 
-            if (cornerProps.Count != 0) PlaceProps(room, cornerProps, room.CornerTiles, PlacementOriginCorner.BottomLeft);
+            PlaceAccessibleProps(room);
+            
+            PlaceNormalProps(room);   
         }
 
         OnFinishedPropPlacement?.Invoke();
     }
 
-    private void PlaceAccessibleProps(Room room, List<PropSO> accessibleProps)
+    private void PlaceMustHaveProps(Room room)
     {
-        // pick a loaction to put a prop
-        // check to make sure no path abstruction
-        // place accessible prop
-
-        // place normal props to not abstruct the path
-
-        List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner).ToList()
+        List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner && x.mustBePlacedAndAccessible)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (cornerProps.Count != 0) PlaceProps(room, cornerProps, room.CornerTiles, PlacementOriginCorner.BottomLeft);
 
-        List<PropSO> leftWallProps = propsToPlace.Where(x => x.NearWallLeft)
+        List<PropSO> leftWallProps = propsToPlace.Where(x => x.NearWallLeft && x.mustBePlacedAndAccessible)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (leftWallProps.Count != 0) PlaceProps(room, leftWallProps, room.NearWallTilesLeft, PlacementOriginCorner.BottomLeft);
 
-        List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft)
+        List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft && x.mustBePlacedAndAccessible)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.BottomLeft);
 
-        List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp)
+        List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp && x.mustBePlacedAndAccessible)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.BottomLeft);
 
-        List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown)
+        List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown && x.mustBePlacedAndAccessible)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.BottomLeft);
 
-        List<PropSO> innerProps = propsToPlace.Where(x => x.Inner)
+        List<PropSO> innerProps = propsToPlace.Where(x => x.Inner && x.mustBePlacedAndAccessible)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (innerProps.Count != 0) PlaceProps(room, innerProps, room.InnerTiles, PlacementOriginCorner.BottomLeft);
     }
 
-    private void PlaceProps(Room room, List<PropSO> propsList, HashSet<Vector2Int> availableTiles, PlacementOriginCorner placement)
+    private void PlaceAccessibleProps(Room room)
     {
-        HashSet<Vector2Int> tempPositions = new(availableTiles);
+        List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner && x.mustBeAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (cornerProps.Count != 0) PlaceProps(room, cornerProps, room.CornerTiles, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> leftWallProps = propsToPlace.Where(x => x.NearWallLeft && x.mustBeAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (leftWallProps.Count != 0) PlaceProps(room, leftWallProps, room.NearWallTilesLeft, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft && x.mustBeAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp && x.mustBeAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown && x.mustBeAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> innerProps = propsToPlace.Where(x => x.Inner && x.mustBeAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (innerProps.Count != 0) PlaceProps(room, innerProps, room.InnerTiles, PlacementOriginCorner.BottomLeft);
+    }
+
+    private void PlaceNormalProps(Room room)
+    {
+        List<PropSO> cornerProps = propsToPlace.Where(x => x.Corner && !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (cornerProps.Count != 0) PlaceProps(room, cornerProps, room.CornerTiles, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> leftWallProps = propsToPlace.Where(x => x.NearWallLeft && !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (leftWallProps.Count != 0) PlaceProps(room, leftWallProps, room.NearWallTilesLeft, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> rightWallProps = propsToPlace.Where(x => x.NearWallLeft && !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (rightWallProps.Count != 0) PlaceProps(room, rightWallProps, room.NearWallTilesRight, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> upWallProps = propsToPlace.Where(x => x.NearWallUp && !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (upWallProps.Count != 0) PlaceProps(room, upWallProps, room.NearWallTilesUp, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> downWallProps = propsToPlace.Where(x => x.NearWallDown && !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (downWallProps.Count != 0) PlaceProps(room, downWallProps, room.NearWallTilesDown, PlacementOriginCorner.BottomLeft);
+
+        List<PropSO> innerProps = propsToPlace.Where(x => x.Inner && !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (innerProps.Count != 0) PlaceProps(room, innerProps, room.InnerTiles, PlacementOriginCorner.BottomLeft);
+    }
+
+    private void PlaceProps(Room room, List<PropSO> propsList, HashSet<Vector2Int> availablePositions, PlacementOriginCorner placement)
+    {
+        HashSet<Vector2Int> tempPositions = new(availablePositions);
         tempPositions.ExceptWith(roomFirstMapGeneratorScript.Path);
 
         foreach (PropSO propToPlace in propsList)
@@ -119,33 +147,47 @@ public class PropPlacementManager : MonoBehaviour
             for (int i = 0; i < quantity; i++)
             {
                 tempPositions.ExceptWith(room.PropPositions);
-                List<Vector2Int> availablePositions = tempPositions.OrderBy(x => Guid.NewGuid()).ToList();
+                tempPositions.ExceptWith(room.ClearFloorTiles);
 
-                if (!TryPlacingPropBruteForce(room, propToPlace, availablePositions, placement)) break;
+                List<Vector2Int> possiblePositions = tempPositions.OrderBy(x => Guid.NewGuid()).ToList();
+
+                if (!TryPlacingPropBruteForce(room, propToPlace, possiblePositions, placement)) break;
             }
         }
     }
 
-    private bool TryPlacingPropBruteForce(Room room, PropSO propToPlace, List<Vector2Int> availablePositions, PlacementOriginCorner placement)
+    private bool TryPlacingPropBruteForce(Room room, PropSO propToPlace, List<Vector2Int> possiblePositions, PlacementOriginCorner placement)
     {
-        for (int i = 0; i < availablePositions.Count; i++)
+        for (int i = 0; i < possiblePositions.Count; i++)
         {
-            Vector2Int position = availablePositions[i];
+            Vector2Int position = possiblePositions[i];
 
-            if (room.PropPositions.Contains(position)) continue;
-
-            List<Vector2Int> freePositionsAround = TryToFitProp(propToPlace, availablePositions, position, placement);
+            List<Vector2Int> freePositionsAround = TryToFitProp(propToPlace, possiblePositions, position, placement);
 
             if (freePositionsAround.Count == propToPlace.PropSize.x * propToPlace.PropSize.y)
             {
-                // if (!CanBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
+                // If on last iteration
+                if (possiblePositions.Count == i + 1 && propToPlace.mustBePlacedAndAccessible)
+                {
+                    if (!CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround))
+                    {
+                        ClearAPathToProp(room, room.RoomCenterPos, freePositionsAround);
+                    }
+                
+                } else
+                {
+                    if (propToPlace.mustBeAccessible)
+                    {
+                        if (!CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
+                    }
+                }
 
                 PlacePropGameObjectAt(room, position, propToPlace);
 
-                if (propToPlace.PlaceAsGroup)
-                {
-                    PlaceGroupObjects(room, position, propToPlace, 1);
-                }
+                // if (propToPlace.PlaceAsGroup)
+                // {
+                //     PlaceGroupObjects(room, position, propToPlace, 1);
+                // }
 
                 return true;
             }
@@ -221,14 +263,22 @@ public class PropPlacementManager : MonoBehaviour
         prop.localPosition = (Vector2)propToPlace.PropSize * 0.5f;
 
         room.PropPositions.Add(placementPosition);
-        room.PropObjectReference.Add(propParent.gameObject);
+        room.PropTransfromReference.Add(propParent);
 
         if (propToPlace.mustBeAccessible)
         {
             room.AccessiblePropPositions.Add(placementPosition);
 
-            CanBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
+            bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
                 new List<Vector2Int>() {placementPosition});
+
+            if (isAccessible)
+            {
+                Debug.Log("found");
+            } else
+            {
+                Debug.Log("not found");
+            }
         }
     }
 
@@ -263,12 +313,12 @@ public class PropPlacementManager : MonoBehaviour
         }
     }
 
-    private bool CanBeAccessed(Room room, Vector2Int startPos, List<Vector2Int> endPositions)
+    private bool CanPropBeAccessed(Room room, Vector2Int startPosition, List<Vector2Int> endPositions)
     {
         Queue<Vector2Int> pathQueue = new();
-        HashSet<Vector2Int> visitedPaths = new() { startPos };
+        HashSet<Vector2Int> visitedPaths = new() { startPosition };
 
-        pathQueue.Enqueue(startPos);
+        pathQueue.Enqueue(startPosition);
 
         while (pathQueue.Count > 0) 
         {
@@ -278,27 +328,89 @@ public class PropPlacementManager : MonoBehaviour
             {
                 Vector2Int edge = currentTile + direction;
 
+                foreach (var position in endPositions)
+                {
+                    if (edge == position)
+                    {
+                        return true;
+                    }
+                }
+
                 if (!visitedPaths.Contains(edge) && room.FloorTiles.Contains(edge) &&
-                    (room.AccessiblePropPositions.Contains(edge) || !room.PropPositions.Contains(edge)))
+                    !room.PropPositions.Contains(edge))
                 {                    
                     visitedPaths.Add(edge);
-
-                    foreach (var position in endPositions)
-                    {
-                        if (edge == position)
-                        {
-                            Debug.Log("found");
-                            return true;
-                        }
-                    }
-
                     pathQueue.Enqueue(edge);
                 }
             }
         }
 
-        Debug.Log("not found");
         return false;
+    }
+
+    private void ClearAPathToProp(Room room, Vector2Int startPosition, List<Vector2Int> endPositions)
+    {
+        Queue<Vector2Int> pathQueue = new();
+        HashSet<Vector2Int> visitedPaths = new() { startPosition };
+        Dictionary<Vector2Int, Vector2Int> pathParents = new();
+
+        pathQueue.Enqueue(startPosition);
+
+        while (pathQueue.Count > 0) 
+        {
+            Vector2Int currentTile = pathQueue.Dequeue();
+
+            foreach (var direction in Direction2D.cardinalDirectionsList)
+            {
+                Vector2Int edge = currentTile + direction;
+
+                foreach (var position in endPositions)
+                {
+                    if (edge == position)
+                    {   
+                        Vector2Int temp = position;
+                        List<Vector2Int> path = new() { temp };
+
+                        while (temp != startPosition)
+                        {
+                            temp = pathParents[temp];
+                            path.Add(temp);
+                        }
+
+                        foreach (var node in path)
+                        {
+                            Debug.Log(node);    
+                        }
+                        
+                        return;
+                    }
+                }
+
+                if (!visitedPaths.Contains(edge) && room.FloorTiles.Contains(edge) &&
+                    !room.PropPositions.Contains(edge))
+                {                    
+                    visitedPaths.Add(edge);
+                    pathQueue.Enqueue(edge);
+
+                } else
+                {
+                    foreach (var prop in room.PropTransfromReference)
+                    {
+                        if ((Vector2)prop.position == edge)
+                        {
+                            room.ClearFloorTiles.Add(edge);
+
+                            pathParents.Add(currentTile, edge);
+
+                            visitedPaths.Add(edge);
+                            pathQueue.Enqueue(edge);
+                        }
+                    }
+                }
+            }
+        }
+
+        return;
     }
 }
 
