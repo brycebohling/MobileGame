@@ -51900,8 +51900,8 @@ MonoBehaviour:
   randomWalkParameters: {fileID: 11400000, guid: d52ad4c40ccb5452c9fae30614b4ff1e, type: 2}
   maxRoomWidth: 10
   maxRoomHeight: 10
-  dungeonWidth: 25
-  dungeonHeight: 25
+  dungeonWidth: 40
+  dungeonHeight: 40
   offset: 2
   randomWalkRooms: 0
   debugCreationTime: 0

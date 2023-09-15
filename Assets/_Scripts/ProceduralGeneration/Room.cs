@@ -16,7 +16,6 @@ public class Room
     public HashSet<Vector2Int> InnerTiles { get; private set; } = new();
 
     public HashSet<Vector2Int> PropPositions { get; private set; } = new();
-    public HashSet<Vector2Int> AccessiblePropPositions { get; private set; } = new();
     public HashSet<Transform> PropTransfromReference { get; private set; } = new();
     public HashSet<Transform> EnemiesInRoom { get; private set; } = new();
 

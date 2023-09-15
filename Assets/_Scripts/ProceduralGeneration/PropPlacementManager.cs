@@ -267,17 +267,31 @@ public class PropPlacementManager : MonoBehaviour
 
         if (propToPlace.mustBeAccessible)
         {
-            room.AccessiblePropPositions.Add(placementPosition);
+            bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
+                new List<Vector2Int>() {placementPosition});
+
+            if (isAccessible)
+            {
+                Debug.Log("found (Accessible)");
+            } else
+            {
+                Debug.Log("not found (Accessible)");
+            }
+
+        } else if (propToPlace.mustBePlacedAndAccessible)
+        {
+            ClearAPathToProp(room, room.RoomCenterPos, new List<Vector2Int>() {placementPosition});
+
 
             bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
                 new List<Vector2Int>() {placementPosition});
 
             if (isAccessible)
             {
-                Debug.Log("found");
+                Debug.Log("found (Accessible&Placed)");
             } else
             {
-                Debug.Log("not found");
+                Debug.Log("not found (Accessible&Placed)");
             }
         }
     }
@@ -368,6 +382,8 @@ public class PropPlacementManager : MonoBehaviour
                 {
                     if (edge == position)
                     {   
+                        pathParents.Add(edge, currentTile);
+
                         Vector2Int temp = position;
                         List<Vector2Int> path = new() { temp };
 
@@ -379,7 +395,7 @@ public class PropPlacementManager : MonoBehaviour
 
                         foreach (var node in path)
                         {
-                            Debug.Log(node);    
+                            room.ClearFloorTiles.Add(node);
                         }
                         
                         return;
@@ -392,20 +408,8 @@ public class PropPlacementManager : MonoBehaviour
                     visitedPaths.Add(edge);
                     pathQueue.Enqueue(edge);
 
-                } else
-                {
-                    foreach (var prop in room.PropTransfromReference)
-                    {
-                        if ((Vector2)prop.position == edge)
-                        {
-                            room.ClearFloorTiles.Add(edge);
+                    pathParents.Add(edge, currentTile);
 
-                            pathParents.Add(currentTile, edge);
-
-                            visitedPaths.Add(edge);
-                            pathQueue.Enqueue(edge);
-                        }
-                    }
                 }
             }
         }
