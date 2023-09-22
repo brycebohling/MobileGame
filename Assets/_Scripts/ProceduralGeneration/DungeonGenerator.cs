@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
 
-public class RoomFirstMapGenerator : RandomWalkMapGenerator
+public class DungeonGenerator : RandomWalkMapGenerator
 {
     [SerializeField] int maxRoomWidth = 4;
     [SerializeField] int maxRoomHeight = 4;
@@ -29,7 +29,7 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         {   
             foreach (Transform prop in room.PropTransfromReference)
             {
-                DestroyImmediate(prop.gameObject);
+                if (prop.gameObject != null) DestroyImmediate(prop.gameObject);
             }
         }
 
@@ -38,6 +38,21 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
         CreateRooms();
 
         OnDungeonLayoutGenerated?.Invoke();
+    }
+
+    protected override void ClearRooms()
+    {
+        tilemapSpawnerScript.Clear();
+
+        foreach (Room room in RoomList)
+        {   
+            foreach (Transform prop in room.PropTransfromReference)
+            {
+                if (prop != null) DestroyImmediate(prop.gameObject);
+            }
+        }
+
+        RoomList.Clear();
     }
 
     public void DebugDungeonCreationTime()

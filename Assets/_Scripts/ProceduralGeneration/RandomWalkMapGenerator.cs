@@ -12,11 +12,12 @@ public class RandomWalkMapGenerator : AbstractDungeonGenerator
 
     protected override void RunProceduralGeneration()
     {
-        // HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
+        
+    }
 
-        // tilemapSpawnerScript.Clear();
-        // tilemapSpawnerScript.SpawnFloorTiles(floorPositions);
-        // WallGenerator.CreateWalls(floorPositions, tilemapSpawnerScript);
+    protected override void ClearRooms()
+    {
+
     }
 
     protected HashSet<Vector2Int> RunRandomWalk(RandomWalkSO paramenters, Vector2Int position,

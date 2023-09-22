@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class PropPlacementManager : MonoBehaviour
 {
-    [SerializeField] RoomFirstMapGenerator roomFirstMapGeneratorScript;
+    [SerializeField] DungeonGenerator roomFirstMapGeneratorScript;
     [SerializeField] List<PropSO> propsToPlace;
     [SerializeField] Transform propParentPrefab;
 

@@ -10,9 +10,17 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
 
     public void GenerateDungeon()
     {
-        tilemapSpawnerScript.Clear();
+        ClearDungeon();
+
         RunProceduralGeneration();
     }
 
+    public void ClearDungeon()
+    {
+        tilemapSpawnerScript.Clear();
+        ClearRooms();
+    }
+
+    protected abstract void ClearRooms();
     protected abstract void RunProceduralGeneration();
 }
