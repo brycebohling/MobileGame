@@ -19,18 +19,20 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
     public List<Room> RoomList = new();
     public HashSet<Vector2Int> Path = new();
-
     float startCreationTime;
-    
-
-    [SerializeField] Transform roomOutline;
-    List<Transform> roomOutlineList = new();
-
-    
 
     protected override void RunProceduralGeneration()
     {
         startCreationTime = Time.realtimeSinceStartup;
+
+        foreach (Room room in RoomList)
+        {   
+            foreach (Transform prop in room.PropTransfromReference)
+            {
+                DestroyImmediate(prop.gameObject);
+            }
+        }
+
         RoomList.Clear();
 
         CreateRooms();
@@ -62,24 +64,9 @@ public class RoomFirstMapGenerator : RandomWalkMapGenerator
 
         List<Vector2Int> roomCenters = new();
 
-        /* debugging start */
-        foreach (var outline in roomOutlineList)
-        {
-            if (outline == null) continue;
-            DestroyImmediate(outline.gameObject);
-        }
-        roomOutlineList.Clear();
-        /* debugging end */
-
         foreach (var room in roomAreas)
         {
-            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));    
-
-            /* for debugging start */
-            var spawnedOutline = Instantiate(roomOutline, new Vector2(Mathf.RoundToInt(room.center.x), Mathf.RoundToInt(room.center.y)), Quaternion.identity);
-            spawnedOutline.localScale = room.size;
-            roomOutlineList.Add(spawnedOutline);
-            /* for debugging end */
+            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
         }
 
         Path = ConnectRooms(roomCenters);

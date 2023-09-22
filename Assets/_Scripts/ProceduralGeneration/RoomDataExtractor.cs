@@ -5,14 +5,9 @@ using UnityEngine.Events;
 
 public class RoomDataExtractor : MonoBehaviour
 {
-    private RoomFirstMapGenerator roomFirstMapGeneratorScript;
+    [SerializeField] RoomFirstMapGenerator roomFirstMapGeneratorScript;
     public UnityEvent OnFinishRoomProcessing;
 
-
-    private void Awake()
-    {
-        roomFirstMapGeneratorScript = FindObjectOfType<RoomFirstMapGenerator>();
-    }
 
     public void ProcessRooms()
     {

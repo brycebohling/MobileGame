@@ -7,18 +7,12 @@ using UnityEngine.Events;
 
 public class PropPlacementManager : MonoBehaviour
 {
-    RoomFirstMapGenerator roomFirstMapGeneratorScript;
-
+    [SerializeField] RoomFirstMapGenerator roomFirstMapGeneratorScript;
     [SerializeField] List<PropSO> propsToPlace;
     [SerializeField] Transform propParentPrefab;
 
     public UnityEvent OnFinishedPropPlacement;
 
-
-    private void Awake() 
-    {
-        roomFirstMapGeneratorScript = FindObjectOfType<RoomFirstMapGenerator>();
-    }
 
     public void ProcessToRooms()
     {

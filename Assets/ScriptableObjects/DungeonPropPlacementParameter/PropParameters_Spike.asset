@@ -21,8 +21,10 @@ MonoBehaviour:
   NearWallRight: 1
   NearWallLeft: 1
   mustBeAccessible: 0
+  mustBePlacedAndAccessible: 0
+  isBrakable: 0
   PlacementQuantityMin: 4
   PlacementQuantityMax: 8
-  PlaceAsGroup: 1
+  PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 3

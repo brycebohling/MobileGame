@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
-  m_Name: PropParameters_WallTorch
+  m_Name: PropParameters_Box_Tall
   m_EditorClassIdentifier: 
-  PropPrefab: {fileID: 7514807292402792796, guid: 4b2e6379865b248e39c63444585fd29f, type: 3}
+  PropPrefab: {fileID: 592386840313463073, guid: b3cae5cdcb44b420b80a19cdc897c93e, type: 3}
   PropSize: {x: 1, y: 1}
-  Corner: 0
+  Corner: 1
   Inner: 0
-  NearWallUp: 0
-  NearWallDown: 0
-  NearWallRight: 0
-  NearWallLeft: 0
-  PlacementQuantityMin: 4
-  PlacementQuantityMax: 8
+  NearWallUp: 1
+  NearWallDown: 1
+  NearWallRight: 1
+  NearWallLeft: 1
+  mustBeAccessible: 0
+  mustBePlacedAndAccessible: 0
+  isBrakable: 1
+  PlacementQuantityMin: 1
+  PlacementQuantityMax: 1
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1

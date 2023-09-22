@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7aa97feebc3e949bfb4ab210dcde004a
+guid: 9bfcb2d382f7a4547a2e2fd706ed899b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,22 +123,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tileset-Spikes_0
+      name: Tiles-Boxes_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 0
         width: 16
-        height: 16
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8775caf7eac2d455a8c4de9e1ae33c28
-      internalID: -643940219
+      spriteID: 1683dd127b8b74e20be940c5c4d78e98
+      internalID: -705516426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tiles-Boxes_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90c1ad894ee104371ae93df45ab671da
+      internalID: -1129070999
       vertices: []
       indices: 
       edges: []
@@ -154,7 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tileset-Spikes_0: -643940219
+      Tiles-Boxes_0: -705516426
+      Tiles-Boxes_1: -1129070999
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

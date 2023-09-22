@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
-  m_Name: PropParameters_TallTorch
+  m_Name: PropParameters_Box_Short
   m_EditorClassIdentifier: 
-  PropPrefab: {fileID: 4530060131377375075, guid: dabfdd1e4ba9447efa0826e71298e8ee, type: 3}
-  PropSize: {x: 1, y: 2}
+  PropPrefab: {fileID: 592386840313463073, guid: aa6749c1f31b344fcb8bb09040bcb318, type: 3}
+  PropSize: {x: 1, y: 1}
   Corner: 1
   Inner: 0
-  NearWallUp: 0
-  NearWallDown: 0
-  NearWallRight: 0
-  NearWallLeft: 0
-  PlacementQuantityMin: 4
-  PlacementQuantityMax: 8
+  NearWallUp: 1
+  NearWallDown: 1
+  NearWallRight: 1
+  NearWallLeft: 1
+  mustBeAccessible: 0
+  mustBePlacedAndAccessible: 0
+  isBrakable: 1
+  PlacementQuantityMin: 1
+  PlacementQuantityMax: 1
   PlaceAsGroup: 0
   GroupMinCount: 1
-  GroupMaxCount: 3
+  GroupMaxCount: 1
