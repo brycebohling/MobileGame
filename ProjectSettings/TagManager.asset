@@ -44,9 +44,6 @@ TagManager:
   - name: Ground
     uniqueID: 3371974115
     locked: 0
-  - name: Prop
-    uniqueID: 1426420797
-    locked: 0
   - name: WallsBack
     uniqueID: 1446328575
     locked: 0
@@ -55,6 +52,9 @@ TagManager:
     locked: 0
   - name: WallsFront
     uniqueID: 1923945105
+    locked: 0
+  - name: Prop
+    uniqueID: 1426420797
     locked: 0
   - name: Player
     uniqueID: 4242042303

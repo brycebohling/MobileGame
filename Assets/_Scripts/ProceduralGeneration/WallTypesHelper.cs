@@ -36,6 +36,11 @@ public static class WallTypesHelper
         0b10001000,
     };
 
+    public static HashSet<int> wallMainBottom = new()
+    {
+
+    };
+
     public static HashSet<int> wallSideRight = new()
     {
         0b00000111,

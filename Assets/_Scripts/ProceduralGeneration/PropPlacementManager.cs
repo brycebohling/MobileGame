@@ -254,10 +254,10 @@ public class PropPlacementManager : MonoBehaviour
 
         propParent.localPosition = (Vector2)placementPosition;
 
-        prop.localPosition = (Vector2)propToPlace.PropSize * 0.5f;
-
         room.PropPositions.Add(placementPosition);
         room.PropTransfromReference.Add(propParent);
+
+        prop.GetComponent<SpriteRenderer>().sortingOrder = -placementPosition.y;
 
         if (propToPlace.mustBeAccessible)
         {
