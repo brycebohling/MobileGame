@@ -10,7 +10,6 @@ public class TilemapSpawner : MonoBehaviour
     [Header("Tile maps")]
     [SerializeField] Tilemap floorTilemap;
     [SerializeField] Tilemap wallTilemap;
-    [SerializeField] Tilemap wallBottomTilemap;
 
     [Header("Tiles")]
     [SerializeField] TileBase floorTile;
@@ -76,18 +75,11 @@ public class TilemapSpawner : MonoBehaviour
         int typeAsInt = Convert.ToInt32(binaryType, 2);
         TileBase tile = null;
         
-        /* if (WallTypesHelper.wallMain.Contains(typeAsInt))
+        if (WallTypesHelper.wallMain.Contains(typeAsInt))
         {
             tile = wallMain;
 
-        } else */ if (WallTypesHelper.wallMainBottom.Contains(typeAsInt))
-        {
-            tile = wallMain;
-            SpawnSingleTile(wallBottomTilemap, tile, position);
-
-            return;
-
-        } /* else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
+        } else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
         {
             tile = wallSideRight;
 
@@ -175,15 +167,15 @@ public class TilemapSpawner : MonoBehaviour
         {
             tile = wallDoubleDownL;
 
-        } */
+        }
 
-        // if (tile != null)
-        // {
-        //     SpawnSingleTile(wallTilemap, tile, position);
+        if (tile != null)
+        {
+            SpawnSingleTile(wallTilemap, tile, position);
 
-        // } else
-        // {
-        //     Debug.Log("Null tile at " + position + "   " + binaryType);
-        // }
+        } else
+        {
+            Debug.Log("Null tile at " + position + "   " + binaryType);
+        }
     }
 }

@@ -257,8 +257,6 @@ public class PropPlacementManager : MonoBehaviour
         room.PropPositions.Add(placementPosition);
         room.PropTransfromReference.Add(propParent);
 
-        prop.GetComponent<SpriteRenderer>().sortingOrder = -placementPosition.y;
-
         if (propToPlace.mustBeAccessible)
         {
             bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
@@ -280,10 +278,7 @@ public class PropPlacementManager : MonoBehaviour
             bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
                 new List<Vector2Int>() {placementPosition});
 
-            if (isAccessible)
-            {
-                Debug.Log("found (Accessible&Placed)");
-            } else
+            if (!isAccessible)
             {
                 Debug.Log("not found (Accessible&Placed)");
             }

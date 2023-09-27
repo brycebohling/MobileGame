@@ -17,6 +17,14 @@ public class AICollisions : AIBase
         {
             other.gameObject.GetComponent<Health>().DamageObject(collisionDmg, knockBackForce, transform.position);
         }
+
+        if (_aIStatesScript.State == AIStates.States.Damaged)
+        {
+            if (TryGetComponent(out AIDamaged aIDamagedScript))
+            {
+                aIDamagedScript.RestDamagedState();
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other) 

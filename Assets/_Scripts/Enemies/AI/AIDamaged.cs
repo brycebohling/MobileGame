@@ -34,8 +34,7 @@ public class AIDamaged : AIBase
         damagedTimer += Time.deltaTime;
         if (damagedTimer >= damagedTime)
         {
-            _aiPathScript.canMove = true;
-            _aIStatesScript.State = AIStates.States.Idle;
+            RestDamagedState();
         }
     }
 
@@ -48,6 +47,12 @@ public class AIDamaged : AIBase
         {
             return false;
         }
+    }
+
+    public void RestDamagedState()
+    {
+        _aiPathScript.canMove = true;
+        _aIStatesScript.State = AIStates.States.Idle;
     }
 
     private void Damaged(float knockBackForce, Vector2 senderPos)
