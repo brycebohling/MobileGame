@@ -59,48 +59,48 @@ public class PropPlacementManager : MonoBehaviour
     {
         foreach (PropSO propToPlace in propsList)
         {
-            HashSet<Vector2Int> tempPositions = new();
+            HashSet<Vector2Int> accessiblePositions = new();
 
             if (propToPlace.Corner)
             {
-                tempPositions.UnionWith(room.CornerTiles);
+                accessiblePositions.UnionWith(room.CornerTiles);
             }
 
             if (propToPlace.NearWallLeft)
             {
-                tempPositions.UnionWith(room.NearWallTilesLeft);
+                accessiblePositions.UnionWith(room.NearWallTilesLeft);
             }
 
             if (propToPlace.NearWallRight)
             {
-                tempPositions.UnionWith(room.NearWallTilesRight);
+                accessiblePositions.UnionWith(room.NearWallTilesRight);
             }
 
             if (propToPlace.NearWallUp)
             {
-                tempPositions.UnionWith(room.NearWallTilesUp);
+                accessiblePositions.UnionWith(room.NearWallTilesUp);
             }
 
             if (propToPlace.NearWallDown)
             {
-                tempPositions.UnionWith(room.NearWallTilesDown);
+                accessiblePositions.UnionWith(room.NearWallTilesDown);
             }
 
             if (propToPlace.Inner)
             {
-                tempPositions.UnionWith(room.InnerTiles);
+                accessiblePositions.UnionWith(room.InnerTiles);
             }
 
-            tempPositions.ExceptWith(roomFirstMapGeneratorScript.Path);
+            accessiblePositions.ExceptWith(roomFirstMapGeneratorScript.Path);
 
             int quantity = UnityEngine.Random.Range(propToPlace.PlacementQuantityMin, propToPlace.PlacementQuantityMax + 1);
 
             for (int i = 0; i < quantity; i++)
             {
-                tempPositions.ExceptWith(room.PropPositions);
-                tempPositions.ExceptWith(room.ClearFloorTiles);
+                accessiblePositions.ExceptWith(room.PropPositions);
+                accessiblePositions.ExceptWith(room.ClearFloorTiles);
 
-                List<Vector2Int> possiblePositions = tempPositions.OrderBy(x => Guid.NewGuid()).ToList();
+                List<Vector2Int> possiblePositions = accessiblePositions.OrderBy(x => Guid.NewGuid()).ToList();
 
                 if (!TryPlacingPropBruteForce(room, propToPlace, possiblePositions, placement)) break;
             }

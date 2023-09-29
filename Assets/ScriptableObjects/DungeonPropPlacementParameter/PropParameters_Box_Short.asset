@@ -15,7 +15,7 @@ MonoBehaviour:
   PropPrefab: {fileID: 592386840313463073, guid: aa6749c1f31b344fcb8bb09040bcb318, type: 3}
   PropSize: {x: 1, y: 1}
   Corner: 1
-  Inner: 0
+  Inner: 1
   NearWallUp: 1
   NearWallDown: 1
   NearWallRight: 1
@@ -23,8 +23,8 @@ MonoBehaviour:
   mustBeAccessible: 0
   mustBePlacedAndAccessible: 0
   isBrakable: 1
-  PlacementQuantityMin: 1
-  PlacementQuantityMax: 1
+  PlacementQuantityMin: 2
+  PlacementQuantityMax: 4
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1

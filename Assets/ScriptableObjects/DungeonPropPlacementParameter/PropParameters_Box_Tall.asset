@@ -24,7 +24,7 @@ MonoBehaviour:
   mustBePlacedAndAccessible: 0
   isBrakable: 1
   PlacementQuantityMin: 1
-  PlacementQuantityMax: 1
+  PlacementQuantityMax: 2
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1

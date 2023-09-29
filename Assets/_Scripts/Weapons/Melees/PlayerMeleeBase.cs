@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMeleeBase : MonoBehaviour
 {
     [Header("Melee Base")]
-    [SerializeField] protected List<AnimationClip> _attackAnimList = new List<AnimationClip>();
+    [SerializeField] protected List<AnimationClip> _attackAnimList = new();
 
     protected PlayerStates _playerStatesScript;
     protected Animator _meleeAnimator;
@@ -42,6 +42,5 @@ public class PlayerMeleeBase : MonoBehaviour
         }
 
         return true;
-        
     }
 }
