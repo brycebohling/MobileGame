@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class PlayerMeleeBase : MonoBehaviour
+public class PlayerWeaponBase : MonoBehaviour
 {
-    [Header("Melee Base")]
+    [Header("Weapon Base")]
     [SerializeField] protected List<AnimationClip> _attackAnimList = new();
 
     protected PlayerStates _playerStatesScript;
-    protected Animator _meleeAnimator;
+    protected Animator _animator;
     protected InputManager _inputManager;
     protected Transform _playerTransform;
 
@@ -27,7 +27,7 @@ public class PlayerMeleeBase : MonoBehaviour
     private void Initialization()
     {
         _playerStatesScript = transform.root.gameObject.GetComponent<PlayerStates>();
-        _meleeAnimator = gameObject.GetComponent<Animator>(); 
+        _animator = gameObject.GetComponent<Animator>(); 
         _playerTransform = transform.root;
     }
 

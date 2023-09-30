@@ -16,6 +16,8 @@ public class PlayerBase : MonoBehaviour
 
     protected InputManager _inputManager;
 
+    float _spriteCenterOffset = 0.6f;
+
 
     protected virtual void Awake()
     {
@@ -140,5 +142,13 @@ public class PlayerBase : MonoBehaviour
     protected virtual void StopAnimation(Animator anim)
     {
         Helpers.ChangeAnimationState(anim, _playerStatesScript.baseAnimationClip.name);
+    }
+
+    protected Vector2 GetPlayerCenter()
+    {
+        Vector2 playerCenter = new(_playerSpriteSpriteRenderer.transform.position.x, 
+            _playerSpriteSpriteRenderer.transform.position.y + _spriteCenterOffset);
+            
+        return playerCenter;
     }
 }

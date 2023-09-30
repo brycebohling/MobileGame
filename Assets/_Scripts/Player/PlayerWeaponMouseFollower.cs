@@ -15,10 +15,11 @@ public class PlayerWeaponMouseFollower : PlayerBase
     [Header("References")]
     [SerializeField] Camera playCamera;
 
-    Vector3 mouseLocalPosition;
-    Vector3 mouseWorldPosition;
+    Vector2 mouseLocalPosition;
+    Vector2 mouseWorldPosition;
 
     public bool isWeaponOnTheRight = true;
+
 
     protected override void Start()
     {
@@ -28,6 +29,12 @@ public class PlayerWeaponMouseFollower : PlayerBase
     void Update()
     {
         if (!IsActionAuth(BlockingActionStates)) return;
+
+        if (weaponPivot == null)
+        {
+            Debug.Log("Weapon pivot is null!");
+            return;
+        }
         
         ApplyAction();
     }
@@ -37,7 +44,8 @@ public class PlayerWeaponMouseFollower : PlayerBase
         mouseLocalPosition = Mouse.current.position.ReadValue();
         mouseWorldPosition = playCamera.ScreenToWorldPoint(mouseLocalPosition);
 
-        Vector3 mouseRelativeToPlayPosition = mouseWorldPosition - _playerSpriteSpriteRenderer.transform.position;
+        Vector2 mouseRelativeToPlayPosition = mouseWorldPosition - GetPlayerCenter();
+
         float angle = Mathf.Atan2(mouseRelativeToPlayPosition.y, mouseRelativeToPlayPosition.x) * Mathf.Rad2Deg;
 
         if (isWeaponOnTheRight)

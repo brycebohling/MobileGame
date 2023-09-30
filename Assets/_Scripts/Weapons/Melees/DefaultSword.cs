@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DefaultSword : PlayerMeleeBase
+public class DefaultSword : PlayerWeaponBase
 {
     [Header("Blocking States")]
     public PlayerStates.States[] BlockingActionStates;
@@ -15,8 +15,7 @@ public class DefaultSword : PlayerMeleeBase
     [SerializeField] float attackRadius;
     [SerializeField] LayerMask enemyLayer;
 
-    [Header("Animations")]
-    InputAction attackkeys;
+    InputAction attackKeys;
     int lastAttackAnimIndex = 0;
 
 
@@ -32,14 +31,14 @@ public class DefaultSword : PlayerMeleeBase
 
     private void OnEnable()
     {
-        attackkeys = _inputManager.Player.Fire;
-        attackkeys.Enable();
-        attackkeys.performed += AttackPressed;
+        attackKeys = _inputManager.Player.Fire;
+        attackKeys.Enable();
+        attackKeys.performed += AttackPressed;
     }
 
     private void OnDisable()
     {
-        attackkeys.Disable();
+        attackKeys.Disable();
     }
 
     private void AttackPressed(InputAction.CallbackContext context)
@@ -53,7 +52,7 @@ public class DefaultSword : PlayerMeleeBase
     {
         foreach (AnimationClip anim in _attackAnimList)
         {
-            if (Helpers.IsAnimationPlaying(_meleeAnimator, anim.name))
+            if (Helpers.IsAnimationPlaying(_animator, anim.name))
             {
                 return;
             }
@@ -66,7 +65,7 @@ public class DefaultSword : PlayerMeleeBase
             hitEnemy.GetComponent<Health>().DamageObject(dmg, knockBackForce, _playerTransform.position);
         }
 
-        Helpers.ChangeAnimationState(_meleeAnimator, _attackAnimList[lastAttackAnimIndex].name);
+        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name);
 
         if (_attackAnimList.Count <= lastAttackAnimIndex + 1)
         {
