@@ -13,12 +13,13 @@ public class DefaultWand : PlayerWeaponBase
     [SerializeField] Transform projectilePrefab;
     [SerializeField] Transform attackPoint;
     [SerializeField] float dmg;
+    [SerializeField] float attackSpeed;
+    float tbAttacks;
     [SerializeField] float projectileSpeed;
     [SerializeField] float knockBackForce;
     [SerializeField] LayerMask enemyLayerMask;
     InputAction attackKeys;
 
-    
     [Header("Animations")]
     [SerializeField] AnimationClip emptyAnim;
     [SerializeField] AnimationClip fireAnim;
@@ -38,7 +39,6 @@ public class DefaultWand : PlayerWeaponBase
     {
         attackKeys = _inputManager.Player.Fire;
         attackKeys.Enable();
-        attackKeys.performed += AttackPressed;
     }
 
     private void OnDisable()
@@ -48,19 +48,28 @@ public class DefaultWand : PlayerWeaponBase
 
     private void Update()
     {
-        // if (!Helpers.IsAnimationPlaying(_animator, fireAnim.name))
-        // {
-        //     Helpers.ChangeAnimationState(_animator, fireAnim.name);
-        // }
+        tbAttacks += Time.deltaTime;
+
+        if (attackKeys.IsPressed())
+        {
+            if (IsActionAuth(BlockingActionStates))
+            {
+                Attack();
+            }
+            
+        } else
+        {
+            Helpers.ChangeAnimationState(_animator, emptyAnim.name);
+        }
     }
 
-    private void AttackPressed(InputAction.CallbackContext context)
+    protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
-        if (!IsActionAuth(BlockingActionStates)) return;
-        
-        // if (Helpers.IsAnimationPlaying(_animator, drawBackArrow.name) || Helpers.IsAnimationPlaying(_animator, releaseBow.name)) return;
+        if (!base.IsActionAuth(blockingActionStates)) return false;
 
-        Attack();
+        if (tbAttacks < attackSpeed) return false;
+
+        return true;
     }
 
     private void Attack()
@@ -70,6 +79,8 @@ public class DefaultWand : PlayerWeaponBase
         Vector2 mouseDirection = attackPoint.position - transform.position;
         projectile.GetComponent<DefaultWandProjectile>().Initialize(mouseDirection, projectileSpeed, dmg, knockBackForce, enemyLayerMask);
 
-        Helpers.ChangeAnimationState(_animator, fireAnim.name);        
+        Helpers.ChangeAnimationState(_animator, fireAnim.name);
+
+        tbAttacks = 0;
     }
 }
