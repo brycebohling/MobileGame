@@ -10,7 +10,8 @@ public class PlayerWeaponMouseFollower : PlayerBase
     public PlayerStates.States[] BlockingActionStates;
     
     [Header("Weapon")]
-    [SerializeField] Transform weaponPivot;
+    [SerializeField] Transform weaponHolder;
+    Transform weaponPivot;
 
     [Header("References")]
     [SerializeField] Camera playCamera;
@@ -24,6 +25,8 @@ public class PlayerWeaponMouseFollower : PlayerBase
     protected override void Start()
     {
         base.Start();
+
+        weaponPivot = weaponHolder.GetChild(0);
     }
 
     void Update()

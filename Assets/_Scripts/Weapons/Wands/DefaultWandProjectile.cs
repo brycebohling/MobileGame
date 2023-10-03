@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,11 @@ public class DefaultWandProjectile : MonoBehaviour
         if (other.gameObject.layer == enemyLayer)
         {
             other.GetComponent<Health>().DamageObject(dmg, knockBackForece, transform.position);
+        }
+
+        if (other.TryGetComponent(out IPropDamageable propDamageScript))
+        {
+            propDamageScript.Damage();
         }
 
         Destroy(gameObject);
