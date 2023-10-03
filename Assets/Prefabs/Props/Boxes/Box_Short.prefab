@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 592386840313463073}
   - component: {fileID: 4015548648092388307}
-  - component: {fileID: 3723213863168904521}
   - component: {fileID: -6749634065757350926}
+  - component: {fileID: 4153367160198878823}
+  - component: {fileID: 3723213863168904521}
+  - component: {fileID: 6836817973494722013}
   m_Layer: 10
   m_Name: Box_Short
   m_TagString: Untagged
@@ -86,6 +88,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &-6749634065757350926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7396410587778530055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fa24b7111104a39bcc83e81df7e575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {x: 0.5, y: 0.6}
+  brakeParticles: {fileID: 2739577515273609169, guid: 514a5748bd4e1442aaf1639a23faa32d, type: 3}
+  boxBrakingAnims: []
+--- !u!114 &4153367160198878823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7396410587778530055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  startingHealth: 3
+  IFrames: 0
+  healthAsInt: 1
+  takeAConstantDamge: 1
+  constantDamage: 1
 --- !u!61 &3723213863168904521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,18 +166,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.688}
   m_EdgeRadius: 0
---- !u!114 &-6749634065757350926
-MonoBehaviour:
+--- !u!95 &6836817973494722013
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7396410587778530055}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61fa24b7111104a39bcc83e81df7e575, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {x: 0.5, y: 0.6}
-  hp: 3
-  brakeParticles: {fileID: 2739577515273609169, guid: 514a5748bd4e1442aaf1639a23faa32d, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: faa01de2902d047c1908be391e92246b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

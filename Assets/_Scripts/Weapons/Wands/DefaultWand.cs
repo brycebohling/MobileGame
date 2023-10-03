@@ -17,7 +17,6 @@ public class DefaultWand : PlayerWeaponBase
     float tbAttacks;
     [SerializeField] float projectileSpeed;
     [SerializeField] float knockBackForce;
-    [SerializeField] LayerMask enemyLayerMask;
     InputAction attackKeys;
 
     [Header("Animations")]
@@ -77,7 +76,7 @@ public class DefaultWand : PlayerWeaponBase
         Transform projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
         
         Vector2 mouseDirection = attackPoint.position - transform.position;
-        projectile.GetComponent<DefaultWandProjectile>().Initialize(mouseDirection, projectileSpeed, dmg, knockBackForce, enemyLayerMask);
+        projectile.GetComponent<DefaultWandProjectile>().Initialize(mouseDirection, projectileSpeed, dmg, knockBackForce);
 
         Helpers.ChangeAnimationState(_animator, fireAnim.name);
 

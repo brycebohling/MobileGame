@@ -6,17 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class DefaultWandProjectile : MonoBehaviour
 {
-    int enemyLayer = 7;
     float dmg;
     float knockBackForece;
-    LayerMask enemyLayerMask;
 
 
-    public void Initialize(Vector2 direction, float speed, float dmg, float knockBackForece, LayerMask enemyLayerMask)
+    public void Initialize(Vector2 direction, float speed, float dmg, float knockBackForece)
     {
         this.dmg = dmg;
         this.knockBackForece = knockBackForece;
-        this.enemyLayerMask = enemyLayerMask;
         
         GetComponent<Rigidbody2D>().velocity = direction.normalized * speed;
 
@@ -26,14 +23,10 @@ public class DefaultWandProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == enemyLayer)
+        
+        if (other.TryGetComponent(out Health healthScript))
         {
-            other.GetComponent<Health>().DamageObject(dmg, knockBackForece, transform.position);
-        }
-
-        if (other.TryGetComponent(out IPropDamageable propDamageScript))
-        {
-            propDamageScript.Damage();
+            healthScript.DamageObject(dmg, knockBackForece, transform.position);
         }
 
         Destroy(gameObject);

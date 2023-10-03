@@ -50,7 +50,7 @@ public class PlayerDamaged : PlayerBase
         }
     }
 
-    private void Damaged(float knockBackForce, Vector2 senderPos)
+    private void Damaged(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
     {
         KnockBack(knockBackForce, senderPos);
         damagedTimer = 0;
