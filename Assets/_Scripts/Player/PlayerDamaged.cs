@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerDamaged : PlayerBase
 {
     [SerializeField] float damagedTime;
-    float damagedTimer = 0;
+    [SerializeField] float cameraShakeTime;
+    float damageCounter = 0;
 
     [Header("Animations")]
     [SerializeField] AnimationClip damagedAnim;
@@ -31,8 +32,8 @@ public class PlayerDamaged : PlayerBase
     {
         if (!IsActionAuth(null)) return;
         
-        damagedTimer += Time.deltaTime;
-        if (damagedTimer >= damagedTime)
+        damageCounter += Time.deltaTime;
+        if (damageCounter >= damagedTime)
         {
             _playerRb.velocity = Vector2.zero;
             _playerStatesScript.State = PlayerStates.States.Idle;
@@ -53,9 +54,11 @@ public class PlayerDamaged : PlayerBase
     private void Damaged(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
     {
         KnockBack(knockBackForce, senderPos);
-        damagedTimer = 0;
+        damageCounter = 0;
 
         StartAnimation(_playerAnimator, damagedAnim);
+
+        CameraShake.Cam.CameraStartShake(2, 2, cameraShakeTime);
 
         _playerStatesScript.State = PlayerStates.States.Damaged;
     }

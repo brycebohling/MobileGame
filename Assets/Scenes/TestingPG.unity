@@ -684,6 +684,7 @@ GameObject:
   - component: {fileID: 50783613}
   - component: {fileID: 50783616}
   - component: {fileID: 50783617}
+  - component: {fileID: 50783618}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -761,6 +762,23 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!114 &50783618
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50783612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: -263.37585, y: -394.1294, z: -292.4384}
 --- !u!1 &60956954
 GameObject:
   m_ObjectHideFlags: 0
@@ -10725,6 +10743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 642973745}
   - component: {fileID: 642973746}
+  - component: {fileID: 642973747}
   m_Layer: 0
   m_Name: VCam
   m_TagString: Untagged
@@ -10787,6 +10806,18 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 50783613}
+--- !u!114 &642973747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642973744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b35241dce174155a8f82f8cb65dfbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &646335392
 GameObject:
   m_ObjectHideFlags: 0
@@ -29709,6 +29740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagedTime: 0.1
+  cameraShakeTime: 0.2
   damagedAnim: {fileID: 7400000, guid: c24fc55f094244e6895b6dab13ec12e3, type: 2}
 --- !u!114 &1535558013
 MonoBehaviour:
