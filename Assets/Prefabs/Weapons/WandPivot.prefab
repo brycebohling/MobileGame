@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162140336556402190}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -30,7 +31,6 @@ Transform:
   m_Children:
   - {fileID: 1071932251333279642}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3028909783986340578
 GameObject:
@@ -55,13 +55,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3028909783986340578}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1071932251333279642}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5596101641257692659
 GameObject:
@@ -89,6 +89,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5596101641257692659}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -96,7 +97,6 @@ Transform:
   m_Children:
   - {fileID: 8514285620135959952}
   m_Father: {fileID: 6756297908834403784}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7432845302832678735
 SpriteRenderer:
@@ -167,11 +167,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7413166034354534998, guid: 3327e046c453e47588b29656dbabc675, type: 3}
   attackPoint: {fileID: 8514285620135959952}
   dmg: 10
+  attackSpeed: 0.75
   projectileSpeed: 5
   knockBackForce: 5
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
   emptyAnim: {fileID: 7400000, guid: 4c0fe12555b474418b49e3fda1c716fb, type: 2}
   fireAnim: {fileID: 7400000, guid: 0b974bd4db8a04409ae6d66c8ec090b8, type: 2}
 --- !u!95 &1853033198609599615
