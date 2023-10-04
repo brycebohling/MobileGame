@@ -76,7 +76,7 @@ public class DefaultWand : PlayerWeaponBase
         Transform projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
         
         Vector2 mouseDirection = attackPoint.position - transform.position;
-        projectile.GetComponent<DefaultWandProjectile>().Initialize(mouseDirection, projectileSpeed, dmg, knockBackForce);
+        projectile.GetComponent<DefaultWandProjectile>().Spawn(mouseDirection, projectileSpeed, dmg, knockBackForce);
 
         Helpers.ChangeAnimationState(_animator, fireAnim.name);
 
