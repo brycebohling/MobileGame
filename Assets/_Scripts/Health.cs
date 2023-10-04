@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class Health : MonoBehaviour
 {
     public event Action OnDeath;
@@ -12,10 +16,13 @@ public class Health : MonoBehaviour
     [SerializeField] float startingHealth;
     [SerializeField] float IFrames;
 
-    [SerializeField] bool healthAsInt;
-    [SerializeField] bool takeAConstantDamge;
-    [SerializeField] float constantDamage;
-    
+    [SerializeField] public bool healthAsInt;
+
+    [Header("Custom Inspecter")]
+
+    [HideInInspector] public bool takeAConstantDamage;
+    [HideInInspector] public float constantDamage;
+
     float currentHealth;
     float currentIFrames;
     bool isInvincible;
@@ -46,7 +53,7 @@ public class Health : MonoBehaviour
             dmg = Mathf.RoundToInt(dmg);
         }
 
-        if (takeAConstantDamge)
+        if (takeAConstantDamage)
         {
             if (currentIFrames >= IFrames)
             {
@@ -104,3 +111,26 @@ public class Health : MonoBehaviour
         currentIFrames += Time.deltaTime;
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(Health))]
+public class HealthEditor : Editor
+{
+	public override void OnInspectorGUI()
+	{
+		DrawDefaultInspector();
+
+		Health healthScript = (Health)target;
+
+        EditorGUILayout.LabelField("Custom Inspector");
+
+		healthScript.takeAConstantDamage = EditorGUILayout.Toggle("takeAConstantDamage", healthScript.takeAConstantDamage);
+
+		if (healthScript.takeAConstantDamage)
+		{
+			healthScript.constantDamage = EditorGUILayout.FloatField("Constant Damage", healthScript.constantDamage);
+            
+		}
+	}
+}
+#endif

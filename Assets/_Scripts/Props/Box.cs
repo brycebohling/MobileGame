@@ -70,7 +70,7 @@ public class Box : MonoBehaviour
     void Died()
     {
         Instantiate(brakeParticles, (Vector2)transform.position + center, Quaternion.identity);
-        
+
         Destroy(gameObject);
     }
 }
