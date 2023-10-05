@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8514285620135959952}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 7432845302832678735}
   - component: {fileID: 7010108787287154438}
   - component: {fileID: 1853033198609599615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,9 +136,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1061469555
-  m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1915329542, guid: 787382e6ce750461bb281f55bb764984, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
   attackSpeed: 0.75
   projectileSpeed: 5
   knockBackForce: 5
+  projectileHeight: 0.5
   emptyAnim: {fileID: 7400000, guid: 4c0fe12555b474418b49e3fda1c716fb, type: 2}
   fireAnim: {fileID: 7400000, guid: 0b974bd4db8a04409ae6d66c8ec090b8, type: 2}
 --- !u!95 &1853033198609599615

@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraShake : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    public static CameraShake Cam { get; private set; }
+    public static CameraController Cam { get; private set; }
     CinemachineVirtualCamera vcam;
+
+    [Header("Camera Shake")]
     CinemachineBasicMultiChannelPerlin noisePerlin;
     bool isShaking = false;
     float shakeTime;
     float shakeCounter;
+
+    [Header("Camera Zoom")]
+    float baseCameraSize;
+    float cameraZoomCounter;
 
 
     void Awake() 
@@ -55,5 +61,4 @@ public class CameraShake : MonoBehaviour
         noisePerlin.m_FrequencyGain = 0f;
         isShaking = false;
     }
-
 }

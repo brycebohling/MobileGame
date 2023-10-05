@@ -14,6 +14,7 @@ public class DefaultBow : PlayerWeaponBase
     [SerializeField] float dmg;
     [SerializeField] float arrowSpeed;
     [SerializeField] float knockBackForce;
+    [SerializeField] float projectileHeight;
     InputAction attackKeys;
 
     [Header("Animations")]
@@ -65,7 +66,7 @@ public class DefaultBow : PlayerWeaponBase
         Transform arrow = Instantiate(arrowPrefab, attackPoint.position, Quaternion.identity);
         
         Vector2 mouseDirection = attackPoint.position - transform.position;
-        arrow.GetComponent<DefaultArrow>().Spawn(mouseDirection, arrowSpeed, dmg, knockBackForce);
+        arrow.GetComponent<DefaultArrow>().Spawn(mouseDirection, arrowSpeed, dmg, knockBackForce, projectileHeight);
 
         Helpers.ChangeAnimationState(_animator, releaseBow.name);        
     }

@@ -14,9 +14,10 @@ public class DefaultWand : PlayerWeaponBase
     [SerializeField] Transform attackPoint;
     [SerializeField] float dmg;
     [SerializeField] float attackSpeed;
-    float tbAttacks;
     [SerializeField] float projectileSpeed;
     [SerializeField] float knockBackForce;
+    [SerializeField] float projectileHeight;
+    float tbAttacksCounter;
     InputAction attackKeys;
 
     [Header("Animations")]
@@ -47,7 +48,7 @@ public class DefaultWand : PlayerWeaponBase
 
     private void Update()
     {
-        tbAttacks += Time.deltaTime;
+        tbAttacksCounter += Time.deltaTime;
 
         if (attackKeys.IsPressed())
         {
@@ -66,7 +67,7 @@ public class DefaultWand : PlayerWeaponBase
     {
         if (!base.IsActionAuth(blockingActionStates)) return false;
 
-        if (tbAttacks < attackSpeed) return false;
+        if (tbAttacksCounter < attackSpeed) return false;
 
         return true;
     }
@@ -76,10 +77,10 @@ public class DefaultWand : PlayerWeaponBase
         Transform projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
         
         Vector2 mouseDirection = attackPoint.position - transform.position;
-        projectile.GetComponent<DefaultWandProjectile>().Spawn(mouseDirection, projectileSpeed, dmg, knockBackForce);
+        projectile.GetComponent<DefaultWandProjectile>().Spawn(mouseDirection, projectileSpeed, dmg, knockBackForce, projectileHeight);
 
         Helpers.ChangeAnimationState(_animator, fireAnim.name);
 
-        tbAttacks = 0;
+        tbAttacksCounter = 0;
     }
 }

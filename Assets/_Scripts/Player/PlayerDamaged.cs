@@ -6,11 +6,15 @@ using UnityEngine;
 public class PlayerDamaged : PlayerBase
 {
     [SerializeField] float damagedTime;
-    [SerializeField] float cameraShakeTime;
     float damageCounter = 0;
 
     [Header("Animations")]
     [SerializeField] AnimationClip damagedAnim;
+
+    [Header("Camera Settings")]
+    [SerializeField] float cameraShakeTime;
+    [SerializeField] float amplitudeGain;
+    [SerializeField] float frequencyGain;
 
 
     protected override void Awake() 
@@ -58,7 +62,7 @@ public class PlayerDamaged : PlayerBase
 
         StartAnimation(_playerAnimator, damagedAnim);
 
-        CameraShake.Cam.CameraStartShake(2, 2, cameraShakeTime);
+        CameraController.Cam.CameraStartShake(amplitudeGain, frequencyGain, cameraShakeTime);
 
         _playerStatesScript.State = PlayerStates.States.Damaged;
     }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class DefaultWandProjectile : ProjectileBase
 {
 
-    public void Spawn(Vector2 direction, float speed, float dmg, float knockBackForece)
+    public void Spawn(Vector2 direction, float speed, float dmg, float knockBackForece, float projectileHeight)
     {
-        base.Initialize(direction, speed, dmg, knockBackForece);
+        base.Initialize(direction, speed, dmg, knockBackForece, projectileHeight);
     }
 }

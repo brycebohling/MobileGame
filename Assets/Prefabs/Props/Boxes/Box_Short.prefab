@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 592386840313463073}
   - component: {fileID: 4015548648092388307}
-  - component: {fileID: -6749634065757350926}
+  - component: {fileID: -43384451382221780}
   - component: {fileID: 4153367160198878823}
   - component: {fileID: 3723213863168904521}
   - component: {fileID: 6836817973494722013}
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &-6749634065757350926
+--- !u!114 &-43384451382221780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,12 +97,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7396410587778530055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61fa24b7111104a39bcc83e81df7e575, type: 3}
+  m_Script: {fileID: 11500000, guid: 91967d58e0a8a4e47a351e173e300552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: 0.5, y: 0.6}
+  height: 0.4
+  center: {x: 0.5, y: 0.5}
+  isBrakeable: 1
   brakeParticles: {fileID: 2739577515273609169, guid: 514a5748bd4e1442aaf1639a23faa32d, type: 3}
-  boxBrakingAnims: []
+  brakingAnimsList: []
 --- !u!114 &4153367160198878823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +121,7 @@ MonoBehaviour:
   startingHealth: 3
   IFrames: 0
   healthAsInt: 1
-  takeAConstantDamge: 1
+  takeAConstantDamage: 0
   constantDamage: 1
 --- !u!61 &3723213863168904521
 BoxCollider2D:

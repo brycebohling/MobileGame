@@ -3,31 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class Box : MonoBehaviour
+public class Prop : MonoBehaviour
 {
+    [Header("Size")]
+    public float height;
     [SerializeField] Vector2 center;
 
     [Header("Health")]
-    Health boxHealthScript;
+    [SerializeField] bool isBrakeable;
+    Health healthScript;
     
     [Header("Particles")]
     [SerializeField] Transform brakeParticles;
 
     [Header("Animations")]
-        Animator animator;
-    [System.Serializable]
-    public struct BoxBrakingAnims
+    Animator animator;
+    [System.Serializable] public struct BrakingAnims
     {
         public AnimationClip brakingAnim;
         public float triggerHp; 
     }
 
-    [SerializeField] List<BoxBrakingAnims> boxBrakingAnims = new();
+    [SerializeField] List<BrakingAnims> brakingAnimsList = new();
 
 
     void Awake()
     {
-        boxHealthScript = GetComponent<Health>();
+        if (!isBrakeable) return;
+        
+        healthScript = GetComponent<Health>();
     }
 
     void Start() 
@@ -35,29 +39,35 @@ public class Box : MonoBehaviour
         
         animator = GetComponent<Animator>();
 
-        if (boxBrakingAnims.Count != 0)
+        if (!isBrakeable) return;
+
+        if (brakingAnimsList.Count != 0)
         {
-            Helpers.ChangeAnimationState(animator, boxBrakingAnims[0].brakingAnim.name);
+            Helpers.ChangeAnimationState(animator, brakingAnimsList[0].brakingAnim.name);
         }
     }
 
     void OnEnable() 
     {
-        boxHealthScript.OnDamaged += Damage;
-        boxHealthScript.OnDeath += Died;
+        if (!isBrakeable) return;
+
+        healthScript.OnDamaged += Damage;
+        healthScript.OnDeath += Died;
     }
 
     void OnDisable() 
     {
-        boxHealthScript.OnDamaged -= Damage;
-        boxHealthScript.OnDeath -= Died;
+        if (!isBrakeable) return;
+
+        healthScript.OnDamaged -= Damage;
+        healthScript.OnDeath -= Died;
     }
 
     void Damage(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
     {
         Instantiate(brakeParticles, (Vector2)transform.position + center, Quaternion.identity);
 
-        foreach (BoxBrakingAnims index in boxBrakingAnims)
+        foreach (BrakingAnims index in brakingAnimsList)
         {
             if (index.triggerHp == currentHealth)
             {
