@@ -17,7 +17,8 @@ public class Room
 
     public HashSet<Vector2Int> PropPositions { get; private set; } = new();
     public HashSet<Transform> PropTransfromReference { get; private set; } = new();
-    public HashSet<Transform> EnemiesInRoom { get; private set; } = new();
+    public HashSet<Vector2Int> EnemyPositions { get; private set; } = new();
+    public HashSet<Transform> EnemyTransfromReference { get; private set; } = new();
 
     public Room(Vector2Int roomCenterPos, HashSet<Vector2Int>  floorTiles)
     {

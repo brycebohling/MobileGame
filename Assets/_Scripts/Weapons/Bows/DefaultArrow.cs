@@ -7,8 +7,8 @@ using UnityEngine;
 public class DefaultArrow : ProjectileBase
 {
 
-    public void Spawn(Vector2 direction, float speed, float dmg, float knockBackForece, float projectileHeight)
+    public void Spawn(Vector2 direction, float speed, float dmg, float knockBackForece)
     {
-        base.Initialize(direction, speed, dmg, knockBackForece, projectileHeight);
+        base.Initialize(direction, speed, dmg, knockBackForece);
     }
 }

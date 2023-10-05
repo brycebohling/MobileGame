@@ -4,22 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering.PostProcessing;
 
 public class PropPlacementManager : MonoBehaviour
 {
-    [SerializeField] DungeonGenerator roomFirstMapGeneratorScript;
+    public UnityEvent OnFinishedPropPlacement;
+
+    [SerializeField] DungeonGenerator dungeonGeneratorScript;
     [SerializeField] List<PropSO> propsToPlace;
     [SerializeField] Transform propParentPrefab;
-
-    public UnityEvent OnFinishedPropPlacement;
 
 
     public void ProcessToRooms()
     {
-        if (roomFirstMapGeneratorScript == null) return;
+        if (dungeonGeneratorScript == null) return;
         
-        foreach (Room room in roomFirstMapGeneratorScript.RoomList)
+        foreach (Room room in dungeonGeneratorScript.RoomList)
         {
             PlaceMustHaveProps(room);
 
@@ -91,7 +90,7 @@ public class PropPlacementManager : MonoBehaviour
                 accessiblePositions.UnionWith(room.InnerTiles);
             }
 
-            accessiblePositions.ExceptWith(roomFirstMapGeneratorScript.Path);
+            accessiblePositions.ExceptWith(dungeonGeneratorScript.Path);
 
             int quantity = UnityEngine.Random.Range(propToPlace.PlacementQuantityMin, propToPlace.PlacementQuantityMax + 1);
 
@@ -120,7 +119,7 @@ public class PropPlacementManager : MonoBehaviour
                 // If on last iteration
                 if (possiblePositions.Count == i + 1 && propToPlace.mustBePlacedAndAccessible)
                 {
-                    if (!CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround))
+                    if (!Helpers.CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround))
                     {
                         ClearAPathToProp(room, room.RoomCenterPos, freePositionsAround);
                     }
@@ -129,7 +128,7 @@ public class PropPlacementManager : MonoBehaviour
                 {
                     if (propToPlace.mustBeAccessible)
                     {
-                        if (!CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
+                        if (!Helpers.CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
                     }
                 }
 
@@ -216,7 +215,7 @@ public class PropPlacementManager : MonoBehaviour
 
         if (propToPlace.mustBeAccessible)
         {
-            bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
+            bool isAccessible = Helpers.CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
                 new List<Vector2Int>() {placementPosition});
 
             if (!isAccessible)
@@ -229,7 +228,7 @@ public class PropPlacementManager : MonoBehaviour
             ClearAPathToProp(room, room.RoomCenterPos, new List<Vector2Int>() {placementPosition});
 
 
-            bool isAccessible = CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
+            bool isAccessible = Helpers.CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
                 new List<Vector2Int>() {placementPosition});
 
             if (!isAccessible)
@@ -252,7 +251,7 @@ public class PropPlacementManager : MonoBehaviour
             {
                 Vector2Int tempPos = groupOriginPosition + new Vector2Int(xOffset, yOffset);
                 
-                if (room.FloorTiles.Contains(tempPos) && !roomFirstMapGeneratorScript.Path.Contains(tempPos) &&
+                if (room.FloorTiles.Contains(tempPos) && !dungeonGeneratorScript.Path.Contains(tempPos) &&
                     !room.PropPositions.Contains(tempPos))
                 {
                     availableSpaces.Add(tempPos);
@@ -268,41 +267,6 @@ public class PropPlacementManager : MonoBehaviour
         {
             PlacePropGameObjectAt(room, availableSpaces[i], propToPlace);
         }
-    }
-
-    private bool CanPropBeAccessed(Room room, Vector2Int startPosition, List<Vector2Int> endPositions)
-    {
-        Queue<Vector2Int> pathQueue = new();
-        HashSet<Vector2Int> visitedPaths = new() { startPosition };
-
-        pathQueue.Enqueue(startPosition);
-
-        while (pathQueue.Count > 0) 
-        {
-            Vector2Int currentTile = pathQueue.Dequeue();
-
-            foreach (var direction in Direction2D.cardinalDirectionsList)
-            {
-                Vector2Int edge = currentTile + direction;
-
-                foreach (var position in endPositions)
-                {
-                    if (edge == position)
-                    {
-                        return true;
-                    }
-                }
-
-                if (!visitedPaths.Contains(edge) && room.FloorTiles.Contains(edge) &&
-                    !room.PropPositions.Contains(edge))
-                {                    
-                    visitedPaths.Add(edge);
-                    pathQueue.Enqueue(edge);
-                }
-            }
-        }
-
-        return false;
     }
 
     private void ClearAPathToProp(Room room, Vector2Int startPosition, List<Vector2Int> endPositions)

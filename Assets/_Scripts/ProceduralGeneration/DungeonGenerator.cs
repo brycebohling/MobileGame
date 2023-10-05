@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class DungeonGenerator : RandomWalkMapGenerator
 {
+    public UnityEvent OnDungeonLayoutGenerated;
+
     [SerializeField] int maxRoomWidth = 4;
     [SerializeField] int maxRoomHeight = 4;
     [SerializeField] int dungeonWidth = 20;
@@ -14,8 +16,6 @@ public class DungeonGenerator : RandomWalkMapGenerator
     [SerializeField] [Range(0, 10)] int offset = 1;
     [SerializeField] bool randomWalkRooms = false;
     [SerializeField] bool debugCreationTime;
-    
-    public UnityEvent OnDungeonLayoutGenerated;
 
     public List<Room> RoomList = new();
     public HashSet<Vector2Int> Path = new();
@@ -49,6 +49,11 @@ public class DungeonGenerator : RandomWalkMapGenerator
             foreach (Transform prop in room.PropTransfromReference)
             {
                 if (prop != null) DestroyImmediate(prop.gameObject);
+            }
+
+            foreach (Transform enemy in room.EnemyTransfromReference)
+            {
+                if (enemy != null) DestroyImmediate(enemy.gameObject);
             }
         }
 

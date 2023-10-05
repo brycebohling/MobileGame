@@ -6,7 +6,6 @@ using UnityEngine;
 public class Prop : MonoBehaviour
 {
     [Header("Size")]
-    public float height;
     [SerializeField] Vector2 center;
 
     [Header("Health")]
@@ -30,7 +29,7 @@ public class Prop : MonoBehaviour
     void Awake()
     {
         if (!isBrakeable) return;
-        
+
         healthScript = GetComponent<Health>();
     }
 

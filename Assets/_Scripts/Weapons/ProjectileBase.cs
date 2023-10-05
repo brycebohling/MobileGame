@@ -6,14 +6,12 @@ public class ProjectileBase : MonoBehaviour
 {
     protected float _dmg;
     protected float _knockBackForece;
-    protected float projectileHeight;
 
 
-    protected virtual void Initialize(Vector2 direction, float speed, float dmg, float knockBackForece, float projectileHeight)
+    protected virtual void Initialize(Vector2 direction, float speed, float dmg, float knockBackForece)
     {
         this._dmg = dmg;
         this._knockBackForece = knockBackForece;
-        this.projectileHeight = projectileHeight;
         
         GetComponent<Rigidbody2D>().velocity = direction.normalized * speed;
 
@@ -22,12 +20,7 @@ public class ProjectileBase : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Prop propScript) && propScript.height < projectileHeight)
-        {
-            return;
-        } 
-        
+    {        
         if (other.TryGetComponent(out Health healthScript))
         {
             healthScript.DamageObject(_dmg, _knockBackForece, transform.position);

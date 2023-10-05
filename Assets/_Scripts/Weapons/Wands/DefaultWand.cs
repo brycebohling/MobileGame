@@ -16,7 +16,6 @@ public class DefaultWand : PlayerWeaponBase
     [SerializeField] float attackSpeed;
     [SerializeField] float projectileSpeed;
     [SerializeField] float knockBackForce;
-    [SerializeField] float projectileHeight;
     float tbAttacksCounter;
     InputAction attackKeys;
 
@@ -77,7 +76,7 @@ public class DefaultWand : PlayerWeaponBase
         Transform projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
         
         Vector2 mouseDirection = attackPoint.position - transform.position;
-        projectile.GetComponent<DefaultWandProjectile>().Spawn(mouseDirection, projectileSpeed, dmg, knockBackForce, projectileHeight);
+        projectile.GetComponent<DefaultWandProjectile>().Spawn(mouseDirection, projectileSpeed, dmg, knockBackForce);
 
         Helpers.ChangeAnimationState(_animator, fireAnim.name);
 

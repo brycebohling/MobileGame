@@ -129,7 +129,6 @@ public class HealthEditor : Editor
 		if (healthScript.takeAConstantDamage)
 		{
 			healthScript.constantDamage = EditorGUILayout.FloatField("Constant Damage", healthScript.constantDamage);
-            
 		}
 	}
 }
