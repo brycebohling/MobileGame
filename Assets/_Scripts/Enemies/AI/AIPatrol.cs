@@ -104,8 +104,6 @@ public class AIPatrol : AIBase
 
     private void MoveToNextPoint(Vector2 nextPoint)
     {
-        Vector2 moveDir = (nextPoint - (Vector2)transform.position).normalized;
-
         _aiPathScript.destination = nextPoint;
         _aiPathScript.maxSpeed = patrolSpeed;
         

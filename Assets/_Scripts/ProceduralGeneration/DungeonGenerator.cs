@@ -8,11 +8,12 @@ using UnityEngine.Events;
 public class DungeonGenerator : RandomWalkMapGenerator
 {
     public UnityEvent OnDungeonLayoutGenerated;
+    public UnityEvent OnFinishedDungeonGeneration;
 
     [SerializeField] int maxRoomWidth = 4;
     [SerializeField] int maxRoomHeight = 4;
-    [SerializeField] int dungeonWidth = 20;
-    [SerializeField] int dungeonHeight = 20;
+    public int dungeonWidth = 20;
+    public int dungeonHeight = 20;
     [SerializeField] [Range(0, 10)] int offset = 1;
     [SerializeField] bool randomWalkRooms = false;
     [SerializeField] bool debugCreationTime;
@@ -58,13 +59,6 @@ public class DungeonGenerator : RandomWalkMapGenerator
         }
 
         RoomList.Clear();
-    }
-
-    public void DebugDungeonCreationTime()
-    {
-        if (!debugCreationTime) return;
-        
-        Debug.Log("Created in " + Mathf.Round((Time.realtimeSinceStartup - startCreationTime) * 1000f) + "ms");
     }
 
     private void CreateRooms()
@@ -239,5 +233,14 @@ public class DungeonGenerator : RandomWalkMapGenerator
         }
 
         return closest;
+    }
+
+    public void BrodcastDungeonComplete()
+    {
+        OnFinishedDungeonGeneration?.Invoke();
+        
+        if (!debugCreationTime) return;
+        
+        Debug.Log("Created in " + Mathf.Round((Time.realtimeSinceStartup - startCreationTime) * 1000f) + "ms");
     }
 }
