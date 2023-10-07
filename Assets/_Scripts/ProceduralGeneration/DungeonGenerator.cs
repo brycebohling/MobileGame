@@ -4,11 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
+using System.Linq;
 
-public class DungeonGenerator : RandomWalkMapGenerator
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public class DungeonGenerator : MonoBehaviour
 {
     public UnityEvent OnDungeonLayoutGenerated;
     public UnityEvent OnFinishedDungeonGeneration;
+
+    [SerializeField] TilemapSpawner  tilemapSpawnerScript = null;
+    [SerializeField] AStarGridSettings aStarGridSettings;
+    [SerializeField] Vector2Int startPosition = Vector2Int.zero;
+
+    [SerializeField] RandomWalkSO randomWalkParameters;
 
     [SerializeField] int maxRoomWidth = 4;
     [SerializeField] int maxRoomHeight = 4;
@@ -22,26 +33,30 @@ public class DungeonGenerator : RandomWalkMapGenerator
     public HashSet<Vector2Int> Path = new();
     float startCreationTime;
 
-    protected override void RunProceduralGeneration()
+
+    public void GenerateDungeon()
+    {
+        ClearDungeon();
+        RunProceduralGeneration();
+    }
+
+    public void ClearDungeon()
+    {
+        tilemapSpawnerScript.Clear();
+        aStarGridSettings.DestroyGrid();
+        ClearRooms();
+    }
+
+    private void RunProceduralGeneration()
     {
         startCreationTime = Time.realtimeSinceStartup;
-
-        foreach (Room room in RoomList)
-        {   
-            foreach (Transform prop in room.PropTransfromReference)
-            {
-                if (prop.gameObject != null) DestroyImmediate(prop.gameObject);
-            }
-        }
-
-        RoomList.Clear();
 
         CreateRooms();
 
         OnDungeonLayoutGenerated?.Invoke();
     }
 
-    protected override void ClearRooms()
+    private void ClearRooms()
     {
         tilemapSpawnerScript.Clear();
 
@@ -235,6 +250,27 @@ public class DungeonGenerator : RandomWalkMapGenerator
         return closest;
     }
 
+    private HashSet<Vector2Int> RunRandomWalk(RandomWalkSO paramenters, Vector2Int position,
+        int offset, int xMinBounds, int xMaxBounds, int yMinBounds, int yMaxBounds)
+    {
+        var currentPostion = position;
+        HashSet<Vector2Int> floorPositions = new();
+        
+        for (int i = 0; i < paramenters.iteration; i++)
+        {
+            var path = ProceduralGenerationAlgorithms.RandomWalk(currentPostion, paramenters.walkLength, paramenters.walkWidth,
+                offset, xMinBounds, xMaxBounds, yMinBounds, yMaxBounds);
+            floorPositions.UnionWith(path);
+
+            if (paramenters.startRandomPosEachIteration)
+            {
+                currentPostion = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
+            }
+        }
+
+        return floorPositions;
+    }
+
     public void BrodcastDungeonComplete()
     {
         OnFinishedDungeonGeneration?.Invoke();
@@ -244,3 +280,26 @@ public class DungeonGenerator : RandomWalkMapGenerator
         Debug.Log("Created in " + Mathf.Round((Time.realtimeSinceStartup - startCreationTime) * 1000f) + "ms");
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(DungeonGenerator))]
+public class DungeonGeneratorEditor : Editor
+{
+	public override void OnInspectorGUI()
+	{
+        base.OnInspectorGUI();
+
+		DungeonGenerator dungeonGenerator = (DungeonGenerator)target;
+
+        if (GUILayout.Button("Create Dungeon"))
+        {
+            dungeonGenerator.GenerateDungeon();
+        }
+
+        if (GUILayout.Button("Clear Dungeon"))
+        {
+            dungeonGenerator.ClearDungeon();
+        }
+	}
+}
+#endif
