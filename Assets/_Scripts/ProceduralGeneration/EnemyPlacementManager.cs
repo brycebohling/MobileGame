@@ -14,7 +14,7 @@ public class EnemyPlacementManager : MonoBehaviour
     [SerializeField] Transform enemyParentPrefab;
 
 
-    public void ProcessToRooms()
+    public void ProcessRooms()
     {
         if (dungeonGeneratorScript == null) return;
         

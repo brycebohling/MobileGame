@@ -23,10 +23,13 @@ public class AIPatrol : AIBase
     bool isActivated;
 
     
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
-        base.Start();
-
         startPos = transform.position;
     }
 

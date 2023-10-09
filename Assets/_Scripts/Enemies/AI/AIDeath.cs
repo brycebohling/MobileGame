@@ -11,7 +11,7 @@ public class AIDeath : AIBase
 
     protected override void Awake()
     {
-        base.Start();
+        base.Awake();
     }
 
     protected override void OnEnable() 
@@ -22,11 +22,6 @@ public class AIDeath : AIBase
     protected override void OnDisable() 
     {
         _healthScript.OnDeath -= Death;
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void Death()

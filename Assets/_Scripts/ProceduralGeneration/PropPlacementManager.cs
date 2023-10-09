@@ -14,7 +14,7 @@ public class PropPlacementManager : MonoBehaviour
     [SerializeField] Transform propParentPrefab;
 
 
-    public void ProcessToRooms()
+    public void ProcessRooms()
     {
         if (dungeonGeneratorScript == null) return;
         

@@ -15,7 +15,7 @@ public class AIBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        
+        Initialization();
     }
 
     protected virtual void Start() 
