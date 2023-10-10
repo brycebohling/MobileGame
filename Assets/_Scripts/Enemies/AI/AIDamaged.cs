@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Health))]
 public class AIDamaged : AIBase
 {
+    public UnityEvent OnDamaged;
+
     [SerializeField] float damagedTime;
     float damagedTimer = 0;
 
@@ -63,6 +66,8 @@ public class AIDamaged : AIBase
         StartAnimation(_animator, damagedAnim);
 
         _aIStatesScript.State = AIStates.States.Damaged;
+
+        OnDamaged?.Invoke();
     }
 
     private void KnockBack(float knockBackForce, Vector2 senderPos)

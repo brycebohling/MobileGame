@@ -12397,10 +12397,10 @@ MonoBehaviour:
   aStarGridSettings: {fileID: 1769074335}
   startPosition: {x: 0, y: 0}
   randomWalkParameters: {fileID: 11400000, guid: d52ad4c40ccb5452c9fae30614b4ff1e, type: 2}
-  maxRoomWidth: 10
-  maxRoomHeight: 10
-  dungeonWidth: 50
-  dungeonHeight: 50
+  maxRoomWidth: 15
+  maxRoomHeight: 15
+  dungeonWidth: 75
+  dungeonHeight: 75
   offset: 2
   randomWalkRooms: 0
   debugCreationTime: 0

@@ -92,10 +92,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockingActionStates: 0400000005000000
   chaseSpeed: 1.25
-  targetingRadius: 3.58
+  targetingRadius: 3.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  agroTime: 5
   walkAnim: {fileID: 7400000, guid: eb9a9ca52ba924df3aaa993460154cd3, type: 2}
 --- !u!114 &8194507959739536419
 MonoBehaviour:
@@ -124,6 +125,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5acfc7902848a9bb9f80667179e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3070699245990236027}
+        m_TargetAssemblyTypeName: AIChase, Assembly-CSharp
+        m_MethodName: Damaged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   damagedTime: 0.1
   damagedAnim: {fileID: 7400000, guid: c24fc55f094244e6895b6dab13ec12e3, type: 2}
 --- !u!114 &546542127347061458

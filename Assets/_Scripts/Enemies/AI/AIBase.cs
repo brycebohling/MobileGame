@@ -144,39 +144,8 @@ public class AIBase : MonoBehaviour
 
     protected virtual bool IsPlayerInRange(float attackRadius, LayerMask playerLayer)
     {
-        RaycastHit2D[] hitPlayers = Physics2D.CircleCastAll(transform.position, attackRadius, Vector2.zero, 0, playerLayer);
+        RaycastHit2D hitPlayer = Physics2D.CircleCast(transform.position, attackRadius, Vector2.zero, 0, playerLayer);
 
-        if (hitPlayers.Length != 0)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
-
-    protected virtual Vector2 FindClosesetPlayerInRange(float attackRadius, LayerMask playerLayer)
-    {
-        RaycastHit2D[] hitPlayers = Physics2D.CircleCastAll(transform.position, attackRadius, Vector2.zero, 0, playerLayer);
-
-        if (hitPlayers.Length != 0)
-        {
-            Vector2 closestPlayerDistance = hitPlayers[0].transform.position - transform.position;
-            Vector2 closestPlayerPos = hitPlayers[0].transform.position;
-
-            foreach (RaycastHit2D hitPlayer in hitPlayers)
-            {
-                if (((Vector2)hitPlayer.transform.position - (Vector2)transform.position).sqrMagnitude < closestPlayerDistance.sqrMagnitude)
-                {
-                    closestPlayerDistance = hitPlayer.transform.position - transform.position;
-                    closestPlayerPos = hitPlayer.transform.position;
-                }
-            }
-
-            return closestPlayerPos;
-        }
-
-        Debug.Log("Should never run this.");
-        return Vector2.zero;
+        return hitPlayer;
     }
 }

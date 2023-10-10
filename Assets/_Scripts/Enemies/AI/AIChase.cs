@@ -10,9 +10,11 @@ public class AIChase : AIBase
     [SerializeField] float chaseSpeed;
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] float agroTime;
     [SerializeField] AnimationClip walkAnim;
 
     bool isActivated;
+    float agroCounter;
 
 
     protected override void Awake()
@@ -36,54 +38,52 @@ public class AIChase : AIBase
     {
         isActivated = true;
         StartAnimation(_animator, walkAnim);
+
+        _aIStatesScript.State = AIStates.States.Chasing;
     }
 
     protected override void OnActionDeactivate()
     {
         isActivated = false;
         StopAnimation(_animator);
+
+        _aIStatesScript.State = AIStates.States.Idle;
     }
 
     protected override void HandleAction()
     {
-        if (IsPlayerInRange(targetingRadius, playerLayer))
+        if (agroCounter > 0)
         {
-            MoveToClosestPlayer(FindClosesetPlayerInRange(targetingRadius, playerLayer));
-            _aIStatesScript.State = AIStates.States.Chasing;
-
             if (!isActivated)
             {
                 OnActionActivate();
             }
 
-        } else if (_aIStatesScript.State == AIStates.States.Chasing)
-        {
-            _aIStatesScript.State = AIStates.States.Idle;
+            ChaseClosestPlayer();
 
-            OnActionDeactivate();
+        } else
+        {
+            if (IsPlayerInRange(targetingRadius, playerLayer))
+            {
+                agroCounter = agroTime;
+
+            } else if (_aIStatesScript.State == AIStates.States.Chasing)
+            {
+                OnActionDeactivate();
+            }
         }
     }
 
-    protected override bool IsPlayerInRange(float attackRadius, LayerMask playerLayer)
+    public void Damaged()
     {
-        return base.IsPlayerInRange(attackRadius, playerLayer);
+        agroCounter = agroTime;
     }
 
-    protected override Vector2 FindClosesetPlayerInRange(float attackRadius, LayerMask playerLayer)
+    private void ChaseClosestPlayer()
     {
-        return base.FindClosesetPlayerInRange(attackRadius, playerLayer);
-    }
-
-    private void MoveToClosestPlayer(Vector2 closestPlayer)
-    {
-        Vector2 moveDir = (closestPlayer - (Vector2)transform.position).normalized;
-
-        _aiPathScript.destination = closestPlayer;
+        _aiPathScript.destination = GameManager.Gm.playerTransfrom.position;
         _aiPathScript.maxSpeed = chaseSpeed;
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, targetingRadius);
+        agroCounter -= Time.deltaTime;
     }
 }
