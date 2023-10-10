@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 30
+  startingHealth: 30
   IFrames: 0
   healthAsInt: 0
   takeAConstantDamage: 0
@@ -397,7 +397,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1670065338, guid: 11776d7534de84505bcb5c63d772efc0, type: 3}
+  m_Sprite: {fileID: 1775512770, guid: 68a2a8047f2654b24838fb448ab7c837, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

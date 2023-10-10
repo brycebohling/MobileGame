@@ -19,8 +19,7 @@ public class Health : MonoBehaviour
     [SerializeField] public bool healthAsInt;
 
     [Header("Custom Inspecter")]
-
-    [HideInInspector] public bool takeAConstantDamage;
+    [SerializeField] public bool takeAConstantDamage;
     [HideInInspector] public float constantDamage;
 
     float currentHealth;
@@ -122,9 +121,7 @@ public class HealthEditor : Editor
 
 		Health healthScript = (Health)target;
 
-        EditorGUILayout.LabelField("Custom Inspector");
-
-		healthScript.takeAConstantDamage = EditorGUILayout.Toggle("takeAConstantDamage", healthScript.takeAConstantDamage);
+		// healthScript.takeAConstantDamage = EditorGUILayout.Toggle("takeAConstantDamage", healthScript.takeAConstantDamage);
 
 		if (healthScript.takeAConstantDamage)
 		{

@@ -120,7 +120,7 @@ MonoBehaviour:
   startingHealth: 3
   IFrames: 0
   healthAsInt: 1
-  takeAConstantDamage: 0
+  takeAConstantDamage: 1
   constantDamage: 1
 --- !u!61 &8206593584638849759
 BoxCollider2D:
