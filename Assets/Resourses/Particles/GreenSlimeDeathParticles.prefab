@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4564461473034981521}
   - component: {fileID: 7836200064221027342}
   m_Layer: 0
-  m_Name: SlimeDeathParticles
+  m_Name: GreenSlimeDeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2411395532823401130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.226718, y: 47.008442, z: 0}
+  m_LocalPosition: {x: 9.69997, y: 60.381855, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -222,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.05882353, g: 0.54509807, b: 0, a: 1}
-      maxColor: {r: 0.05724919, g: 1, b: 0, a: 1}
+      minColor: {r: 0.13725491, g: 0.86274517, b: 0.08627451, a: 1}
+      maxColor: {r: 0.13725491, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

@@ -6227,6 +6227,7 @@ MonoBehaviour:
   dungeonGeneratorScript: {fileID: 2075197044}
   enemiesToPlace:
   - {fileID: 11400000, guid: 72e23f4838a0b4db485bd0e4ef16c1e1, type: 2}
+  - {fileID: 11400000, guid: 2af3faeab2dac4b4bb647b7065cc44b9, type: 2}
   enemyParentPrefab: {fileID: 241239917624784068, guid: 4426ac99f69684b89b53d42e59c8623c, type: 3}
 --- !u!1 &1112467995
 GameObject:
