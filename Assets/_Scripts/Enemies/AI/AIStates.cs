@@ -10,6 +10,7 @@ public class AIStates : MonoBehaviour
         Idle,
         Attacking,
         Chasing,
+        Dashing,
         Damaged,
         Dead,
     }

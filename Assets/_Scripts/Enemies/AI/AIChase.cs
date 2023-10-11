@@ -36,10 +36,13 @@ public class AIChase : AIBase
 
     protected override void OnActionActivate()
     {
+        base.OnActionActivate();
+
         isActivated = true;
-        StartAnimation(_animator, walkAnim);
 
         _aIStatesScript.State = AIStates.States.Chasing;
+
+        StartAnimation(_animator, walkAnim);
     }
 
     protected override void OnActionDeactivate()

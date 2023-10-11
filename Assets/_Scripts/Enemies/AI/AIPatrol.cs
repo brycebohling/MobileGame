@@ -114,6 +114,10 @@ public class AIPatrol : AIBase
         _aIStatesScript.State = AIStates.States.Patrolling;
         timeTillReroute = 0;
 
+        // Trash Code // Trash Code // Trash Code // Trash Code // Trash Code // Trash Code // Trash Code
+        OnActionActivate();
+        // Trash Code // Trash Code // Trash Code // Trash Code// Trash Code // Trash Code // Trash Code
+
         StartAnimation(_animator, walkAnim);
     }
 

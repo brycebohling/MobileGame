@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8306941218177790580}
   - component: {fileID: 8698686531382471513}
   - component: {fileID: 4144654370984479334}
+  - component: {fileID: 4531409403164414613}
   - component: {fileID: 3221933205575066050}
   - component: {fileID: 1145193851312828381}
   - component: {fileID: 1910084066879394229}
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 030000000400000005000000
+  BlockingActionStates: 03000000040000000500000004000000
   patrolRadius: 2.39
   patrolSpeed: 1
   tbMovementMin: 0.5
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 0400000005000000
+  BlockingActionStates: 040000000500000004000000
   chaseSpeed: 1.25
   targetingRadius: 3.5
   playerLayer:
@@ -221,6 +222,29 @@ MonoBehaviour:
     m_Bits: 64
   agroTime: 5
   walkAnim: {fileID: 7400000, guid: 5e89896c01ced4e12a68a6c6ce89f310, type: 2}
+--- !u!114 &4531409403164414613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432026951679514277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95377faffaade4886969f5aef2dd262f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockingActionStates: 05000000
+  dashSpeed: 12
+  preDashTime: 1
+  dashTime: 0.3
+  dashCooldown: 3
+  targetingRadius: 3
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  preDashAnim: {fileID: 7400000, guid: a6b5c3cac5e334eb197210010e4e1e3e, type: 2}
+  dashAnim: {fileID: 7400000, guid: 84a0de523fc314f2d89895c0811d0448, type: 2}
 --- !u!114 &3221933205575066050
 MonoBehaviour:
   m_ObjectHideFlags: 0

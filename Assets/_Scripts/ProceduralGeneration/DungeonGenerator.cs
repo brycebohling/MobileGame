@@ -28,15 +28,20 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] [Range(0, 10)] int offset = 1;
     [SerializeField] bool randomWalkRooms = false;
     [SerializeField] bool debugCreationTime;
+    [SerializeField] bool generateOnStart;
 
     public List<Room> RoomList = new();
     public HashSet<Vector2Int> Path = new();
+
     float startCreationTime;
 
 
     private void Start() 
     {
-        GenerateDungeon();    
+        if (generateOnStart)
+        {
+            GenerateDungeon();
+        }
     }
 
     public void GenerateDungeon()
