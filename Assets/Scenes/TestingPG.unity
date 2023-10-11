@@ -12405,7 +12405,7 @@ MonoBehaviour:
   offset: 2
   randomWalkRooms: 0
   debugCreationTime: 0
-  generateOnStart: 1
+  generateOnStart: 0
 --- !u!4 &2075197045
 Transform:
   m_ObjectHideFlags: 0

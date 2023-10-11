@@ -37,7 +37,7 @@ public class AIDash : AIBase
         {
             if (!isActionCanceled)
             {
-                OnActionDeactivate();
+                OnActionCancel();
             }
 
             return;
@@ -90,18 +90,27 @@ public class AIDash : AIBase
         StopAnimation(_animator);
     }
 
+    protected override void OnActionCancel()
+    {
+        isPreDash = false;
+        isDashing = false;
+        preDashCounter = preDashTime;
+        dashCounter = dashTime;
+    }
+
     protected override void HandleAction()
     {
         if (_aIStatesScript.State == AIStates.States.Dashing)
         {
-            if (dashCounter <= 0 || !IsPlayerInRange(targetingRadius, playerLayer))
+            if (dashCounter <= 0)
             {
                 OnActionDeactivate();
                 return;
             }
         }
 
-        if (!IsPlayerInRange(targetingRadius, playerLayer) || dashCooldownCounter > 0 || isDashing) return;
+        if ((!IsPlayerInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing) || 
+            dashCooldownCounter > 0 || isDashing) return;
 
         if (!isPreDash)
         {

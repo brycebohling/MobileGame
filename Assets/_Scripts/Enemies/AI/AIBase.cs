@@ -67,6 +67,11 @@ public class AIBase : MonoBehaviour
 
     }
 
+    protected virtual void OnActionCancel()
+    {
+
+    }
+
     protected virtual void HandleAction()
     {
 
