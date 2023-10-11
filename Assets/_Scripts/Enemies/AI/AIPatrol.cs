@@ -16,7 +16,7 @@ public class AIPatrol : AIBase
     [SerializeField] AnimationClip walkAnim;
 
     Vector2 startPos;
-    float tbNextMovement;
+    float nextMovementCounter;
     float timeTillReroute;
     bool isMovingToPoint;
     Vector2 movePoint;
@@ -39,7 +39,7 @@ public class AIPatrol : AIBase
         {
             if (isActivated)
             {
-                OnActionDeactivate();
+                OnActionCancel();
             }
             
             return;
@@ -54,11 +54,16 @@ public class AIPatrol : AIBase
         return base.IsActionAuth(blockingActionStates);
     }
 
-    protected override void OnActionDeactivate()
+    protected override void OnActionActivate()
+    {
+        base.OnActionActivate();
+    }
+
+    protected override void OnActionCancel()
     {
         isActivated = false;
 
-        tbNextMovement = 0;
+        nextMovementCounter = 0;
         timeTillReroute = 0;
         isMovingToPoint = false;
         movePoint = Vector2.zero;
@@ -71,7 +76,7 @@ public class AIPatrol : AIBase
             if (Vector2.Distance(transform.position, movePoint) < requiredDistanceFromPoint)
             {
                 isMovingToPoint = false;
-                tbNextMovement = Random.Range(tbMovementMin, tbMovementMax);
+                nextMovementCounter = Random.Range(tbMovementMin, tbMovementMax);
 
             } else
             {
@@ -85,13 +90,13 @@ public class AIPatrol : AIBase
 
         } else
         {
-            if (tbNextMovement <= 0)
+            if (nextMovementCounter <= 0)
             {
                 MoveToNextPoint(GetMovePos());
 
             } else
             {
-                tbNextMovement -= Time.deltaTime;
+                nextMovementCounter -= Time.deltaTime;
 
                 _aIStatesScript.State = AIStates.States.Idle;
                 StopAnimation(_animator);
@@ -107,16 +112,16 @@ public class AIPatrol : AIBase
 
     private void MoveToNextPoint(Vector2 nextPoint)
     {
+        OnActionActivate();
+
         _aiPathScript.destination = nextPoint;
         _aiPathScript.maxSpeed = patrolSpeed;
         
         isMovingToPoint = true;
-        _aIStatesScript.State = AIStates.States.Patrolling;
         timeTillReroute = 0;
 
-        // Trash Code // Trash Code // Trash Code // Trash Code // Trash Code // Trash Code // Trash Code
-        OnActionActivate();
-        // Trash Code // Trash Code // Trash Code // Trash Code// Trash Code // Trash Code // Trash Code
+        _aIStatesScript.State = AIStates.States.Patrolling;
+        
 
         StartAnimation(_animator, walkAnim);
     }
