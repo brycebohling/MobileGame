@@ -81,26 +81,26 @@ public class PlayerDash : PlayerBase
 
     protected override void OnActionActivate()
     {
-        _playerStatesScript.State = PlayerStates.States.Dashing;
-        velocityBeforeDash = _playerRb.velocity;
+        _statesScript.State = PlayerStates.States.Dashing;
+        velocityBeforeDash = _rb.velocity;
         isDashing = true;
 
-        _playerRb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
+        _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
 
-        StartAnimation(_playerAnimator, dashAnim);
+        StartAnimation(_animator, dashAnim);
 
         StartParticles(dashParticales, particleSpawn.position);
     }
 
     protected override void OnActionDeactivate()
     {
-        _playerStatesScript.State = PlayerStates.States.Idle;
+        _statesScript.State = PlayerStates.States.Idle;
         isDashing = false;
         dashingTimer = 0;
         dashCooldownTimer = 0;
-        _playerRb.velocity = Vector2.zero;
+        _rb.velocity = Vector2.zero;
         
-        StopAnimation(_playerAnimator);
+        StopAnimation(_animator);
 
         StopParticles(dashParticales);
     }

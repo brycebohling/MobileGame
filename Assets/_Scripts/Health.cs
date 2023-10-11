@@ -25,6 +25,7 @@ public class Health : MonoBehaviour
     float currentHealth;
     float currentIFrames;
     bool isInvincible;
+    bool isDead;
 
 
     void Start()
@@ -40,13 +41,15 @@ public class Health : MonoBehaviour
         currentIFrames = IFrames;
     }
 
-    void Update()
+    private void Update()
     {
         HandleTimers();
     }
 
     public void DamageObject(float dmg, float knockBackForce, Vector2 senderPos)
     {
+        if (isDead) return;
+
         if (healthAsInt)
         {
             dmg = Mathf.RoundToInt(dmg);
@@ -79,8 +82,9 @@ public class Health : MonoBehaviour
 
             if (currentHealth <= 0)
             {
+                isDead = true;
                 OnDeath?.Invoke();
-
+            
             } else
             {
                 currentIFrames = 0;

@@ -39,14 +39,14 @@ public class PlayerDamaged : PlayerBase
         damageCounter += Time.deltaTime;
         if (damageCounter >= damagedTime)
         {
-            _playerRb.velocity = Vector2.zero;
-            _playerStatesScript.State = PlayerStates.States.Idle;
+            _rb.velocity = Vector2.zero;
+            _statesScript.State = PlayerStates.States.Idle;
         }
     }
 
     protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
     {
-        if (_playerStatesScript.State == PlayerStates.States.Damaged)
+        if (_statesScript.State == PlayerStates.States.Damaged)
         {
             return true;
         } else
@@ -60,18 +60,18 @@ public class PlayerDamaged : PlayerBase
         KnockBack(knockBackForce, senderPos);
         damageCounter = 0;
 
-        StartAnimation(_playerAnimator, damagedAnim);
+        StartAnimation(_animator, damagedAnim);
 
         CameraController.Cam.CameraStartShake(amplitudeGain, frequencyGain, cameraShakeTime);
 
-        _playerStatesScript.State = PlayerStates.States.Damaged;
+        _statesScript.State = PlayerStates.States.Damaged;
     }
 
     private void KnockBack(float knockBackForce, Vector2 senderPos)
     {
         Vector2 dir = ((Vector2)transform.position - senderPos).normalized;
-        _playerRb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
+        _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
-        _playerStatesScript.State = PlayerStates.States.Damaged;
+        _statesScript.State = PlayerStates.States.Damaged;
     }
 }

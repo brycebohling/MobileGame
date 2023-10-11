@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4564461473034981521}
   - component: {fileID: 7836200064221027342}
   m_Layer: 0
-  m_Name: PinkSlimeDeathParticles
+  m_Name: PlayerDeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.94117653, g: 0.3647059, b: 0.9333334, a: 1}
-      maxColor: {r: 0.8196079, g: 0.08235294, b: 0.77647066, a: 1}
+      minColor: {r: 0.5754717, g: 0.031219855, b: 0, a: 1}
+      maxColor: {r: 0.9150943, g: 0.054534785, b: 0.012949424, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

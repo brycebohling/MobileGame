@@ -28,12 +28,6 @@ public class AIDeath : AIBase
     {
         _aIStatesScript.State = AIStates.States.Dead;
 
-        StartParticles(deathParticles, transform.position);
-        
-        _aiPathScript.canMove = false;
-        _rb.velocity = Vector2.zero;
-        _spriteRenderer.enabled = false;
-
         InstantiateParticales(deathParticles, transform.position);
 
         Destroy(gameObject);

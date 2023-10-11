@@ -11,8 +11,9 @@ public class PlayerStates : MonoBehaviour
         Dashing,
         Attacking,
         Damaged,
+        Dead,
     }
 
-    public PlayerStates.States State;
+    public States State;
     public AnimationClip baseAnimationClip;
 }

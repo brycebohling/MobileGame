@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
-    protected Animator _playerAnimator;
-    protected Rigidbody2D _playerRb;
-    protected SpriteRenderer _playerSpriteSpriteRenderer;
+    protected Animator _animator;
+    protected Rigidbody2D _rb;
+    protected SpriteRenderer _spriteRenderer;
 
-    protected Health _playerHealthScript;
-    protected PlayerMovement _playerMovementScript;
-    protected PlayerStates _playerStatesScript;
     protected Health _healthScript;
+    protected PlayerMovement _movementScript;
+    protected PlayerStates _statesScript;
 
     protected InputManager _inputManager;
 
@@ -22,6 +21,7 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Awake()
     {
         _inputManager = new InputManager();
+        Initialization();
     }
 
     protected virtual void Start() 
@@ -31,13 +31,12 @@ public class PlayerBase : MonoBehaviour
 
     private void Initialization()
     {
-        _playerRb = GetComponent<Rigidbody2D>();
-        _playerAnimator = gameObject?.GetComponentInChildren<Animator>();
-        _playerSpriteSpriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
-        _playerHealthScript = gameObject?.GetComponent<Health>();
-        _playerMovementScript = gameObject?.GetComponent<PlayerMovement>();
-        _playerStatesScript = gameObject?.GetComponent<PlayerStates>();
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = gameObject?.GetComponentInChildren<Animator>();
+        _spriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
         _healthScript = gameObject?.GetComponent<Health>();
+        _movementScript = gameObject?.GetComponent<PlayerMovement>();
+        _statesScript = gameObject?.GetComponent<PlayerStates>();
     }
 
     protected virtual void OnEnable()
@@ -60,7 +59,7 @@ public class PlayerBase : MonoBehaviour
     {
         foreach (PlayerStates.States state in blockingActionStates)
         {
-            if (state == _playerStatesScript.State)
+            if (state == _statesScript.State)
             {
                 return false;
             }
@@ -124,6 +123,14 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    protected virtual void InstantiateParticales(List<ParticleSystem> particleList, Vector3 pos)
+    {
+        foreach (ParticleSystem particleSystem in particleList)
+        {
+            Instantiate(particleSystem, pos, Quaternion.identity);
+        }
+    }
+
     protected virtual void StartSFX()
     {
 
@@ -141,13 +148,13 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void StopAnimation(Animator anim)
     {
-        Helpers.ChangeAnimationState(anim, _playerStatesScript.baseAnimationClip.name);
+        Helpers.ChangeAnimationState(anim, _statesScript.baseAnimationClip.name);
     }
 
     protected Vector2 GetPlayerCenter()
     {
-        Vector2 playerCenter = new(_playerSpriteSpriteRenderer.transform.position.x, 
-            _playerSpriteSpriteRenderer.transform.position.y + _spriteCenterOffset);
+        Vector2 playerCenter = new(_spriteRenderer.transform.position.x, 
+            _spriteRenderer.transform.position.y + _spriteCenterOffset);
             
         return playerCenter;
     }

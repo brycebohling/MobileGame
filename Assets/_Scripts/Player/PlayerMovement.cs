@@ -87,7 +87,7 @@ public class PlayerMovement : PlayerBase
                 OnActionActivate();
             }
 
-        } else if (_playerStatesScript.State == PlayerStates.States.Walking)
+        } else if (_statesScript.State == PlayerStates.States.Walking)
         {
             OnActionDeactivate();
         }
@@ -105,16 +105,16 @@ public class PlayerMovement : PlayerBase
 
     protected override void ApplyAction()
     {
-        _playerRb.velocity = movementSpeed;
+        _rb.velocity = movementSpeed;
 
-        _playerStatesScript.State = PlayerStates.States.Walking;
+        _statesScript.State = PlayerStates.States.Walking;
     }
 
     protected override void OnActionActivate()
     {
         isActivated = true;
 
-        StartAnimation(_playerAnimator, walkAnim);
+        StartAnimation(_animator, walkAnim);
 
         StartParticles(walkParticles, particleSpawn.position);
     }
@@ -123,10 +123,10 @@ public class PlayerMovement : PlayerBase
     {
         isActivated = false;
 
-        _playerRb.velocity = Vector2.zero;
-        _playerStatesScript.State = PlayerStates.States.Idle;
+        _rb.velocity = Vector2.zero;
+        _statesScript.State = PlayerStates.States.Idle;
 
-        StopAnimation(_playerAnimator);
+        StopAnimation(_animator);
 
         StopParticles(walkParticles);
     }

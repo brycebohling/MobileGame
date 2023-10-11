@@ -56,11 +56,11 @@ public class PlayerFlipper : PlayerBase
 
     private bool CanFlipTowardsWeapon()
     {
-        if (playerWeaponMouseFollowerScript.isWeaponOnTheRight && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
+        if (playerWeaponMouseFollowerScript.isWeaponOnTheRight && _spriteRenderer.transform.localScale.x != 1)
         {
             return true;
 
-        } else if (!playerWeaponMouseFollowerScript.isWeaponOnTheRight && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
+        } else if (!playerWeaponMouseFollowerScript.isWeaponOnTheRight && _spriteRenderer.transform.localScale.x != -1)
         {
             return true;
             
@@ -72,11 +72,11 @@ public class PlayerFlipper : PlayerBase
 
     private bool CanFlipTowardsVelocity()
     {
-        if (_playerRb.velocity.x > minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != 1)
+        if (_rb.velocity.x > minimumVelocityToFlip && _spriteRenderer.transform.localScale.x != 1)
         {
             return true;
 
-        } else if (_playerRb.velocity.x < -minimumVelocityToFlip && _playerSpriteSpriteRenderer.transform.localScale.x != -1)
+        } else if (_rb.velocity.x < -minimumVelocityToFlip && _spriteRenderer.transform.localScale.x != -1)
         {
             return true;
 
@@ -88,8 +88,8 @@ public class PlayerFlipper : PlayerBase
 
     protected override void ApplyAction()
     {
-        Vector3 spriteLocalScale = _playerSpriteSpriteRenderer.transform.localScale;
+        Vector3 spriteLocalScale = _spriteRenderer.transform.localScale;
         spriteLocalScale.x *= -1;    
-        _playerSpriteSpriteRenderer.transform.localScale = spriteLocalScale;
+        _spriteRenderer.transform.localScale = spriteLocalScale;
     }
 }
