@@ -13227,6 +13227,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1310440962}
     m_Modifications:
+    - target: {fileID: 2509082068607222299, guid: 57e13a91dcca240eeb8d744bc91d26be, type: 3}
+      propertyPath: knockBackForce
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2740292790087327688, guid: 57e13a91dcca240eeb8d744bc91d26be, type: 3}
       propertyPath: m_Name
       value: BowPivot
