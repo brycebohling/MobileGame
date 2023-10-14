@@ -10,8 +10,8 @@ public class ProjectileBase : MonoBehaviour
 
     protected virtual void Initialize(Vector2 direction, float speed, float dmg, float knockBackForece)
     {
-        this._dmg = dmg;
-        this._knockBackForece = knockBackForece;
+        _dmg = dmg;
+        _knockBackForece = knockBackForece;
         
         GetComponent<Rigidbody2D>().velocity = direction.normalized * speed;
 

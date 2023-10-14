@@ -62,9 +62,9 @@ public class Prop : MonoBehaviour
         healthScript.OnDeath -= Died;
     }
 
-    void Damage(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
+    private void Damage(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
     {
-        Instantiate(brakeParticles, (Vector2)transform.position + center, Quaternion.identity);
+        SpawnParticles();
 
         foreach (BrakingAnims index in brakingAnimsList)
         {
@@ -76,10 +76,17 @@ public class Prop : MonoBehaviour
         }
     }
 
-    void Died()
+    private void Died()
     {
-        Instantiate(brakeParticles, (Vector2)transform.position + center, Quaternion.identity);
+        SpawnParticles();
 
         Destroy(gameObject);
+    }
+
+    private void SpawnParticles()
+    {
+        if (brakeParticles == null) return;
+
+        Instantiate(brakeParticles, (Vector2)transform.position + center, Quaternion.identity);
     }
 }

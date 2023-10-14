@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
+  m_Name: PropParameters_Barrel
+  m_EditorClassIdentifier: 
+  PropPrefab: {fileID: 604346310183204265, guid: 4c8e348d0f4e946f7b4873cf730e2b4f, type: 3}
+  PropSize: {x: 1, y: 1}
+  fourSpriteDirections: 0
+  spriteFront: {fileID: 0}
+  spriteBack: {fileID: 0}
+  spriteRight: {fileID: 0}
+  spriteLeft: {fileID: 0}
+  Corner: 0
+  Inner: 1
+  NearWallUp: 0
+  NearWallDown: 0
+  NearWallRight: 0
+  NearWallLeft: 0
+  mustBeAccessible: 0
+  mustBePlacedAndAccessible: 0
+  isBrakable: 0
+  PlacementQuantityMin: 2
+  PlacementQuantityMax: 3
+  PlaceAsGroup: 0
+  GroupMinCount: 1
+  GroupMaxCount: 1

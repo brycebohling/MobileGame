@@ -29,7 +29,9 @@ public class PropSO : ScriptableObject
     public bool mustBeAccessible;
     public bool mustBePlacedAndAccessible;
     public bool isBrakable;
+    [Tooltip("Amount placed per room")]
     [Min(1)] public int PlacementQuantityMin = 1;
+    [Tooltip("Amount placed per room")]
     [Min(1)] public int PlacementQuantityMax = 1;
 
     [Space, Header("Group Placement")]

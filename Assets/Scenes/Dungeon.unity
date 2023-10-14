@@ -5591,6 +5591,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6abdd280b55394477b1b939b37097737, type: 2}
   - {fileID: 11400000, guid: 545a46afdf42d4b1f81f1ee866fb0221, type: 2}
   - {fileID: 11400000, guid: a3e8d1cc11e52435881309c70fca768f, type: 2}
+  - {fileID: 11400000, guid: 320914976eb1440909d50da3b0789ae0, type: 2}
   propParentPrefab: {fileID: 6312586571603541136, guid: 17bf4c63592f84829be59717e9dc2a60, type: 3}
 --- !u!4 &399501401
 Transform:
