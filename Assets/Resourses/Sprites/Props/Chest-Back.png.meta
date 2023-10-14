@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9bfcb2d382f7a4547a2e2fd706ed899b
+guid: a3c35028639c64b49b107d080acded63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,49 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tiles-Boxes_Short
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c51a23812fef496f9ab423681de3341
-      internalID: -787692219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiles-Boxes_Tall
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1df2a03fceacb4602b1d683acbe5428a
-      internalID: -57301761
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiles-Boxes_TallShadow
+      name: Chest-Back_0
       rect:
         serializedVersion: 2
         x: 0
@@ -179,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b938948861b54d35be6a774bcdb119a
-      internalID: 1522929831
+      spriteID: e8909cdf15e534604aa4c86851ba63ba
+      internalID: -404843770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles-Boxes_ShortShadow
+      name: Chest-Back_1
       rect:
         serializedVersion: 2
         x: 16
@@ -200,8 +158,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf9fcddedc504478d9ce05a80ee6710b
-      internalID: -600873589
+      spriteID: 2f8cea452ca8a484bbd58e988a675cf5
+      internalID: 1658966047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Back_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a191398eedf6149af95dc57d0034df34
+      internalID: -556172761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Back_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 910de1d69b68643819070c0e95869f17
+      internalID: -1781989664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Back_Shadow
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb5db8d5284d410c84f1d7cfed4e731
+      internalID: 1068598366
       vertices: []
       indices: 
       edges: []
@@ -217,10 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tiles-Boxes_Short: -787692219
-      Tiles-Boxes_ShortShadow: -600873589
-      Tiles-Boxes_Tall: -57301761
-      Tiles-Boxes_TallShadow: 1522929831
+      Chest-Back_0: -404843770
+      Chest-Back_1: 1658966047
+      Chest-Back_2: -556172761
+      Chest-Back_3: -1781989664
+      Chest-Back_Shadow: 1068598366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

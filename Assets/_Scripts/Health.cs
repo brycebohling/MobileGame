@@ -125,8 +125,6 @@ public class HealthEditor : Editor
 
 		Health healthScript = (Health)target;
 
-		// healthScript.takeAConstantDamage = EditorGUILayout.Toggle("takeAConstantDamage", healthScript.takeAConstantDamage);
-
 		if (healthScript.takeAConstantDamage)
 		{
 			healthScript.constantDamage = EditorGUILayout.FloatField("Constant Damage", healthScript.constantDamage);

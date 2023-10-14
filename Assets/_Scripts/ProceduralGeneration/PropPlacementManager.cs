@@ -236,6 +236,27 @@ public class PropPlacementManager : MonoBehaviour
                 Debug.Log("not found (Accessible&Placed)");
             }
         }
+
+        if (propToPlace.fourSpriteDirections)
+        {
+            if (!room.FloorTiles.Contains(placementPosition + Vector2Int.up))
+            {
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteFront;
+
+            } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.down))
+            {
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteBack;
+
+            } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.right))
+            {
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteLeft;
+
+            } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.left))
+            {
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteRight;
+
+            }
+        }
     }
 
     private void PlaceGroupObjects(Room room, Vector2Int groupOriginPosition, PropSO propToPlace, int searchOffset)

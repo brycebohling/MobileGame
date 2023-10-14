@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9bfcb2d382f7a4547a2e2fd706ed899b
+guid: a54822fb0e3aa4d93b6e5974d519453f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,49 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tiles-Boxes_Short
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c51a23812fef496f9ab423681de3341
-      internalID: -787692219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiles-Boxes_Tall
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1df2a03fceacb4602b1d683acbe5428a
-      internalID: -57301761
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiles-Boxes_TallShadow
+      name: Chest-Left_0
       rect:
         serializedVersion: 2
         x: 0
@@ -179,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b938948861b54d35be6a774bcdb119a
-      internalID: 1522929831
+      spriteID: 8724dc81185a445679d5d3cf4e338e3f
+      internalID: -1013931186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles-Boxes_ShortShadow
+      name: Chest-Left_1
       rect:
         serializedVersion: 2
         x: 16
@@ -200,8 +158,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf9fcddedc504478d9ce05a80ee6710b
-      internalID: -600873589
+      spriteID: 5ccda5f1f16994e828ea10ed39d52cfb
+      internalID: 1631089447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Left_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c16571ae7bb24d8fb92ae1de71281e6
+      internalID: 1115218126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Left_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ebb27b1f87ab430da9337dc65b6a0b7
+      internalID: 256930749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Left_Shadow
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 32
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e290c54b8f12445fa80f4ef1c313164e
+      internalID: -1948317791
       vertices: []
       indices: 
       edges: []
@@ -217,10 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tiles-Boxes_Short: -787692219
-      Tiles-Boxes_ShortShadow: -600873589
-      Tiles-Boxes_Tall: -57301761
-      Tiles-Boxes_TallShadow: 1522929831
+      Chest-Left_0: -1013931186
+      Chest-Left_1: 1631089447
+      Chest-Left_2: 1115218126
+      Chest-Left_3: 256930749
+      Chest-Left_Shadow: -1948317791
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
