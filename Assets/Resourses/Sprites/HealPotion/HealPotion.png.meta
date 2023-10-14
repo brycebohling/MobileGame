@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2dd6e0c231b8b47dd89297d2ac1f1e81
+guid: 3ba434530b6474a299f6ee630a3e6557
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,6 +81,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,81 +119,63 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tiles-Spikes_0
+      name: HealPotion_Empty
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
         height: 16
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23706275efcc04a9ab821ad3ac8534a4
-      internalID: -1323701236
+      spriteID: d2ff190a8895f470c85a79e8927ddb67
+      internalID: 1564483556
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles-Spikes_1
+      name: HealPotion_FillColor
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
         height: 16
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -2, y: 3}
+        - {x: -4, y: -1}
+        - {x: -4, y: -4}
+        - {x: -2, y: -7}
+        - {x: 2, y: -7}
+        - {x: 4, y: -4}
+        - {x: 4, y: -1}
+        - {x: 2, y: 3}
+      physicsShape:
+      - - {x: -2, y: 3}
+        - {x: -4, y: -1}
+        - {x: -4, y: -4}
+        - {x: -2, y: -7}
+        - {x: 2, y: -7}
+        - {x: 4, y: -4}
+        - {x: 4, y: -1}
+        - {x: 2, y: 3}
       tessellationDetail: 0
       bones: []
-      spriteID: ed3e1654370de42a992c7e28eddaae80
-      internalID: -1747336618
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiles-Spikes_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 26aa49dd47f8241bebb9287003d0cfc7
-      internalID: -2017209640
+      spriteID: 19d05c581dd944da594a6d7ff2511b33
+      internalID: -1813806374
       vertices: []
       indices: 
       edges: []
@@ -196,9 +191,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tiles-Spikes_0: -1323701236
-      Tiles-Spikes_1: -1747336618
-      Tiles-Spikes_2: -2017209640
+      HealPotion_Empty: 1564483556
+      HealPotion_FillColor: -1813806374
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
