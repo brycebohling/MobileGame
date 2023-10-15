@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using JetBrains.Annotations;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,11 +15,6 @@ public class PropSO : ScriptableObject
     public Vector2Int PropSize = Vector2Int.one;
 
     [Space, Header("Placement Type")]
-    public bool fourSpriteDirections;
-    [HideInInspector] public Sprite spriteFront;
-    [HideInInspector] public Sprite spriteBack;
-    [HideInInspector] public Sprite spriteRight;
-    [HideInInspector] public Sprite spriteLeft;
     public bool Corner;
     public bool Inner;
     public bool NearWallUp;
@@ -38,6 +33,16 @@ public class PropSO : ScriptableObject
     public bool PlaceAsGroup;
     [Min(1)] public int GroupMinCount = 1;
     [Min(1)] public int GroupMaxCount = 1;
+
+    [Header("Custom Inspector")]
+    public bool hasVariants;
+    [HideInInspector] public Sprite[] variants;
+
+    public bool fourSpriteDirections;
+    [HideInInspector] public Sprite spriteFront;
+    [HideInInspector] public Sprite spriteBack;
+    [HideInInspector] public Sprite spriteRight;
+    [HideInInspector] public Sprite spriteLeft;
 }
 
 #if UNITY_EDITOR
@@ -47,8 +52,17 @@ public class PropSOEditor : Editor
 	public override void OnInspectorGUI()
 	{
         base.OnInspectorGUI();
-
+        
 		PropSO propSO = (PropSO)target;
+        
+        if (propSO.hasVariants)
+        {
+            serializedObject.Update();
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("variants"));
+
+            serializedObject.ApplyModifiedProperties();    
+        }
 
         if (propSO.fourSpriteDirections)
 		{
@@ -57,6 +71,8 @@ public class PropSOEditor : Editor
             propSO.spriteRight = (Sprite)EditorGUILayout.ObjectField("Sprite Right", propSO.spriteRight, typeof(Sprite), false);
             propSO.spriteLeft = (Sprite)EditorGUILayout.ObjectField("Sprite Left", propSO.spriteLeft, typeof(Sprite), false);
 		}
+
+        
 	}
 }
 #endif

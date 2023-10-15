@@ -185,6 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91967d58e0a8a4e47a351e173e300552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   center: {x: 0.5, y: 0.5}
   isBrakeable: 1
   brakeParticles: {fileID: 2739577515273609169, guid: 514a5748bd4e1442aaf1639a23faa32d, type: 3}

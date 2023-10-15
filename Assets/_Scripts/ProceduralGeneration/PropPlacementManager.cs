@@ -257,6 +257,13 @@ public class PropPlacementManager : MonoBehaviour
 
             }
         }
+
+        if (propToPlace.hasVariants)
+        {
+            Sprite variant = propToPlace.variants[UnityEngine.Random.Range(0, propToPlace.variants.Length)];
+
+            prop.GetComponent<SpriteRenderer>().sprite = variant;
+        }
     }
 
     private void PlaceGroupObjects(Room room, Vector2Int groupOriginPosition, PropSO propToPlace, int searchOffset)

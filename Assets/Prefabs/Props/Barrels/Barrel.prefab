@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 604346310183204265}
   - component: {fileID: 1331600919509333864}
   - component: {fileID: 4436659300367638726}
+  - component: {fileID: -2798602386592421259}
   - component: {fileID: 6285200255667367277}
-  - component: {fileID: 3022092115778268076}
   - component: {fileID: 6361125376597582794}
+  - component: {fileID: 3022092115778268076}
   m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
@@ -101,10 +102,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91967d58e0a8a4e47a351e173e300552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2798602386592421259}
+        m_TargetAssemblyTypeName: Barrel, Assembly-CSharp
+        m_MethodName: OnBarrelBrake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   center: {x: 0.5, y: 0.5}
   isBrakeable: 1
-  brakeParticles: {fileID: 0}
+  brakeParticles: {fileID: 2739577515273609169, guid: 514a5748bd4e1442aaf1639a23faa32d, type: 3}
   brakingAnimsList: []
+--- !u!114 &-2798602386592421259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793633870342313032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c2d0ad0aa5144dfb897ee15497861d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrelVariants:
+  - sprite: {fileID: -1762333654, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
+    script: {fileID: 6006629827676973877, guid: 0a24233228b64414caff74c859cc4525, type: 3}
+  - sprite: {fileID: -1075112388, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
+    script: {fileID: 534604638111947193, guid: 5945b60bb48ea4053b28fbeef852dad6, type: 3}
+  - sprite: {fileID: -674165366, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
+    script: {fileID: 8037513556893520948, guid: acd8d91d69b3f43e187fd1d8c0ff5ecf, type: 3}
 --- !u!114 &6285200255667367277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,27 +158,6 @@ MonoBehaviour:
   healthAsInt: 1
   takeAConstantDamage: 1
   constantDamage: 1
---- !u!95 &3022092115778268076
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4793633870342313032}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &6361125376597582794
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -189,6 +203,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75527, y: 0.8}
   m_EdgeRadius: 0
+--- !u!95 &3022092115778268076
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793633870342313032}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5937949831716329361
 GameObject:
   m_ObjectHideFlags: 0

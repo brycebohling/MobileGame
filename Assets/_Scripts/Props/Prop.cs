@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 public class Prop : MonoBehaviour
 {
+    [Header("Events")]
+    public UnityEvent OnDeath;
+
     [Header("Size")]
     [SerializeField] Vector2 center;
 
@@ -26,16 +30,15 @@ public class Prop : MonoBehaviour
     [SerializeField] List<BrakingAnims> brakingAnimsList = new();
 
 
-    void Awake()
+    private void Awake()
     {
         if (!isBrakeable) return;
 
         healthScript = GetComponent<Health>();
     }
 
-    void Start() 
+    private void Start() 
     {
-        
         animator = GetComponent<Animator>();
 
         if (!isBrakeable) return;
@@ -46,7 +49,7 @@ public class Prop : MonoBehaviour
         }
     }
 
-    void OnEnable() 
+    private void OnEnable() 
     {
         if (!isBrakeable) return;
 
@@ -54,7 +57,7 @@ public class Prop : MonoBehaviour
         healthScript.OnDeath += Died;
     }
 
-    void OnDisable() 
+    private void OnDisable() 
     {
         if (!isBrakeable) return;
 
@@ -80,6 +83,8 @@ public class Prop : MonoBehaviour
     {
         SpawnParticles();
 
+        OnDeath?.Invoke();
+        
         Destroy(gameObject);
     }
 
