@@ -9,7 +9,5 @@ public class BarrelFire : AbstractBarrel
     public override void SpawnBarrelInsides(Vector2 senderPos)
     {
         Instantiate(brakeParticles, senderPos, Quaternion.identity);
-
-
     } 
 }

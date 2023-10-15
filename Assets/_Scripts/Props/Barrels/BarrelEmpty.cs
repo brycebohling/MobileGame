@@ -6,6 +6,6 @@ public class BarrelEmpty : AbstractBarrel
 {
     public override void SpawnBarrelInsides(Vector2 senderPos)
     {
-        Debug.Log("Empty");
+        
     }   
 }

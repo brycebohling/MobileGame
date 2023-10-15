@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5705193548555080902}
   - component: {fileID: 2252653958935982621}
   m_Layer: 0
-  m_Name: BarrelFireParticles
+  m_Name: BarrelPosionParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -981,7 +981,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 200
+        scalar: 150
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -1046,7 +1046,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.5703659
+          value: 0.43243408
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1096,14 +1096,14 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.45269656
-          value: 0.64057434
-          inSlope: -2.2746193
-          outSlope: -2.2746193
+          time: 0.33953738
+          value: 0.5945958
+          inSlope: -4.5163016
+          outSlope: -4.5163016
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.19239375
+          outWeight: 0.15546373
         - serializedVersion: 3
           time: 0.94464326
           value: 1
@@ -1466,7 +1466,7 @@ ParticleSystem:
     enabled: 1
     mode: 0
     timeMode: 2
-    fps: 5
+    fps: 1
     frameOverTime:
       serializedVersion: 2
       minMaxState: 1
@@ -1574,7 +1574,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 8
+    tilesX: 2
     tilesY: 1
     animationType: 1
     rowIndex: 0
@@ -4874,7 +4874,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fad1e7230ffb44ee9b04600dd180fa44, type: 2}
+  - {fileID: 2100000, guid: a259c94260a284fb7bb66e19bd196299, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

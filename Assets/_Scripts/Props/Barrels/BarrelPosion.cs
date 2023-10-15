@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BarrelPosion : AbstractBarrel
 {
+    [SerializeField] ParticleSystem brakeParticles;
+
     public override void SpawnBarrelInsides(Vector2 senderPos)
     {
-        Debug.Log("Posion");
-    } 
+        Instantiate(brakeParticles, senderPos, Quaternion.identity);
+    }
 }
