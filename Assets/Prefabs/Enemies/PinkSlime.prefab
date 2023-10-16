@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 1145193851312828381}
   - component: {fileID: 1910084066879394229}
   - component: {fileID: 1362369968411345219}
+  - component: {fileID: -2219799922785385904}
   - component: {fileID: 3936010992651541819}
   - component: {fileID: 855455656590406594}
   - component: {fileID: 1741526247595217980}
@@ -408,6 +409,24 @@ MonoBehaviour:
   healthAsInt: 0
   takeAConstantDamage: 0
   constantDamage: 0
+--- !u!114 &-2219799922785385904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432026951679514277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46be72e8c17d49c6b621dbbf3ca2d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootSO: {fileID: 0}
+  spawnLootOnDeath: 0
+  spawnLootOnDamage: 0
+  canSpawn: 1
+  delay: 0
+  quantity: 0
 --- !u!50 &3936010992651541819
 Rigidbody2D:
   serializedVersion: 4

@@ -1,7 +1,16 @@
-using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(ReadOnlyInspectorAttribute))]
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public class ReadOnlyInspector : PropertyAttribute
+{
+    
+}
+
+#if UNITY_EDITOR
+[CustomPropertyDrawer(typeof(ReadOnlyInspector))]
 public class ReadOnlyInspectorDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -11,3 +20,4 @@ public class ReadOnlyInspectorDrawer : PropertyDrawer
         GUI.enabled = true;
     }
 }
+#endif

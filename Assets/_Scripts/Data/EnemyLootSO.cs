@@ -39,7 +39,6 @@ public class LootSOEditor : Editor
 
         foreach (var item in lootSO.lootTable)
         {
-            Debug.Log(item.weight / totalWeight);
             item.percentChance = (float)item.weight / totalWeight;
         }
 	}
