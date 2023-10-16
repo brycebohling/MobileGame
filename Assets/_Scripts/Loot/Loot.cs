@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 
@@ -15,7 +16,7 @@ public class Loot : MonoBehaviour
     [Header("Spawn")]
     [SerializeField] bool canSpawn = true;
     [SerializeField] float delay;
-    [SerializeField] int quantity;
+    [SerializeField] Vector2 quantity;
 
     Health healthScript;
 
@@ -46,6 +47,32 @@ public class Loot : MonoBehaviour
 
     private void SpawnLoot()
     {
-        
+        int totalWeight = 0;
+
+        foreach (LootObject item in lootSO.lootTable)
+        {
+            totalWeight += item.weight;
+        }
+
+        int randomWeight = Random.Range(1, totalWeight + 1);
+        int counter = 0;
+
+        foreach (LootObject item in lootSO.lootTable)
+        {
+            counter += item.weight;
+
+            if (counter >= randomWeight)
+            {
+                if (item.gameObject.TryGetComponent(out ILoot lootScript))
+                {
+                    lootScript.Spawn();
+                    break;
+
+                } else
+                {
+                    Debug.LogError("Loot object did not have ILoot component attached!");
+                }
+            }
+        }
     }
 }

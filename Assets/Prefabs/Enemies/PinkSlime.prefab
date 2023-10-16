@@ -421,12 +421,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46be72e8c17d49c6b621dbbf3ca2d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootSO: {fileID: 0}
-  spawnLootOnDeath: 0
+  lootSO: {fileID: 11400000, guid: 7240586d380ee4485ba3c45797d92c8e, type: 2}
+  spawnLootOnDeath: 1
   spawnLootOnDamage: 0
   canSpawn: 1
   delay: 0
-  quantity: 0
+  quantity: {x: 0, y: 0}
 --- !u!50 &3936010992651541819
 Rigidbody2D:
   serializedVersion: 4
