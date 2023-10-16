@@ -54,7 +54,7 @@ public class PropSOEditor : Editor
         base.OnInspectorGUI();
         
 		PropSO propSO = (PropSO)target;
-        
+
         if (propSO.hasVariants)
         {
             serializedObject.Update();
@@ -71,8 +71,6 @@ public class PropSOEditor : Editor
             propSO.spriteRight = (Sprite)EditorGUILayout.ObjectField("Sprite Right", propSO.spriteRight, typeof(Sprite), false);
             propSO.spriteLeft = (Sprite)EditorGUILayout.ObjectField("Sprite Left", propSO.spriteLeft, typeof(Sprite), false);
 		}
-
-        
 	}
 }
 #endif

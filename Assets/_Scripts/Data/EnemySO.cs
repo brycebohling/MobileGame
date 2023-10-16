@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyParameters_", menuName = "PCG/EnemySO")]
+[CreateAssetMenu(fileName = "EnemyParameters_", menuName = "Enemies/EnemySO")]
 public class EnemySO : ScriptableObject
 {
     [Header("Enemy Data")]
