@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
         HandleTimers();
     }
 
-    public void DamageObject(float dmg, float knockBackForce, Vector2 senderPos)
+    public void Damage(float dmg, float knockBackForce, Vector2 senderPos)
     {
         if (isDead) return;
 
@@ -94,7 +94,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void Heal(float healAmount)
+    public void Heal(float healAmount)
     {
         if (healthAsInt)
         {

@@ -15,7 +15,4 @@ MonoBehaviour:
   lootTable:
   - gameObject: {fileID: 1438994762964047679, guid: 1f2919ac837d04c71908aabe0e677936, type: 3}
     weight: 1
-    percentChance: 0.2
-  - gameObject: {fileID: 5432717998437854781, guid: c800ce6281cc749eabc0cd0801cf7003, type: 3}
-    weight: 4
-    percentChance: 0.8
+    percentChance: 1

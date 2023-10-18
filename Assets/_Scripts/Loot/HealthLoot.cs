@@ -1,11 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthLoot : MonoBehaviour, ILoot
+public class HealthLoot : MonoBehaviour
 {
-    public void Spawn()
+    
+    [Header("Health")]
+    [SerializeField] float healAmount;
+
+
+    public void HealthCollected(Health healthScript)
     {
-        Debug.Log("Spawned health");
+        healthScript.Heal(healAmount);
+
+        Destroy(gameObject);
     }
 }

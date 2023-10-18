@@ -62,7 +62,7 @@ public class DefaultSword : PlayerWeaponBase
 
         foreach (Collider2D hitEnemy in hitEnemies)
         {
-            hitEnemy.GetComponent<Health>().DamageObject(dmg, knockBackForce, _playerTransform.position);
+            hitEnemy.GetComponent<Health>().Damage(dmg, knockBackForce, _playerTransform.position);
         }
 
         Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name);

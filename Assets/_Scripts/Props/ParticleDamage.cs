@@ -27,6 +27,6 @@ public class ParticleDamage : MonoBehaviour
 
     void OnParticleTrigger() 
     {
-        playerHealthScript.DamageObject(particleDamage, knockBackForce, transform.position);   
+        playerHealthScript.Damage(particleDamage, knockBackForce, transform.position);   
     }
 }

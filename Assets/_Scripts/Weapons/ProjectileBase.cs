@@ -23,7 +23,7 @@ public class ProjectileBase : MonoBehaviour
     {        
         if (other.TryGetComponent(out Health healthScript))
         {
-            healthScript.DamageObject(_dmg, _knockBackForece, transform.position);
+            healthScript.Damage(_dmg, _knockBackForece, transform.position);
         }
 
         Destroy(gameObject);

@@ -65,3 +65,6 @@ TagManager:
   - name: Particales
     uniqueID: 1848453131
     locked: 0
+  - name: Crosshair
+    uniqueID: 2234451455
+    locked: 0

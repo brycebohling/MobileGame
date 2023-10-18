@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinsLoot : MonoBehaviour, ILoot
+public class CoinsLoot : MonoBehaviour
 {
-    public void Spawn()
+    private void Start() 
     {
-        Debug.Log("Spawned coins");
+        
     }
 }

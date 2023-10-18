@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 
@@ -63,15 +60,7 @@ public class Loot : MonoBehaviour
 
             if (counter >= randomWeight)
             {
-                if (item.gameObject.TryGetComponent(out ILoot lootScript))
-                {
-                    lootScript.Spawn();
-                    break;
-
-                } else
-                {
-                    Debug.LogError("Loot object did not have ILoot component attached!");
-                }
+                Instantiate(item.gameObject, transform.position, Quaternion.identity);
             }
         }
     }

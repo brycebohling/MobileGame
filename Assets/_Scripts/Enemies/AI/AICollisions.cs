@@ -15,7 +15,7 @@ public class AICollisions : AIBase
 
         if (other.gameObject.CompareTag("Player"))      
         {
-            other.gameObject.GetComponent<Health>().DamageObject(collisionDmg, knockBackForce, transform.position);
+            other.gameObject.GetComponent<Health>().Damage(collisionDmg, knockBackForce, transform.position);
         }
 
         if (_aIStatesScript.State == AIStates.States.Damaged)
@@ -33,7 +33,7 @@ public class AICollisions : AIBase
         
         if (other.gameObject.CompareTag("Player"))      
         {
-            other.gameObject.GetComponent<Health>().DamageObject(collisionDmg, knockBackForce, transform.position);
+            other.gameObject.GetComponent<Health>().Damage(collisionDmg, knockBackForce, transform.position);
         }
     }
 }
