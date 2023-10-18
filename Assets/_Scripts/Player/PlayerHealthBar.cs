@@ -15,14 +15,16 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void OnEnable() 
     {
-        healthScript.OnDamaged += UpdateHealthBar;
+        healthScript.OnDamaged += WhenDamaged;
         healthScript.OnDeath += Death;
+        healthScript.OnHeal += WhenHealed;
     }
 
     private void OnDisable() 
     {
-        healthScript.OnDamaged -= UpdateHealthBar;
+        healthScript.OnDamaged -= WhenDamaged;
         healthScript.OnDeath -= Death;
+        healthScript.OnHeal -= WhenHealed;
     }
 
     private void FixedUpdate()
@@ -40,7 +42,17 @@ public class PlayerHealthBar : MonoBehaviour
         }
     }
 
-    private void UpdateHealthBar(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
+    private void WhenDamaged(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
+    {
+        UpdateHealthBar(currentHealth);
+    }
+
+    private void WhenHealed(float healAmount, float currentHealth, float maxHealth)
+    {
+        UpdateHealthBar(currentHealth);
+    }
+
+    private void UpdateHealthBar(float currentHealth)
     {
         healthBarFill.fillAmount = currentHealth / healthScript.maxHealth;
 

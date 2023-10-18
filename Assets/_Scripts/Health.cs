@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 {
     public event Action OnDeath;
     public event Action<float, float, float, Vector2> OnDamaged;
+    public event Action<float, float, float> OnHeal;
     
     public float maxHealth;
     [SerializeField] float startingHealth;
@@ -107,6 +108,8 @@ public class Health : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
+        OnHeal?.Invoke(healAmount, currentHealth, maxHealth);
     }
 
     private void HandleTimers()
