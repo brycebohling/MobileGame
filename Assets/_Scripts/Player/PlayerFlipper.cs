@@ -16,11 +16,11 @@ public class PlayerFlipper : PlayerBase
     
     PlayerWeaponMouseFollower playerWeaponMouseFollowerScript;
 
-    private void Awake() 
+    protected override void Awake() 
     {
-        base.Awake();    
+        base.Awake();
     }
-
+    
     protected override void Start()
     {
         if (isFlippingTowardsWeapon)
