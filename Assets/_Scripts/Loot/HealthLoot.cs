@@ -7,9 +7,9 @@ public class HealthLoot : MonoBehaviour
     [SerializeField] float healAmount;
 
 
-    public void HealthCollected(Health healthScript)
+    public void HealthCollected()
     {
-        healthScript.Heal(healAmount);
+        GameManager.Gm.playerTransfrom.GetComponent<Health>().Heal(healAmount);
 
         Destroy(gameObject);
     }

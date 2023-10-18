@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     public event Action OnDeath;
     public event Action<float, float, float, Vector2> OnDamaged;
     
-    [SerializeField] float maxHealth;
+    public float maxHealth;
     [SerializeField] float startingHealth;
     [SerializeField] float IFrames;
 

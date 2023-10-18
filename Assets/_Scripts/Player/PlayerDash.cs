@@ -33,12 +33,11 @@ public class PlayerDash : PlayerBase
     protected override void Awake()
     {
         base.Awake();
+        base.NewInputManager();
     }
 
     protected override void Start()
     {
-        base.Start();
-
         dashCooldownTimer = dashCooldown;
     }
 

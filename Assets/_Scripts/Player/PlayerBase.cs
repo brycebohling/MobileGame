@@ -19,14 +19,18 @@ public class PlayerBase : MonoBehaviour
 
 
     protected virtual void Awake()
-    {
-        _inputManager = new InputManager();
+    {   
         Initialization();
     }
 
     protected virtual void Start() 
     {
         Initialization();
+    }
+
+    protected virtual void NewInputManager()
+    {
+        _inputManager = new InputManager();
     }
 
     private void Initialization()

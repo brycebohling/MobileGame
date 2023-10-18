@@ -16,10 +16,13 @@ public class PlayerFlipper : PlayerBase
     
     PlayerWeaponMouseFollower playerWeaponMouseFollowerScript;
 
+    private void Awake() 
+    {
+        base.Awake();    
+    }
+
     protected override void Start()
     {
-        base.Start();
-
         if (isFlippingTowardsWeapon)
         {
             playerWeaponMouseFollowerScript = transform.root.GetComponent<PlayerWeaponMouseFollower>();

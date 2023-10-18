@@ -22,10 +22,13 @@ public class PlayerWeaponMouseFollower : PlayerBase
     public bool isWeaponOnTheRight = true;
 
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
-        base.Start();
-
         weaponPivot = weaponHolder.GetChild(0);
     }
 

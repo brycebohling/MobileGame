@@ -31,11 +31,7 @@ public class PlayerMovement : PlayerBase
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        base.NewInputManager();
     }
 
     protected override void OnEnable()
