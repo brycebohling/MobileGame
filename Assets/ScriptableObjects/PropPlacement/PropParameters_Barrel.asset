@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PropParameters_Barrel
   m_EditorClassIdentifier: 
   PropPrefab: {fileID: 604346310183204265, guid: 4c8e348d0f4e946f7b4873cf730e2b4f, type: 3}
-  PropSize: {x: 1, y: 1}
+  PropSize: {x: 1, y: 2}
   Corner: 0
   Inner: 1
   NearWallUp: 0
@@ -23,6 +23,7 @@ MonoBehaviour:
   mustBeAccessible: 0
   mustBePlacedAndAccessible: 0
   isBrakable: 0
+  placeOnePerFloor: 0
   PlacementQuantityMin: 2
   PlacementQuantityMax: 3
   PlaceAsGroup: 0

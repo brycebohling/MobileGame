@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f790eda62f529447f9bdc08980e6be11, type: 3}
+  m_Name: PropParameters_Ladder
+  m_EditorClassIdentifier: 
+  PropPrefab: {fileID: 3832244380902711699, guid: 9b3d39a2678a14cdf962fb829197f19f, type: 3}
+  PropSize: {x: 3, y: 2}
+  Corner: 1
+  Inner: 1
+  NearWallUp: 1
+  NearWallDown: 1
+  NearWallRight: 1
+  NearWallLeft: 1
+  mustBeAccessible: 0
+  mustBePlacedAndAccessible: 1
+  isBrakable: 0
+  placeOnePerFloor: 1
+  PlacementQuantityMin: 1
+  PlacementQuantityMax: 1
+  PlaceAsGroup: 0
+  GroupMinCount: 1
+  GroupMaxCount: 1
+  hasVariants: 0
+  variants: []
+  fourSpriteDirections: 0
+  spriteFront: {fileID: 1607967250, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
+  spriteBack: {fileID: -404843770, guid: a3c35028639c64b49b107d080acded63, type: 3}
+  spriteRight: {fileID: -109614022, guid: a99ab324321ad48bd84493682033c3dc, type: 3}
+  spriteLeft: {fileID: -1013931186, guid: a54822fb0e3aa4d93b6e5974d519453f, type: 3}

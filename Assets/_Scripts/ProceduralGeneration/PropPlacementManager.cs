@@ -15,9 +15,11 @@ public class PropPlacementManager : MonoBehaviour
 
 
     public void ProcessRooms()
-    {
+    {   
         if (dungeonGeneratorScript == null) return;
         
+        PlaceOnceProps();
+
         foreach (Room room in dungeonGeneratorScript.RoomList)
         {
             PlaceMustHaveProps(room);
@@ -30,9 +32,20 @@ public class PropPlacementManager : MonoBehaviour
         OnFinishedPropPlacement?.Invoke();
     }
 
+    private void PlaceOnceProps()
+    {
+        int randomRoomIndex = UnityEngine.Random.Range(0, dungeonGeneratorScript.RoomList.Count);
+
+        List<PropSO> onceProps = propsToPlace.Where(x => x.placeOnePerFloor)
+            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
+
+        if (onceProps.Count != 0) PlaceProps(dungeonGeneratorScript.RoomList[randomRoomIndex],
+            onceProps, PlacementOriginCorner.BottomLeft);
+    }
+
     private void PlaceMustHaveProps(Room room)
     {
-        List<PropSO> mustHaveProps = propsToPlace.Where(x => x.mustBePlacedAndAccessible)
+        List<PropSO> mustHaveProps = propsToPlace.Where(x => x.mustBePlacedAndAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (mustHaveProps.Count != 0) PlaceProps(room, mustHaveProps, PlacementOriginCorner.BottomLeft);
@@ -40,7 +53,7 @@ public class PropPlacementManager : MonoBehaviour
 
     private void PlaceAccessibleProps(Room room)
     {
-        List<PropSO> accessibleProps = propsToPlace.Where(x => x.mustBeAccessible)
+        List<PropSO> accessibleProps = propsToPlace.Where(x => x.mustBeAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (accessibleProps.Count != 0) PlaceProps(room, accessibleProps, PlacementOriginCorner.BottomLeft);
@@ -48,7 +61,7 @@ public class PropPlacementManager : MonoBehaviour
 
     private void PlaceNormalProps(Room room)
     {
-        List<PropSO> normalProps = propsToPlace.Where(x => !x.mustBeAccessible && !x.mustBePlacedAndAccessible)
+        List<PropSO> normalProps = propsToPlace.Where(x => !x.mustBeAccessible && !x.mustBePlacedAndAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (normalProps.Count != 0) PlaceProps(room, normalProps, PlacementOriginCorner.BottomLeft);

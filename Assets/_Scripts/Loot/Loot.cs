@@ -1,26 +1,27 @@
 using UnityEngine;
 
-
-[RequireComponent(typeof(Health))]
 public class Loot : MonoBehaviour
 {
     [SerializeField] LootSO lootSO;
 
     [Header("Conditions")]
+    [Tooltip("Requires Health component")]
     [SerializeField] bool spawnLootOnDeath;
+    [Tooltip("Requires Health component")]
     [SerializeField] bool spawnLootOnDamage;
 
     [Header("Spawn")]
-    [SerializeField] bool canSpawn = true;
-    [SerializeField] float delay;
-    [SerializeField] Vector2 quantity;
+    [SerializeField] Vector2Int quantity;
 
     Health healthScript;
 
 
     private void Awake() 
     {
-        healthScript = GetComponent<Health>();
+        if (TryGetComponent(out Health health))
+        {
+            healthScript = health;
+        }
     }
 
     private void OnEnable() 
@@ -51,17 +52,27 @@ public class Loot : MonoBehaviour
             totalWeight += item.weight;
         }
 
-        int randomWeight = Random.Range(1, totalWeight + 1);
-        int counter = 0;
+        int randomQuantity = Random.Range(quantity.x, quantity.y + 1);
 
-        foreach (LootObject item in lootSO.lootTable)
+        for (int i = 0; i < randomQuantity; i++)
         {
-            counter += item.weight;
+            int randomWeight = Random.Range(1, totalWeight + 1);
+            int counter = 0;
 
-            if (counter >= randomWeight)
+            foreach (LootObject item in lootSO.lootTable)
             {
-                Instantiate(item.gameObject, transform.position, Quaternion.identity);
+                counter += item.weight;
+
+                if (counter >= randomWeight)
+                {
+                    Instantiate(item.gameObject, transform.position, Quaternion.identity);
+                }
             }
         }
+    }
+
+    public void SpawnLootOnInteract()
+    {
+        SpawnLoot();
     }
 }

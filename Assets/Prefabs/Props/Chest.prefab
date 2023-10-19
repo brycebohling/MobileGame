@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4451386331211034679}
   - component: {fileID: 4572955275391911435}
+  - component: {fileID: 2095498161850855476}
+  - component: {fileID: 3045289936422311424}
   - component: {fileID: 1035802469199298020}
   m_Layer: 10
   m_Name: Chest
@@ -86,6 +88,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &2095498161850855476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065401929994926742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6e4326a92754fa8bd0d1fce68a81ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3045289936422311424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065401929994926742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46be72e8c17d49c6b621dbbf3ca2d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootSO: {fileID: 11400000, guid: 18fd1005a040c45d6a50cd4385416a87, type: 2}
+  spawnLootOnDeath: 0
+  spawnLootOnDamage: 0
+  quantity: {x: 1, y: 1}
 --- !u!61 &1035802469199298020
 BoxCollider2D:
   m_ObjectHideFlags: 0
