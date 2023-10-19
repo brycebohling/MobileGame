@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerStates))]
@@ -21,8 +20,8 @@ public class PlayerMovement : PlayerBase
     [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> walkParticles;
 
-    
-    InputAction movementKeys;
+    [SerializeField] InputReaderSO inputReaderSO;
+
     Vector2 moveDir;
     Vector2 movementSpeed;
 
@@ -31,18 +30,15 @@ public class PlayerMovement : PlayerBase
     protected override void Awake()
     {
         base.Awake();
-        base.NewInputManager();
     }
 
     protected override void OnEnable()
     {
-        movementKeys = _inputManager.Player.Movement;
-        movementKeys.Enable();
+        inputReaderSO.MovementEvent += SetMoveDirection;
     }
 
     protected override void OnDisable()
     {
-        movementKeys.Disable();
     }
 
     void Update()
@@ -70,10 +66,13 @@ public class PlayerMovement : PlayerBase
         }
     }
 
+    private void SetMoveDirection(Vector2 moveDirection)
+    {
+        moveDir = moveDirection;
+    }
+
     protected override void HandleInput()
     {
-        moveDir = movementKeys.ReadValue<Vector2>();
-        
         if (moveDir != Vector2.zero)
         {
             SetMovement();

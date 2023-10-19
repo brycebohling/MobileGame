@@ -13,8 +13,6 @@ public class PlayerBase : MonoBehaviour
     protected PlayerMovement _movementScript;
     protected PlayerStates _statesScript;
 
-    protected InputManager _inputManager;
-
     float _spriteCenterOffset = 0.6f;
 
 
@@ -26,11 +24,6 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Start() 
     {
         Initialization();
-    }
-
-    protected virtual void NewInputManager()
-    {
-        _inputManager = new InputManager();
     }
 
     private void Initialization()

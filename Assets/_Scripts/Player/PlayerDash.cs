@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerStates))]
@@ -22,7 +22,7 @@ public class PlayerDash : PlayerBase
     [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> dashParticales;
 
-    InputAction dashKeys;
+    [SerializeField] InputReaderSO inputReaderSO;
 
     bool isDashing;
     float dashingTimer;
@@ -33,7 +33,6 @@ public class PlayerDash : PlayerBase
     protected override void Awake()
     {
         base.Awake();
-        base.NewInputManager();
     }
 
     protected override void Start()
@@ -48,17 +47,15 @@ public class PlayerDash : PlayerBase
 
     protected override void OnEnable()
     {
-        // dashKeys = _inputManager.Player.Dash;
-        // dashKeys.Enable();
-        // dashKeys.performed += DashPressed;
+        inputReaderSO.DashEvent += DashPressed;
     }
 
     protected override void OnDisable()
     {
-        // dashKeys.Disable();
+        inputReaderSO.DashEvent -= DashPressed;
     }
 
-    public void DashPressed(InputAction.CallbackContext context)
+    private void DashPressed()
     {
         if (!IsActionAuth(BlockingActionStates)) return;
         
