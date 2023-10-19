@@ -48,17 +48,17 @@ public class PlayerDash : PlayerBase
 
     protected override void OnEnable()
     {
-        dashKeys = _inputManager.Player.Dash;
-        dashKeys.Enable();
-        dashKeys.performed += DashPressed;
+        // dashKeys = _inputManager.Player.Dash;
+        // dashKeys.Enable();
+        // dashKeys.performed += DashPressed;
     }
 
     protected override void OnDisable()
     {
-        dashKeys.Disable();
+        // dashKeys.Disable();
     }
 
-    private void DashPressed(InputAction.CallbackContext context)
+    public void DashPressed(InputAction.CallbackContext context)
     {
         if (!IsActionAuth(BlockingActionStates)) return;
         
@@ -83,6 +83,7 @@ public class PlayerDash : PlayerBase
         _statesScript.State = PlayerStates.States.Dashing;
         velocityBeforeDash = _rb.velocity;
         isDashing = true;
+        dashCooldownTimer = 0;
 
         _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
 
@@ -96,7 +97,6 @@ public class PlayerDash : PlayerBase
         _statesScript.State = PlayerStates.States.Idle;
         isDashing = false;
         dashingTimer = 0;
-        dashCooldownTimer = 0;
         _rb.velocity = Vector2.zero;
         
         StopAnimation(_animator);
