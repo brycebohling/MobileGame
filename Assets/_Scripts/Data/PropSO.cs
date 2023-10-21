@@ -14,6 +14,8 @@ public class PropSO : ScriptableObject
     [Header("Prop Data")]
     public Transform PropPrefab;
     public Vector2Int PropSize = Vector2Int.one;
+    [Tooltip("The distance from the pivot point to the bottom left corner")]
+    public Vector2 PlacementOffset;
 
     [Space, Header("Placement Type")]
     public bool Corner;
@@ -38,18 +40,18 @@ public class PropSO : ScriptableObject
     [Min(1)] public int GroupMaxCount = 1;
 
     [Header("Custom Inspector")]
-    public bool hasVariants;
-    [HideInInspector] public Sprite[] variants;
-    public bool twoSpriteDirections;
-    public bool fourSpriteDirections;
+    public bool HasVariants;
+    [HideInInspector] public Sprite[] Variants;
+    public bool TwoSpriteDirections;
+    public bool FourSpriteDirections;
 
-    [Serializable] public struct PropGraphics
+    [Serializable] public struct PropGraphicsData
     {
         public Sprite sprite;
         public AnimationClip animationClip;
     }
 
-    public List<PropGraphics> propGraphics = new();
+    public List<PropGraphicsData> PropGraphics = new();
 
     public enum PropGraphicOrder
     {
@@ -70,59 +72,59 @@ public class PropSOEditor : Editor
         
 		PropSO propSO = (PropSO)target;
 
-        if (propSO.hasVariants)
+        if (propSO.HasVariants)
         {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("variants"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Variants"));
 
             serializedObject.ApplyModifiedProperties();    
         }
 
-        if (propSO.twoSpriteDirections && propSO.fourSpriteDirections)
+        if (propSO.TwoSpriteDirections && propSO.FourSpriteDirections)
         {
-            propSO.fourSpriteDirections = false;
+            propSO.FourSpriteDirections = false;
         }
 
-        if (propSO.twoSpriteDirections)
+        if (propSO.TwoSpriteDirections)
         {
-            if (propSO.propGraphics.Count > 2)
+            if (propSO.PropGraphics.Count > 2)
             {
-                while (propSO.propGraphics.Count > 2)
+                while (propSO.PropGraphics.Count > 2)
                 {
-                    propSO.propGraphics.RemoveAt(2);
+                    propSO.PropGraphics.RemoveAt(2);
                 }
 
-            } else if (propSO.propGraphics.Count < 2)
+            } else if (propSO.PropGraphics.Count < 2)
             {
-                while (propSO.propGraphics.Count < 2)
+                while (propSO.PropGraphics.Count < 2)
                 {
-                    propSO.propGraphics.Add(new PropSO.PropGraphics());
+                    propSO.PropGraphics.Add(new PropSO.PropGraphicsData());
                 }
             }
         }
 
-        if (propSO.fourSpriteDirections)
+        if (propSO.FourSpriteDirections)
 		{
-            if (propSO.propGraphics.Count > 4)
+            if (propSO.PropGraphics.Count > 4)
             {
-                while (propSO.propGraphics.Count > 4)
+                while (propSO.PropGraphics.Count > 4)
                 {
-                    propSO.propGraphics.RemoveAt(4);
+                    propSO.PropGraphics.RemoveAt(4);
                 }
 
-            } else if (propSO.propGraphics.Count < 4)
+            } else if (propSO.PropGraphics.Count < 4)
             {
-                while (propSO.propGraphics.Count < 4)
+                while (propSO.PropGraphics.Count < 4)
                 {
-                    propSO.propGraphics.Add(new PropSO.PropGraphics());
+                    propSO.PropGraphics.Add(new PropSO.PropGraphicsData());
                 }
             }
 		}
 
-        if (!propSO.twoSpriteDirections && !propSO.fourSpriteDirections)
+        if (!propSO.TwoSpriteDirections && !propSO.FourSpriteDirections)
         {
-            propSO.propGraphics.Clear();
+            propSO.PropGraphics.Clear();
         }
 	}
 }

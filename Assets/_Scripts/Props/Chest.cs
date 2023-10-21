@@ -29,7 +29,7 @@ public class Chest : MonoBehaviour, IInteractable
     {
         if (animator == null) return;
         
-        foreach (PropSO.PropGraphics graphic in propSO.propGraphics)
+        foreach (PropSO.PropGraphicsData graphic in propSO.PropGraphics)
         {
             if (graphic.sprite == spriteRenderer.sprite)
             {

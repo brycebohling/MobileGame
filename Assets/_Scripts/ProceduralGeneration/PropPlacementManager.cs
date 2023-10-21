@@ -40,7 +40,7 @@ public class PropPlacementManager : MonoBehaviour
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (onceProps.Count != 0) PlaceProps(dungeonGeneratorScript.RoomList[randomRoomIndex],
-            onceProps, PlacementOriginCorner.BottomLeft);
+            onceProps);
     }
 
     private void PlaceMustHaveProps(Room room)
@@ -48,7 +48,7 @@ public class PropPlacementManager : MonoBehaviour
         List<PropSO> mustHaveProps = propsToPlace.Where(x => x.mustBePlacedAndAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
-        if (mustHaveProps.Count != 0) PlaceProps(room, mustHaveProps, PlacementOriginCorner.BottomLeft);
+        if (mustHaveProps.Count != 0) PlaceProps(room, mustHaveProps);
     }
 
     private void PlaceAccessibleProps(Room room)
@@ -56,7 +56,7 @@ public class PropPlacementManager : MonoBehaviour
         List<PropSO> accessibleProps = propsToPlace.Where(x => x.mustBeAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
-        if (accessibleProps.Count != 0) PlaceProps(room, accessibleProps, PlacementOriginCorner.BottomLeft);
+        if (accessibleProps.Count != 0) PlaceProps(room, accessibleProps);
     }
 
     private void PlaceNormalProps(Room room)
@@ -64,10 +64,10 @@ public class PropPlacementManager : MonoBehaviour
         List<PropSO> normalProps = propsToPlace.Where(x => !x.mustBeAccessible && !x.mustBePlacedAndAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
-        if (normalProps.Count != 0) PlaceProps(room, normalProps, PlacementOriginCorner.BottomLeft);
+        if (normalProps.Count != 0) PlaceProps(room, normalProps);
     }
 
-    private void PlaceProps(Room room, List<PropSO> propsList, PlacementOriginCorner placement)
+    private void PlaceProps(Room room, List<PropSO> propsList)
     {
         foreach (PropSO propToPlace in propsList)
         {
@@ -114,18 +114,18 @@ public class PropPlacementManager : MonoBehaviour
 
                 List<Vector2Int> possiblePositions = accessiblePositions.OrderBy(x => Guid.NewGuid()).ToList();
 
-                if (!TryPlacingPropBruteForce(room, propToPlace, possiblePositions, placement)) break;
+                if (!TryPlacingPropBruteForce(room, propToPlace, possiblePositions)) break;
             }
         }
     }
 
-    private bool TryPlacingPropBruteForce(Room room, PropSO propToPlace, List<Vector2Int> possiblePositions, PlacementOriginCorner placement)
+    private bool TryPlacingPropBruteForce(Room room, PropSO propToPlace, List<Vector2Int> possiblePositions)
     {
         for (int i = 0; i < possiblePositions.Count; i++)
         {
             Vector2Int position = possiblePositions[i];
 
-            List<Vector2Int> freePositionsAround = TryToFitProp(propToPlace, possiblePositions, position, placement);
+            List<Vector2Int> freePositionsAround = TryToFitProp(propToPlace, possiblePositions, position);
 
             if (freePositionsAround.Count == propToPlace.PropSize.x * propToPlace.PropSize.y)
             {
@@ -159,57 +159,17 @@ public class PropPlacementManager : MonoBehaviour
         return false;
     }
 
-    private List<Vector2Int> TryToFitProp(PropSO propToPlace, List<Vector2Int> availablePositions,
-        Vector2Int originPosition, PlacementOriginCorner placement)
+    private List<Vector2Int> TryToFitProp(PropSO propToPlace, List<Vector2Int> availablePositions, Vector2Int originPosition)
     {
         List<Vector2Int> freePositions = new();
 
-        if (placement == PlacementOriginCorner.BottomLeft)
+        for (int xOffset = 0; xOffset < propToPlace.PropSize.x; xOffset++)
         {
-            for (int xOffset = 0; xOffset < propToPlace.PropSize.x; xOffset++)
+            for (int yOffset = 0; yOffset < propToPlace.PropSize.y; yOffset++)
             {
-                for (int yOffset = 0; yOffset < propToPlace.PropSize.y; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
+                Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
 
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
-            }
-
-        } else if (placement == PlacementOriginCorner.BottomRight)
-        {
-            for (int xOffset = -propToPlace.PropSize.x + 1; xOffset <= 0; xOffset++)
-            {
-                for (int yOffset = 0; yOffset < propToPlace.PropSize.y; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
-
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
-            }
-
-        } else if (placement == PlacementOriginCorner.TopLeft)
-        {
-            for (int xOffset = 0; xOffset < propToPlace.PropSize.x; xOffset++)
-            {
-                for (int yOffset = -propToPlace.PropSize.y + 1; yOffset <= 0; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
-
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
-            }
-
-        } else
-        {
-            for (int xOffset = -propToPlace.PropSize.x + 1; xOffset <= 0; xOffset++)
-            {
-                for (int yOffset = -propToPlace.PropSize.y + 1; yOffset <= 0; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
-
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
+                if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
             }
         }
 
@@ -219,7 +179,7 @@ public class PropPlacementManager : MonoBehaviour
     private void PlacePropGameObjectAt(Room room, Vector2Int placementPosition, PropSO propToPlace)
     {
         Transform propParent = Instantiate(propParentPrefab);
-        Transform prop = Instantiate(propToPlace.PropPrefab, Vector2.zero, Quaternion.identity, propParent.transform);
+        Transform prop = Instantiate(propToPlace.PropPrefab, Vector2.zero + propToPlace.PlacementOffset, Quaternion.identity, propParent.transform);
 
         propParent.localPosition = (Vector2)placementPosition;
 
@@ -250,34 +210,34 @@ public class PropPlacementManager : MonoBehaviour
             }
         }
 
-        if (propToPlace.twoSpriteDirections || propToPlace.twoSpriteDirections)
+        if (propToPlace.TwoSpriteDirections || propToPlace.TwoSpriteDirections)
         {
             if (!room.FloorTiles.Contains(placementPosition + Vector2Int.up))
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Front].sprite;
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Front].sprite;
 
             } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.down))
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Back].sprite;
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Back].sprite;
 
             }
 
-            if (propToPlace.fourSpriteDirections)
+            if (propToPlace.FourSpriteDirections)
             {
                 if (!room.FloorTiles.Contains(placementPosition + Vector2Int.left))
                 {
-                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Right].sprite;
+                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Right].sprite;
 
                 } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.right))
                 {
-                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Left].sprite;
+                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Left].sprite;
                 }
             }
         }
 
-        if (propToPlace.hasVariants)
+        if (propToPlace.HasVariants)
         {
-            Sprite variant = propToPlace.variants[UnityEngine.Random.Range(0, propToPlace.variants.Length)];
+            Sprite variant = propToPlace.Variants[UnityEngine.Random.Range(0, propToPlace.Variants.Length)];
 
             prop.GetComponent<SpriteRenderer>().sprite = variant;
         }
@@ -368,12 +328,4 @@ public class PropPlacementManager : MonoBehaviour
 
         return;
     }
-}
-
-public enum PlacementOriginCorner
-{
-    TopRight,
-    TopLeft,
-    BottomRight,
-    BottomLeft,
 }

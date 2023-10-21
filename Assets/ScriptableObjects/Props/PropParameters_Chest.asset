@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PropPrefab: {fileID: 4451386331211034679, guid: e920ad16f82e14975948746006affba9, type: 3}
   PropSize: {x: 1, y: 1}
+  PlacementOffset: {x: 0.5, y: 0.32}
   Corner: 1
   Inner: 0
   NearWallUp: 0
@@ -29,11 +30,11 @@ MonoBehaviour:
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1
-  hasVariants: 0
-  variants: []
-  twoSpriteDirections: 1
-  fourSpriteDirections: 0
-  propGraphics:
+  HasVariants: 0
+  Variants: []
+  TwoSpriteDirections: 1
+  FourSpriteDirections: 0
+  PropGraphics:
   - sprite: {fileID: 1607967250, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
     animationClip: {fileID: 7400000, guid: 41b851cab194847679b1b301843521a3, type: 2}
   - sprite: {fileID: -404843770, guid: a3c35028639c64b49b107d080acded63, type: 3}

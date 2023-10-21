@@ -9,9 +9,6 @@ public class Prop : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnDeath;
 
-    [Header("Size")]
-    [SerializeField] Vector2 center;
-
     [Header("Health")]
     [SerializeField] bool isBrakeable;
     Health healthScript;
@@ -92,6 +89,6 @@ public class Prop : MonoBehaviour
     {
         if (brakeParticles == null) return;
 
-        Instantiate(brakeParticles, (Vector2)transform.position + center, Quaternion.identity);
+        Instantiate(brakeParticles, transform.position, Quaternion.identity);
     }
 }

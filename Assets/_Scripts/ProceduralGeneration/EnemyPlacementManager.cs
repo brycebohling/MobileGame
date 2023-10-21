@@ -20,13 +20,13 @@ public class EnemyPlacementManager : MonoBehaviour
         
         foreach (Room room in dungeonGeneratorScript.RoomList)
         {
-            PlaceProps(room, enemiesToPlace, PlacementOriginCorner.BottomLeft);
+            PlaceProps(room, enemiesToPlace);
         }
 
         OnFinishedEnemyPlacement?.Invoke();
     }
 
-    private void PlaceProps(Room room, List<EnemySO> enemyList, PlacementOriginCorner placement)
+    private void PlaceProps(Room room, List<EnemySO> enemyList)
     {
         foreach (EnemySO enemyToPlace in enemyList)
         {
@@ -44,18 +44,18 @@ public class EnemyPlacementManager : MonoBehaviour
 
                 List<Vector2Int> possiblePositions = accessiblePositions.OrderBy(x => Guid.NewGuid()).ToList();
                 
-                if (!TryPlacingEnemyBruteForce(room, enemyToPlace, possiblePositions, placement)) break;
+                if (!TryPlacingEnemyBruteForce(room, enemyToPlace, possiblePositions)) break;
             }
         }
     }
 
-    private bool TryPlacingEnemyBruteForce(Room room, EnemySO enemyToPlace, List<Vector2Int> possiblePositions, PlacementOriginCorner placement)
+    private bool TryPlacingEnemyBruteForce(Room room, EnemySO enemyToPlace, List<Vector2Int> possiblePositions)
     {
         for (int i = 0; i < possiblePositions.Count; i++)
         {
             Vector2Int position = possiblePositions[i];
 
-            List<Vector2Int> freePositionsAround = TryToFitProp(enemyToPlace, possiblePositions, position, placement);
+            List<Vector2Int> freePositionsAround = TryToFitEnemy(enemyToPlace, possiblePositions, position);
             
             if (freePositionsAround.Count == enemyToPlace.EnemySize.x * enemyToPlace.EnemySize.y)
             {
@@ -78,57 +78,17 @@ public class EnemyPlacementManager : MonoBehaviour
         return false;
     }
 
-    private List<Vector2Int> TryToFitProp(EnemySO enemyToPlace, List<Vector2Int> availablePositions,
-        Vector2Int originPosition, PlacementOriginCorner placement)
+    private List<Vector2Int> TryToFitEnemy(EnemySO enemyToPlace, List<Vector2Int> availablePositions, Vector2Int originPosition)
     {
         List<Vector2Int> freePositions = new();
 
-        if (placement == PlacementOriginCorner.BottomLeft)
+        for (int xOffset = 0; xOffset < enemyToPlace.EnemySize.x; xOffset++)
         {
-            for (int xOffset = 0; xOffset < enemyToPlace.EnemySize.x; xOffset++)
+            for (int yOffset = 0; yOffset < enemyToPlace.EnemySize.y; yOffset++)
             {
-                for (int yOffset = 0; yOffset < enemyToPlace.EnemySize.y; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
+                Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
 
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
-            }
-
-        } else if (placement == PlacementOriginCorner.BottomRight)
-        {
-            for (int xOffset = -enemyToPlace.EnemySize.x + 1; xOffset <= 0; xOffset++)
-            {
-                for (int yOffset = 0; yOffset < enemyToPlace.EnemySize.y; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
-
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
-            }
-
-        } else if (placement == PlacementOriginCorner.TopLeft)
-        {
-            for (int xOffset = 0; xOffset < enemyToPlace.EnemySize.x; xOffset++)
-            {
-                for (int yOffset = -enemyToPlace.EnemySize.y + 1; yOffset <= 0; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
-
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
-            }
-
-        } else
-        {
-            for (int xOffset = -enemyToPlace.EnemySize.x + 1; xOffset <= 0; xOffset++)
-            {
-                for (int yOffset = -enemyToPlace.EnemySize.y + 1; yOffset <= 0; yOffset++)
-                {
-                    Vector2Int tempPos = originPosition + new Vector2Int(xOffset, yOffset);
-
-                    if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
-                }
+                if (availablePositions.Contains(tempPos)) freePositions.Add(tempPos);
             }
         }
 
