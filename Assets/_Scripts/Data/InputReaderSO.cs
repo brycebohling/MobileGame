@@ -54,7 +54,10 @@ public class InputReaderSO : ScriptableObject, GameInput.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        InteractEvent?.Invoke();
+        if (context.started)
+        {
+            InteractEvent?.Invoke();
+        }
     }
 
     public void EnableGameplayInput()

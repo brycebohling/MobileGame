@@ -46,7 +46,11 @@ public class PlayerInputReader : MonoBehaviour
             }
         }
 
-        closestObjectReference.GetComponent<IInteractable>().OnInteract();
+        if (closestObjectReference != null)
+        {
+            closestObjectReference.GetComponent<IInteractable>().OnInteract();
+        }
+        
     }
 
     private void OnDrawGizmos() 
