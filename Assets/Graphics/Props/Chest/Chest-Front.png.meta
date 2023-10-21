@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chest-Front_0
+      name: Chest-Front_Close
       rect:
         serializedVersion: 2
         x: 0
@@ -186,7 +186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-Front_3
+      name: Chest-Front_Open
       rect:
         serializedVersion: 2
         x: 48
@@ -238,10 +238,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Chest-Front_0: 1607967250
       Chest-Front_1: -2070091347
       Chest-Front_2: -518909100
-      Chest-Front_3: -46343135
+      Chest-Front_Close: 1607967250
+      Chest-Front_Open: -46343135
       Chest-Front_Shadow: -518968050
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

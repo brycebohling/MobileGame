@@ -250,24 +250,28 @@ public class PropPlacementManager : MonoBehaviour
             }
         }
 
-        if (propToPlace.fourSpriteDirections)
+        if (propToPlace.twoSpriteDirections || propToPlace.twoSpriteDirections)
         {
             if (!room.FloorTiles.Contains(placementPosition + Vector2Int.up))
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteFront;
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Front].sprite;
 
             } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.down))
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteBack;
+                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Back].sprite;
 
-            } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.right))
+            }
+
+            if (propToPlace.fourSpriteDirections)
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteLeft;
+                if (!room.FloorTiles.Contains(placementPosition + Vector2Int.left))
+                {
+                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Right].sprite;
 
-            } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.left))
-            {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.spriteRight;
-
+                } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.right))
+                {
+                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.propGraphics[(int)PropSO.PropGraphicOrder.Left].sprite;
+                }
             }
         }
 

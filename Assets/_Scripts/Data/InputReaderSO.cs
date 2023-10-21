@@ -47,7 +47,7 @@ public class InputReaderSO : ScriptableObject, GameInput.IPlayerActions
         FireEvent?.Invoke();
     }
 
-    public void OnDash(InputAction.CallbackContext ctx)
+    public void OnDash(InputAction.CallbackContext context)
     {
         DashEvent?.Invoke();
     }

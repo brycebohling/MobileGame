@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a54822fb0e3aa4d93b6e5974d519453f
+guid: a3c35028639c64b49b107d080acded63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chest-Left_0
+      name: Chest-Back_Close
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8724dc81185a445679d5d3cf4e338e3f
-      internalID: -1013931186
+      spriteID: e8909cdf15e534604aa4c86851ba63ba
+      internalID: -404843770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-Left_1
+      name: Chest-Back_1
       rect:
         serializedVersion: 2
         x: 16
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ccda5f1f16994e828ea10ed39d52cfb
-      internalID: 1631089447
+      spriteID: 2f8cea452ca8a484bbd58e988a675cf5
+      internalID: 1658966047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-Left_2
+      name: Chest-Back_2
       rect:
         serializedVersion: 2
         x: 32
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c16571ae7bb24d8fb92ae1de71281e6
-      internalID: 1115218126
+      spriteID: a191398eedf6149af95dc57d0034df34
+      internalID: -556172761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-Left_3
+      name: Chest-Back_Open
       rect:
         serializedVersion: 2
         x: 48
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ebb27b1f87ab430da9337dc65b6a0b7
-      internalID: 256930749
+      spriteID: 910de1d69b68643819070c0e95869f17
+      internalID: -1781989664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-Left_Shadow
+      name: Chest-Back_Shadow
       rect:
         serializedVersion: 2
         x: 64
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e290c54b8f12445fa80f4ef1c313164e
-      internalID: -1948317791
+      spriteID: ccb5db8d5284d410c84f1d7cfed4e731
+      internalID: 1068598366
       vertices: []
       indices: 
       edges: []
@@ -238,11 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Chest-Left_0: -1013931186
-      Chest-Left_1: 1631089447
-      Chest-Left_2: 1115218126
-      Chest-Left_3: 256930749
-      Chest-Left_Shadow: -1948317791
+      Chest-Back_1: 1658966047
+      Chest-Back_2: -556172761
+      Chest-Back_Close: -404843770
+      Chest-Back_Open: -1781989664
+      Chest-Back_Shadow: 1068598366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

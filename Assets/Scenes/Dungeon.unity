@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 37040487}
   m_Layer: 0
-  m_Name: InputReader
+  m_Name: InputReaderManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,12 +218,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37040486}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1905287165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &50783612
 GameObject:
@@ -7433,6 +7433,7 @@ GameObject:
   - component: {fileID: 1535558012}
   - component: {fileID: 1535558017}
   - component: {fileID: 1535558011}
+  - component: {fileID: 1535558018}
   - component: {fileID: 1535558008}
   - component: {fileID: 1535558007}
   - component: {fileID: 1535558006}
@@ -7729,6 +7730,18 @@ MonoBehaviour:
   weaponHolder: {fileID: 1310440962}
   deathParticles:
   - {fileID: 4564461473034981521, guid: dc6a3cf9b7a65459baf5a62b7731ba16, type: 3}
+--- !u!114 &1535558018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535558005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d070087f85447f49a3b29c18fa4339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1541271196
 GameObject:
   m_ObjectHideFlags: 0
@@ -13727,6 +13740,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2077694777}
+  - {fileID: 37040487}
   - {fileID: 1769074334}
   - {fileID: 2075197045}
   - {fileID: 399501401}
@@ -13941,7 +13955,7 @@ MonoBehaviour:
   dungeonWidth: 75
   dungeonHeight: 75
   offset: 2
-  randomWalkRooms: 1
+  randomWalkRooms: 0
   debugCreationTime: 0
   generateOnStart: 1
 --- !u!4 &2075197045
@@ -14173,4 +14187,3 @@ SceneRoots:
   - {fileID: 272615542}
   - {fileID: 1535558016}
   - {fileID: 1286802384}
-  - {fileID: 37040487}

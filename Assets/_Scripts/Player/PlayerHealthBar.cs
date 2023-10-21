@@ -8,7 +8,7 @@ public class PlayerHealthBar : MonoBehaviour
     [SerializeField] Health healthScript;
     [SerializeField] Image healthBarFill;
     [SerializeField] Image healthBarFillBackground;
-    [SerializeField] float lerpSpeed;
+    [SerializeField, Range(0, 1)] float lerpSpeed;
 
     bool isBackgroundLerping;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -39,12 +40,24 @@ public class PropSO : ScriptableObject
     [Header("Custom Inspector")]
     public bool hasVariants;
     [HideInInspector] public Sprite[] variants;
-
+    public bool twoSpriteDirections;
     public bool fourSpriteDirections;
-    [HideInInspector] public Sprite spriteFront;
-    [HideInInspector] public Sprite spriteBack;
-    [HideInInspector] public Sprite spriteRight;
-    [HideInInspector] public Sprite spriteLeft;
+
+    [Serializable] public struct PropGraphics
+    {
+        public Sprite sprite;
+        public AnimationClip animationClip;
+    }
+
+    public List<PropGraphics> propGraphics = new();
+
+    public enum PropGraphicOrder
+    {
+        Front,
+        Back,
+        Right,
+        Left,
+    }
 }
 
 #if UNITY_EDITOR
@@ -66,13 +79,51 @@ public class PropSOEditor : Editor
             serializedObject.ApplyModifiedProperties();    
         }
 
+        if (propSO.twoSpriteDirections && propSO.fourSpriteDirections)
+        {
+            propSO.fourSpriteDirections = false;
+        }
+
+        if (propSO.twoSpriteDirections)
+        {
+            if (propSO.propGraphics.Count > 2)
+            {
+                while (propSO.propGraphics.Count > 2)
+                {
+                    propSO.propGraphics.RemoveAt(2);
+                }
+
+            } else if (propSO.propGraphics.Count < 2)
+            {
+                while (propSO.propGraphics.Count < 2)
+                {
+                    propSO.propGraphics.Add(new PropSO.PropGraphics());
+                }
+            }
+        }
+
         if (propSO.fourSpriteDirections)
 		{
-			propSO.spriteFront = (Sprite)EditorGUILayout.ObjectField("Sprite Front", propSO.spriteFront, typeof(Sprite), false);
-            propSO.spriteBack = (Sprite)EditorGUILayout.ObjectField("Sprite Back", propSO.spriteBack, typeof(Sprite), false);
-            propSO.spriteRight = (Sprite)EditorGUILayout.ObjectField("Sprite Right", propSO.spriteRight, typeof(Sprite), false);
-            propSO.spriteLeft = (Sprite)EditorGUILayout.ObjectField("Sprite Left", propSO.spriteLeft, typeof(Sprite), false);
+            if (propSO.propGraphics.Count > 4)
+            {
+                while (propSO.propGraphics.Count > 4)
+                {
+                    propSO.propGraphics.RemoveAt(4);
+                }
+
+            } else if (propSO.propGraphics.Count < 4)
+            {
+                while (propSO.propGraphics.Count < 4)
+                {
+                    propSO.propGraphics.Add(new PropSO.PropGraphics());
+                }
+            }
 		}
+
+        if (!propSO.twoSpriteDirections && !propSO.fourSpriteDirections)
+        {
+            propSO.propGraphics.Clear();
+        }
 	}
 }
 #endif

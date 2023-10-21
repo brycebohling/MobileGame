@@ -14,11 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PropPrefab: {fileID: 4451386331211034679, guid: e920ad16f82e14975948746006affba9, type: 3}
   PropSize: {x: 1, y: 1}
-  fourSpriteDirections: 1
-  spriteFront: {fileID: 1607967250, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
-  spriteBack: {fileID: -404843770, guid: a3c35028639c64b49b107d080acded63, type: 3}
-  spriteRight: {fileID: -109614022, guid: a99ab324321ad48bd84493682033c3dc, type: 3}
-  spriteLeft: {fileID: -1013931186, guid: a54822fb0e3aa4d93b6e5974d519453f, type: 3}
   Corner: 1
   Inner: 0
   NearWallUp: 0
@@ -28,8 +23,18 @@ MonoBehaviour:
   mustBeAccessible: 0
   mustBePlacedAndAccessible: 1
   isBrakable: 0
+  placeOnePerFloor: 0
   PlacementQuantityMin: 1
   PlacementQuantityMax: 1
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1
+  hasVariants: 0
+  variants: []
+  twoSpriteDirections: 1
+  fourSpriteDirections: 0
+  propGraphics:
+  - sprite: {fileID: 1607967250, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
+    animationClip: {fileID: 7400000, guid: 41b851cab194847679b1b301843521a3, type: 2}
+  - sprite: {fileID: -404843770, guid: a3c35028639c64b49b107d080acded63, type: 3}
+    animationClip: {fileID: 7400000, guid: 3b71be6eec778436788af86173f85d84, type: 2}

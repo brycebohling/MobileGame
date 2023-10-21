@@ -424,8 +424,6 @@ MonoBehaviour:
   lootSO: {fileID: 11400000, guid: 7240586d380ee4485ba3c45797d92c8e, type: 2}
   spawnLootOnDeath: 1
   spawnLootOnDamage: 0
-  canSpawn: 1
-  delay: 0
   quantity: {x: 0, y: 0}
 --- !u!50 &3936010992651541819
 Rigidbody2D:
