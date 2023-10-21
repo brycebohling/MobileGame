@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Chest : MonoBehaviour, IInteractable
 {
+    public UnityEvent OnOpen;
+
     [SerializeField] PropSO propSO;
 
     Animator animator;
@@ -17,6 +20,7 @@ public class Chest : MonoBehaviour, IInteractable
         if (TryGetComponent(out Animator anim))    
         {
             animator = anim;
+            animator.enabled = false;
         }
     }
 
@@ -33,9 +37,12 @@ public class Chest : MonoBehaviour, IInteractable
         {
             if (graphic.sprite == spriteRenderer.sprite)
             {
+                animator.enabled = true;
                 Helpers.ChangeAnimationState(animator, graphic.animationClip.name);
             }
         }
+
+        OnOpen?.Invoke();
 
         Destroy(this);
     }

@@ -219,7 +219,6 @@ public class PropPlacementManager : MonoBehaviour
             } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.down))
             {
                 prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Back].sprite;
-
             }
 
             if (propToPlace.FourSpriteDirections)

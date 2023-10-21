@@ -43,7 +43,7 @@ public class Loot : MonoBehaviour
         SpawnLoot();
     }
 
-    private void SpawnLoot()
+    public void SpawnLoot()
     {
         int totalWeight = 0;
 
@@ -69,10 +69,5 @@ public class Loot : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void SpawnLootOnInteract()
-    {
-        SpawnLoot();
     }
 }

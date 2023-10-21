@@ -105,7 +105,6 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  center: {x: 0.5, y: 0.5}
   isBrakeable: 0
   brakeParticles: {fileID: 0}
   brakingAnimsList: []
@@ -121,6 +120,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6e4326a92754fa8bd0d1fce68a81ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3045289936422311424}
+        m_TargetAssemblyTypeName: Loot, Assembly-CSharp
+        m_MethodName: SpawnLoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   propSO: {fileID: 11400000, guid: 6abdd280b55394477b1b939b37097737, type: 2}
 --- !u!114 &3045289936422311424
 MonoBehaviour:
