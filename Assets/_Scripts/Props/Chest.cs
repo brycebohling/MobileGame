@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class Chest : MonoBehaviour, IInteractable
 {
     [SerializeField] PropSO propSO;
-
-    [SerializeField] InputReaderSO inputReaderSO;
 
     Animator animator;
     SpriteRenderer spriteRenderer;
@@ -22,17 +20,12 @@ public class Chest : MonoBehaviour
         }
     }
 
-    private void OnEnable() 
+    public void OnInteract()
     {
-        inputReaderSO.InteractEvent += OnOpen;    
+        Open();
     }
 
-    private void OnDisable()
-    {
-        inputReaderSO.InteractEvent -= OnOpen;
-    }
-
-    private void OnOpen()
+    private void Open()
     {
         if (animator == null) return;
         
@@ -44,5 +37,6 @@ public class Chest : MonoBehaviour
             }
         }
 
+        Destroy(this);
     }
 }

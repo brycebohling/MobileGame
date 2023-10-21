@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4451386331211034679}
   - component: {fileID: 4572955275391911435}
+  - component: {fileID: 5826256210445970254}
   - component: {fileID: 2095498161850855476}
   - component: {fileID: 3045289936422311424}
   - component: {fileID: 1035802469199298020}
@@ -89,6 +90,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &5826256210445970254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065401929994926742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91967d58e0a8a4e47a351e173e300552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  center: {x: 0.5, y: 0.5}
+  isBrakeable: 0
+  brakeParticles: {fileID: 0}
+  brakingAnimsList: []
 --- !u!114 &2095498161850855476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propSO: {fileID: 11400000, guid: 6abdd280b55394477b1b939b37097737, type: 2}
-  inputReaderSO: {fileID: 11400000, guid: 2c2f2634af7f8428ba1597c75a10a3fc, type: 2}
 --- !u!114 &3045289936422311424
 MonoBehaviour:
   m_ObjectHideFlags: 0
