@@ -5796,12 +5796,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
   dungeonGeneratorScript: {fileID: 2075197044}
+  ladder: {fileID: 11400000, guid: 679f7b1e5ff4a4b8ea2a6151171a17ac, type: 2}
   propsToPlace:
   - {fileID: 11400000, guid: 6abdd280b55394477b1b939b37097737, type: 2}
   - {fileID: 11400000, guid: 545a46afdf42d4b1f81f1ee866fb0221, type: 2}
   - {fileID: 11400000, guid: a3e8d1cc11e52435881309c70fca768f, type: 2}
   - {fileID: 11400000, guid: 320914976eb1440909d50da3b0789ae0, type: 2}
-  - {fileID: 11400000, guid: 679f7b1e5ff4a4b8ea2a6151171a17ac, type: 2}
   propParentPrefab: {fileID: 6312586571603541136, guid: 17bf4c63592f84829be59717e9dc2a60, type: 3}
 --- !u!4 &399501401
 Transform:
@@ -13936,19 +13936,7 @@ MonoBehaviour:
         m_CallState: 1
   OnFinishedDungeonGeneration:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2075197044}
-        m_TargetAssemblyTypeName: DungeonGenerator, Assembly-CSharp
-        m_MethodName: PlacePlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
   tilemapSpawnerScript: {fileID: 22355247}
   aStarGridSettings: {fileID: 1769074335}
   startPosition: {x: 0, y: 0}

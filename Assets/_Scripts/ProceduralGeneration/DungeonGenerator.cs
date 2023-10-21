@@ -289,35 +289,6 @@ public class DungeonGenerator : MonoBehaviour
         
         Debug.Log("Created in " + Mathf.Round((Time.realtimeSinceStartup - startCreationTime) * 1000f) + "ms");
     }
-
-    public void PlacePlayer()
-    {
-        List<int> furthestRoomIndexList = FindFurthestRooms();
-
-        GameManager.Gm.playerTransfrom.position = (Vector2)RoomList[furthestRoomIndexList[0]].RoomCenterPos;
-    }
-
-    private List<int> FindFurthestRooms()
-    {   
-        float furthestDistance = 0;
-        List<int> roomIndex = new();
-
-        for (int i = 0; i < RoomList.Count; i++)
-        {
-            for (int x = 0; x < RoomList.Count; x++)
-            {
-                float distance = Vector2.Distance(RoomList[i].RoomCenterPos, RoomList[x].RoomCenterPos);
-                if (distance > furthestDistance)
-                {
-                    furthestDistance = distance;
-                    roomIndex.Clear();
-                    roomIndex = new() {i, x};
-                }
-            }
-        }
-
-        return roomIndex;
-    }
 }
 
 #if UNITY_EDITOR

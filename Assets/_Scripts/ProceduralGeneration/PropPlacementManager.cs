@@ -10,6 +10,7 @@ public class PropPlacementManager : MonoBehaviour
     public UnityEvent OnFinishedPropPlacement;
 
     [SerializeField] DungeonGenerator dungeonGeneratorScript;
+    [SerializeField] PropSO ladder;
     [SerializeField] List<PropSO> propsToPlace;
     [SerializeField] Transform propParentPrefab;
 
@@ -17,6 +18,8 @@ public class PropPlacementManager : MonoBehaviour
     public void ProcessRooms()
     {   
         if (dungeonGeneratorScript == null) return;
+
+        PlaceLadderAndPlayer();
         
         PlaceOnceProps();
 
@@ -30,6 +33,22 @@ public class PropPlacementManager : MonoBehaviour
         }
 
         OnFinishedPropPlacement?.Invoke();
+    }
+
+    private void PlaceLadderAndPlayer()
+    {
+        List<int> furthestRooms = FindFurthestRooms();
+
+        List<PropSO> ladderList = new () {ladder};
+
+        PlaceProps(dungeonGeneratorScript.RoomList[furthestRooms[0]], ladderList);
+
+        PlacePlayer(dungeonGeneratorScript.RoomList[furthestRooms[1]].RoomCenterPos);
+    }
+
+    public void PlacePlayer(Vector2 position)
+    {
+        GameManager.Gm.playerTransfrom.position = position;
     }
 
     private void PlaceOnceProps()
@@ -326,5 +345,29 @@ public class PropPlacementManager : MonoBehaviour
         }
 
         return;
+    }
+
+    private List<int> FindFurthestRooms()
+    {   
+        float furthestDistance = 0;
+        List<int> roomIndex = new();
+
+        for (int i = 0; i < dungeonGeneratorScript.RoomList.Count; i++)
+        {
+            for (int x = 0; x < dungeonGeneratorScript.RoomList.Count; x++)
+            {
+                float distance = Vector2.Distance(dungeonGeneratorScript.RoomList[i].RoomCenterPos, 
+                    dungeonGeneratorScript.RoomList[x].RoomCenterPos);
+
+                if (distance > furthestDistance)
+                {
+                    furthestDistance = distance;
+                    roomIndex.Clear();
+                    roomIndex = new() {i, x};
+                }
+            }
+        }
+
+        return roomIndex;
     }
 }
