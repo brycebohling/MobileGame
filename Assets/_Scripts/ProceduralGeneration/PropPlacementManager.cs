@@ -200,9 +200,18 @@ public class PropPlacementManager : MonoBehaviour
         Transform propParent = Instantiate(propParentPrefab);
         Transform prop = Instantiate(propToPlace.PropPrefab, Vector2.zero + propToPlace.PlacementOffset, Quaternion.identity, propParent.transform);
 
-        propParent.localPosition = (Vector2)placementPosition;
+        propParent.localPosition = (Vector2)placementPosition;        
 
-        room.PropPositions.Add(placementPosition);
+        for (int xOffset = 0; xOffset < propToPlace.PropSize.x; xOffset++)
+        {
+            for (int yOffset = 0; yOffset < propToPlace.PropSize.y; yOffset++)
+            {
+                Vector2Int tempPos = placementPosition + new Vector2Int(xOffset, yOffset);
+
+                room.PropPositions.Add(tempPos);
+            }
+        }
+
         room.PropTransfromReference.Add(propParent);
 
         if (propToPlace.mustBeAccessible)
