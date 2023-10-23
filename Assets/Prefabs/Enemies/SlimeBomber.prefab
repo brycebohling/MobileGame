@@ -334,6 +334,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  parentRenderer: {fileID: 800787400078146426}
   drawGizmos: 0
 --- !u!114 &9138349314797641536
 MonoBehaviour:

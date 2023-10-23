@@ -234,7 +234,7 @@ public class PropPlacementManager : MonoBehaviour
 
             if (!isAccessible)
             {
-                Debug.Log("not found (Accessible&Placed)");
+                Debug.LogWarning("not found (Accessible&Placed) " + prop.name);
             }
         }
 

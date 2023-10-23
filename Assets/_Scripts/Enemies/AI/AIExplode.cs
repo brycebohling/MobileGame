@@ -16,6 +16,8 @@ public class AIExplode : AIBase
     [SerializeField] Transform explosionVFXTransfrom;
     [SerializeField] LayerMask targetLayer;
 
+    [SerializeField] Renderer parentRenderer;
+
     [SerializeField] bool drawGizmos;
 
     float explosionBuildUpCounter;
@@ -33,7 +35,8 @@ public class AIExplode : AIBase
 
         if (explosionBuildUpCounter >= explosionBuildUpTime)
         {
-            Explode();
+            Kill();
+            explosionBuildUpCounter = 0;
 
         } else if (IsPlayerInRange(explosionTargetingRadius, targetLayer) && !startedBuildUpExplosion)
         {
@@ -58,18 +61,30 @@ public class AIExplode : AIBase
         _aIStatesScript.State = AIStates.States.Attacking;
     }
 
+    private void Kill()
+    {
+        _healthScript.InstaKill();
+    }
+
+    // Called by UnityEvent
     public void Explode()
     {
-        Instantiate(explosionVFXTransfrom, transform.position, Quaternion.identity);
+        Transform explosionTransfrom = Instantiate(explosionVFXTransfrom, transform.position, Quaternion.identity);
+
+        Renderer explosionRenderer = explosionTransfrom.GetComponent<Renderer>();
+
+        Debug.Log(parentRenderer.material.GetInt("_HsvShift"));
+        
+        explosionRenderer.material.SetFloat("_HsvShift", parentRenderer.material.GetInt("_HsvShift"));
+        explosionRenderer.material.SetFloat("_Contrast", parentRenderer.material.GetInt("_Contrast"));
+        explosionRenderer.material.SetFloat("_Brightness", parentRenderer.material.GetInt("_Brightness"));
 
         Collider2D hitTarget = Physics2D.OverlapCircle(transform.position, explosionRadius, targetLayer);
 
         if (hitTarget != null && hitTarget.TryGetComponent(out Health healthScript))
         {
             healthScript.Damage(explosionDamage, knockBackForce, transform.position);
-        }
-
-        _healthScript.InstaKill();
+        }        
     }
 
     private void OnDrawGizmos()
