@@ -138,7 +138,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9865db112f7a0481991c474bdcee52bf, type: 2}
+  - {fileID: 2100000, guid: 74142eced7a264766baf96677cf4ea8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -388,9 +388,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9698f521fb4b04052b73a301f3f83b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnParticlesOnDeath: 1
   deathParticles:
   - {fileID: 4564461473034981521, guid: 707c600009f984d29b8fbc156cbda5d7, type: 3}
-  particleTime: 10
 --- !u!114 &1362369968411345219
 MonoBehaviour:
   m_ObjectHideFlags: 0

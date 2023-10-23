@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AIDeath : AIBase
 {
+    public UnityEvent OnDeath;
+
     [Header("Particales")]
+    [SerializeField] bool spawnParticlesOnDeath;
     [SerializeField] List<ParticleSystem> deathParticles;
-    [SerializeField] float particleTime;
 
 
     protected override void Awake()
@@ -28,7 +31,12 @@ public class AIDeath : AIBase
     {
         _aIStatesScript.State = AIStates.States.Dead;
 
-        InstantiateParticales(deathParticles, transform.position);
+        if (spawnParticlesOnDeath)
+        {
+            InstantiateParticales(deathParticles, transform.position);
+        }
+
+        OnDeath?.Invoke();
 
         Destroy(gameObject);
     }

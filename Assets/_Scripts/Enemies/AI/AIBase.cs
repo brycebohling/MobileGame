@@ -52,7 +52,7 @@ public class AIBase : MonoBehaviour
                 return false;
             }
         }
-
+        
         return true;
     }
 

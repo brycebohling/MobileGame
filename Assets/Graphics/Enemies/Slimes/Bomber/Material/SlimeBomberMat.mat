@@ -7,12 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DamagedFlash
+  m_Name: SlimeBomberMat
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - CONTRAST_ON
   - HITEFFECT_ON
+  - HSV_ON
   - OUTBASEPIXELPERF_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -85,7 +87,7 @@ Material:
     - _BillboardY: 0
     - _BlurHD: 0
     - _BlurIntensity: 0
-    - _Brightness: -0.63
+    - _Brightness: 0
     - _ChromAberrAlpha: 0.4
     - _ChromAberrAmount: 1
     - _ClipUvDown: 0
@@ -103,7 +105,7 @@ Material:
     - _ColorSwapBlueLuminosity: 0.5
     - _ColorSwapGreenLuminosity: 0.5
     - _ColorSwapRedLuminosity: 0.5
-    - _Contrast: 3.22
+    - _Contrast: 1
     - _CullingOption: 0
     - _DistortAmount: 0.5
     - _DistortTexXSpeed: 5
@@ -148,7 +150,7 @@ Material:
     - _HologramUnmodAmount: 0.078
     - _HsvBright: 1
     - _HsvSaturation: 1
-    - _HsvShift: 110
+    - _HsvShift: 0
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 4
     - _InnerOutlineThickness: 1

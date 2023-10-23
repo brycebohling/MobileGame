@@ -95,6 +95,16 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void InstaKill()
+    {
+        if (isDead) return;
+        
+        currentHealth = 0;
+
+        isDead = true;
+        OnDeath?.Invoke();
+    }
+
     public void Heal(float healAmount)
     {
         if (healthAsInt)

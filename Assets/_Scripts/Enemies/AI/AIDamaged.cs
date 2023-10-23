@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Health))]
 public class AIDamaged : AIBase
 {
+    public AIStates.States[] KeepActionStates;
+
     public UnityEvent OnDamaged;
 
     [SerializeField] float damagedTime;
@@ -13,6 +15,9 @@ public class AIDamaged : AIBase
 
     [Header("Animations")]
     [SerializeField] AnimationClip damagedAnim;
+
+    AIStates.States revertToState;
+    bool isRevertingToState;
 
 
     protected override void Awake()
@@ -32,30 +37,45 @@ public class AIDamaged : AIBase
 
     private void Update() 
     {
-        if (!IsActionAuth(null)) return;
+        if (_aIStatesScript.State != AIStates.States.Damaged) return;
         
         damagedTimer += Time.deltaTime;
+
         if (damagedTimer >= damagedTime)
         {
             RestDamagedState();
         }
     }
 
-    protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
+    public void RestDamagedState()
     {
-        if (_aIStatesScript.State == AIStates.States.Damaged)
+        _rb.velocity = Vector2.zero;
+
+        if (isRevertingToState)
         {
-            return true;
+            _aIStatesScript.State = revertToState;
+
+            isRevertingToState = false;
+            
         } else
         {
-            return false;
+            _aiPathScript.canMove = true;
+
+            _aIStatesScript.State = AIStates.States.Idle;
         }
     }
 
-    public void RestDamagedState()
+    private bool ShouldRevertToState(AIStates.States[] keepActionStates)
     {
-        _aiPathScript.canMove = true;
-        _aIStatesScript.State = AIStates.States.Idle;
+        foreach (AIStates.States state in keepActionStates)
+        {
+            if (state == _aIStatesScript.State)
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     private void Damaged(float dmg, float currentHealth, float knockBackForce, Vector2 senderPos)
@@ -64,6 +84,13 @@ public class AIDamaged : AIBase
         damagedTimer = 0;
 
         StartAnimation(_animator, damagedAnim);
+
+        if (ShouldRevertToState(KeepActionStates))
+        {
+            revertToState = _aIStatesScript.State;
+
+            isRevertingToState = true;
+        }
 
         _aIStatesScript.State = AIStates.States.Damaged;
 
@@ -78,6 +105,5 @@ public class AIDamaged : AIBase
         _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
         _aiPathScript.canMove = false;
-        _aIStatesScript.State = AIStates.States.Damaged;
     }
 }   

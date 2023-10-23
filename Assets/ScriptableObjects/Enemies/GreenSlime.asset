@@ -17,7 +17,7 @@ MonoBehaviour:
   Center: {x: 0.5, y: 0.5}
   MustBeAccessible: 1
   PlacementQuantityMin: 1
-  PlacementQuantityMax: 4
+  PlacementQuantityMax: 3
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1

@@ -138,7 +138,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9865db112f7a0481991c474bdcee52bf, type: 2}
+  - {fileID: 2100000, guid: f46d7c0e3cfa54060b2678a1dab140e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 2182071253663723637}
   - component: {fileID: 8460317132066424842}
   - component: {fileID: 278462855004151915}
+  - component: {fileID: 835019520126488595}
   - component: {fileID: 9138349314797641536}
   - component: {fileID: 911302894551272032}
   - component: {fileID: 8151930425545646195}
@@ -247,7 +248,7 @@ Transform:
   m_GameObject: {fileID: 7072159184155292011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.34, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 030000000400000005000000
+  BlockingActionStates: 03000000040000000500000002000000
   patrolRadius: 2.39
   patrolSpeed: 1
   tbMovementMin: 0.5
@@ -301,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 0400000005000000
+  BlockingActionStates: 040000000500000002000000
   chaseSpeed: 2
   targetingRadius: 3.5
   playerLayer:
@@ -309,6 +310,31 @@ MonoBehaviour:
     m_Bits: 64
   agroTime: 5
   walkAnim: {fileID: 7400000, guid: 6c5042fc5b1f7487094269447c615ecf, type: 2}
+--- !u!114 &835019520126488595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072159184155292011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2cf24e0527645d384294fa34d0dd4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockingActionStates: 
+  explodeOnDeath: 0
+  explosionBuildUpTime: 1
+  explosionRadius: 1
+  explosionTargetingRadius: 0.9
+  explosionDamage: 10
+  knockBackForce: 5
+  explosionBuildUpAnim: {fileID: 7400000, guid: dbb9461d672ed418b98bae18a0bb2d14, type: 2}
+  explosionVFXTransfrom: {fileID: 2096635210948159989, guid: 8c4d613b7b5484ffba7cae0a233ed8b0, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  drawGizmos: 0
 --- !u!114 &9138349314797641536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5acfc7902848a9bb9f80667179e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeepActionStates: 02000000
   OnDamaged:
     m_PersistentCalls:
       m_Calls:
@@ -365,9 +392,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9698f521fb4b04052b73a301f3f83b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathParticles:
-  - {fileID: 4564461473034981521, guid: 50c7fdb626f0241cdaee31cd0457e1b6, type: 3}
-  particleTime: 10
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 835019520126488595}
+        m_TargetAssemblyTypeName: AIExplode, Assembly-CSharp
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  spawnParticlesOnDeath: 0
+  deathParticles: []
 --- !u!114 &7363621653479846416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,8 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f1c20c95efb41bbbc1ee1fb6604e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasShadow: 1
-  Shadow: {fileID: 1504170721391657856}
 --- !u!114 &2311523080852763414
 MonoBehaviour:
   m_ObjectHideFlags: 0

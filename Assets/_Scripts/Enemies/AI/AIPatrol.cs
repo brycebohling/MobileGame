@@ -44,14 +44,9 @@ public class AIPatrol : AIBase
             
             return;
         } 
-
+        
         HandleAction();
         isActivated = true;
-    }
-
-    protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
-    {
-        return base.IsActionAuth(blockingActionStates);
     }
 
     protected override void OnActionActivate()

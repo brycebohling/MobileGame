@@ -29,11 +29,6 @@ public class AIChase : AIBase
         HandleAction();
     }
 
-    protected override bool IsActionAuth(AIStates.States[] blockingActionStates)
-    {
-        return base.IsActionAuth(blockingActionStates);
-    }
-
     protected override void OnActionActivate()
     {
         base.OnActionActivate();
