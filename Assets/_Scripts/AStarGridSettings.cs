@@ -66,7 +66,6 @@ public class AStarGridSettings : MonoBehaviour
 
         if (astarData.FindGraph(g => g.name == gridName) != null) 
         {
-            Debug.Log("removed at " + gridIndex);
             astarData.RemoveGraph(astarData.graphs[gridIndex]);
         }
     }

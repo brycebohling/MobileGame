@@ -50,6 +50,12 @@ public class DungeonGenerator : MonoBehaviour
         RunProceduralGeneration();
     }
 
+    public void GenerateNextLevel()
+    {
+        ClearDungeon();
+        RunProceduralGeneration();
+    }
+
     public void ClearDungeon()
     {
         tilemapSpawnerScript.Clear();
