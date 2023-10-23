@@ -46,10 +46,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void CameraStartShake(float AmplitudeGain, float FrequencyGain, float time)
+    public void CameraStartShake(float amplitudeGain, float frequencyGain, float time)
     {
-        noisePerlin.m_AmplitudeGain = AmplitudeGain;
-        noisePerlin.m_FrequencyGain = FrequencyGain;
+        noisePerlin.m_AmplitudeGain = amplitudeGain;
+        noisePerlin.m_FrequencyGain = frequencyGain;
         shakeTime = time;
         shakeCounter = 0;
         isShaking = true;

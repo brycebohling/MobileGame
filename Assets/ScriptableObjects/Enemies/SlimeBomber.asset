@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea0c5c68332aa4cb386a196f0baa6bf7, type: 3}
-  m_Name: PinkSlime
+  m_Name: SlimeBomber
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 8976634329156818760, guid: a06999feb644c4a6498a965c6ccb14a9, type: 3}
+  EnemyPrefab: {fileID: 3906833319123196036, guid: 036e2fd49f0064e6fa52202361f1bd45, type: 3}
   EnemySize: {x: 1, y: 1}
   Center: {x: 0.5, y: 0.5}
   MustBeAccessible: 1
