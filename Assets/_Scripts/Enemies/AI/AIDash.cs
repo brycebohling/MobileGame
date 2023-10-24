@@ -70,7 +70,6 @@ public class AIDash : AIBase
 
         preDashCounter = preDashTime;
         dashCounter = dashTime;
-        
 
         isPreDash = true;
 

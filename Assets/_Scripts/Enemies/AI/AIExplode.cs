@@ -73,7 +73,7 @@ public class AIExplode : AIBase
 
         Renderer explosionRenderer = explosionTransfrom.GetComponent<Renderer>();
 
-        Debug.Log(parentRenderer.material.GetInt("_HsvShift"));
+        Debug.Log(parentRenderer.material.GetFloat("_HsvShift"));
         
         explosionRenderer.material.SetFloat("_HsvShift", parentRenderer.material.GetInt("_HsvShift"));
         explosionRenderer.material.SetFloat("_Contrast", parentRenderer.material.GetInt("_Contrast"));
