@@ -16,7 +16,7 @@ public class AIExplode : AIBase
     [SerializeField] Transform explosionVFXTransfrom;
     [SerializeField] LayerMask targetLayer;
 
-    [SerializeField] Renderer parentRenderer;
+    [SerializeField] SpriteRenderer parentSpriteRenderer;
 
     [SerializeField] bool drawGizmos;
 
@@ -71,13 +71,16 @@ public class AIExplode : AIBase
     {
         Transform explosionTransfrom = Instantiate(explosionVFXTransfrom, transform.position, Quaternion.identity);
 
-        Renderer explosionRenderer = explosionTransfrom.GetComponent<Renderer>();
+        Material parentMat = parentSpriteRenderer.material;
 
-        Debug.Log(parentRenderer.material.GetFloat("_HsvShift"));
+        SpriteRenderer explosionSpriteRenderer = explosionTransfrom.GetComponent<SpriteRenderer>();
+        Material explosionMat = explosionSpriteRenderer.material;
+
+        Debug.Log(parentSpriteRenderer.material.GetFloat("_HsvShift"));
         
-        explosionRenderer.material.SetFloat("_HsvShift", parentRenderer.material.GetInt("_HsvShift"));
-        explosionRenderer.material.SetFloat("_Contrast", parentRenderer.material.GetInt("_Contrast"));
-        explosionRenderer.material.SetFloat("_Brightness", parentRenderer.material.GetInt("_Brightness"));
+        explosionMat.SetFloat("_HsvShift", parentMat.GetInt("_HsvShift"));
+        explosionMat.SetFloat("_Contrast", parentMat.GetInt("_Contrast"));
+        explosionMat.SetFloat("_Brightness", parentMat.GetInt("_Brightness"));
 
         Collider2D hitTarget = Physics2D.OverlapCircle(transform.position, explosionRadius, targetLayer);
 
