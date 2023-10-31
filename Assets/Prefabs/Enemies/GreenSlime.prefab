@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5acfc7902848a9bb9f80667179e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeepActionStates: 
   OnDamaged:
     m_PersistentCalls:
       m_Calls:
@@ -157,6 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9698f521fb4b04052b73a301f3f83b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   spawnParticlesOnDeath: 1
   deathParticles:
   - {fileID: 4564461473034981521, guid: 50c7fdb626f0241cdaee31cd0457e1b6, type: 3}

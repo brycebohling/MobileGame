@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e0dd75e0796c342b18b5289da64696da
+guid: 50220e433b6614f41a45c27338763504
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton-Run_0
+      name: Skeleton-Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 279ed64888e2e469da10dbbc231b7303
-      internalID: -809881031
+      spriteID: 03fe20821789242599153456465c8da3
+      internalID: 312910688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton-Run_1
+      name: Skeleton-Idle_1
       rect:
         serializedVersion: 2
         x: 28
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb695542fcbb042d2846e4f684ca021b
-      internalID: 949311977
+      spriteID: 4986616a53ddf482989e18dff004f3de
+      internalID: -1932465813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton-Run_2
+      name: Skeleton-Idle_2
       rect:
         serializedVersion: 2
         x: 0
@@ -179,29 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a5759a886e7c40e382145564f3858b5
-      internalID: -903218189
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton-Run_3
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 0
-        width: 28
-        height: 36
-      alignment: 9
-      pivot: {x: 0.45, y: 0.28}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 08da882ed3c84456589644618a4d3734
-      internalID: 2115012164
+      spriteID: 9fbe3aada1a1341c5abbdbd113df779d
+      internalID: -1692406737
       vertices: []
       indices: 
       edges: []
@@ -217,10 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton-Run_0: -809881031
-      Skeleton-Run_1: 949311977
-      Skeleton-Run_2: -903218189
-      Skeleton-Run_3: 2115012164
+      Skeleton-Idle_0: 312910688
+      Skeleton-Idle_1: -1932465813
+      Skeleton-Idle_2: -1692406737
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

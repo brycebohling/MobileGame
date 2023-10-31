@@ -38,7 +38,7 @@ public class AIExplode : AIBase
             Kill();
             explosionBuildUpCounter = 0;
 
-        } else if (IsPlayerInRange(explosionTargetingRadius, targetLayer) && !startedBuildUpExplosion)
+        } else if (IsTargetInRange(explosionTargetingRadius, targetLayer) && !startedBuildUpExplosion)
         {
             BuildUpExplosion();
         }

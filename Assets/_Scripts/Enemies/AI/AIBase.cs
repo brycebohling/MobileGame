@@ -11,6 +11,7 @@ public class AIBase : MonoBehaviour
     protected SpriteRenderer _spriteRenderer;
     protected Health _healthScript;
     protected AIPath _aiPathScript;
+    protected AISpriteFlipper _aiSpriteFlipper;
 
 
     protected virtual void Awake()
@@ -25,12 +26,13 @@ public class AIBase : MonoBehaviour
 
     private void Initialization()
     {
-        _rb = gameObject?.GetComponent<Rigidbody2D>();
         _animator = gameObject?.GetComponentInChildren<Animator>();
         _spriteRenderer = gameObject?.GetComponentInChildren<SpriteRenderer>();
+        _rb = gameObject?.GetComponent<Rigidbody2D>();
         _healthScript = gameObject?.GetComponent<Health>();
         _aIStatesScript = gameObject?.GetComponent<AIStates>();
         _aiPathScript = gameObject?.GetComponent<AIPath>();
+        _aiSpriteFlipper = gameObject?.GetComponent<AISpriteFlipper>();
     }
 
     protected virtual void OnEnable()
@@ -148,9 +150,9 @@ public class AIBase : MonoBehaviour
         Helpers.ChangeAnimationState(anim, _aIStatesScript.baseAnimationClip.name);
     }
 
-    protected virtual bool IsPlayerInRange(float attackRadius, LayerMask playerLayer)
+    protected virtual bool IsTargetInRange(float attackRadius, LayerMask targetLayer)
     {
-        RaycastHit2D hitPlayer = Physics2D.CircleCast(transform.position, attackRadius, Vector2.zero, 0, playerLayer);
+        RaycastHit2D hitPlayer = Physics2D.CircleCast(transform.position, attackRadius, Vector2.zero, 0, targetLayer);
 
         return hitPlayer;
     }

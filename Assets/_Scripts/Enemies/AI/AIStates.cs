@@ -16,6 +16,5 @@ public class AIStates : MonoBehaviour
     }
 
     public States State;
-
     public AnimationClip baseAnimationClip;
 }

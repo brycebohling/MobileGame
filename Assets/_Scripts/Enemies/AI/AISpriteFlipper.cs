@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -30,5 +31,17 @@ public class AISpriteFlipper : AIBase
         transform.localScale = tempScale;
 
         isFacingRight = !isFacingRight;
+    } 
+
+    public void FlipTowardsTarget(float targetXPos)
+    {
+        if (targetXPos < transform.position.x && isFacingRight)
+        {   
+            Flip();
+
+        } else if (targetXPos > transform.position.x && !isFacingRight)
+        {
+            Flip();
+        }
     }
 }

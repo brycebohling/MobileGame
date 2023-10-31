@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e0dd75e0796c342b18b5289da64696da
+guid: 0f1c936bdb7bc430fb6e667779de605b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,49 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton-Run_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 36
-        width: 28
-        height: 36
-      alignment: 9
-      pivot: {x: 0.45, y: 0.28}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 279ed64888e2e469da10dbbc231b7303
-      internalID: -809881031
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton-Run_1
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 36
-        width: 28
-        height: 36
-      alignment: 9
-      pivot: {x: 0.45, y: 0.28}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb695542fcbb042d2846e4f684ca021b
-      internalID: 949311977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton-Run_2
+      name: Skeleton-AttackDown_0
       rect:
         serializedVersion: 2
         x: 0
@@ -179,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a5759a886e7c40e382145564f3858b5
-      internalID: -903218189
+      spriteID: 955b9b9e75b5a462490e9935acc31b09
+      internalID: -1938266772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton-Run_3
+      name: Skeleton-AttackDown_1
       rect:
         serializedVersion: 2
         x: 28
@@ -200,8 +158,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08da882ed3c84456589644618a4d3734
-      internalID: 2115012164
+      spriteID: 1d778b2a743334d5daa3a6a9828e4031
+      internalID: -531856741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackDown_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85683d87754e4610a1a91e16c245842
+      internalID: -877728738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackDown_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6630f8d4365a4494b535334ec35b06a
+      internalID: -1514239993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackDown_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e97adfef30947399dc54317615058d
+      internalID: 1298636744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackDown_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceef5407328de4313b15e1ce428bd4c6
+      internalID: -1684618812
       vertices: []
       indices: 
       edges: []
@@ -217,10 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton-Run_0: -809881031
-      Skeleton-Run_1: 949311977
-      Skeleton-Run_2: -903218189
-      Skeleton-Run_3: 2115012164
+      Skeleton-AttackDown_0: -1938266772
+      Skeleton-AttackDown_1: -531856741
+      Skeleton-AttackDown_2: -877728738
+      Skeleton-AttackDown_3: -1514239993
+      Skeleton-AttackDown_4: 1298636744
+      Skeleton-AttackDown_5: -1684618812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -108,7 +108,7 @@ public class AIDash : AIBase
             }
         }
 
-        if ((!IsPlayerInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing) || 
+        if ((!IsTargetInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing) || 
             dashCooldownCounter > 0 || isDashing) return;
 
         if (!isPreDash)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2188573804720990272}
   - component: {fileID: 591900592798306814}
   - component: {fileID: 7290787812807601326}
+  - component: {fileID: 8721621757241466815}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 475559635416776555}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.475, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1645135998, guid: e2a8af289ad23493bba99ff63df34543, type: 3}
+  m_Sprite: {fileID: 312910688, guid: 50220e433b6614f41a45c27338763504, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.75, y: 2.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -123,6 +124,33 @@ MonoBehaviour:
   normalStrength: 5
   normalSmoothing: 1
   computingNormal: 0
+--- !u!114 &8721621757241466815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475559635416776555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c7fd2d6dfa47dc8064d74f0389776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5983866783918837049}
+        m_TargetAssemblyTypeName: AIBasicMeleeAttack, Assembly-CSharp
+        m_MethodName: OnAttackFrame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &972625530238409844
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 972625530238409844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.125, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,7 +229,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 0.04}
+  m_Size: {x: 1.75, y: 2.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -219,15 +247,16 @@ GameObject:
   - component: {fileID: 7025541152590431698}
   - component: {fileID: 4297095134349484055}
   - component: {fileID: 7238832031253549608}
+  - component: {fileID: -5983866783918837049}
   - component: {fileID: 781215425558332255}
   - component: {fileID: 1347757058897880715}
   - component: {fileID: 3620512135033059001}
   - component: {fileID: 85990326520103564}
   - component: {fileID: 8226629990875052755}
   - component: {fileID: 2842835867980195137}
+  - component: {fileID: 7303890073925685253}
+  - component: {fileID: 4155565360861018666}
   - component: {fileID: 6151906990310471306}
-  - component: {fileID: 8735017610686983863}
-  - component: {fileID: 3820427875896988709}
   - component: {fileID: 5908411446070905529}
   - component: {fileID: 7451536844644641715}
   - component: {fileID: 1853364771436660156}
@@ -281,11 +310,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 030000000400000005000000
-  patrolRadius: 2.39
+  BlockingActionStates: 03000000040000000500000002000000
+  patrolRadius: 2.4
   patrolSpeed: 1
-  tbMovementMin: 0.5
-  tbMovementMax: 2
+  tbMovementMin: 2
+  tbMovementMax: 6
   moveTimeBeforeReroute: 5
   requiredDistanceFromPoint: 0.5
   walkAnim: {fileID: 7400000, guid: 8d2bdf37d169f4d99aea4bbb4738de55, type: 2}
@@ -301,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 0400000005000000
+  BlockingActionStates: 040000000500000002000000
   chaseSpeed: 1.25
   targetingRadius: 3.5
   playerLayer:
@@ -309,6 +338,34 @@ MonoBehaviour:
     m_Bits: 64
   agroTime: 5
   walkAnim: {fileID: 7400000, guid: 8d2bdf37d169f4d99aea4bbb4738de55, type: 2}
+--- !u!114 &-5983866783918837049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285565018055539371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e51f10e98c94f5dabd23bd06fd9178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockingActionStates: 05000000
+  attackTargetingRadius: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damage: 10
+  knockBackForce: 5
+  attackCooldownTime: 1.5
+  hitBoxRadius: 0.5
+  offsetFromCenter: 0.5
+  attackAnims:
+  - {fileID: 7400000, guid: 87b5ab813a4c24886b2b25416efd5de8, type: 2}
+  - {fileID: 7400000, guid: 4f9e5c77154ef42f98d812265bfa01ac, type: 2}
+  - {fileID: 7400000, guid: af074012ee75a454781328a17a1708ed, type: 2}
+  - {fileID: 7400000, guid: af074012ee75a454781328a17a1708ed, type: 2}
+  showGizmos: 1
 --- !u!114 &781215425558332255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,35 +475,8 @@ MonoBehaviour:
   spawnLootOnDeath: 1
   spawnLootOnDamage: 0
   quantity: {x: 0, y: 0}
---- !u!50 &6151906990310471306
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6285565018055539371}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!58 &8735017610686983863
-CircleCollider2D:
+--- !u!61 &7303890073925685253
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -474,14 +504,24 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 1783
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
+  m_Offset: {x: -0.013035044, y: -0.011171997}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
---- !u!58 &3820427875896988709
-CircleCollider2D:
+  m_Size: {x: 0.58720756, y: 0.938094}
+  m_EdgeRadius: 0
+--- !u!61 &4155565360861018666
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -512,9 +552,46 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Size: {x: 0.3306925, y: 0.28649312}
+  m_EdgeRadius: 0
+--- !u!50 &6151906990310471306
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285565018055539371}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &5908411446070905529
 MonoBehaviour:
   m_ObjectHideFlags: 0

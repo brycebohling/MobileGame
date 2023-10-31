@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e2a8af289ad23493bba99ff63df34543
+guid: f88617b242bd54b508f54e82842f9e31
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,64 +123,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton-Ilde_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 26
-        width: 23
-        height: 26
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a023c05a18137400b8491371ebb456b2
-      internalID: -1645135998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton-Ilde_1
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 26
-        width: 23
-        height: 26
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c7d6e0fcaf0943b3a9a3fec7b18cbbc
-      internalID: -1418220914
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton-Ilde_2
+      name: Skeleton-AttackUp_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 23
-        height: 26
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b559d6a666c874415b74c9451bd30e6f
-      internalID: 83734369
+      spriteID: e3de01e46c2c14b4cab0e9b44bbfcd82
+      internalID: 1299854056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackUp_1
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7ff2059b7a2e4ccd93723c982ef36f9
+      internalID: 1131185661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackUp_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6409292a01e4e4b52861d9a7b58f8077
+      internalID: -390161937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackUp_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 366632fd400df4ef68d95367b7df4427
+      internalID: -67070506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackUp_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5452fdbb8fbec4632aa0602217def046
+      internalID: 1882272042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton-AttackUp_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 28
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45, y: 0.28}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22f4445f88db0487783e3b9462b2494b
+      internalID: 255228687
       vertices: []
       indices: 
       edges: []
@@ -196,9 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton-Ilde_0: -1645135998
-      Skeleton-Ilde_1: -1418220914
-      Skeleton-Ilde_2: 83734369
+      Skeleton-AttackUp_0: 1299854056
+      Skeleton-AttackUp_1: 1131185661
+      Skeleton-AttackUp_2: -390161937
+      Skeleton-AttackUp_3: -67070506
+      Skeleton-AttackUp_4: 1882272042
+      Skeleton-AttackUp_5: 255228687
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public static class Helpers
 {
+    public enum Directions
+    {
+        Up,
+        Down,
+        Right,
+        Left,
+    }
+
     public static void ChangeAnimationState(Animator animator, string newState)
     {
         animator.Play(newState);

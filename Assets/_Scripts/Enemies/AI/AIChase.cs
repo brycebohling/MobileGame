@@ -24,7 +24,15 @@ public class AIChase : AIBase
 
     void Update()
     {
-        if (!IsActionAuth(BlockingActionStates)) return;
+        if (!IsActionAuth(BlockingActionStates))
+        {
+            if (isActivated)
+            {
+                OnActionCancel();
+            }
+
+            return;
+        }
 
         HandleAction();
     }
@@ -48,6 +56,12 @@ public class AIChase : AIBase
         _aIStatesScript.State = AIStates.States.Idle;
     }
 
+    protected override void OnActionCancel()
+    {
+        isActivated = false;
+        agroCounter = 0;
+    }
+
     protected override void HandleAction()
     {
         if (agroCounter > 0)
@@ -61,7 +75,7 @@ public class AIChase : AIBase
 
         } else
         {
-            if (IsPlayerInRange(targetingRadius, playerLayer))
+            if (IsTargetInRange(targetingRadius, playerLayer))
             {
                 agroCounter = agroTime;
 
