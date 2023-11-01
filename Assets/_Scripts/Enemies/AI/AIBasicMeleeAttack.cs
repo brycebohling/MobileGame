@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +17,11 @@ public class AIBasicMeleeAttack : AIBase
     [SerializeField] float offsetFromCenter;
 
     [Header("Animations")]
-    [SerializeField] List<AnimationClip> attackAnims = new(); 
+    [SerializeField] AnimationClip[] attackAnims; 
     
-    [SerializeField] bool showGizmos;
+    [Header("Gizmos")]
+    [SerializeField] bool showAttackTargetingRadius;
+    [SerializeField] bool showAttackRadius;
 
     bool isActivated;
     float attackCooldownCounter;
@@ -34,7 +37,9 @@ public class AIBasicMeleeAttack : AIBase
     }
 
     void Update()
-    {           
+    {
+        UpdateTimers();
+
         if (!IsActionAuth(BlockingActionStates))
         {
             if (isActivated) OnActionCancel();
@@ -50,7 +55,6 @@ public class AIBasicMeleeAttack : AIBase
         base.OnActionActivate();
 
         isActivated = true;
-        attackCooldownCounter = attackCooldownTime;
         _aiPathScript.canMove = false;
         _aIStatesScript.State = AIStates.States.Attacking;
     }
@@ -58,15 +62,20 @@ public class AIBasicMeleeAttack : AIBase
     protected override void OnActionDeactivate()
     {
         isActivated = false;
-
-        attackCooldownCounter = 0;
         _aIStatesScript.State = AIStates.States.Idle;
     }
 
     protected override void OnActionCancel()
     {
         isActivated = false;
-        attackCooldownCounter = 0;
+    }
+
+    private void UpdateTimers()
+    {
+        if (!isPlayingAttackAnim) 
+        {
+            attackCooldownCounter += Time.deltaTime;
+        }
     }
 
     protected override void HandleAction()
@@ -102,8 +111,6 @@ public class AIBasicMeleeAttack : AIBase
 
         if (attackCooldownCounter < attackCooldownTime)
         {
-            attackCooldownCounter += Time.deltaTime;
-
             if (!isPlayingAttackAnim)
             {
                 Helpers.ChangeAnimationState(_animator, _aIStatesScript.baseAnimationClip.name);
@@ -111,36 +118,37 @@ public class AIBasicMeleeAttack : AIBase
 
             return;
 
-        } else if (!isPlayingAttackAnim)
+        }
+
+        if (isPlayingAttackAnim) return;
+        
+        float angleToPlayer = Mathf.Atan2(GameManager.Gm.playerTransfrom.position.y - transform.position.y,
+        GameManager.Gm.playerTransfrom.position.x - transform.position.x) * Mathf.Rad2Deg;
+
+        _aiSpriteFlipper.FlipTowardsTarget(GameManager.Gm.playerTransfrom.position.x);
+
+        if (Mathf.Abs(angleToPlayer) <= 45)
         {
-            float angleToPlayer = Mathf.Atan2(GameManager.Gm.playerTransfrom.position.y - transform.position.y,
-            GameManager.Gm.playerTransfrom.position.x - transform.position.x) * Mathf.Rad2Deg;
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Right].name);
+            attackingDirection = Vector2.right;
 
-            _aiSpriteFlipper.FlipTowardsTarget(GameManager.Gm.playerTransfrom.position.x);
+        } else if (Mathf.Abs(angleToPlayer) >= 135)
+        {
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Left].name);
+            attackingDirection = Vector2.left;
 
-            if (Mathf.Abs(angleToPlayer) <= 45)
-            {
-                Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Right].name);
-                attackingDirection = Vector2.right;
+        } else if (angleToPlayer < 135 && angleToPlayer > 45)
+        {
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Up].name);
+            attackingDirection = Vector2.up;
 
-            } else if (Mathf.Abs(angleToPlayer) >= 135)
-            {
-                Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Left].name);
-                attackingDirection = Vector2.left;
+        } else
+        {
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Down].name);
+            attackingDirection = Vector2.down;
+        }   
 
-            } else if (angleToPlayer < 135 && angleToPlayer > 45)
-            {
-                Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Up].name);
-                attackingDirection = Vector2.up;
-
-            } else
-            {
-                Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Down].name);
-                attackingDirection = Vector2.down;
-            }   
-
-            isPlayingAttackAnim = true;
-        }        
+        isPlayingAttackAnim = true;   
     }
 
     public void OnAttackFrame()
@@ -162,8 +170,17 @@ public class AIBasicMeleeAttack : AIBase
 
     private void OnDrawGizmos() 
     {
-        if (!showGizmos) return;
+        if (showAttackTargetingRadius)
+        {
+            Gizmos.DrawWireSphere(transform.position, attackTargetingRadius);    
+        }
 
-        Gizmos.DrawWireSphere(transform.position, attackTargetingRadius);
+        if (showAttackRadius)
+        {
+            Gizmos.DrawWireSphere((Vector2)transform.position + (Vector2.up * offsetFromCenter), hitBoxRadius);
+            Gizmos.DrawWireSphere((Vector2)transform.position + (Vector2.down * offsetFromCenter), hitBoxRadius);
+            Gizmos.DrawWireSphere((Vector2)transform.position + (Vector2.right * offsetFromCenter), hitBoxRadius);
+            Gizmos.DrawWireSphere((Vector2)transform.position + (Vector2.left * offsetFromCenter), hitBoxRadius);
+        }
     }
 }

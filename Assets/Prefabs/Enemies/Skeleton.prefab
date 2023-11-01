@@ -358,14 +358,15 @@ MonoBehaviour:
   damage: 10
   knockBackForce: 5
   attackCooldownTime: 1.5
-  hitBoxRadius: 0.5
+  hitBoxRadius: 0.75
   offsetFromCenter: 0.5
   attackAnims:
   - {fileID: 7400000, guid: 87b5ab813a4c24886b2b25416efd5de8, type: 2}
   - {fileID: 7400000, guid: 4f9e5c77154ef42f98d812265bfa01ac, type: 2}
   - {fileID: 7400000, guid: af074012ee75a454781328a17a1708ed, type: 2}
   - {fileID: 7400000, guid: af074012ee75a454781328a17a1708ed, type: 2}
-  showGizmos: 1
+  showAttackTargetingRadius: 0
+  showAttackRadius: 0
 --- !u!114 &781215425558332255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,9 +427,9 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  spawnParticlesOnDeath: 1
-  deathParticles:
-  - {fileID: 4564461473034981521, guid: 50c7fdb626f0241cdaee31cd0457e1b6, type: 3}
+  objectOnDeath: {fileID: 6922825952343993301, guid: 4b12c2d6d98ac4346b47c18a0e83f81e, type: 3}
+  spawnParticlesOnDeath: 0
+  deathParticles: []
 --- !u!114 &85990326520103564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f1c20c95efb41bbbc1ee1fb6604e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlockingActionStates: 05000000
 --- !u!114 &8226629990875052755
 MonoBehaviour:
   m_ObjectHideFlags: 0

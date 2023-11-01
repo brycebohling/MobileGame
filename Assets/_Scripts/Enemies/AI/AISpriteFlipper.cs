@@ -1,9 +1,10 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class AISpriteFlipper : AIBase
 {
+    public AIStates.States[] BlockingActionStates;
+
     bool isFacingRight = true;
 
 
@@ -14,6 +15,8 @@ public class AISpriteFlipper : AIBase
 
     private void Update()
     {
+        if (!IsActionAuth(BlockingActionStates)) return;
+
         if (_aiPathScript.velocity.x > 0 && !isFacingRight)
         {
             Flip();

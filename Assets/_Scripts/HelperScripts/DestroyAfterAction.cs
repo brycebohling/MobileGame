@@ -4,33 +4,80 @@ using UnityEngine;
 
 public class DestroyAfterAction : MonoBehaviour
 {
+    [Header("Time")]
     [SerializeField] bool destroyAfterTime;
-    [SerializeField] float destroyTime;
+    [SerializeField] bool fadeAfterTime;
+    [SerializeField] float time;
 
+    [Header("Animatinos")]
     [SerializeField] bool destroyAfterAmin;
+    [SerializeField] bool fadeAfterAnim;
+    [SerializeField] bool playAnimOnAwake;
     [SerializeField] Animator animator;
-    [SerializeField] AnimationClip destroyAfterClip;
+    [SerializeField] AnimationClip animClip;
 
-    float destroyAfterCounter;
+    [Header("Action")]
+    [SerializeField] bool fadeAfterAction;
+    
+    [Header("Graphics")]
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] float fadeSpeed;
+    
+
+    float timeCounter;
 
 
-    void Update()
+    private void Awake() 
     {
-        if (destroyAfterTime)
+        if (playAnimOnAwake)
         {
-            destroyAfterCounter += Time.deltaTime;
+            Helpers.ChangeAnimationState(animator, animClip.name);
+        }
+    }
 
-            if (destroyAfterCounter >= destroyTime)
-            {
-                Destroy(gameObject);
-            }
-
-        } else if (destroyAfterAmin)
+    private void LateUpdate()
+    {
+        if (destroyAfterTime || fadeAfterTime)
         {
-            if (!Helpers.IsAnimationPlaying(animator, destroyAfterClip.name))
+            time += Time.deltaTime;
+
+            if (timeCounter >= time)
             {
-                Destroy(gameObject);
+                if (destroyAfterTime)
+                {
+                    Destroy(gameObject);
+
+                } else if (fadeAfterTime)
+                {
+                    FadeAlpha();
+                }
             }
         }
+
+        if (destroyAfterAmin || fadeAfterAnim)
+        {
+            if (!Helpers.IsAnimationPlaying(animator, animClip.name))
+            {
+                if (destroyAfterAmin)
+                {
+                    Destroy(gameObject);
+                    
+                } else if (fadeAfterAnim)
+                {
+                    FadeAlpha();
+                }
+            }
+        }
+
+        if (fadeAfterAction)
+        {
+            FadeAlpha();
+        }
+    }
+
+    private void FadeAlpha()
+    {
+        float newAlpha = Mathf.Lerp(spriteRenderer.color.a, 0, fadeSpeed * Time.deltaTime);
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, newAlpha);
     }
 }

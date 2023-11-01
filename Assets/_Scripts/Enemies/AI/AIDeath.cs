@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class AIDeath : AIBase
 {
     public UnityEvent OnDeath;
+
+    [Header("Objects")]
+    [SerializeField] Transform objectOnDeath;
 
     [Header("Particales")]
     [SerializeField] bool spawnParticlesOnDeath;
@@ -34,6 +38,11 @@ public class AIDeath : AIBase
         if (spawnParticlesOnDeath)
         {
             InstantiateParticales(deathParticles, transform.position);
+        }
+
+        if (objectOnDeath != null)
+        {
+            Instantiate(objectOnDeath, transform.position, Quaternion.identity);
         }
 
         OnDeath?.Invoke();
