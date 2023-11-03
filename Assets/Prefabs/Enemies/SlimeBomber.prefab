@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4df1e4b72604f788fc8b01e2041f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 03000000040000000500000002000000
+  BlockingActionStates: 0300000004000000050000000200000006000000
   patrolRadius: 2.39
   patrolSpeed: 1
   tbMovementMin: 0.5
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c325ae50f276440c896499a6152a0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 040000000500000002000000
+  BlockingActionStates: 04000000050000000200000006000000
   chaseSpeed: 2
   targetingRadius: 3.5
   playerLayer:
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2cf24e0527645d384294fa34d0dd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 
+  BlockingActionStates: 06000000
   explodeOnDeath: 0
   explosionBuildUpTime: 1
   explosionRadius: 1
@@ -335,6 +335,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   parentSpriteRenderer: {fileID: 800787400078146426}
+  baseMat: {fileID: 2100000, guid: f46d7c0e3cfa54060b2678a1dab140e3, type: 2}
   drawGizmos: 0
 --- !u!114 &9138349314797641536
 MonoBehaviour:
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e78adb7e4202d47f0af3fed3ba5952ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingActionStates: 
+  BlockingActionStates: 06000000
   collisionDmg: 10
   knockBackForce: 5
 --- !u!114 &911302894551272032
@@ -408,6 +409,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  objectOnDeath: {fileID: 0}
   spawnParticlesOnDeath: 0
   deathParticles: []
 --- !u!114 &7363621653479846416
@@ -422,6 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f1c20c95efb41bbbc1ee1fb6604e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlockingActionStates: 
 --- !u!114 &2311523080852763414
 MonoBehaviour:
   m_ObjectHideFlags: 0

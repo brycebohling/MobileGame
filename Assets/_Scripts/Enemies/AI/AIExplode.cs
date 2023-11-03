@@ -17,6 +17,7 @@ public class AIExplode : AIBase
     [SerializeField] LayerMask targetLayer;
 
     [SerializeField] SpriteRenderer parentSpriteRenderer;
+    [SerializeField] Material baseMat;
 
     [SerializeField] bool drawGizmos;
 
@@ -31,6 +32,11 @@ public class AIExplode : AIBase
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Explode();
+        }
+
         if (!IsActionAuth(BlockingActionStates)) return;
 
         if (explosionBuildUpCounter >= explosionBuildUpTime)
@@ -56,6 +62,7 @@ public class AIExplode : AIBase
         _rb.velocity = Vector2.zero;
 
         Helpers.ChangeAnimationState(_animator, explosionBuildUpAnim.name);
+        StartCoroutine(PlayExplosionColors());
 
         startedBuildUpExplosion = true;
         _aIStatesScript.State = AIStates.States.Attacking;
@@ -66,6 +73,23 @@ public class AIExplode : AIBase
         _healthScript.InstaKill();
     }
 
+    private IEnumerator PlayExplosionColors()
+    {
+        Material parentMat = parentSpriteRenderer.material;
+
+        float counter = 0;
+
+        while (counter < explosionBuildUpAnim.length)
+        {
+            parentMat.SetFloat("_HsvShift", Mathf.Lerp(parentMat.GetFloat("_HsvShift"), 110, counter / explosionBuildUpAnim.length));
+            parentMat.SetFloat("_Contrast", Mathf.Lerp(parentMat.GetFloat("_Contrast"), 3, counter / explosionBuildUpAnim.length));
+            parentMat.SetFloat("_Brightness", Mathf.Lerp(parentMat.GetFloat("_Brightness"), -1, counter / explosionBuildUpAnim.length));
+
+            counter += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
     // Called by UnityEvent
     public void Explode()
     {
@@ -73,17 +97,14 @@ public class AIExplode : AIBase
 
         Material parentMat = parentSpriteRenderer.material;
 
-        SpriteRenderer explosionSpriteRenderer = explosionTransfrom.GetComponent<SpriteRenderer>();
-        Material explosionMat = explosionSpriteRenderer.material;
-
-        Debug.Log(parentSpriteRenderer.material.GetFloat("_HsvShift"));
+        Material explosionMat = explosionTransfrom.GetComponent<SpriteRenderer>().material;
         
         explosionMat.SetFloat("_HsvShift", parentMat.GetInt("_HsvShift"));
         explosionMat.SetFloat("_Contrast", parentMat.GetInt("_Contrast"));
         explosionMat.SetFloat("_Brightness", parentMat.GetInt("_Brightness"));
 
         Collider2D hitTarget = Physics2D.OverlapCircle(transform.position, explosionRadius, targetLayer);
-
+ 
         if (hitTarget != null && hitTarget.TryGetComponent(out Health healthScript))
         {
             healthScript.Damage(explosionDamage, knockBackForce, transform.position);
