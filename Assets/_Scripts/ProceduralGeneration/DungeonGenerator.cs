@@ -19,16 +19,17 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] AStarGridSettings aStarGridSettings;
     [SerializeField] Vector2Int startPosition = Vector2Int.zero;
 
+    [Header("Rooms")]
     [SerializeField] RandomWalkSO randomWalkParameters;
-
+    [SerializeField] int roomDifficulty;
     [SerializeField] int maxRoomWidth = 4;
     [SerializeField] int maxRoomHeight = 4;
     public int dungeonWidth = 20;
     public int dungeonHeight = 20;
     [SerializeField] [Range(0, 10)] int offset = 1;
     [SerializeField] bool randomWalkRooms = false;
-    [SerializeField] bool debugCreationTime;
     [SerializeField] bool generateOnStart;
+    [SerializeField] bool debugCreationTime;
 
     public List<Room> RoomList = new();
     public HashSet<Vector2Int> Path = new();
@@ -135,7 +136,7 @@ public class DungeonGenerator : MonoBehaviour
             var roomFloor = RunRandomWalk(randomWalkParameters, roomCenter,
                 offset, roomBounds.xMin, roomBounds.xMax, roomBounds.yMin, roomBounds.yMax);
 
-            Room room = new(roomCenter, roomFloor);
+            Room room = new(roomCenter, roomFloor, roomDifficulty);
 
             RoomList.Add(room);
 
@@ -170,7 +171,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
 
-            Room room = new(roomCenter, roomFloor);
+            Room room = new(roomCenter, roomFloor, roomDifficulty);
             RoomList.Add(room);
         }
 

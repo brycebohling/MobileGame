@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Room
 {
+    public int RoomDifficulty;
+
     public Vector2Int RoomCenterPos { get; set; }
     public HashSet<Vector2Int> FloorTiles { get; private set; } = new();
     public HashSet<Vector2Int> ClearFloorTiles { get; private set; } = new();
@@ -20,9 +22,10 @@ public class Room
     public HashSet<Vector2Int> EnemyPositions { get; private set; } = new();
     public HashSet<Transform> EnemyTransfromReference { get; private set; } = new();
 
-    public Room(Vector2Int roomCenterPos, HashSet<Vector2Int>  floorTiles)
+    public Room(Vector2Int roomCenterPos, HashSet<Vector2Int>  floorTiles, int roomDifficulty)
     {
         RoomCenterPos = roomCenterPos;
         FloorTiles = floorTiles;
+        RoomDifficulty = roomDifficulty;
     }
 }

@@ -28,23 +28,24 @@ public class EnemyPlacementManager : MonoBehaviour
 
     private void PlaceProps(Room room, List<EnemySO> enemyList)
     {
-        foreach (EnemySO enemyToPlace in enemyList)
+        int curDifficulty = 0;
+        while (curDifficulty < room.RoomDifficulty)
         {
+            int randomEnemyIndex = UnityEngine.Random.Range(0, enemyList.Count);
+
             HashSet<Vector2Int> accessiblePositions = new(room.FloorTiles);
 
             accessiblePositions.ExceptWith(dungeonGeneratorScript.Path);
 
-            int quantity = UnityEngine.Random.Range(enemyToPlace.PlacementQuantityMin, enemyToPlace.PlacementQuantityMax + 1);
+            accessiblePositions.ExceptWith(room.PropPositions);
+            accessiblePositions.ExceptWith(room.EnemyPositions);
+            accessiblePositions.ExceptWith(room.ClearFloorTiles);
 
-            for (int i = 0; i < quantity; i++)
-            {
-                accessiblePositions.ExceptWith(room.PropPositions);
-                accessiblePositions.ExceptWith(room.EnemyPositions);
-                accessiblePositions.ExceptWith(room.ClearFloorTiles);
-
-                List<Vector2Int> possiblePositions = accessiblePositions.OrderBy(x => Guid.NewGuid()).ToList();
+            List<Vector2Int> possiblePositions = accessiblePositions.OrderBy(x => Guid.NewGuid()).ToList();
                 
-                if (!TryPlacingEnemyBruteForce(room, enemyToPlace, possiblePositions)) break;
+            if (TryPlacingEnemyBruteForce(room, enemyList[randomEnemyIndex], possiblePositions)) 
+            {
+                curDifficulty += enemyList[randomEnemyIndex].EnemyDifficulty;
             }
         }
     }

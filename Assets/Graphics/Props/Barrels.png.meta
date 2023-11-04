@@ -130,15 +130,15 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc581c84ba6974c53b4cc802fd64aa7a
-      internalID: -674165366
+      spriteID: 1e4f99a31734d46f092946a6744bf7c2
+      internalID: 1045198347
       vertices: []
       indices: 
       edges: []
@@ -151,15 +151,15 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c21f9b6c85005421cb108b534bf8b523
-      internalID: -1075112388
+      spriteID: bc7c87ca49dae49b0a5428456e46ebbd
+      internalID: -1612845867
       vertices: []
       indices: 
       edges: []
@@ -172,15 +172,15 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 898750732cca14e1e983412f69eabc18
-      internalID: -1762333654
+      spriteID: 7906695b514444cc798e794104ea6691
+      internalID: 43177533
       vertices: []
       indices: 
       edges: []
@@ -193,15 +193,15 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6908a8cd75ca44f359109f47dc735534
-      internalID: 1977443437
+      spriteID: 4f5064abf4eca4610ba22085f673319b
+      internalID: -194854276
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Barrels_Empty: -1762333654
-      Barrels_Fire: -1075112388
-      Barrels_Posion: -674165366
-      Barrels_Shadow: 1977443437
+      Barrels_Empty: 43177533
+      Barrels_Fire: -1612845867
+      Barrels_Posion: 1045198347
+      Barrels_Shadow: -194854276
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -15,9 +15,5 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 8976634329156818760, guid: a06999feb644c4a6498a965c6ccb14a9, type: 3}
   EnemySize: {x: 1, y: 1}
   Center: {x: 0.5, y: 0.5}
+  EnemyDifficulty: 2
   MustBeAccessible: 1
-  PlacementQuantityMin: 1
-  PlacementQuantityMax: 2
-  PlaceAsGroup: 0
-  GroupMinCount: 1
-  GroupMaxCount: 1

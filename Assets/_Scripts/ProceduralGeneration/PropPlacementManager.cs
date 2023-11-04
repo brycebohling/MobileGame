@@ -242,22 +242,26 @@ public class PropPlacementManager : MonoBehaviour
         {
             if (!room.FloorTiles.Contains(placementPosition + Vector2Int.up))
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Front].sprite;
+                // prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Front].sprite;
+                prop.GetComponent<IMultiDirectionalProp>().InitPropSprite(propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Front].sprite);
 
             } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.down))
             {
-                prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Back].sprite;
+                // prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Back].sprite;
+                prop.GetComponent<IMultiDirectionalProp>().InitPropSprite(propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Back].sprite);
             }
 
             if (propToPlace.FourSpriteDirections)
             {
                 if (!room.FloorTiles.Contains(placementPosition + Vector2Int.left))
                 {
-                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Right].sprite;
+                    // prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Right].sprite;
+                    prop.GetComponent<IMultiDirectionalProp>().InitPropSprite(propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Right].sprite);
 
                 } else if (!room.FloorTiles.Contains(placementPosition + Vector2Int.right))
                 {
-                    prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Left].sprite;
+                    // prop.GetComponent<SpriteRenderer>().sprite = propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Left].sprite;
+                    prop.GetComponent<IMultiDirectionalProp>().InitPropSprite(propToPlace.PropGraphics[(int)PropSO.PropGraphicOrder.Left].sprite);
                 }
             }
         }
@@ -266,7 +270,7 @@ public class PropPlacementManager : MonoBehaviour
         {
             Sprite variant = propToPlace.Variants[UnityEngine.Random.Range(0, propToPlace.Variants.Length)];
 
-            prop.GetComponent<SpriteRenderer>().sprite = variant;
+            prop.GetComponentInChildren<SpriteRenderer>().sprite = variant;
         }
     }
 

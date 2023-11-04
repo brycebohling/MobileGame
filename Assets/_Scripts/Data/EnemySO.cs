@@ -9,14 +9,15 @@ public class EnemySO : ScriptableObject
     public Transform EnemyPrefab;
     public Vector2Int EnemySize = Vector2Int.one;
     public Vector2 Center;
+    public int EnemyDifficulty;
 
     [Header("Placement Type")]
     public bool MustBeAccessible;
-    [Min(1)] public int PlacementQuantityMin = 1;
-    [Min(1)] public int PlacementQuantityMax = 1;
+    // [Min(1)] public int PlacementQuantityMin = 1;
+    // [Min(1)] public int PlacementQuantityMax = 1;
 
-    [Header("Group Placement")]
-    public bool PlaceAsGroup;
-    [Min(1)] public int GroupMinCount = 1;
-    [Min(1)] public int GroupMaxCount = 1;
+    // [Header("Group Placement")]
+    // public bool PlaceAsGroup;
+    // [Min(1)] public int GroupMinCount = 1;
+    // [Min(1)] public int GroupMaxCount = 1;
 }

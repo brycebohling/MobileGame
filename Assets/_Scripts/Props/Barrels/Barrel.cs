@@ -16,7 +16,7 @@ public class Barrel : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
     public void OnBarrelBrake()

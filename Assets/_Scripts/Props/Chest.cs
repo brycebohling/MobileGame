@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Chest : MonoBehaviour, IInteractable
+public class Chest : MonoBehaviour, IInteractable, IMultiDirectionalProp
 {
     public UnityEvent OnOpen;
 
@@ -15,9 +15,9 @@ public class Chest : MonoBehaviour, IInteractable
 
     private void Awake() 
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 
-        if (TryGetComponent(out Animator anim))    
+        if (spriteRenderer.TryGetComponent(out Animator anim))    
         {
             animator = anim;
             animator.enabled = false;
@@ -31,7 +31,11 @@ public class Chest : MonoBehaviour, IInteractable
 
     private void Open()
     {
-        if (animator == null) return;
+        if (animator == null) 
+        {
+            Debug.LogWarning("Animator null");   
+            return;
+        }
         
         foreach (PropSO.PropGraphicsData graphic in propSO.PropGraphics)
         {
@@ -41,9 +45,14 @@ public class Chest : MonoBehaviour, IInteractable
                 Helpers.ChangeAnimationState(animator, graphic.animationClip.name);
             }
         }
-
+        
         OnOpen?.Invoke();
 
         Destroy(this);
+    }
+
+    public void InitPropSprite(Sprite sprite)
+    {
+        spriteRenderer.sprite = sprite;
     }
 }

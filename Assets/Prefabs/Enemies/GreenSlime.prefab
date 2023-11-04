@@ -161,6 +161,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  objectOnDeath: {fileID: 0}
   spawnParticlesOnDeath: 1
   deathParticles:
   - {fileID: 4564461473034981521, guid: 50c7fdb626f0241cdaee31cd0457e1b6, type: 3}
@@ -452,7 +453,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 36d0bbd9e1ed34affafcd59896479550, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0

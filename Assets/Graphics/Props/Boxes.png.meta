@@ -123,85 +123,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tiles-Boxes_Short
+      name: Boxes_Short
       rect:
         serializedVersion: 2
         x: 16
         y: 32
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c51a23812fef496f9ab423681de3341
-      internalID: -787692219
+      spriteID: a13f163824d334c408b9c122d89b2738
+      internalID: -452728675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles-Boxes_Tall
+      name: Boxes_Tall
       rect:
         serializedVersion: 2
         x: 32
         y: 32
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1df2a03fceacb4602b1d683acbe5428a
-      internalID: -57301761
+      spriteID: aea57e95ec606424a87152774465e750
+      internalID: -1435414150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles-Boxes_TallShadow
+      name: Boxes_TallShadow
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b938948861b54d35be6a774bcdb119a
-      internalID: 1522929831
+      spriteID: cf9825b2cb3fa4c429e11f7c7468b045
+      internalID: -1616919043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles-Boxes_ShortShadow
+      name: Boxes_ShortShadow
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
         height: 32
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf9fcddedc504478d9ce05a80ee6710b
-      internalID: -600873589
+      spriteID: 3eaf90d871be04f98a455adf6238d7e0
+      internalID: -37942210
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tiles-Boxes_Short: -787692219
-      Tiles-Boxes_ShortShadow: -600873589
-      Tiles-Boxes_Tall: -57301761
-      Tiles-Boxes_TallShadow: 1522929831
+      Boxes_Short: -452728675
+      Boxes_ShortShadow: -37942210
+      Boxes_Tall: -1435414150
+      Boxes_TallShadow: -1616919043
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

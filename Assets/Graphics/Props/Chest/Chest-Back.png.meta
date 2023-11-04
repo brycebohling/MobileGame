@@ -123,27 +123,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chest-Back_Close
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.16}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8909cdf15e534604aa4c86851ba63ba
-      internalID: -404843770
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Chest-Back_1
       rect:
         serializedVersion: 2
@@ -151,8 +130,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.16}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,8 +151,8 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.16}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -186,22 +165,43 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-Back_Open
+      name: Chest-Back_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aee98b87b4dbc4fc3b266ed977a7a83b
+      internalID: -133443559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-Back_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 16
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.16}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 910de1d69b68643819070c0e95869f17
-      internalID: -1781989664
+      spriteID: 0169fcd133385498882e1e6d2730adc6
+      internalID: -520013903
       vertices: []
       indices: 
       edges: []
@@ -214,15 +214,15 @@ TextureImporter:
         y: 0
         width: 16
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.16}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccb5db8d5284d410c84f1d7cfed4e731
-      internalID: 1068598366
+      spriteID: 2d763c23884914a0fb3ed209ab604ac6
+      internalID: -159637381
       vertices: []
       indices: 
       edges: []
@@ -238,11 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Chest-Back_0: -133443559
       Chest-Back_1: 1658966047
       Chest-Back_2: -556172761
-      Chest-Back_Close: -404843770
-      Chest-Back_Open: -1781989664
-      Chest-Back_Shadow: 1068598366
+      Chest-Back_3: -520013903
+      Chest-Back_Shadow: -159637381
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

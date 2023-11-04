@@ -35,7 +35,7 @@ MonoBehaviour:
   TwoSpriteDirections: 1
   FourSpriteDirections: 0
   PropGraphics:
-  - sprite: {fileID: 1607967250, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
+  - sprite: {fileID: 1990660790, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
     animationClip: {fileID: 7400000, guid: 41b851cab194847679b1b301843521a3, type: 2}
-  - sprite: {fileID: -404843770, guid: a3c35028639c64b49b107d080acded63, type: 3}
+  - sprite: {fileID: -133443559, guid: a3c35028639c64b49b107d080acded63, type: 3}
     animationClip: {fileID: 7400000, guid: 3b71be6eec778436788af86173f85d84, type: 2}

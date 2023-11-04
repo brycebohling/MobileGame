@@ -6505,9 +6505,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 4966ba6572e7848f2989d307528d846d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7607,7 +7607,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2745432}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7618,7 +7618,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.22232085}
+  m_Size: {x: 0.6, y: 0.7714073}
   m_EdgeRadius: 0
 --- !u!50 &1535558008
 Rigidbody2D:
@@ -14059,14 +14059,15 @@ MonoBehaviour:
   aStarGridSettings: {fileID: 1769074335}
   startPosition: {x: 0, y: 0}
   randomWalkParameters: {fileID: 11400000, guid: d52ad4c40ccb5452c9fae30614b4ff1e, type: 2}
+  roomDifficulty: 5
   maxRoomWidth: 15
   maxRoomHeight: 15
   dungeonWidth: 75
   dungeonHeight: 75
   offset: 2
-  randomWalkRooms: 0
-  debugCreationTime: 0
+  randomWalkRooms: 1
   generateOnStart: 1
+  debugCreationTime: 0
 --- !u!4 &2075197045
 Transform:
   m_ObjectHideFlags: 0
