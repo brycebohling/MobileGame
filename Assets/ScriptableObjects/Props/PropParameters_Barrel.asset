@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PropPrefab: {fileID: 604346310183204265, guid: 4c8e348d0f4e946f7b4873cf730e2b4f, type: 3}
   PropSize: {x: 1, y: 2}
-  PlacementOffset: {x: 0, y: 0}
+  PlacementOffset: {x: 0.5, y: 0.4}
   Corner: 0
   Inner: 1
   NearWallUp: 0
@@ -32,9 +32,9 @@ MonoBehaviour:
   GroupMaxCount: 1
   HasVariants: 1
   Variants:
-  - {fileID: -1762333654, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
-  - {fileID: -1075112388, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
-  - {fileID: -674165366, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
+  - {fileID: 43177533, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
+  - {fileID: -1612845867, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
+  - {fileID: 1045198347, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
   TwoSpriteDirections: 0
   FourSpriteDirections: 0
   PropGraphics: []

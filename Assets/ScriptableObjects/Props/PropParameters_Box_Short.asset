@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PropPrefab: {fileID: 592386840313463073, guid: aa6749c1f31b344fcb8bb09040bcb318, type: 3}
   PropSize: {x: 1, y: 1}
-  PlacementOffset: {x: 0, y: 0}
+  PlacementOffset: {x: 0.5, y: 0.5}
   Corner: 1
   Inner: 1
   NearWallUp: 1
