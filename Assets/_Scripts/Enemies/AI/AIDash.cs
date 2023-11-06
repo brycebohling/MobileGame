@@ -9,19 +9,18 @@ public class AIDash : AIBase
     [SerializeField] float dashSpeed;
     [SerializeField] float preDashTime;
     [SerializeField] float dashTime;
-    [SerializeField] float dashCooldown;
+    [SerializeField] float dashCooldownTime;
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] AnimationClip preDashAnim;
     [SerializeField] AnimationClip dashAnim;
 
+    bool isActivated;
     bool isDashing;
     bool isPreDash;
     float preDashCounter;
     float dashCounter;
     float dashCooldownCounter;
-
-    bool isActionCanceled;
 
 
     protected override void Awake()
@@ -35,7 +34,7 @@ public class AIDash : AIBase
         
         if (!IsActionAuth(BlockingActionStates)) 
         {
-            if (!isActionCanceled)
+            if (isActivated)
             {
                 OnActionCancel();
             }
@@ -50,17 +49,17 @@ public class AIDash : AIBase
     {
         if (isPreDash)
         {
-            preDashCounter -= Time.deltaTime;
+            preDashCounter += Time.deltaTime;
         }
         
         if (isDashing)
         {
-            dashCounter -= Time.deltaTime;
+            dashCounter += Time.deltaTime;
         }
 
         if (!isPreDash && !isDashing)
         {
-            dashCooldownCounter -= Time.deltaTime;
+            dashCooldownCounter += Time.deltaTime;
         }
     }
 
@@ -68,21 +67,19 @@ public class AIDash : AIBase
     {
         base.OnActionActivate();
 
-        preDashCounter = preDashTime;
-        dashCounter = dashTime;
-
-        isPreDash = true;
+        isActivated = true;
 
         _aIStatesScript.State = AIStates.States.Dashing;
     }
 
     protected override void OnActionDeactivate()
     {
+        isActivated = false;
         isPreDash = false;
         isDashing = false;
-        preDashCounter = preDashTime;
-        dashCounter = dashTime;
-        dashCooldownCounter = dashCooldown;
+        preDashCounter = 0;
+        dashCounter = 0;
+        dashCooldownCounter = 0;
 
         _aIStatesScript.State = AIStates.States.Idle;
 
@@ -91,32 +88,34 @@ public class AIDash : AIBase
 
     protected override void OnActionCancel()
     {
+        isActivated = false;
         isPreDash = false;
         isDashing = false;
-        preDashCounter = preDashTime;
-        dashCounter = dashTime;
+        preDashCounter = 0;
+        dashCounter = 0;
+        dashCooldownCounter = 0;
     }
 
     protected override void HandleAction()
     {
-        if (_aIStatesScript.State == AIStates.States.Dashing)
+        if (isDashing)
         {
-            if (dashCounter <= 0)
+            if (dashCounter >= dashTime)
             {
                 OnActionDeactivate();
                 return;
             }
         }
 
-        if ((!IsTargetInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing) || 
-            dashCooldownCounter > 0 || isDashing) return;
+        if ((!IsTargetInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing) 
+            || dashCooldownCounter < dashCooldownTime || isDashing) return;
 
         if (!isPreDash)
         {
             OnActionActivate();
             PreDash();
 
-        } else if (preDashCounter <= 0)
+        } else if (preDashCounter >= preDashTime)
         {
             Dash();
         }
@@ -124,6 +123,7 @@ public class AIDash : AIBase
 
     private void PreDash()
     {
+        isPreDash = true;
         _aiPathScript.canMove = false;
 
         StartAnimation(_animator, preDashAnim);

@@ -324,7 +324,7 @@ MonoBehaviour:
   dashSpeed: 12
   preDashTime: 1
   dashTime: 0.3
-  dashCooldown: 3
+  dashCooldownTime: 1
   targetingRadius: 3
   playerLayer:
     serializedVersion: 2

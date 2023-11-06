@@ -39,6 +39,7 @@ public class PlayerMovement : PlayerBase
 
     protected override void OnDisable()
     {
+        inputReaderSO.MovementEvent -= SetMoveDirection;
     }
 
     void Update()
