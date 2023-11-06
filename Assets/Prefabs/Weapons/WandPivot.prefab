@@ -170,7 +170,6 @@ MonoBehaviour:
   attackSpeed: 0.75
   projectileSpeed: 5
   knockBackForce: 5
-  projectileHeight: 0.5
   emptyAnim: {fileID: 7400000, guid: 4c0fe12555b474418b49e3fda1c716fb, type: 2}
   fireAnim: {fileID: 7400000, guid: 0b974bd4db8a04409ae6d66c8ec090b8, type: 2}
 --- !u!95 &1853033198609599615

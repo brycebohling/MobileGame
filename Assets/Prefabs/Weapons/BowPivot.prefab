@@ -190,6 +190,5 @@ MonoBehaviour:
   dmg: 10
   arrowSpeed: 10
   knockBackForce: 5
-  projectileHeight: 0.5
   drawBackArrow: {fileID: 7400000, guid: 3d44a18848737493d838e814ff06f8d4, type: 2}
   releaseBow: {fileID: 7400000, guid: e1a03e00f3fbf40b8b7c473c96b4c772, type: 2}
