@@ -78,6 +78,12 @@ public class DestroyAfterAction : MonoBehaviour
     private void FadeAlpha()
     {
         float newAlpha = Mathf.Lerp(spriteRenderer.color.a, 0, fadeSpeed * Time.deltaTime);
+
+        if (newAlpha <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, newAlpha);
     }
 }

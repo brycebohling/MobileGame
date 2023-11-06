@@ -288,7 +288,6 @@ MonoBehaviour:
   tbMovementMin: 0.5
   tbMovementMax: 2
   moveTimeBeforeReroute: 5
-  requiredDistanceFromPoint: 0.5
   walkAnim: {fileID: 7400000, guid: 6c5042fc5b1f7487094269447c615ecf, type: 2}
 --- !u!114 &278462855004151915
 MonoBehaviour:
@@ -619,9 +618,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.6
+  slowdownDistance: 0
   pickNextWaypointDist: 0.5
-  endReachedDistance: 0.2
+  endReachedDistance: 0.1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0

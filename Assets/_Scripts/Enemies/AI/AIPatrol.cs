@@ -12,7 +12,6 @@ public class AIPatrol : AIBase
     [SerializeField] float tbMovementMin;
     [SerializeField] float tbMovementMax;
     [SerializeField] float moveTimeBeforeReroute;
-    [SerializeField] float requiredDistanceFromPoint;
     [SerializeField] AnimationClip walkAnim;
 
     Vector2 startPos;
@@ -68,7 +67,7 @@ public class AIPatrol : AIBase
     {
         if (isMovingToPoint)
         {
-            if (Vector2.Distance(transform.position, movePoint) < requiredDistanceFromPoint)
+            if (Vector2.Distance(transform.position, movePoint) <= _aiPathScript.endReachedDistance)
             {
                 isMovingToPoint = false;
                 nextMovementCounter = Random.Range(tbMovementMin, tbMovementMax);

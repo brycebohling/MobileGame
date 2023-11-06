@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleDamage : MonoBehaviour
@@ -25,7 +23,7 @@ public class ParticleDamage : MonoBehaviour
         ps.trigger.AddCollider(playerCollider);
     }
 
-    void OnParticleTrigger() 
+    private void OnParticleTrigger() 
     {
         playerHealthScript.Damage(particleDamage, knockBackForce, transform.position);   
     }

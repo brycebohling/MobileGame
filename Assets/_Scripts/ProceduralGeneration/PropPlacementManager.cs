@@ -145,7 +145,7 @@ public class PropPlacementManager : MonoBehaviour
             Vector2Int position = possiblePositions[i];
 
             List<Vector2Int> freePositionsAround = TryToFitProp(propToPlace, possiblePositions, position);
-
+    
             if (freePositionsAround.Count == propToPlace.PropSize.x * propToPlace.PropSize.y)
             {
                 // If on last iteration

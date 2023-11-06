@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6922825952343993301}
   - component: {fileID: 805682969620464087}
-  - component: {fileID: 4805975731677314235}
+  - component: {fileID: -6601987504905014230}
   - component: {fileID: 3865783830464549890}
   m_Layer: 0
   m_Name: DeadSkeleton
@@ -87,29 +87,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4805975731677314235
-MonoBehaviour:
+--- !u!61 &-6601987504905014230
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839161488168621605}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa26417c24970454e862d07efd0a460e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfterTime: 0
-  fadeAfterTime: 0
-  time: 0
-  destroyAfterAmin: 0
-  fadeAfterAnim: 1
-  playAnimOnAwake: 1
-  animator: {fileID: 3865783830464549890}
-  animClip: {fileID: 7400000, guid: 585a9da61f039431fb1b1e775a1c8774, type: 2}
-  fadeAfterAction: 0
-  spriteRenderer: {fileID: 805682969620464087}
-  fadeSpeed: 2
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.003663823, y: 0.33982605}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.45, y: 0.28}
+    oldSize: {x: 1.75, y: 2.25}
+    newSize: {x: 1.75, y: 2.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.57951224, y: 0.5692531}
+  m_EdgeRadius: 0
 --- !u!95 &3865783830464549890
 Animator:
   serializedVersion: 5

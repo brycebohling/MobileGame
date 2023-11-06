@@ -287,7 +287,6 @@ MonoBehaviour:
   tbMovementMin: 0.5
   tbMovementMax: 2
   moveTimeBeforeReroute: 5
-  requiredDistanceFromPoint: 0.5
   walkAnim: {fileID: 7400000, guid: 5e89896c01ced4e12a68a6c6ce89f310, type: 2}
 --- !u!114 &4144654370984479334
 MonoBehaviour:
@@ -359,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5acfc7902848a9bb9f80667179e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeepActionStates: 
   OnDamaged:
     m_PersistentCalls:
       m_Calls:
@@ -388,6 +388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9698f521fb4b04052b73a301f3f83b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  objectOnDeath: {fileID: 0}
   spawnParticlesOnDeath: 1
   deathParticles:
   - {fileID: 4564461473034981521, guid: 707c600009f984d29b8fbc156cbda5d7, type: 3}
@@ -484,7 +488,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!58 &1741526247595217980
@@ -585,9 +589,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.6
+  slowdownDistance: 0
   pickNextWaypointDist: 0.5
-  endReachedDistance: 0.2
+  endReachedDistance: 0.1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0

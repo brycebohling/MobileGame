@@ -316,7 +316,6 @@ MonoBehaviour:
   tbMovementMin: 2
   tbMovementMax: 6
   moveTimeBeforeReroute: 5
-  requiredDistanceFromPoint: 0.5
   walkAnim: {fileID: 7400000, guid: 8d2bdf37d169f4d99aea4bbb4738de55, type: 2}
 --- !u!114 &7238832031253549608
 MonoBehaviour:
@@ -506,7 +505,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 1783
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.013035044, y: -0.011171997}
@@ -657,9 +656,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.6
+  slowdownDistance: 0
   pickNextWaypointDist: 0.5
-  endReachedDistance: 0.2
+  endReachedDistance: 0.1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
