@@ -31,7 +31,7 @@ public class DestroyAfterAction : MonoBehaviour
     {
         if (playAnimOnAwake)
         {
-            Helpers.ChangeAnimationState(animator, animClip.name);
+            Helpers.ChangeAnimationState(animator, animClip.name, 1);
         }
     }
 

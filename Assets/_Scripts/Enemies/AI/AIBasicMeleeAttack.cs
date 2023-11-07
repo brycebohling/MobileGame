@@ -113,7 +113,7 @@ public class AIBasicMeleeAttack : AIBase
         {
             if (!isPlayingAttackAnim)
             {
-                Helpers.ChangeAnimationState(_animator, _aIStatesScript.baseAnimationClip.name);
+                Helpers.ChangeAnimationState(_animator, _aIStatesScript.baseAnimationClip.name, 1);
             }
 
             return;
@@ -129,22 +129,22 @@ public class AIBasicMeleeAttack : AIBase
 
         if (Mathf.Abs(angleToPlayer) <= 45)
         {
-            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Right].name);
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Right].name, 1);
             attackingDirection = Vector2.right;
 
         } else if (Mathf.Abs(angleToPlayer) >= 135)
         {
-            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Left].name);
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Left].name, 1);
             attackingDirection = Vector2.left;
 
         } else if (angleToPlayer < 135 && angleToPlayer > 45)
         {
-            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Up].name);
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Up].name, 1);
             attackingDirection = Vector2.up;
 
         } else
         {
-            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Down].name);
+            Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Down].name, 1);
             attackingDirection = Vector2.down;
         }   
 

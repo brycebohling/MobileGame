@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 2740292790087327688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73,8 +73,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6791156254564594249}
   - component: {fileID: 6032089312776332381}
-  - component: {fileID: 4207659065825706847}
   - component: {fileID: 2509082068607222299}
+  - component: {fileID: 4207659065825706847}
   m_Layer: 6
   m_Name: Bow
   m_TagString: Untagged
@@ -150,6 +150,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2509082068607222299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7214663341260355615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f3261cf4bc64d9fa22602364401460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackAnimList: []
+  BlockingActionStates: 02000000
+  arrowPrefab: {fileID: 2544284586929017096, guid: 5afeb15d851b04ab5938c5e91a95e4c8, type: 3}
+  attackPoint: {fileID: 3171175931114945425}
+  dmg: 10
+  attackPerSecond: 0.5
+  arrowSpeed: 10
+  knockBackForce: 5
+  drawBackArrow: {fileID: 7400000, guid: 3d44a18848737493d838e814ff06f8d4, type: 2}
+  releaseBow: {fileID: 7400000, guid: e1a03e00f3fbf40b8b7c473c96b4c772, type: 2}
 --- !u!95 &4207659065825706847
 Animator:
   serializedVersion: 5
@@ -171,24 +193,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2509082068607222299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7214663341260355615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f3261cf4bc64d9fa22602364401460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackAnimList: []
-  BlockingActionStates: 02000000
-  arrowPrefab: {fileID: 2544284586929017096, guid: 5afeb15d851b04ab5938c5e91a95e4c8, type: 3}
-  attackPoint: {fileID: 3171175931114945425}
-  dmg: 10
-  arrowSpeed: 10
-  knockBackForce: 5
-  drawBackArrow: {fileID: 7400000, guid: 3d44a18848737493d838e814ff06f8d4, type: 2}
-  releaseBow: {fileID: 7400000, guid: e1a03e00f3fbf40b8b7c473c96b4c772, type: 2}

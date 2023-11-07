@@ -140,12 +140,12 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void StartAnimation(Animator anim, AnimationClip animClip)
     {
-        Helpers.ChangeAnimationState(anim, animClip.name);
+        Helpers.ChangeAnimationState(anim, animClip.name, 1);
     }
 
     protected virtual void StopAnimation(Animator anim)
     {
-        Helpers.ChangeAnimationState(anim, _statesScript.baseAnimationClip.name);
+        Helpers.ChangeAnimationState(anim, _statesScript.baseAnimationClip.name, 1);
     }
 
     protected Vector2 GetPlayerCenter()

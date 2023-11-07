@@ -17,6 +17,8 @@ public class PlayerWeaponBase : MonoBehaviour
     protected virtual void Awake()
     {
         _inputManager = new InputManager();
+
+        Initialization();
     }
 
     protected virtual void Start()

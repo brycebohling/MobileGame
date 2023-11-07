@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class DefaultBow : PlayerWeaponBase
 {
@@ -12,6 +14,7 @@ public class DefaultBow : PlayerWeaponBase
     [SerializeField] Transform arrowPrefab;
     [SerializeField] Transform attackPoint;
     [SerializeField] float dmg;
+    [SerializeField] float attackPerSecond;
     [SerializeField] float arrowSpeed;
     [SerializeField] float knockBackForce;
     InputAction attackKeys;
@@ -19,6 +22,9 @@ public class DefaultBow : PlayerWeaponBase
     [Header("Animations")]
     [SerializeField] AnimationClip drawBackArrow;
     [SerializeField] AnimationClip releaseBow;
+
+    bool bowDrawnBack;
+    float animSpeed;
 
 
     protected override void Awake()
@@ -28,7 +34,9 @@ public class DefaultBow : PlayerWeaponBase
 
     protected override void Start()
     {
-        base.Start();
+        float totalAnimLength = drawBackArrow.length + releaseBow.length;
+
+        animSpeed = totalAnimLength / attackPerSecond;
     }
 
     private void OnEnable()
@@ -43,11 +51,13 @@ public class DefaultBow : PlayerWeaponBase
         attackKeys.Disable();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (!Helpers.IsAnimationPlaying(_animator, releaseBow.name))
+        if (!bowDrawnBack && !Helpers.IsAnimationPlaying(_animator, releaseBow.name))
         {
-            Helpers.ChangeAnimationState(_animator, drawBackArrow.name);
+            bowDrawnBack = true;
+
+            Helpers.ChangeAnimationState(_animator, drawBackArrow.name, animSpeed);
         }
     }
 
@@ -66,7 +76,9 @@ public class DefaultBow : PlayerWeaponBase
         
         Vector2 mouseDirection = attackPoint.position - transform.position;
         arrow.GetComponent<DefaultArrow>().Spawn(mouseDirection, arrowSpeed, dmg, knockBackForce);
+        
+        bowDrawnBack = false;
 
-        Helpers.ChangeAnimationState(_animator, releaseBow.name);        
+        Helpers.ChangeAnimationState(_animator, releaseBow.name, animSpeed);
     }
 }

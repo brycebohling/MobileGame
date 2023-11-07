@@ -61,7 +61,7 @@ public class AIExplode : AIBase
         
         _rb.velocity = Vector2.zero;
 
-        Helpers.ChangeAnimationState(_animator, explosionBuildUpAnim.name);
+        Helpers.ChangeAnimationState(_animator, explosionBuildUpAnim.name, 1);
         StartCoroutine(PlayExplosionColors());
 
         startedBuildUpExplosion = true;

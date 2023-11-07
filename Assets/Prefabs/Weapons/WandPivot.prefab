@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 162140336556402190}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -167,7 +167,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7413166034354534998, guid: 3327e046c453e47588b29656dbabc675, type: 3}
   attackPoint: {fileID: 8514285620135959952}
   dmg: 10
-  attackSpeed: 0.75
+  attackPerSecond: 0.5
   projectileSpeed: 5
   knockBackForce: 5
   emptyAnim: {fileID: 7400000, guid: 4c0fe12555b474418b49e3fda1c716fb, type: 2}

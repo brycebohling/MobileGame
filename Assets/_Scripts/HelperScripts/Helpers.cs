@@ -12,8 +12,9 @@ public static class Helpers
         Left,
     }
 
-    public static void ChangeAnimationState(Animator animator, string newState)
+    public static void ChangeAnimationState(Animator animator, string newState, float animSpeed)
     {
+        animator.speed = animSpeed;
         animator.Play(newState);
     }
 

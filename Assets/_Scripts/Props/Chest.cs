@@ -42,10 +42,10 @@ public class Chest : MonoBehaviour, IInteractable, IMultiDirectionalProp
             if (graphic.sprite == spriteRenderer.sprite)
             {
                 animator.enabled = true;
-                Helpers.ChangeAnimationState(animator, graphic.animationClip.name);
+                Helpers.ChangeAnimationState(animator, graphic.animationClip.name, 1);
             }
         }
-        
+
         OnOpen?.Invoke();
 
         Destroy(this);

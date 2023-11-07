@@ -41,7 +41,7 @@ public class Prop : MonoBehaviour
 
         if (brakingAnimsList.Count != 0)
         {
-            Helpers.ChangeAnimationState(animator, brakingAnimsList[0].brakingAnim.name);
+            Helpers.ChangeAnimationState(animator, brakingAnimsList[0].brakingAnim.name, 1);
         }
     }
 
@@ -69,7 +69,7 @@ public class Prop : MonoBehaviour
         {
             if (index.triggerHp == currentHealth)
             {
-                Helpers.ChangeAnimationState(animator, index.brakingAnim.name);
+                Helpers.ChangeAnimationState(animator, index.brakingAnim.name, 1);
                 break;
             }
         }

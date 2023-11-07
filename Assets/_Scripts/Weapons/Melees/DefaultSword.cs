@@ -65,7 +65,7 @@ public class DefaultSword : PlayerWeaponBase
             hitEnemy.GetComponent<Health>().Damage(dmg, knockBackForce, _playerTransform.position);
         }
 
-        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name);
+        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name, 1);
 
         if (_attackAnimList.Count <= lastAttackAnimIndex + 1)
         {
