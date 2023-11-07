@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -68,5 +65,5 @@ public class InputReaderSO : ScriptableObject, GameInput.IPlayerActions
     public void DisableAllInput()
 	{
 		gameInput.Player.Disable();
-	}
+    }
 }

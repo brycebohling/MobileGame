@@ -171,9 +171,9 @@ MonoBehaviour:
   attackPerSecond: 0.2
   knockBackForce: 5
   attackRadius: 0.8
-  enemyLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
 --- !u!95 &8206291504214590955
 Animator:
   serializedVersion: 5

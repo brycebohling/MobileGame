@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2939335641120327194}
   - component: {fileID: 5348241267711067543}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,6 +454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealth: 30
   startingHealth: 30
   IFrames: 0
@@ -549,7 +552,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1975
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

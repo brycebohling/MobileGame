@@ -14,7 +14,7 @@ public class DefaultSword : PlayerWeaponBase
     [SerializeField] float attackPerSecond;
     [SerializeField] float knockBackForce;
     [SerializeField] float attackRadius;
-    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] LayerMask targetLayer;
 
     InputAction attackKeys;
     int lastAttackAnimIndex = 0;
@@ -57,13 +57,16 @@ public class DefaultSword : PlayerWeaponBase
             {
                 return;
             }
-        }
+        }   
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, enemyLayer);
+        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, targetLayer);
 
-        foreach (Collider2D hitEnemy in hitEnemies)
+        foreach (Collider2D hitTarget in hitTargets)
         {
-            hitEnemy.GetComponent<Health>().Damage(dmg, knockBackForce, _playerTransform.position);
+            if (hitTarget.TryGetComponent(out Health healthScript))
+            {
+                healthScript.Damage(dmg, knockBackForce, _playerTransform.position);
+            }
         }
 
         float animSpeed = _attackAnimList[lastAttackAnimIndex].length / attackPerSecond;

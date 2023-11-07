@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,6 +11,7 @@ using UnityEditor;
 
 public class Health : MonoBehaviour
 {
+    public UnityEvent OnDeathEvent;
     public event Action OnDeath;
     public event Action<float, float, float, Vector2> OnDamaged;
     public event Action<float, float, float> OnHeal;
@@ -64,7 +67,7 @@ public class Health : MonoBehaviour
 
                 if (currentHealth <= 0)
                 {
-                    OnDeath?.Invoke();
+                    Death();
 
                 } else
                 {
@@ -83,9 +86,7 @@ public class Health : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                isDead = true;
-                OnDeath?.Invoke();
-            
+                Death();
             } else
             {
                 currentIFrames = 0;
@@ -101,8 +102,14 @@ public class Health : MonoBehaviour
         
         currentHealth = 0;
 
+        Death();
+    }
+
+    private void Death()
+    {
         isDead = true;
         OnDeath?.Invoke();
+        OnDeathEvent?.Invoke();
     }
 
     public void Heal(float healAmount)

@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6922825952343993301}
   - component: {fileID: 805682969620464087}
+  - component: {fileID: -3453044553222644595}
   - component: {fileID: -6601987504905014230}
   - component: {fileID: 3865783830464549890}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DeadSkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,6 +88,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3453044553222644595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839161488168621605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: a911055ba9bee40cebeafd49ce5f6092, type: 2}
+        m_TargetAssemblyTypeName: HelpersSO, Assembly-CSharp
+        m_MethodName: DestoryObj
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 839161488168621605}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  maxHealth: 3
+  startingHealth: 3
+  IFrames: 0
+  healthAsInt: 1
+  takeAConstantDamage: 1
+  constantDamage: 1
 --- !u!61 &-6601987504905014230
 BoxCollider2D:
   m_ObjectHideFlags: 0

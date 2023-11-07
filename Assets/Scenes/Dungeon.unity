@@ -5930,6 +5930,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3570665043756960891, guid: 54ae80b7fc8de45a68034ee16c08c056, type: 3}
+      propertyPath: knockBackForce
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8249492253277976297, guid: 54ae80b7fc8de45a68034ee16c08c056, type: 3}
       propertyPath: m_Name
       value: SwordPivot
@@ -7755,6 +7759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealth: 100
   startingHealth: 100
   IFrames: 0.5
