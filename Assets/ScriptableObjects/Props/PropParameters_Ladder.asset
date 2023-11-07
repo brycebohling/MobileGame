@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PropPrefab: {fileID: 3832244380902711699, guid: 9b3d39a2678a14cdf962fb829197f19f, type: 3}
   PropSize: {x: 3, y: 2}
+  PlacementOffset: {x: 1.5, y: 0.75}
   Corner: 1
   Inner: 1
   NearWallUp: 1
@@ -29,10 +30,8 @@ MonoBehaviour:
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1
-  hasVariants: 0
-  variants: []
-  fourSpriteDirections: 0
-  spriteFront: {fileID: 1607967250, guid: 3bd46f735b53642b2b2eabc71fc0cab6, type: 3}
-  spriteBack: {fileID: -404843770, guid: a3c35028639c64b49b107d080acded63, type: 3}
-  spriteRight: {fileID: -109614022, guid: a99ab324321ad48bd84493682033c3dc, type: 3}
-  spriteLeft: {fileID: -1013931186, guid: a54822fb0e3aa4d93b6e5974d519453f, type: 3}
+  HasVariants: 0
+  Variants: []
+  TwoSpriteDirections: 0
+  FourSpriteDirections: 0
+  PropGraphics: []
