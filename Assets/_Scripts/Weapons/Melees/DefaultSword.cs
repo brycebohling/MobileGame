@@ -11,6 +11,7 @@ public class DefaultSword : PlayerWeaponBase
     [Header("Attack")]
     [SerializeField] Transform attackPoint;
     [SerializeField] float dmg;
+    [SerializeField] float attackPerSecond;
     [SerializeField] float knockBackForce;
     [SerializeField] float attackRadius;
     [SerializeField] LayerMask enemyLayer;
@@ -65,7 +66,9 @@ public class DefaultSword : PlayerWeaponBase
             hitEnemy.GetComponent<Health>().Damage(dmg, knockBackForce, _playerTransform.position);
         }
 
-        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name, 1);
+        float animSpeed = _attackAnimList[lastAttackAnimIndex].length / attackPerSecond;
+
+        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name, animSpeed);
 
         if (_attackAnimList.Count <= lastAttackAnimIndex + 1)
         {
