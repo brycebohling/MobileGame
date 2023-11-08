@@ -9,21 +9,13 @@ public class AICollisions : AIBase
     [SerializeField] float knockBackForce;
 
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!IsActionAuth(BlockingActionStates)) return;
 
         if (other.gameObject.CompareTag("Player"))      
         {
             other.gameObject.GetComponent<Health>().Damage(collisionDmg, knockBackForce, transform.position);
-        }
-
-        if (_aIStatesScript.State == AIStates.States.Damaged)
-        {
-            if (TryGetComponent(out AIDamaged aIDamagedScript))
-            {
-                aIDamagedScript.RestDamagedState();
-            }
         }
     }
 
