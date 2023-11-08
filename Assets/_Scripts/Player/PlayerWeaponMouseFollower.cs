@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +18,8 @@ public class PlayerWeaponMouseFollower : PlayerBase
     Vector2 mouseWorldPosition;
 
     public bool isWeaponOnTheRight = true;
+
+    public float weaponAngle;
 
 
     protected override void Awake()
@@ -53,6 +53,8 @@ public class PlayerWeaponMouseFollower : PlayerBase
         Vector2 mouseRelativeToPlayPosition = mouseWorldPosition - GetPlayerCenter();
 
         float angle = Mathf.Atan2(mouseRelativeToPlayPosition.y, mouseRelativeToPlayPosition.x) * Mathf.Rad2Deg;
+
+        weaponAngle = angle;
 
         if (isWeaponOnTheRight)
         {

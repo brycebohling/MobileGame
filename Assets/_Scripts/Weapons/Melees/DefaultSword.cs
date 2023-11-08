@@ -13,9 +13,10 @@ public class DefaultSword : PlayerWeaponBase
     [SerializeField] float dmg;
     [SerializeField] float attackPerSecond;
     [SerializeField] float knockBackForce;
-    [SerializeField] float attackRadius;
+    [SerializeField] Vector2 attackBoxCollider;
     [SerializeField] LayerMask targetLayer;
-
+    
+    PlayerWeaponMouseFollower playerWeaponMouseFollowerScript;
     InputAction attackKeys;
     int lastAttackAnimIndex = 0;
 
@@ -27,7 +28,12 @@ public class DefaultSword : PlayerWeaponBase
 
     protected override void Start()
     {
-        base.Start();
+        playerWeaponMouseFollowerScript = GameManager.Gm.playerTransfrom?.GetComponent<PlayerWeaponMouseFollower>();
+
+        if (playerWeaponMouseFollowerScript == null)
+        {
+            Debug.LogWarning("playerWeaponMouseFollowerScript is null!");
+        }
     }
 
     private void OnEnable()
@@ -46,10 +52,10 @@ public class DefaultSword : PlayerWeaponBase
     {
         if (!IsActionAuth(BlockingActionStates)) return;
         
-        Attack();
+        HandleAction();
     }
 
-    private void Attack()
+    private void HandleAction()
     {
         foreach (AnimationClip anim in _attackAnimList)
         {
@@ -57,21 +63,9 @@ public class DefaultSword : PlayerWeaponBase
             {
                 return;
             }
-        }   
-
-        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, targetLayer);
-
-        foreach (Collider2D hitTarget in hitTargets)
-        {
-            if (hitTarget.TryGetComponent(out Health healthScript))
-            {
-                healthScript.Damage(dmg, knockBackForce, _playerTransform.position);
-            }
         }
 
-        float animSpeed = _attackAnimList[lastAttackAnimIndex].length / attackPerSecond;
-
-        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name, animSpeed);
+        PlayAttackAnim();
 
         if (_attackAnimList.Count <= lastAttackAnimIndex + 1)
         {
@@ -81,11 +75,31 @@ public class DefaultSword : PlayerWeaponBase
         {
             lastAttackAnimIndex++;
         }
-        
+    }
+
+    private void PlayAttackAnim()
+    {
+        float animSpeed = _attackAnimList[lastAttackAnimIndex].length / attackPerSecond;
+
+        Helpers.ChangeAnimationState(_animator, _attackAnimList[lastAttackAnimIndex].name, animSpeed);
+    }
+
+    public void Attack()
+    {
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.transform.position, attackBoxCollider, 
+            playerWeaponMouseFollowerScript.weaponAngle, targetLayer);
+
+        foreach (Collider2D hitTarget in hitTargets)
+        {
+            if (hitTarget.TryGetComponent(out Health healthScript))
+            {
+                healthScript.Damage(dmg, knockBackForce, _playerTransform.position);
+            }
+        }        
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+        Gizmos.DrawWireCube(attackPoint.position, attackBoxCollider);
     }
 }

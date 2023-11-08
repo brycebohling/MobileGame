@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class PlayerWeaponBase : MonoBehaviour
 {
     [Header("Weapon Base")]
@@ -23,13 +22,13 @@ public class PlayerWeaponBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        Initialization();
+        
     }
 
     private void Initialization()
     {
         _playerStatesScript = transform.root.gameObject.GetComponent<PlayerStates>();
-        _animator = gameObject.GetComponent<Animator>(); 
+        _animator = gameObject.GetComponentInChildren<Animator>(); 
         _playerTransform = transform.root;
     }
 

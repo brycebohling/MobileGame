@@ -29,11 +29,6 @@ public class DefaultWand : PlayerWeaponBase
         base.Awake();
     }
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     private void OnEnable()
     {
         attackKeys = _inputManager.Player.Fire;
