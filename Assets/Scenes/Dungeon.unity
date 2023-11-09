@@ -5835,7 +5835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2740292790087327688, guid: 57e13a91dcca240eeb8d744bc91d26be, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8307867392609697178, guid: 57e13a91dcca240eeb8d744bc91d26be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6813,6 +6813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPivot
       objectReference: {fileID: 0}
+    - target: {fileID: 8249492253277976297, guid: 54ae80b7fc8de45a68034ee16c08c056, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7431,9 +7435,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 621326213}
   - {fileID: 1008088591}
   - {fileID: 887590940}
+  - {fileID: 621326213}
   m_Father: {fileID: 1535558016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1339665216
