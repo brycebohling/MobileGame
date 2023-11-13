@@ -12,10 +12,20 @@ public class GameManager : MonoBehaviour
     {
         if (Gm != null && Gm != this)
         {
-            Debug.Log("More than one GameManager in a scene!");
+            Debug.LogWarning("More than one GameManager in a scene!");
         } else
         {
             Gm = this;
         }
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 1;
     }
 }

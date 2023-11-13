@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class AIDash : AIBase
     [SerializeField] float dashCooldownTime;
     [SerializeField] float targetingRadius;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask obstacleLayer;
     [SerializeField] AnimationClip preDashAnim;
     [SerializeField] AnimationClip dashAnim;
 
@@ -128,7 +130,7 @@ public class AIDash : AIBase
 
         StartAnimation(_animator, preDashAnim);
     }
-
+    
     private void Dash()
     {
         Vector2 direction = (GameManager.Gm.playerTransfrom.position - transform.position).normalized;
