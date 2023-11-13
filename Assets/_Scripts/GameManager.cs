@@ -21,11 +21,11 @@ public class GameManager : MonoBehaviour
 
     public void UnPauseGame()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
     }
 
     public void PauseGame()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
     }
 }
