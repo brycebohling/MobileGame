@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8d6963e338bfc454680e991d0c9b6215
+guid: daaf78a6156f04a2b9cb8c0ee81ec5f5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AlterUpgrades_0
+      name: AlterFireBall-Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,20 +131,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71a15018d1c0c469b9bcb118684730ea
-      internalID: 25270119
+      spriteID: aa5a4360a6c0547cb85a6d242ba2dbd9
+      internalID: -330353291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_1
+      name: AlterFireBall-Right_1
       rect:
         serializedVersion: 2
         x: 100
@@ -152,20 +152,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e24e1698a9b1c4821b830d2655309c7f
-      internalID: 469524700
+      spriteID: 41e597c9641034a6a8c597d3fca5174c
+      internalID: -1757353377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_2
+      name: AlterFireBall-Right_2
       rect:
         serializedVersion: 2
         x: 200
@@ -173,20 +173,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db9977909dcff44378d257ffe8d396a1
-      internalID: -696488555
+      spriteID: 884570588be0f41c4950b01fca4c36c2
+      internalID: 1944816920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_3
+      name: AlterFireBall-Right_3
       rect:
         serializedVersion: 2
         x: 300
@@ -194,20 +194,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 776f8e99524da42ca96ab07e5a29f51b
-      internalID: 222048377
+      spriteID: 60fc07eb1c3cb47d18c9ca3a10038e96
+      internalID: -163872165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_4
+      name: AlterFireBall-Right_4
       rect:
         serializedVersion: 2
         x: 400
@@ -215,20 +215,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e601bb81396544b2f9ee73fbbc9c0696
-      internalID: 1892094733
+      spriteID: ed239f507407146b68ebdf6ed50a1b8b
+      internalID: -543767982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_5
+      name: AlterFireBall-Right_5
       rect:
         serializedVersion: 2
         x: 500
@@ -236,20 +236,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d12144a4d996d48fdad003c099c4c4b3
-      internalID: 680397180
+      spriteID: 617e514a4c5b04b25a459e7c55829995
+      internalID: 1923758494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_6
+      name: AlterFireBall-Right_6
       rect:
         serializedVersion: 2
         x: 600
@@ -257,20 +257,20 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e11697691892343acb5e89fda66ab734
-      internalID: -1998456111
+      spriteID: 66145c05bd448494398ec0006b1a7f11
+      internalID: 1386312780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlterUpgrades_7
+      name: AlterFireBall-Right_7
       rect:
         serializedVersion: 2
         x: 700
@@ -278,143 +278,14 @@ TextureImporter:
         width: 100
         height: 108
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58229ce0e1d6b4abbbbf7a2e6b0b0f65
-      internalID: 112614014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlterUpgrades_8
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 100
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -50, y: -54}
-        - {x: -50, y: 54}
-        - {x: 50, y: 54}
-        - {x: 50, y: -54}
-      physicsShape:
-      - - {x: -28, y: -45}
-        - {x: -28, y: 28}
-        - {x: 30, y: 28}
-        - {x: 30, y: -45}
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd61050c41b484d07b4d86f78128d16f
-      internalID: 784464638
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlterUpgrades_9
-      rect:
-        serializedVersion: 2
-        x: 900
-        y: 0
-        width: 100
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -28, y: -45}
-        - {x: -28, y: 28}
-        - {x: 30, y: 28}
-        - {x: 30, y: -45}
-      tessellationDetail: 0
-      bones: []
-      spriteID: d06bf08608f4d402f808e68fc0c8c744
-      internalID: 1086352862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlterUpgrades_10
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 100
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -28, y: -45}
-        - {x: -28, y: 28}
-        - {x: 30, y: 28}
-        - {x: 30, y: -45}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 009d034cd892b4747b575c345d1bd007
-      internalID: 1539212371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlterUpgrades_11
-      rect:
-        serializedVersion: 2
-        x: 1100
-        y: 0
-        width: 100
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -28, y: -45}
-        - {x: -28, y: 28}
-        - {x: 30, y: 28}
-        - {x: 30, y: -45}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d7552822c8a74e2dbfa18434c3295b9
-      internalID: -1425526765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlterUpgrades_12
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 100
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -28, y: -45}
-        - {x: -28, y: 28}
-        - {x: 30, y: 28}
-        - {x: 30, y: -45}
-      tessellationDetail: 0
-      bones: []
-      spriteID: fed362c76ff394a17a4929c0c58ddc48
-      internalID: -1955490398
+      spriteID: 0bc56b63532034370b60ec77ba1557ba
+      internalID: 256784726
       vertices: []
       indices: 
       edges: []
@@ -430,19 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AlterUpgrades_0: 25270119
-      AlterUpgrades_1: 469524700
-      AlterUpgrades_10: 1539212371
-      AlterUpgrades_11: -1425526765
-      AlterUpgrades_12: -1955490398
-      AlterUpgrades_2: -696488555
-      AlterUpgrades_3: 222048377
-      AlterUpgrades_4: 1892094733
-      AlterUpgrades_5: 680397180
-      AlterUpgrades_6: -1998456111
-      AlterUpgrades_7: 112614014
-      AlterUpgrades_8: 784464638
-      AlterUpgrades_9: 1086352862
+      AlterFireBall-Right_0: -330353291
+      AlterFireBall-Right_1: -1757353377
+      AlterFireBall-Right_2: 1944816920
+      AlterFireBall-Right_3: -163872165
+      AlterFireBall-Right_4: -543767982
+      AlterFireBall-Right_5: 1923758494
+      AlterFireBall-Right_6: 1386312780
+      AlterFireBall-Right_7: 256784726
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
