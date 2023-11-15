@@ -32,7 +32,7 @@ namespace Pathfinding {
 			/// when it doesn't have to.
 			///
 			/// More precisely:
-			/// Let C be a circle centered at the destination for the last calculated path with a radius equal to the distance to that point divided by <see cref="sensitivity"/>.
+			/// Let C be a circle centered at the destination for the last calculated path, with a radius equal to the distance to that point divided by <see cref="sensitivity"/>.
 			/// If the new destination is outside that circle the path will be immediately recalculated.
 			/// Otherwise let F be the 1 - (distance from the circle's center to the new destination divided by the circle's radius).
 			/// So F will be 1 if the new destination is the same as the old one and 0 if it is at the circle's edge.
@@ -106,6 +106,10 @@ namespace Pathfinding {
 		public virtual void DidRecalculatePath (Vector3 destination) {
 			lastRepathTime = Time.time;
 			lastDestination = destination;
+			// Randomize the repath time slightly so that all agents don't request a path at the same time
+			// in the future. This is useful when there are a lot of agents instantiated at exactly the same time.
+			const float JITTER_AMOUNT = 0.3f;
+			lastRepathTime -= (UnityEngine.Random.value - 0.5f) * JITTER_AMOUNT * (mode == Mode.Dynamic ? maximumPeriod : period);
 		}
 
 		public void DrawGizmos (Vector3 position, float radius) {

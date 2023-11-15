@@ -112,7 +112,9 @@ namespace Pathfinding {
 		GraphTransform ITransformedGraph.transform { get { return transform; } }
 
 		/// <summary>\copydoc Pathfinding::NavMeshGraph::recalculateNormals</summary>
-		protected abstract bool RecalculateNormals { get; }
+		public abstract bool RecalculateNormals { get; }
+
+		public override bool isScanned => tiles != null;
 
 		/// <summary>
 		/// Returns a new transform which transforms graph space to world space.
@@ -240,8 +242,17 @@ namespace Pathfinding {
 			return new Int2((int)position.x, (int)position.z);
 		}
 
-		protected override void OnDestroy () {
-			base.OnDestroy();
+		protected override void DestroyAllNodes () {
+			// Remove cross-graph connections
+			GetNodes(node => {
+				node.GetConnections(other => {
+					if (node.GraphIndex != other.GraphIndex) other.RemoveConnection(node);
+				});
+			});
+			// Destroy all nodes
+			GetNodes(node => {
+				node.Destroy();
+			});
 
 			// Cleanup
 			TriangleMeshNode.SetNavmeshHolder(active.data.GetGraphIndex(this), null);
@@ -250,6 +261,7 @@ namespace Pathfinding {
 				for (int i = 0; i < tiles.Length; i++) {
 					Pathfinding.Util.ObjectPool<BBTree>.Release(ref tiles[i].bbTree);
 				}
+				tiles = null;
 			}
 		}
 
@@ -1468,18 +1480,20 @@ namespace Pathfinding {
 					sharedEdges[0] = sharedEdges[1] = sharedEdges[2] = false;
 
 					var node = tile.nodes[j];
-					for (int c = 0; c < node.connections.Length; c++) {
-						var other = node.connections[c].node as TriangleMeshNode;
+					if (node.connections != null) {
+						for (int c = 0; c < node.connections.Length; c++) {
+							var other = node.connections[c].node as TriangleMeshNode;
 
-						// Loop through neighbours to figure out which edges are shared
-						if (other != null && other.GraphIndex == node.GraphIndex) {
-							for (int v = 0; v < 3; v++) {
-								for (int v2 = 0; v2 < 3; v2++) {
-									if (node.GetVertexIndex(v) == other.GetVertexIndex((v2+1)%3) && node.GetVertexIndex((v+1)%3) == other.GetVertexIndex(v2)) {
-										// Found a shared edge with the other node
-										sharedEdges[v] = true;
-										v = 3;
-										break;
+							// Loop through neighbours to figure out which edges are shared
+							if (other != null && other.GraphIndex == node.GraphIndex) {
+								for (int v = 0; v < 3; v++) {
+									for (int v2 = 0; v2 < 3; v2++) {
+										if (node.GetVertexIndex(v) == other.GetVertexIndex((v2+1)%3) && node.GetVertexIndex((v+1)%3) == other.GetVertexIndex(v2)) {
+											// Found a shared edge with the other node
+											sharedEdges[v] = true;
+											v = 3;
+											break;
+										}
 									}
 								}
 							}

@@ -1,3 +1,54 @@
+## 4.2.19 (2023-11-14)
+- This release contains fixes and features that have been backported from the 4.3 beta.
+		The beta version contains a lot more exciting new features and fixes.
+		You can download the 4.3 beta at https://www.arongranberg.com/astar/download.
+- The documentation now has a dropdown to allow you to choose between different versions of the package, and a notification if you are viewing a previous version.
+	 	\shadowimage{changelog/documentation_version_dropdown.png}
+- Added a new tutorial: \ref traversal_provider.
+- You can now set a custom traversal provider on the Seeker component, and it will be applied to all path requests. See \reflink{Seeker.traversalProvider}.
+- Changed \link Pathfinding.Seeker.IsDone Seeker.IsDone\endlink to return true from within the OnPathComplete callback.
+		Previously it would always return false, which was confusing since the callback explicitly indicates that the path has been calculated.
+- Made the grid graph's collision visualization in the inspector green instead of blue.
+		This is done to make the connection to colliders more clear. The color is also easier to see against the grey background.
+- The \reflink{RaycastModifier} now defaults to graph raycasting in the pro version of the package.
+- The transform tool for the GameObject with the AstarPath component is now hidden to reduce clutter, as each graph has its own transform tool instead.
+- \reflink{AutoRepathPolicy} will now automatically randomly spread out path recalculations a bit to avoid many agents recalculating their paths at the same time.
+- Added \reflink{GraphMask.FromGraphIndex}.
+- Added an option for a custom edge filter in \reflink{GraphUtilities.GetContours}.
+- Added \reflink{GridGraph.GetNeighbourDirections}.
+- Added \reflink{NavGraph.isScanned}.
+- Added \reflink{NavGraph.IsInsideBounds}.
+- Added \reflink{GraphNode.ContainsPoint} and \reflink{GraphNode.ContainsPointInGraphSpace}.
+- Added \reflink{GridGraph.AlignToTilemap}.
+- Added \reflink{IAstarAI.endOfPath}.
+- Added \reflink{GridNodeBase.HasConnectionsToAllAxisAlignedNeighbours}.
+- Added \reflink{GraphUpdateScene.GetGraphUpdate}.
+- Added \reflink{ABPath.cost} for accessing the total cost of a calculated path.
+- Added a way to align a grid graph to a tilemap. Previously this has been quite tricky, especially for isometric and hexagonal tilemap layouts.
+		\shadowimage{gridgraph/align_to_tilemap.png}
+- Added ASTAR_LARGER_GRIDS which can be set under the Optimizations tab to enable grid graphs larger than 1024x1024.
+- Changed how \reflink{GridGraph.aspectRatio} works for isometric and hexagonal grid graphs. Now it works more intuitively to just make the nodes N times wider.
+		Before it only behaved properly for rectangular grid graphs.
+- Deprecated NNConstraint.Default. Use the equivalent \reflink{NNConstraint.Walkable} property instead, as this name is more descriptive.
+- Deprecated \reflink{AIPath.OnTargetReached}, \reflink{RichAI.OnTargetReached}, \reflink{AILerp.OnTargetReached}.
+		You can use \reflink{IAstarAI.reachedDestination} or \reflink{IAstarAI.reachedEndOfPath} instead.
+		The OnTargetReached method will continue to work as before, but using it is discouraged.
+- Deprecated the AdvancedSmooth modifier. It never worked particularly well, and given that no one has asked a single support question about it the last 5 years or so, I don't think a lot of people use it.
+- Fixed \link Pathfinding.IAstarAI.SetPath ai.SetPath\endlink did not accept paths if you called it from the OnPathComplete callback for the path.
+- Fixed the first tag color in the inspector would sometimes be initialized to completely transparent.
+- Fixed \reflink{NavmeshCut}s with custom meshes could calculate an incorrect bounding box, which could lead to it not updating some tiles, even if it was touching them.
+- Fixed \reflink{GraphUpdateScene.GetBounds} sometimes incorrectly returning an empty bounding box if the \a convex option was enabled.
+- Fixed some cases where a recast graph would miss some connections between nodes in different tiles. Especially if the shared edge was long.
+- Fixed Navmesh Cutting Update Interval would not be serialized, and therefore always reset to 0 when the game started.
+- Fixed the grid graph's collision preview showing the side view when using 2D physics even though that's irrelevant for 2D.
+- Fixed an exception could in rare circumstances be thrown when using \reflink{ABPath.calculatePartial}.
+- Fixed editor-only data would sometimes not be loaded from graphs, leading to some settings in the graph inspectors to be lost (e.g. if the grid graph's collision preview was open or closed).
+- Fixed \reflink{TriangleMeshNode.ContainsConnection} could throw an exception if the node had no connections at all.
+- Fixed calling \reflink{GraphUtilities.GetContours} with a grid graph that had one-way connections could cause an infinite loop.
+		Now an exception will be thrown if any one-way connections are found. This is reasonable because the contours of a grid graph are not really well-defined if any one-way connections exist.
+- Removed previously deprecated methods on the Path class: GetState, Log, LogError and ReleaseSilent. They have all been deprecated for over 5 years.
+- Removed previously deprecated methods on the AstarData class: GetGraphType(string), CreateGraph(string), AddGraph(string, and GetRaycastableGraphs. They have all been deprecated for over 5 years.
+
 ## 4.2.18 (2022-11-08)
 - This release contains fixes and features that have been backported from the 4.3 beta.
 		You can download the 4.3 beta at https://www.arongranberg.com/astar/download.
@@ -595,7 +646,7 @@
 		- Fixed some cases where the funnel modifier would produce incorrect results.
 		- Fixed typo in a private method in the AstarPath class. Renamed the UpdateGraphsInteral method to UpdateGraphsInternal.
 		- Fixed AIPath.remainingDistance and AIPath.targetReached could be incorrect for 1 frame when a new path had just been calculated (introduced in a previous beta release).
-	
+
 ## 4.0.11 (2017-09-09)
 - Fixed paths would ignore the ITraversalProvider (used for the turn based utilities) on the first node of the path, resulting in successful paths where they should have failed.
 - Fixed BlockManager.BlockMode.AllExceptSelector could often produce incorrect results. Thanks Cquels for spotting the bug.

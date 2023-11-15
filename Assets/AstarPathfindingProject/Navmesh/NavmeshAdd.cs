@@ -24,7 +24,7 @@ namespace Pathfinding {
 	/// cut away the NavmeshAdd object.
 	/// Then you can add links between the added geometry and the rest of the world, preferably using NodeLink3.
 	/// </summary>
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_navmesh_add.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_navmesh_add.php")]
 	public class NavmeshAdd : NavmeshClipper {
 		public enum MeshType {
 			Rectangle,

@@ -10,7 +10,7 @@ namespace Pathfinding {
 
 	[System.Serializable]
 	/// <summary>Stores editor colors</summary>
-	public class AstarColor {
+	public class AstarColor : ISerializationCallbackReceiver {
 		public Color _SolidColor;
 		public Color _UnwalkableNode;
 		public Color _BoundsHandles;
@@ -71,7 +71,7 @@ namespace Pathfinding {
 		/// It is a bit ugly though, but oh well.
 		/// </summary>
 		public void PushToStatic (AstarPath astar) {
-			_AreaColors  = _AreaColors ?? new Color[1];
+			_AreaColors  = _AreaColors ?? new Color[0];
 
 			SolidColor = _SolidColor;
 			UnwalkableNode = _UnwalkableNode;
@@ -80,6 +80,15 @@ namespace Pathfinding {
 			ConnectionHighLerp = _ConnectionHighLerp;
 			MeshEdgeColor = _MeshEdgeColor;
 			AreaColors = _AreaColors;
+		}
+
+		public void OnBeforeSerialize () {}
+
+		public void OnAfterDeserialize () {
+			// Patch bad initialization code in earlier versions that made it start out with a single transparent color.
+			if (_AreaColors != null && _AreaColors.Length == 1 && _AreaColors[0] == default) {
+				_AreaColors = new Color[0];
+			}
 		}
 
 		public AstarColor () {
@@ -161,7 +170,7 @@ namespace Pathfinding {
 		/// GraphMask mask1 = GraphMask.FromGraphName("My Grid Graph");
 		/// GraphMask mask2 = GraphMask.FromGraphName("My Other Grid Graph");
 		///
-		/// NNConstraint nn = NNConstraint.Default;
+		/// NNConstraint nn = NNConstraint.Walkable;
 		///
 		/// nn.graphMask = mask1 | mask2;
 		///
@@ -255,8 +264,24 @@ namespace Pathfinding {
 		/// Equivalent to new NNConstraint ().
 		/// This NNConstraint has settings which works for most, it only finds walkable nodes
 		/// and it constrains distance set by A* Inspector -> Settings -> Max Nearest Node Distance
+		///
+		/// Deprecated: Use <see cref="NNConstraint.Walkable"/> instead. It is equivalent, but the name is more descriptive.
 		/// </summary>
+		[System.Obsolete("Use NNConstraint.Walkable instead. It is equivalent, but the name is more descriptive")]
 		public static NNConstraint Default {
+			get {
+				return new NNConstraint();
+			}
+		}
+
+
+		/// <summary>
+		/// An NNConstraint which filters out unwalkable nodes.
+		/// This is the most commonly used NNConstraint.
+		///
+		/// It also constrains the nearest node to be within the distance set by A* Inspector -> Settings -> Max Nearest Node Distance
+		/// </summary>
+		public static NNConstraint Walkable {
 			get {
 				return new NNConstraint();
 			}
@@ -918,7 +943,7 @@ namespace Pathfinding {
 	/// GraphMask mask1 = GraphMask.FromGraphName("My Grid Graph");
 	/// GraphMask mask2 = GraphMask.FromGraphName("My Other Grid Graph");
 	///
-	/// NNConstraint nn = NNConstraint.Default;
+	/// NNConstraint nn = NNConstraint.Walkable;
 	///
 	/// nn.graphMask = mask1 | mask2;
 	///
@@ -977,13 +1002,16 @@ namespace Pathfinding {
 			return value.ToString();
 		}
 
+		/// <summary>A bitmask containing the given graph index.</summary>
+		public static GraphMask FromGraphIndex(uint graphIndex) => new GraphMask(1 << (int)graphIndex);
+
 		/// <summary>
 		/// A bitmask containing the first graph with the given name.
 		/// <code>
 		/// GraphMask mask1 = GraphMask.FromGraphName("My Grid Graph");
 		/// GraphMask mask2 = GraphMask.FromGraphName("My Other Grid Graph");
 		///
-		/// NNConstraint nn = NNConstraint.Default;
+		/// NNConstraint nn = NNConstraint.Walkable;
 		///
 		/// nn.graphMask = mask1 | mask2;
 		///
@@ -1181,12 +1209,20 @@ namespace Pathfinding {
 
 	/// <summary>Internal state of a path in the pipeline</summary>
 	public enum PathState {
+		/// <summary>Path has been created but not yet scheduled</summary>
 		Created = 0,
+		/// <summary>Path is waiting to be calculated</summary>
 		PathQueue = 1,
+		/// <summary>Path is being calculated</summary>
 		Processing = 2,
+		/// <summary>Path is calculated and is waiting to have its callback called</summary>
 		ReturnQueue = 3,
-		Returned = 4
+		/// <summary>The path callback is being called right now (only set inside the callback itself)</summary>
+		Returning = 4,
+		/// <summary>The path has been calculated and its callback has been called</summary>
+		Returned = 5,
 	}
+
 
 	/// <summary>State of a path request</summary>
 	public enum PathCompleteState {

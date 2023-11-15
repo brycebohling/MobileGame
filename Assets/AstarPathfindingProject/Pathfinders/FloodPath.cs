@@ -125,8 +125,6 @@ namespace Pathfinding {
 		}
 
 		protected override void Prepare () {
-			AstarProfiler.StartProfile("Get Nearest");
-
 			if (startNode == null) {
 				//Initialize the NNConstraint
 				nnConstraint.tags = enabledTags;
@@ -140,8 +138,6 @@ namespace Pathfinding {
 			} else {
 				startPoint = (Vector3)startNode.position;
 			}
-
-			AstarProfiler.EndProfile();
 
 #if ASTARDEBUG
 			Debug.DrawLine((Vector3)startNode.position, startPoint, Color.blue);
@@ -186,12 +182,9 @@ namespace Pathfinding {
 		protected override void CalculateStep (long targetTick) {
 			int counter = 0;
 
-			//Continue to search as long as we haven't encountered an error and we haven't found the target
+			// Continue to search as long as we haven't encountered an error and we haven't found the target
 			while (CompleteState == PathCompleteState.NotCalculated) {
 				searchedNodes++;
-
-				AstarProfiler.StartFastProfile(4);
-				//Debug.DrawRay ((Vector3)currentR.node.Position, Vector3.up*2,Color.red);
 
 				//Loop through all walkable neighbours of the node and add them to the open list.
 				currentR.node.Open(this, currentR, pathHandler);
@@ -199,20 +192,16 @@ namespace Pathfinding {
 				// Insert into internal search tree
 				if (saveParents) parents[currentR.node] = currentR.parent.node;
 
-				AstarProfiler.EndFastProfile(4);
-
-				//any nodes left to search?
+				// Any nodes left to search?
 				if (pathHandler.heap.isEmpty) {
 					CompleteState = PathCompleteState.Complete;
 					break;
 				}
 
-				//Select the node with the lowest F score and remove it from the open list
-				AstarProfiler.StartFastProfile(7);
+				// Select the node with the lowest F score and remove it from the open list
 				currentR = pathHandler.heap.Remove();
-				AstarProfiler.EndFastProfile(7);
 
-				//Check for time every 500 nodes, roughly every 0.5 ms usually
+				// Check for time every 500 nodes, roughly every 0.5 ms usually
 				if (counter > 500) {
 					//Have we exceded the maxFrameTime, if so we should wait one frame before continuing the search since we don't want the game to lag
 					if (DateTime.UtcNow.Ticks >= targetTick) {

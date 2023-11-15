@@ -15,7 +15,7 @@ namespace Pathfinding.Examples {
 	/// done so that it won't spawn effects too close to the previous spawn-point.
 	/// [Open online documentation to see images]
 	/// </summary>
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_examples_1_1_mine_bot_animation.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_examples_1_1_mine_bot_animation.php")]
 	public class MineBotAnimation : VersionedMonoBehaviour {
 		/// <summary>
 		/// Animation component.

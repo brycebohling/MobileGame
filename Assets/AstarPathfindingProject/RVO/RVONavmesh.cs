@@ -20,7 +20,7 @@ namespace Pathfinding.RVO {
 	/// [Open online documentation to see images]
 	/// </summary>
 	[AddComponentMenu("Pathfinding/Local Avoidance/RVO Navmesh")]
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_r_v_o_1_1_r_v_o_navmesh.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_r_v_o_1_1_r_v_o_navmesh.php")]
 	public class RVONavmesh : GraphModifier {
 		/// <summary>
 		/// Height of the walls added for each obstacle edge.

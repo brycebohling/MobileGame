@@ -15,7 +15,7 @@ namespace Pathfinding {
 	/// See: modifiers (view in online documentation for working links)
 	/// </summary>
 	[AddComponentMenu("Pathfinding/Seeker")]
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_seeker.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_seeker.php")]
 	public class Seeker : VersionedMonoBehaviour {
 		/// <summary>
 		/// Enables drawing of the last calculated path using Gizmos.
@@ -81,7 +81,7 @@ namespace Pathfinding {
 		/// GraphMask mask1 = GraphMask.FromGraphName("My Grid Graph");
 		/// GraphMask mask2 = GraphMask.FromGraphName("My Other Grid Graph");
 		///
-		/// NNConstraint nn = NNConstraint.Default;
+		/// NNConstraint nn = NNConstraint.Walkable;
 		///
 		/// nn.graphMask = mask1 | mask2;
 		///
@@ -98,6 +98,19 @@ namespace Pathfinding {
 		/// </summary>
 		[HideInInspector]
 		public GraphMask graphMask = GraphMask.everything;
+
+		/// <summary>
+		/// Custom traversal provider to calculate which nodes are traversable and their penalties.
+		///
+		/// This can be used to override the built-in pathfinding logic.
+		///
+		/// <code>
+		/// seeker.traversalProvider = new MyCustomTraversalProvider();
+		/// </code>
+		///
+		/// See: traversal_provider (view in online documentation for working links)
+		/// </summary>
+		public ITraversalProvider traversalProvider;
 
 		/// <summary>Used for serialization backwards compatibility</summary>
 		[UnityEngine.Serialization.FormerlySerializedAs("graphMask")]
@@ -116,6 +129,7 @@ namespace Pathfinding {
 		/// <summary>Called after a path has been calculated, right before modifiers are executed.</summary>
 		public OnPathDelegate postProcessPath;
 
+#if UNITY_EDITOR
 		/// <summary>Used for drawing gizmos</summary>
 		[System.NonSerialized]
 		List<Vector3> lastCompletedVectorPath;
@@ -123,6 +137,7 @@ namespace Pathfinding {
 		/// <summary>Used for drawing gizmos</summary>
 		[System.NonSerialized]
 		List<GraphNode> lastCompletedNodePath;
+#endif
 
 		/// <summary>The current path</summary>
 		[System.NonSerialized]
@@ -167,11 +182,9 @@ namespace Pathfinding {
 		/// Path that is currently being calculated or was last calculated.
 		/// You should rarely have to use this. Instead get the path when the path callback is called.
 		///
-		/// See: pathCallback
+		/// See: <see cref="StartPath"/>
 		/// </summary>
-		public Path GetCurrentPath () {
-			return path;
-		}
+		public Path GetCurrentPath() => path;
 
 		/// <summary>
 		/// Stop calculating the current path request.
@@ -205,7 +218,7 @@ namespace Pathfinding {
 		/// See: <see cref="ReleaseClaimedPath"/>
 		/// See: <see cref="startEndModifier"/>
 		/// </summary>
-		public void OnDestroy () {
+		void OnDestroy () {
 			ReleaseClaimedPath();
 			startEndModifier.OnDestroy(this);
 		}
@@ -244,8 +257,7 @@ namespace Pathfinding {
 		/// Post Processes the path.
 		/// This will run any modifiers attached to this GameObject on the path.
 		/// This is identical to calling RunModifiers(ModifierPass.PostProcess, path)
-		/// See: RunModifiers
-		/// Since: Added in 3.2
+		/// See: <see cref="RunModifiers"/>
 		/// </summary>
 		public void PostProcess (Path path) {
 			RunModifiers(ModifierPass.PostProcess, path);
@@ -272,21 +284,16 @@ namespace Pathfinding {
 		/// Is the current path done calculating.
 		/// Returns true if the current <see cref="path"/> has been returned or if the <see cref="path"/> is null.
 		///
-		/// Note: Do not confuse this with Pathfinding.Path.IsDone. They usually return the same value, but not always
-		/// since the path might be completely calculated, but it has not yet been processed by the Seeker.
+		/// Note: Do not confuse this with Pathfinding.Path.IsDone. They usually return the same value, but not always.
+		/// The path might be completely calculated, but has not yet been processed by the Seeker.
 		///
-		/// Since: Added in 3.0.8
-		/// Version: Behaviour changed in 3.2
+		/// Inside the OnPathComplete callback this method will return true.
+		///
+		/// Version: Before version 4.2.19 this would return false inside the OnPathComplete callback. However this behaviour was unintuitive.
 		/// </summary>
-		public bool IsDone () {
-			return path == null || path.PipelineState >= PathState.Returned;
-		}
+		public bool IsDone() => path == null || path.PipelineState >= PathState.Returning;
 
-		/// <summary>
-		/// Called when a path has completed.
-		/// This should have been implemented as optional parameter values, but that didn't seem to work very well with delegates (the values weren't the default ones)
-		/// See: OnPathComplete(Path,bool,bool)
-		/// </summary>
+		/// <summary>Called when a path has completed</summary>
 		void OnPathComplete (Path path) {
 			OnPathComplete(path, true, true);
 		}
@@ -311,8 +318,10 @@ namespace Pathfinding {
 			if (sendCallbacks) {
 				p.Claim(this);
 
+#if UNITY_EDITOR
 				lastCompletedNodePath = p.path;
 				lastCompletedVectorPath = p.vectorPath;
+#endif
 
 				// This will send the path to the callback (if any) specified when calling StartPath
 				if (tmpPathCallback != null) {
@@ -470,6 +479,7 @@ namespace Pathfinding {
 
 			p.enabledTags = traversableTags;
 			p.tagPenalties = tagPenalties;
+			if (traversalProvider != null) p.traversalProvider = traversalProvider;
 
 			// Cancel a previously requested path is it has not been processed yet and also make sure that it has not been recycled and used somewhere else
 			if (path != null && path.PipelineState <= PathState.Processing && path.CompleteState != PathCompleteState.Error && lastPathID == path.pathID) {
@@ -562,6 +572,7 @@ namespace Pathfinding {
 			return p;
 		}
 
+#if UNITY_EDITOR
 		/// <summary>Draws gizmos for the Seeker</summary>
 		public void OnDrawGizmos () {
 			if (lastCompletedNodePath == null || !drawGizmos) {
@@ -586,6 +597,7 @@ namespace Pathfinding {
 				}
 			}
 		}
+#endif
 
 		protected override int OnUpgradeSerializedData (int version, bool unityThread) {
 			if (graphMaskCompatibility != -1) {

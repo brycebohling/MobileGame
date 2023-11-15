@@ -190,7 +190,7 @@ namespace Pathfinding {
 		}
 
 		/// <summary>Exports the INavmesh graph to a .obj file</summary>
-		public static void ExportToFile (RecastGraph target) {
+		public static void ExportToFile (NavmeshBase target) {
 			//INavmesh graph = (INavmesh)target;
 			if (target == null) return;
 

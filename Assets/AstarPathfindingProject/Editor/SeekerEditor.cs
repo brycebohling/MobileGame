@@ -123,6 +123,10 @@ namespace Pathfinding {
 				EditorGUILayout.EndHorizontal();
 			}
 
+			if (scripts.Count > 0 && scripts[0].traversalProvider != null) {
+				EditorGUILayout.HelpBox("A custom traversal provider has been set", MessageType.None);
+			}
+
 			// Make sure we don't leak any memory
 			scripts.Clear();
 		}

@@ -197,6 +197,7 @@ namespace Pathfinding {
 				endPoint = targetPoints[target];
 				originalEndPoint = originalTargetPoints[target];
 			}
+			cost =  path != null? pathHandler.GetPathNode(endNode).G : 0;
 		}
 
 		protected override void ReturnPath () {
@@ -592,9 +593,7 @@ namespace Pathfinding {
 				}
 
 				// Select the node with the lowest F score and remove it from the open list
-				AstarProfiler.StartFastProfile(7);
 				currentR = pathHandler.heap.Remove();
-				AstarProfiler.EndFastProfile(7);
 
 				// Check for time every 500 nodes, roughly every 0.5 ms usually
 				if (counter > 500) {

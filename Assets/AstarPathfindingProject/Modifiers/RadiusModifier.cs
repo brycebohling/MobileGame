@@ -28,7 +28,7 @@ namespace Pathfinding {
 	/// Since: Added in 3.2.6
 	/// </summary>
 	[AddComponentMenu("Pathfinding/Modifiers/Radius Offset")]
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_radius_modifier.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_radius_modifier.php")]
 	public class RadiusModifier : MonoModifier {
 #if UNITY_EDITOR
 		[UnityEditor.MenuItem("CONTEXT/Seeker/Add Radius Modifier")]

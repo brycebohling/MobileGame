@@ -34,7 +34,7 @@ namespace Pathfinding {
 	/// Note: Using erosion on grid graphs can significantly lower the performance when updating graphs.
 	/// Each erosion iteration requires expanding the region that is updated by 1 node.
 	/// </summary>
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_procedural_grid_mover.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_procedural_grid_mover.php")]
 	public class ProceduralGridMover : VersionedMonoBehaviour {
 		/// <summary>
 		/// Graph will be updated if the target is more than this number of nodes from the graph center.

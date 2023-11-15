@@ -78,7 +78,7 @@ namespace Pathfinding {
 		[JsonMember]
 		Vector3 cachedSourceMeshBoundsMin;
 
-		protected override bool RecalculateNormals { get { return recalculateNormals; } }
+		public override bool RecalculateNormals { get { return recalculateNormals; } }
 
 		public override float TileWorldSizeX {
 			get {
@@ -97,6 +97,25 @@ namespace Pathfinding {
 				// Tiles are not supported, so this is irrelevant
 				return 0f;
 			}
+		}
+
+		/// <summary>
+		/// True if the point is inside the bounding box of this graph.
+		///
+		/// Warning: If your input mesh is entirely flat, the bounding box will also end up entirely flat (with a height of zero), this will make this function always return false for almost all points, unless they are at exactly the right y-coordinate.
+		///
+		/// Note: For an unscanned graph, this will always return false.
+		/// </summary>
+		public override bool IsInsideBounds (Vector3 point) {
+			if (this.tiles == null || this.tiles.Length == 0 || sourceMesh == null) return false;
+
+			var local = transform.InverseTransform(point);
+			var size = sourceMesh.bounds.size*scale;
+
+			// Allow a small margin
+			const float EPS = 0.0001f;
+
+			return local.x >= -EPS && local.y >= -EPS && local.z >= -EPS && local.x <= size.x + EPS && local.y <= size.y + EPS && local.z <= size.z + EPS;
 		}
 
 		public override GraphTransform CalculateTransform () {

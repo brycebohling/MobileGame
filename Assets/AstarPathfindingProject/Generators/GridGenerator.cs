@@ -189,7 +189,7 @@ namespace Pathfinding {
 		public float aspectRatio = 1F;
 
 		/// <summary>
-		/// Angle to use for the isometric projection.
+		/// Angle in degrees to use for the isometric projection.
 		/// If you are making a 2D isometric game, you may want to use this parameter to adjust the layout of the graph to match your game.
 		/// This will essentially scale the graph along one of its diagonals to produce something like this:
 		///
@@ -442,6 +442,50 @@ namespace Pathfinding {
 		/// <summary>In GetNearestForce, determines how far to search after a valid node has been found</summary>
 		public const int getNearestForceOverlap = 2;
 
+		/// <summary>Which neighbours are going to be used when <see cref="neighbours"/>=4</summary>
+		internal static readonly int[] axisAlignedNeighbourIndices = { 0, 1, 2, 3 };
+
+		/// <summary>Which neighbours are going to be used when <see cref="neighbours"/>=8</summary>
+		internal static readonly int[] allNeighbourIndices = { 0, 1, 2, 3, 4, 5, 6, 7 };
+
+		/// <summary>
+		/// Neighbour direction indices to use depending on how many neighbours each node should have.
+		///
+		/// The following illustration shows the direction indices for all 8 neighbours,
+		/// <code>
+		///         Z
+		///         |
+		///         |
+		///
+		///      6  2  5
+		///       \ | /
+		/// --  3 - X - 1  ----- X
+		///       / | \
+		///      7  0  4
+		///
+		///         |
+		///         |
+		/// </code>
+		///
+		/// For other neighbour counts, a subset of these will be returned.
+		///
+		/// These can then be used to index into the <see cref="neighbourOffsets"/>, <see cref="neighbourCosts"/>, <see cref="neighbourXOffsets"/>, and <see cref="neighbourZOffsets"/> arrays.
+		///
+		/// See: <see cref="GridNodeBase.HasConnectionInDirection"/>
+		/// See: <see cref="GridNodeBase.GetNeighbourAlongDirection"/>
+		/// </summary>
+		public static int[] GetNeighbourDirections (NumNeighbours neighbours) {
+			switch (neighbours) {
+			case NumNeighbours.Four:
+				return axisAlignedNeighbourIndices;
+			case NumNeighbours.Six:
+				return hexagonNeighbourIndices;
+			default:
+				return allNeighbourIndices;
+			}
+		}
+
+
 		/// <summary>
 		/// All nodes in this graph.
 		/// Nodes are laid out row by row.
@@ -484,6 +528,8 @@ namespace Pathfinding {
 				}
 			}
 		}
+
+		public override bool isScanned => nodes != null;
 
 		/// <summary>Used for using a texture as a source for a grid graph.</summary>
 		public class TextureData {
@@ -590,6 +636,25 @@ namespace Pathfinding {
 				var height = previousTransform.InverseTransform((Vector3)node.position).y;
 				node.position = GraphPointToWorld(gnode.XCoordinateInGrid, gnode.ZCoordinateInGrid, height);
 			});
+		}
+
+		/// <summary>
+		/// True if the point is inside the bounding box of this graph.
+		///
+		/// For a graph that uses 2D physics, or if height testing is disabled, then the graph is treated as infinitely tall.
+		/// Otherwise, the height of the graph is determined by <see cref="GraphCollision.fromHeight"/>.
+		///
+		/// Note: For an unscanned graph, this will always return false.
+		/// </summary>
+		public override bool IsInsideBounds (Vector3 point) {
+			if (this.nodes == null) return false;
+
+			var local = transform.InverseTransform(point);
+			if (!(local.x >= 0 && local.z >= 0 && local.x <= width && local.z <= depth)) return false;
+
+			if (collision.use2D || !collision.heightCheck) return true;
+
+			return local.y >= 0 && local.y <= collision.fromHeight;
 		}
 
 		/// <summary>
@@ -767,6 +832,79 @@ namespace Pathfinding {
 			inspectorGridMode = shape;
 		}
 		/// <summary>
+		/// Aligns this grid to a given tilemap or grid layout.
+		///
+		/// This is very handy if your game uses a tilemap for rendering and you want to make sure the graph is laid out exactly the same.
+		/// Matching grid parameters manually can be quite tricky in some cases.
+		///
+		/// The inspector will automatically show a button to align to a tilemap if one is detected in the scene.
+		/// </summary>
+		public void AlignToTilemap (UnityEngine.GridLayout grid) {
+			var origin = grid.CellToWorld(new Vector3Int(0, 0, 0));
+			var dx = grid.CellToWorld(new Vector3Int(1, 0, 0)) - origin;
+			var dy = grid.CellToWorld(new Vector3Int(0, 1, 0)) - origin;
+
+			switch (grid.cellLayout) {
+			case GridLayout.CellLayout.Rectangle: {
+				var rot = Quaternion.LookRotation(dy.normalized, -Vector3.Cross(dx, dy).normalized);
+				this.nodeSize = dy.magnitude;
+				this.isometricAngle = 0f;
+				this.aspectRatio = dx.magnitude / this.nodeSize;
+				if (float.IsInfinity(this.aspectRatio) || float.IsNaN(this.aspectRatio)) this.aspectRatio = 1.0f;
+				this.rotation = rot.eulerAngles;
+				this.uniformEdgeCosts = false;
+				if (this.neighbours == NumNeighbours.Six) this.neighbours = NumNeighbours.Eight;
+				this.inspectorGridMode = InspectorGridMode.Grid;
+				break;
+			}
+			case GridLayout.CellLayout.Isometric:
+				var d1 = grid.CellToWorld(new Vector3Int(1, 1, 0)) - origin;
+				var d2 = grid.CellToWorld(new Vector3Int(1, -1, 0)) - origin;
+				if (d1.magnitude > d2.magnitude) {
+					Memory.Swap(ref d1, ref d2);
+				}
+				var rot2 = Quaternion.LookRotation(d1.normalized, -Vector3.Cross(d2, d1).normalized) * Quaternion.Euler(0, -45.0f, 0);
+
+				this.isometricAngle = Mathf.Acos(d1.magnitude / d2.magnitude) * Mathf.Rad2Deg;
+				this.nodeSize = d2.magnitude / Mathf.Sqrt(2.0f);
+				this.rotation = rot2.eulerAngles;
+				this.uniformEdgeCosts = false;
+				this.aspectRatio = 1.0f;
+				if (this.neighbours == NumNeighbours.Six) this.neighbours = NumNeighbours.Eight;
+				this.inspectorGridMode = InspectorGridMode.IsometricGrid;
+				break;
+			case GridLayout.CellLayout.Hexagon:
+				// Note: Unity does not use a mathematically perfect hexagonal layout by default. The cells can be squished vertically or horizontally.
+				var d12 = grid.CellToWorld(new Vector3Int(1, 0, 0)) - origin;
+				var d22 = grid.CellToWorld(new Vector3Int(0, 1, 0)) - origin;
+				var d32 = grid.CellToWorld(new Vector3Int(-1, 1, 0)) - origin;
+				this.aspectRatio = (d12.magnitude / Mathf.Sqrt(2f/3f)) / (Vector3.Cross(d12.normalized, d32).magnitude / (1.5f * Mathf.Sqrt(2)/3f));
+				this.nodeSize = GridGraph.ConvertHexagonSizeToNodeSize(InspectorGridHexagonNodeSize.Width, d12.magnitude / aspectRatio);
+
+				var crossAxis = -Vector3.Cross(d12, Vector3.Cross(d12, d32));
+
+				var rot3 = Quaternion.LookRotation(crossAxis.normalized, -Vector3.Cross(d12, crossAxis).normalized);
+
+				this.rotation = rot3.eulerAngles;
+				this.uniformEdgeCosts = true;
+				this.neighbours = NumNeighbours.Six;
+				this.inspectorGridMode = InspectorGridMode.Hexagonal;
+				break;
+			}
+
+			// Snap center to the closest grid point
+			UpdateTransform();
+			var layoutCellPivotIsCenter = grid.cellLayout == GridLayout.CellLayout.Hexagon;
+			var offset = new Vector3(((width % 2) == 0) != layoutCellPivotIsCenter ? 0 : 0.5f, 0, ((depth % 2) == 0) != layoutCellPivotIsCenter ? 0f : 0.5f);
+			var worldOffset = transform.TransformVector(offset);
+			var centerCell = grid.WorldToCell(center + worldOffset);
+			centerCell.z = 0;
+			center = grid.CellToWorld(centerCell) - worldOffset;
+			if (float.IsNaN(center.x)) center = Vector3.zero;
+			UpdateTransform();
+		}
+
+		/// <summary>
 		/// Updates <see cref="unclampedSize"/> from <see cref="width"/>, <see cref="depth"/> and <see cref="nodeSize"/> values.
 		/// Also <see cref="UpdateTransform generates a new"/>.
 		/// Note: This does not rescan the graph, that must be done with Scan
@@ -830,30 +968,42 @@ namespace Pathfinding {
 		/// See: <see cref="UpdateTransform"/>
 		/// </summary>
 		public GraphTransform CalculateTransform () {
-			int newWidth, newDepth;
-			float newNodeSize;
+			CalculateDimensions(out var newWidth, out var newDepth, out var newNodeSize);
 
-			CalculateDimensions(out newWidth, out newDepth, out newNodeSize);
+			if (this.neighbours == NumNeighbours.Six) {
+				var ax1 = new Vector3(newNodeSize*aspectRatio*Mathf.Sqrt(2f/3f), 0, 0);
+				var ax2 = new Vector3(0, 1, 0);
+				var ax3 = new Vector3(-aspectRatio * newNodeSize * 0.5f * Mathf.Sqrt(2f/3f), 0, newNodeSize * (1.5f * Mathf.Sqrt(2)/3f));
+				var m = new Matrix4x4(
+					(Vector4)ax1,
+					(Vector4)ax2,
+					(Vector4)ax3,
+					new Vector4(0, 0, 0, 1)
+					);
 
-			// Generate a matrix which shrinks the graph along one of the diagonals
-			// corresponding to the isometricAngle
-			var isometricMatrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 45, 0), Vector3.one);
-			isometricMatrix = Matrix4x4.Scale(new Vector3(Mathf.Cos(Mathf.Deg2Rad*isometricAngle), 1, 1)) * isometricMatrix;
-			isometricMatrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, -45, 0), Vector3.one) * isometricMatrix;
+				var boundsMatrix = Matrix4x4.TRS(center, Quaternion.Euler(rotation), Vector3.one) * m;
 
-			// Generate a matrix for the bounds of the graph
-			// This moves a point to the correct offset in the world and the correct rotation and the aspect ratio and isometric angle is taken into account
-			// The unit is still world units however
-			var boundsMatrix = Matrix4x4.TRS(center, Quaternion.Euler(rotation), new Vector3(aspectRatio, 1, 1)) * isometricMatrix;
+				// Generate a matrix where Vector3.zero is the corner of the graph instead of the center
+				m = Matrix4x4.TRS(boundsMatrix.MultiplyPoint3x4(-new Vector3(newWidth, 0, newDepth)*0.5F), Quaternion.Euler(rotation), Vector3.one) * m;
+				return new GraphTransform(m);
+			} else {
+				// Generate a matrix which shrinks the graph along the main diagonal
+				var squishFactor = new Vector3(Mathf.Cos(Mathf.Deg2Rad*isometricAngle), 1, 1);
+				var isometricMatrix = Matrix4x4.Scale(new Vector3(newNodeSize*aspectRatio, 1, newNodeSize));
+				var squishAngle = Mathf.Atan2(newNodeSize, newNodeSize*aspectRatio) * Mathf.Rad2Deg;
+				isometricMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -squishAngle, 0)) * Matrix4x4.Scale(squishFactor) * Matrix4x4.Rotate(Quaternion.Euler(0, squishAngle, 0)) * isometricMatrix;
 
-			// Generate a matrix where Vector3.zero is the corner of the graph instead of the center
-			// The unit is nodes here (so (0.5,0,0.5) is the position of the first node and (1.5,0,0.5) is the position of the second node)
-			// 0.5 is added since this is the node center, not its corner. In graph space a node has a size of 1
-			var m = Matrix4x4.TRS(boundsMatrix.MultiplyPoint3x4(-new Vector3(newWidth*newNodeSize, 0, newDepth*newNodeSize)*0.5F), Quaternion.Euler(rotation), new Vector3(newNodeSize*aspectRatio, 1, newNodeSize)) * isometricMatrix;
+				// Generate a matrix for the bounds of the graph
+				// This moves a point to the correct offset in the world and the correct rotation and the aspect ratio and isometric angle is taken into account
+				var boundsMatrix = Matrix4x4.TRS(center, Quaternion.Euler(rotation), Vector3.one) * isometricMatrix;
 
-			// Set the matrix of the graph
-			// This will also set inverseMatrix
-			return new GraphTransform(m);
+				// Generate a matrix where Vector3.zero is the corner of the graph instead of the center
+				// The unit is nodes here (so (0.5,0,0.5) is the position of the first node and (1.5,0,0.5) is the position of the second node)
+				// 0.5 is added since this is the node center, not its corner. In graph space a node has a size of 1
+				var m = Matrix4x4.TRS(boundsMatrix.MultiplyPoint3x4(-new Vector3(newWidth, 0, newDepth)*0.5F), Quaternion.Euler(rotation), Vector3.one) * isometricMatrix;
+
+				return new GraphTransform(m);
+			}
 		}
 
 		/// <summary>
@@ -868,9 +1018,14 @@ namespace Pathfinding {
 			newSize.x *= Mathf.Sign(newSize.x);
 			newSize.y *= Mathf.Sign(newSize.y);
 
+#if !ASTAR_LARGER_GRIDS
 			// Clamp the nodeSize so that the graph is never larger than 1024*1024
-			nodeSize = Mathf.Max(this.nodeSize, newSize.x/1024F);
-			nodeSize = Mathf.Max(this.nodeSize, newSize.y/1024F);
+			nodeSize = Mathf.Max(this.nodeSize, newSize.x/1024f);
+			nodeSize = Mathf.Max(this.nodeSize, newSize.y/1024f);
+#else
+			nodeSize = Mathf.Max(this.nodeSize, newSize.x/8192f);
+			nodeSize = Mathf.Max(this.nodeSize, newSize.y/8192f);
+#endif
 
 			// Prevent the graph to become smaller than a single node
 			newSize.x = newSize.x < nodeSize ? nodeSize : newSize.x;
@@ -1101,10 +1256,12 @@ namespace Pathfinding {
 			// Make sure the matrix is up to date
 			UpdateTransform();
 
+#if !ASTAR_LARGER_GRIDS
 			if (width > 1024 || depth > 1024) {
 				Debug.LogError("One of the grid's sides is longer than 1024 nodes");
 				yield break;
 			}
+#endif
 
 #if !ASTAR_JPS
 			if (this.useJumpPointSearch) {

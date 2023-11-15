@@ -105,8 +105,78 @@ namespace Pathfinding {
 		/// True if the node has grid connections to all its 8 neighbours.
 		/// Note: This will always return false if GridGraph.neighbours is set to anything other than Eight.
 		/// See: GetNeighbourAlongDirection
+		/// See: <see cref="HasConnectionsToAllAxisAlignedNeighbours"/>
 		/// </summary>
 		public abstract bool HasConnectionsToAllEightNeighbours { get; }
+
+		/// <summary>
+		/// True if the node has grid connections to all its 4 axis-aligned neighbours.
+		/// See: GetNeighbourAlongDirection
+		/// See: <see cref="HasConnectionsToAllEightNeighbours"/>
+		/// </summary>
+		public abstract bool HasConnectionsToAllAxisAlignedNeighbours { get; }
+
+		/// <summary>
+		/// The connection oppositie the given one.
+		///
+		/// <code>
+		///         Z
+		///         |
+		///         |
+		///
+		///      6  2  5
+		///       \ | /
+		/// --  3 - X - 1  ----- X
+		///       / | \
+		///      7  0  4
+		///
+		///         |
+		///         |
+		/// </code>
+		///
+		/// For example, dir=1 outputs 3, dir=6 outputs 4 and so on.
+		///
+		/// See: <see cref="HasConnectionInDirection"/>
+		/// </summary>
+		public static int OppositeConnectionDirection (int dir) {
+			return dir < 4 ? ((dir + 2) % 4) : (((dir-2) % 4) + 4);
+		}
+
+		/// <summary>
+		/// Checks if point is inside the node when seen from above.
+		///
+		/// The borders of a node are considered to be inside the node.
+		///
+		/// Note that <see cref="ContainsPointInGraphSpace"/> is faster than this method as it avoids
+		/// some coordinate transformations. If you are repeatedly calling this method
+		/// on many different nodes but with the same point then you should consider
+		/// transforming the point first and then calling ContainsPointInGraphSpace.
+		/// <code>
+		/// Int3 p = (Int3)graph.transform.InverseTransform(point);
+		///
+		/// node.ContainsPointInGraphSpace(p);
+		/// </code>
+		/// </summary>
+		public override bool ContainsPoint (Vector3 point) {
+			var gg = Graph as GridGraph;
+			// Convert to graph space
+			return ContainsPointInGraphSpace((Int3)gg.transform.InverseTransform(point));
+		}
+
+		/// <summary>
+		/// Checks if point is inside the node in graph space.
+		///
+		/// The borders of a node are considered to be inside the node.
+		///
+		/// The y coordinate of the point is ignored.
+		/// </summary>
+		public override bool ContainsPointInGraphSpace (Int3 point) {
+			// Calculate graph position of this node
+			var x = XCoordinateInGrid*Int3.Precision;
+			var z = ZCoordinateInGrid*Int3.Precision;
+
+			return point.x >= x && point.x <= x + Int3.Precision && point.z >= z && point.z <= z + Int3.Precision;
+		}
 
 		public override float SurfaceArea () {
 			GridGraph gg = GridNode.GetGridGraph(GraphIndex);

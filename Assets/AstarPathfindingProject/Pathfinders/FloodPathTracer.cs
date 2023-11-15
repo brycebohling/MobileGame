@@ -54,7 +54,7 @@ namespace Pathfinding {
 		protected void Setup (Vector3 start, FloodPath flood, OnPathDelegate callback) {
 			this.flood = flood;
 
-			if (flood == null || flood.PipelineState < PathState.Returned) {
+			if (flood == null || flood.PipelineState < PathState.Returning) {
 				throw new System.ArgumentException("You must supply a calculated FloodPath to the 'flood' argument");
 			}
 

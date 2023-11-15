@@ -62,6 +62,7 @@ namespace Pathfinding {
 	/// It may take one or sometimes multiple frames for the path to be calculated, but finally the <see cref="OnPathComplete"/> method will be called and the current path that the AI is following will be replaced.
 	/// </summary>
 	[AddComponentMenu("Pathfinding/AI/AIPath (2D,3D)")]
+	[UniqueComponent(tag = "ai")]
 	public partial class AIPath : AIBase, IAstarAI {
 		/// <summary>
 		/// How quickly the agent accelerates.
@@ -223,6 +224,13 @@ namespace Pathfinding {
 			}
 		}
 
+		/// <summary>\copydoc Pathfinding::IAstarAI::endOfPath</summary>
+		public override Vector3 endOfPath {
+			get {
+				return interpolator.valid ? interpolator.endPoint : destination;
+			}
+		}
+
 		/// <summary>\copydoc Pathfinding::IAstarAI::radius</summary>
 		float IAstarAI.radius { get { return radius; } set { radius = value; } }
 
@@ -270,6 +278,8 @@ namespace Pathfinding {
 		///
 		/// This method will be called again if a new path is calculated as the destination may have changed.
 		/// So when the agent is close to the destination this method will typically be called every <see cref="repathRate"/> seconds.
+		///
+		/// Deprecated: Avoid overriding this method. Instead poll the <see cref="reachedDestination"/> or <see cref="reachedEndOfPath"/> properties.
 		/// </summary>
 		public virtual void OnTargetReached () {
 		}
@@ -451,7 +461,7 @@ namespace Pathfinding {
 			}
 		}
 
-		static NNConstraint cachedNNConstraint = NNConstraint.Default;
+		static NNConstraint cachedNNConstraint = NNConstraint.Walkable;
 		protected override Vector3 ClampToNavmesh (Vector3 position, out bool positionChanged) {
 			if (constrainInsideGraph) {
 				cachedNNConstraint.tags = seeker.traversableTags;

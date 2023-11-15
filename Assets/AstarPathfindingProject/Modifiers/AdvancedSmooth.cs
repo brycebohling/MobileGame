@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pathfinding {
-	[AddComponentMenu("Pathfinding/Modifiers/Advanced Smooth")]
+	/// <summary>
+	/// Smoothing by dividing path into turns and straight segments.
+	///
+	/// Deprecated: This modifier is deprecated
+	/// </summary>
 	[System.Serializable]
-	/// <summary>Smoothing by dividing path into turns and straight segments.</summary>
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_advanced_smooth.php")]
+	[System.Obsolete("This modifier is deprecated")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_advanced_smooth.php")]
 	public class AdvancedSmooth : MonoModifier {
 		public override int Order { get { return 40; } }
 

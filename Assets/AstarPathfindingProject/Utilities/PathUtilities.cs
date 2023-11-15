@@ -16,8 +16,8 @@ namespace Pathfinding {
 		/// This method is extremely fast because it only uses precalculated information.
 		///
 		/// <code>
-		/// GraphNode node1 = AstarPath.active.GetNearest(point1, NNConstraint.Default).node;
-		/// GraphNode node2 = AstarPath.active.GetNearest(point2, NNConstraint.Default).node;
+		/// GraphNode node1 = AstarPath.active.GetNearest(point1, NNConstraint.Walkable).node;
+		/// GraphNode node2 = AstarPath.active.GetNearest(point2, NNConstraint.Walkable).node;
 		///
 		/// if (PathUtilities.IsPathPossible(node1, node2)) {
 		///     // Yay, there is a path between those two nodes
@@ -178,7 +178,7 @@ namespace Pathfinding {
 		/// [Open online documentation to see videos]
 		///
 		/// <code>
-		/// var seed = AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
+		/// var seed = AstarPath.active.GetNearest(transform.position, NNConstraint.Walkable).node;
 		/// var nodes = PathUtilities.BFS(seed, 10);
 		/// foreach (var node in nodes) {
 		///     Debug.DrawRay((Vector3)node.position, Vector3.up, Color.red, 10);
@@ -362,7 +362,7 @@ namespace Pathfinding {
 
 			if (graph == null) throw new System.ArgumentException("g is not a NavGraph");
 
-			NNInfoInternal nn = graph.GetNearestForce(center, NNConstraint.Default);
+			NNInfoInternal nn = graph.GetNearestForce(center, PathNNConstraint.Walkable);
 			center = nn.clampedPosition;
 
 			if (nn.node == null) {

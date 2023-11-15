@@ -186,16 +186,33 @@ namespace Pathfinding {
 
 		public override Vector3 ClosestPointOnNodeXZ (Vector3 p) {
 			// Get all 3 vertices for this node
-			Int3 tp1, tp2, tp3;
-
-			GetVertices(out tp1, out tp2, out tp3);
+			GetVertices(out Int3 tp1, out Int3 tp2, out Int3 tp3);
 			return Polygon.ClosestPointOnTriangleXZ((Vector3)tp1, (Vector3)tp2, (Vector3)tp3, p);
 		}
 
+		/// <summary>
+		/// Checks if point is inside the node when seen from above.
+		///
+		/// Note that <see cref="ContainsPointInGraphSpace"/> is faster than this method as it avoids
+		/// some coordinate transformations. If you are repeatedly calling this method
+		/// on many different nodes but with the same point then you should consider
+		/// transforming the point first and then calling ContainsPointInGraphSpace.
+		/// <code>
+		/// Int3 p = (Int3)graph.transform.InverseTransform(point);
+		///
+		/// node.ContainsPointInGraphSpace(p);
+		/// </code>
+		/// </summary>
 		public override bool ContainsPoint (Vector3 p) {
 			return ContainsPointInGraphSpace((Int3)GetNavmeshHolder(GraphIndex).transform.InverseTransform(p));
 		}
 
+		/// <summary>
+		/// Checks if point is inside the node in graph space.
+		///
+		/// In graph space the up direction is always the Y axis so in principle
+		/// we project the triangle down on the XZ plane and check if the point is inside the 2D triangle there.
+		/// </summary>
 		public override bool ContainsPointInGraphSpace (Int3 p) {
 			// Get all 3 vertices for this node
 			Int3 a, b, c;

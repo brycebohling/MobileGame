@@ -268,36 +268,36 @@ namespace Pathfinding {
 		/// Returns: the shortest squared distance between S1 and S2
 		/// </summary>
 		public static float SqrDistanceSegmentSegment (Vector3 s1, Vector3 e1, Vector3 s2, Vector3 e2) {
-			Vector3 u = e1 - s1;
-			Vector3 v = e2 - s2;
-			Vector3 w = s1 - s2;
-			double a = Vector3.Dot(u, u);           // always >= 0
-			double b = Vector3.Dot(u, v);
-			double c = Vector3.Dot(v, v);           // always >= 0
-			double d = Vector3.Dot(u, w);
-			double e = Vector3.Dot(v, w);
-			double D = a*c - b*b;           // always >= 0
+			Vector3 dir1 = e1 - s1;
+			Vector3 dir2 = e2 - s2;
+			Vector3 startOffset = s1 - s2;
+			double dir1sq = Vector3.Dot(dir1, dir1);           // always >= 0
+			double b = Vector3.Dot(dir1, dir2);
+			double dir2sq = Vector3.Dot(dir2, dir2);           // always >= 0
+			double d = Vector3.Dot(dir1, startOffset);
+			double e = Vector3.Dot(dir2, startOffset);
+			double D = dir1sq*dir2sq - b*b;           // always >= 0
 			double sc, sN, sD = D;          // sc = sN / sD, default sD = D >= 0
 			double tc, tN, tD = D;          // tc = tN / tD, default tD = D >= 0
 
 			// compute the line parameters of the two closest points
-			// D is approximately |v|^2|u|^2*(1-cos alpha), where alpha is the angle between the lines
-			if (D < 0.00001) { // the lines are almost parallel
+			// D is approximately |dir1|^2|dir2|^2*(1-cos^2 alpha), where alpha is the angle between the lines
+			if (D < 0.000001 * dir1sq*dir2sq) { // the lines are almost parallel
 				sN = 0.0f;         // force using point P0 on segment S1
 				sD = 1.0f;         // to prevent possible division by 0.0 later
 				tN = e;
-				tD = c;
+				tD = dir2sq;
 			} else {               // get the closest points on the infinite lines
-				sN = (b*e - c*d);
-				tN = (a*e - b*d);
+				sN = (b*e - dir2sq*d);
+				tN = (dir1sq*e - b*d);
 				if (sN < 0.0) {        // sc < 0 => the s=0 edge is visible
 					sN = 0.0;
 					tN = e;
-					tD = c;
+					tD = dir2sq;
 				} else if (sN > sD) { // sc > 1  => the s=1 edge is visible
 					sN = sD;
 					tN = e + b;
-					tD = c;
+					tD = dir2sq;
 				}
 			}
 
@@ -306,22 +306,22 @@ namespace Pathfinding {
 				// recompute sc for this edge
 				if (-d < 0.0f)
 					sN = 0.0f;
-				else if (-d > a)
+				else if (-d > dir1sq)
 					sN = sD;
 				else {
 					sN = -d;
-					sD = a;
+					sD = dir1sq;
 				}
 			} else if (tN > tD) {    // tc > 1  => the t=1 edge is visible
 				tN = tD;
 				// recompute sc for this edge
 				if ((-d + b) < 0.0f)
 					sN = 0;
-				else if ((-d + b) > a)
+				else if ((-d + b) > dir1sq)
 					sN = sD;
 				else {
 					sN = (-d +  b);
-					sD = a;
+					sD = dir1sq;
 				}
 			}
 
@@ -330,7 +330,7 @@ namespace Pathfinding {
 			tc = (Math.Abs(tN) < 0.00001f ? 0.0 : tN / tD);
 
 			// get the difference of the two closest points
-			Vector3 dP = w + ((float)sc * u) - ((float)tc * v);  // =  S1(sc) - S2(tc)
+			Vector3 dP = startOffset + ((float)sc * dir1) - ((float)tc * dir2);  // =  S1(sc) - S2(tc)
 
 			return dP.sqrMagnitude;   // return the closest distance
 		}

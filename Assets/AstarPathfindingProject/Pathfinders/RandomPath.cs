@@ -130,7 +130,7 @@ namespace Pathfinding {
 				endNode = path[path.Count-1];
 				endPoint = (Vector3)endNode.position;
 				originalEndPoint = endPoint;
-
+				cost = pathHandler.GetPathNode(endNode).G;
 				hTarget = endNode.position;
 			}
 			if (callback != null) {

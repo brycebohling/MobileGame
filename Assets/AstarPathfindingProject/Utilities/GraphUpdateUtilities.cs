@@ -36,6 +36,8 @@ namespace Pathfinding {
 		///     Destroy(tower);
 		/// }
 		/// </code>
+		///
+		/// Warning: This will not work for recast graphs if <see cref="GraphUpdateObject.updatePhysics"/> is enabled (the default).
 		/// </summary>
 		/// <param name="guo">The GraphUpdateObject to update the graphs with</param>
 		/// <param name="node1">Node which should have a valid path to node2. All nodes should be walkable or false will be returned.</param>

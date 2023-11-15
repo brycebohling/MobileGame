@@ -14,7 +14,7 @@ namespace Pathfinding.Util {
 	/// Usage:
 	/// - Claim a new array using <code> SomeClass[] foo = ArrayPool<SomeClass>.Claim (capacity); </code>
 	/// - Use it and do stuff with it
-	/// - Release it with <code> ArrayPool<SomeClass>.Release (foo); </code>
+	/// - Release it with <code> ArrayPool<SomeClass>.Release (ref foo); </code>
 	///
 	/// Warning: Arrays returned from the Claim method may contain arbitrary data.
 	///  You cannot rely on it being zeroed out.

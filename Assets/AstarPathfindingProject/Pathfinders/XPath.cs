@@ -71,6 +71,7 @@ namespace Pathfinding {
 
 			endNode = target;
 			endPoint = (Vector3)target.position;
+			cost = pathHandler.GetPathNode(endNode).G;
 		}
 
 		protected override void CalculateStep (long targetTick) {

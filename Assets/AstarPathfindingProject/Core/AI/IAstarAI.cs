@@ -140,6 +140,18 @@ namespace Pathfinding {
 		bool reachedEndOfPath { get; }
 
 		/// <summary>
+		/// End point of path the agent is currently following.
+		/// If the agent has no path (or it might not be calculated yet), this will return the <see cref="destination"/> instead.
+		/// If the agent has no destination it either it will return (+inf,+inf,+inf).
+		///
+		/// The end of the path is usually identical or very close to the <see cref="destination"/>, but it may differ
+		/// if the path for example was blocked by a wall so that the agent couldn't get any closer.
+		///
+		/// This is only updated when the path is recalculated.
+		/// </summary>
+		Vector3 endOfPath { get; }
+
+		/// <summary>
 		/// Position in the world that this agent should move to.
 		///
 		/// If no destination has been set yet, then (+infinity, +infinity, +infinity) will be returned.

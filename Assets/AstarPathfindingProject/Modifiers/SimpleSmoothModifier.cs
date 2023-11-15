@@ -30,7 +30,7 @@ namespace Pathfinding {
 	/// Note: Modifies vectorPath array
 	/// TODO: Make the smooth modifier take the world geometry into account when smoothing
 	/// </summary>
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_simple_smooth_modifier.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_simple_smooth_modifier.php")]
 	public class SimpleSmoothModifier : MonoModifier {
 #if UNITY_EDITOR
 		[UnityEditor.MenuItem("CONTEXT/Seeker/Add Simple Smooth Modifier")]

@@ -371,7 +371,7 @@ namespace Pathfinding {
 		/// </summary>
 		List<NavmeshTile> stagingTiles = new List<NavmeshTile>();
 
-		protected override bool RecalculateNormals { get { return true; } }
+		public override bool RecalculateNormals { get { return true; } }
 
 		public override float TileWorldSizeX {
 			get {
@@ -401,6 +401,20 @@ namespace Pathfinding {
 			get {
 				return new Bounds(forcedBoundsCenter, forcedBoundsSize);
 			}
+		}
+
+		/// <summary>
+		/// True if the point is inside the bounding box of this graph.
+		///
+		/// Note: This method uses a tighter non-axis-aligned bounding box than you can get from the <see cref="bounds"/> property.
+		///
+		/// Note: What is considered inside the bounds is only updated when the graph is scanned. For an unscanned graph, this will always return false.
+		/// </summary>
+		public override bool IsInsideBounds (Vector3 point) {
+			if (this.tiles == null || this.tiles.Length == 0) return false;
+
+			var local = transform.InverseTransform(point);
+			return local.x >= 0 && local.y >= 0 && local.z >= 0 && local.x <= forcedBoundsSize.x && local.y <= forcedBoundsSize.y && local.z <= forcedBoundsSize.z;
 		}
 
 		/// <summary>
@@ -464,9 +478,6 @@ namespace Pathfinding {
 				return;
 			}
 
-			AstarProfiler.Reset();
-			AstarProfiler.StartProfile("UpdateAreaInit");
-			AstarProfiler.StartProfile("CollectMeshes");
 
 			RelevantGraphSurface.UpdateAllPositions();
 
@@ -487,9 +498,6 @@ namespace Pathfinding {
 			}
 
 			globalVox.inputMeshes = meshes;
-
-			AstarProfiler.EndProfile("CollectMeshes");
-			AstarProfiler.EndProfile("UpdateAreaInit");
 		}
 
 		void IUpdatableGraph.UpdateArea (GraphUpdateObject guo) {
@@ -514,7 +522,6 @@ namespace Pathfinding {
 				throw new System.InvalidOperationException("No Voxelizer object. UpdateAreaInit should have been called before this function.");
 			}
 
-			AstarProfiler.StartProfile("Build Tiles");
 
 			// Build the new tiles
 			for (int x = affectedTiles.xmin; x <= affectedTiles.xmax; x++) {
@@ -535,7 +542,6 @@ namespace Pathfinding {
 
 			for (int i = 0; i < vox.inputMeshes.Count; i++) vox.inputMeshes[i].Pool();
 			ListPool<RasterizationMesh>.Release(ref vox.inputMeshes);
-			AstarProfiler.EndProfile("Build Tiles");
 		}
 
 		/// <summary>Called on the Unity thread to complete a graph update</summary>
@@ -827,9 +833,6 @@ namespace Pathfinding {
 		}
 
 		protected NavmeshTile BuildTileMesh (Voxelize vox, int x, int z, int threadIndex = 0) {
-			AstarProfiler.StartProfile("Build Tile");
-			AstarProfiler.StartProfile("Init");
-
 			vox.borderSize = TileBorderSizeInVoxels;
 			vox.forcedBounds = CalculateTileBoundsWithBorder(x, z);
 			vox.width = tileSizeX + vox.borderSize*2;
@@ -844,23 +847,18 @@ namespace Pathfinding {
 
 			vox.minRegionSize = Mathf.RoundToInt(minRegionSize / (cellSize*cellSize));
 
-			AstarProfiler.EndProfile("Init");
 
 
 			// Init voxelizer
 			vox.Init();
 			vox.VoxelizeInput(transform, CalculateTileBoundsWithBorder(x, z));
 
-			AstarProfiler.StartProfile("Filter Ledges");
 
 
 			vox.FilterLedges(vox.voxelWalkableHeight, vox.voxelWalkableClimb, vox.cellSize, vox.cellHeight);
 
-			AstarProfiler.EndProfile("Filter Ledges");
 
-			AstarProfiler.StartProfile("Filter Low Height Spans");
 			vox.FilterLowHeightSpans(vox.voxelWalkableHeight, vox.cellSize, vox.cellHeight);
-			AstarProfiler.EndProfile("Filter Low Height Spans");
 
 			vox.BuildCompactField();
 			vox.BuildVoxelConnections();
@@ -874,7 +872,6 @@ namespace Pathfinding {
 			VoxelMesh mesh;
 			vox.BuildPolyMesh(cset, 3, out mesh);
 
-			AstarProfiler.StartProfile("Build Nodes");
 
 			// Position the vertices correctly in graph space (all tiles are laid out on the xz plane with the (0,0) tile at the origin)
 			for (int i = 0; i < mesh.verts.Length; i++) {
@@ -884,9 +881,7 @@ namespace Pathfinding {
 
 			NavmeshTile tile = CreateTile(vox, mesh, x, z, threadIndex);
 
-			AstarProfiler.EndProfile("Build Nodes");
 
-			AstarProfiler.EndProfile("Build Tile");
 			return tile;
 		}
 

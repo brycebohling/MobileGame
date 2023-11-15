@@ -7,17 +7,25 @@ using System.Collections.Generic;
 namespace Pathfinding {
 	/// <summary>
 	/// Finds all nodes within a specified distance from the start.
-	/// This class will search outwards from the start point and find all nodes which it costs less than ConstantPath.maxGScore to reach, this is usually the same as the distance to them multiplied with 1000
+	/// This class will search outwards from the start point and find all nodes which it costs less than <see cref="EndingConditionDistance.maxGScore"/> to reach, this is usually the same as the distance to them multiplied with 1000.
 	///
 	/// The path can be called like:
 	/// <code>
-	/// // Here you create a new path and set how far it should search. Null is for the callback, but the seeker will handle that
-	/// ConstantPath cpath = ConstantPath.Construct(transform.position, 2000, null);
-	/// // Set the seeker to search for the path (where mySeeker is a variable referencing a Seeker component)
-	/// mySeeker.StartPath(cpath, myCallbackFunction);
+	/// // Here you create a new path and set how far it should search.
+	/// ConstantPath cpath = ConstantPath.Construct(transform.position, 20000, null);
+	/// AstarPath.StartPath(cpath);
+	///
+	/// // Block until the path has been calculated. You can also calculate it asynchronously
+	/// // by providing a callback in the constructor above.
+	/// cpath.BlockUntilCalculated();
+	///
+	/// // Draw a line upwards from all nodes within range
+	/// for (int i = 0; i < cpath.allNodes.Count; i++) {
+	///     Debug.DrawRay((Vector3)cpath.allNodes[i].position, Vector3.up, Color.red, 2f);
+	/// }
 	/// </code>
 	///
-	/// Then when getting the callback, all nodes will be stored in the variable ConstantPath.allNodes (remember that you need to cast it from Path to ConstantPath first to get the variable).
+	/// When the path has been calculated, all nodes it searched will be stored in the variable <see cref="ConstantPath.allNodes"/> (remember that you need to cast it from Path to ConstantPath first to get the variable).
 	///
 	/// This list will be sorted by the cost to reach that node (more specifically the G score if you are familiar with the terminology for search algorithms).
 	/// [Open online documentation to see images]
@@ -34,9 +42,9 @@ namespace Pathfinding {
 		public List<GraphNode> allNodes;
 
 		/// <summary>
-		/// Controls when the path should terminate.
+		/// Determines when the path calculation should stop.
 		/// This is set up automatically in the constructor to an instance of the Pathfinding.EndingConditionDistance class with a maxGScore is specified in the constructor.
-		/// If you want to use another ending condition.
+		///
 		/// See: Pathfinding.PathEndingCondition for examples
 		/// </summary>
 		public PathEndingCondition endingCondition;
@@ -167,13 +175,10 @@ namespace Pathfinding {
 
 //--- Here the important stuff ends
 
-				AstarProfiler.StartFastProfile(4);
 				//Debug.DrawRay ((Vector3)currentR.node.Position, Vector3.up*2,Color.red);
 
 				//Loop through all walkable neighbours of the node and add them to the open list.
 				currentR.node.Open(this, currentR, pathHandler);
-
-				AstarProfiler.EndFastProfile(4);
 
 				//any nodes left to search?
 				if (pathHandler.heap.isEmpty) {
@@ -183,9 +188,7 @@ namespace Pathfinding {
 
 
 				//Select the node with the lowest F score and remove it from the open list
-				AstarProfiler.StartFastProfile(7);
 				currentR = pathHandler.heap.Remove();
-				AstarProfiler.EndFastProfile(7);
 
 				//Check for time every 500 nodes, roughly every 0.5 ms usually
 				if (counter > 500) {

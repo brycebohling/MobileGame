@@ -39,7 +39,7 @@ namespace Pathfinding.Legacy {
 	/// </summary>
 	[RequireComponent(typeof(Seeker))]
 	[AddComponentMenu("Pathfinding/Legacy/AI/Legacy AIPath (3D)")]
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_legacy_1_1_legacy_a_i_path.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_legacy_1_1_legacy_a_i_path.php")]
 	public class LegacyAIPath : AIPath {
 		/// <summary>
 		/// Target point is Interpolated on the current segment in the path so that it has a distance of <see cref="forwardLook"/> from the AI.

@@ -96,13 +96,13 @@ namespace Pathfinding {
 		/// This info can be updated when a check for new versions is done to ensure that there are no invalid links.
 		/// </summary>
 		static Dictionary<string, string> astarServerData = new Dictionary<string, string> {
-			{ "URL:modifiers", "https://www.arongranberg.com/astar/docs/modifiers.php" },
+			{ "URL:modifiers", "https://www.arongranberg.com/astar/docs/modifiers.html" },
 			{ "URL:astarpro", "https://arongranberg.com/unity/a-pathfinding/astarpro/" },
 			{ "URL:documentation", "https://arongranberg.com/astar/docs/" },
 			{ "URL:findoutmore", "https://arongranberg.com/astar" },
 			{ "URL:download", "https://arongranberg.com/unity/a-pathfinding/download" },
-			{ "URL:changelog", "https://arongranberg.com/astar/docs/changelog.php" },
-			{ "URL:tags", "https://arongranberg.com/astar/docs/tags.php" },
+			{ "URL:changelog", "https://arongranberg.com/astar/docs/changelog.html" },
+			{ "URL:tags", "https://arongranberg.com/astar/docs/tags.html" },
 			{ "URL:homepage", "https://arongranberg.com/astar/" }
 		};
 
@@ -190,13 +190,8 @@ namespace Pathfinding {
 		}
 
 		static void DownloadVersionInfo () {
+			if (!Application.isPlaying) AstarPath.FindAstarPath();
 			var script = AstarPath.active != null ? AstarPath.active : GameObject.FindObjectOfType(typeof(AstarPath)) as AstarPath;
-			if (script != null) {
-				script.ConfigureReferencesInternal();
-				if ((!Application.isPlaying && (script.data.graphs == null || script.data.graphs.Length == 0)) || script.data.graphs == null) {
-					script.data.DeserializeGraphs();
-				}
-			}
 
 			bool mecanim = GameObject.FindObjectOfType(typeof(Animator)) != null;
 			string query = updateURL+

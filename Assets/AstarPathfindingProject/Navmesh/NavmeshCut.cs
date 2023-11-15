@@ -148,7 +148,7 @@ namespace Pathfinding {
 	/// See: http://www.arongranberg.com/2013/08/navmesh-cutting/
 	/// </summary>
 	[AddComponentMenu("Pathfinding/Navmesh/Navmesh Cut")]
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_navmesh_cut.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_navmesh_cut.php")]
 	public class NavmeshCut : NavmeshClipper {
 		public enum MeshType {
 			Rectangle,
@@ -369,7 +369,7 @@ namespace Pathfinding {
 				var buffer = buffers[i];
 				for (int k = 0; k < buffer.Count; k++) {
 					var p = inverseTransform.InverseTransform(buffer[k]);
-					if (k == 0) {
+					if (k == 0 && i == 0) {
 						r = new Rect(p.x, p.z, 0, 0);
 					} else {
 						r.xMax = System.Math.Max(r.xMax, p.x);

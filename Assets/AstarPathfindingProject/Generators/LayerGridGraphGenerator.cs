@@ -370,11 +370,13 @@ namespace Pathfinding {
 
 			UpdateTransform();
 
+#if !ASTAR_LARGER_GRIDS
 			// This is just an artificial limit. Graphs larger than this use quite a lot of memory.
 			if (width > 1024 || depth > 1024) {
 				Debug.LogError("One of the grid's sides is longer than 1024 nodes");
 				yield break;
 			}
+#endif
 
 			lastScannedWidth = width;
 			lastScannedDepth = depth;
@@ -911,10 +913,12 @@ namespace Pathfinding {
 		public const int NoConnection = 0xF;
 		private const int ConnectionMask = 0xF;
 		private const int ConnectionStride = 4;
+		internal const int AxisAlignedConnectionsMask = 0xFFFF;
 #else
 		public const int NoConnection = 0xFF;
 		public const int ConnectionMask = 0xFF;
 		private const int ConnectionStride = 8;
+		internal const ulong AxisAlignedConnectionsMask = 0xFFFFFFFF;
 #endif
 		public const int MaxLayerCount = ConnectionMask;
 
@@ -945,6 +949,12 @@ namespace Pathfinding {
 			get {
 				// Layered grid graphs only support 4 neighbours
 				return false;
+			}
+		}
+
+		public override bool HasConnectionsToAllAxisAlignedNeighbours {
+			get {
+				return (gridConnections & AxisAlignedConnectionsMask) == AxisAlignedConnectionsMask;
 			}
 		}
 

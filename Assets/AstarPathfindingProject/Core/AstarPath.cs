@@ -20,16 +20,16 @@ using Thread = System.Threading.Thread;
 /// This class is a singleton class, meaning there should only exist at most one active instance of it in the scene.
 /// It might be a bit hard to use directly, usually interfacing with the pathfinding system is done through the <see cref="Pathfinding.Seeker"/> class.
 /// </summary>
-[HelpURL("http://arongranberg.com/astar/documentation/stable/class_astar_path.php")]
+[HelpURL("https://arongranberg.com/astar/documentation/stable/class_astar_path.php")]
 public class AstarPath : VersionedMonoBehaviour {
 	/// <summary>The version number for the A* Pathfinding Project</summary>
-	public static readonly System.Version Version = new System.Version(4, 2, 18);
+	public static readonly System.Version Version = new System.Version(4, 2, 19);
 
 	/// <summary>Information about where the package was downloaded</summary>
 	public enum AstarDistribution { WebsiteDownload, AssetStore, PackageManager };
 
 	/// <summary>Used by the editor to guide the user to the correct place to download updates</summary>
-	public static readonly AstarDistribution Distribution = AstarDistribution.AssetStore;
+	public static readonly AstarDistribution Distribution = AstarDistribution.WebsiteDownload;
 
 	/// <summary>
 	/// Which branch of the A* Pathfinding Project is this release.
@@ -568,7 +568,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// Handles navmesh cuts.
 	/// See: <see cref="Pathfinding.NavmeshCut"/>
 	/// </summary>
-	public readonly NavmeshUpdates navmeshUpdates = new NavmeshUpdates();
+	public NavmeshUpdates navmeshUpdates = new NavmeshUpdates();
 
 	/// <summary>Processes work items</summary>
 	readonly WorkItemProcessor workItems;
@@ -621,6 +621,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 		workItems = new WorkItemProcessor(this);
 		graphUpdates = new GraphUpdateProcessor(this);
+		navmeshUpdates.astar = this;
 
 		// Forward graphUpdates.OnGraphsUpdated to AstarPath.OnGraphsUpdated
 		graphUpdates.OnGraphsUpdated += () => {
@@ -753,8 +754,6 @@ public class AstarPath : VersionedMonoBehaviour {
 
 		colorSettings.PushToStatic(this);
 
-		AstarProfiler.StartProfile("OnDrawGizmos");
-
 		if (workItems.workItemsInProgress || isScanning) {
 			// If updating graphs, graph info might not be valid right now
 			// so just draw the same thing as last frame.
@@ -780,10 +779,7 @@ public class AstarPath : VersionedMonoBehaviour {
 				if (debugMode == GraphDebugMode.HierarchicalNode) hierarchicalGraph.OnDrawGizmos(gizmos);
 			}
 		}
-
 		gizmos.FinalizeDraw();
-
-		AstarProfiler.EndProfile("OnDrawGizmos");
 	}
 
 #if !ASTAR_NO_GUI
@@ -1251,7 +1247,6 @@ public class AstarPath : VersionedMonoBehaviour {
 		RelevantGraphSurface.FindAllGraphSurfaces();
 
 		InitializePathProcessor();
-		InitializeProfiler();
 		ConfigureReferencesInternal();
 		InitializeAstarData();
 
@@ -1332,26 +1327,6 @@ public class AstarPath : VersionedMonoBehaviour {
 		colorSettings.PushToStatic(this);
 	}
 	/// <summary>\endcond</summary>
-
-	/// <summary>Calls AstarProfiler.InitializeFastProfile</summary>
-	void InitializeProfiler () {
-		AstarProfiler.InitializeFastProfile(new string[14] {
-			"Prepare",          //0
-			"Initialize",       //1
-			"CalculateStep",    //2
-			"Trace",            //3
-			"Open",             //4
-			"UpdateAllG",       //5
-			"Add",              //6
-			"Remove",           //7
-			"PreProcessing",    //8
-			"Callback",         //9
-			"Overhead",         //10
-			"Log",              //11
-			"ReturnPaths",      //12
-			"PostPathCallback"  //13
-		});
-	}
 
 	/// <summary>
 	/// Initializes the AstarData class.
@@ -1611,14 +1586,11 @@ public class AstarPath : VersionedMonoBehaviour {
 
 	/// <summary>
 	/// Scans a particular graph asynchronously. This is a IEnumerable, you can loop through it to get the progress
-	/// <code>
-	/// foreach (Progress progress in AstarPath.active.ScanAsync()) {
-	///     Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
-	/// }
-	/// </code>
-	/// You can scan graphs asyncronously by yielding when you loop through the progress.
+	///
+	/// You can scan graphs asyncronously by yielding when you iterate through the returned IEnumerable.
 	/// Note that this does not guarantee a good framerate, but it will allow you
-	/// to at least show a progress bar during scanning.
+	/// to at least show a progress bar while scanning.
+	///
 	/// <code>
 	/// IEnumerator Start () {
 	///     foreach (Progress progress in AstarPath.active.ScanAsync()) {
@@ -1638,14 +1610,10 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// <summary>
 	/// Scans all specified graphs asynchronously. This is a IEnumerable, you can loop through it to get the progress
 	///
-	/// <code>
-	/// foreach (Progress progress in AstarPath.active.ScanAsync()) {
-	///     Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
-	/// }
-	/// </code>
 	/// You can scan graphs asyncronously by yielding when you loop through the progress.
 	/// Note that this does not guarantee a good framerate, but it will allow you
 	/// to at least show a progress bar during scanning.
+	///
 	/// <code>
 	/// IEnumerator Start () {
 	///     foreach (Progress progress in AstarPath.active.ScanAsync()) {
@@ -1999,7 +1967,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// The NNConstraint can be used to specify constraints on which nodes can be chosen such as only picking walkable nodes.
 	///
 	/// <code>
-	/// GraphNode node = AstarPath.active.GetNearest(transform.position, NNConstraint.Default).node;
+	/// GraphNode node = AstarPath.active.GetNearest(transform.position, NNConstraint.Walkable).node;
 	/// </code>
 	///
 	/// <code>
@@ -2068,20 +2036,22 @@ public class AstarPath : VersionedMonoBehaviour {
 				}
 
 				// Distance to the closest point on the node from the requested position
-				float dist = ((Vector3)nnInfo.clampedPosition-position).magnitude;
+				float distSqr = (nnInfo.clampedPosition-position).sqrMagnitude;
 
 #pragma warning disable 0618
-				if (prioritizeGraphs && dist < prioritizeGraphsLimit) {
+				if (prioritizeGraphs) {
+					if (distSqr < prioritizeGraphsLimit*prioritizeGraphsLimit) {
 #pragma warning restore 0618
-					// The node is close enough, choose this graph and discard all others
-					minDist = dist;
-					nearestNode = nnInfo;
-					nearestGraph = i;
-					break;
+						// The node is close enough, choose this graph and discard all others
+						minDist = distSqr;
+						nearestNode = nnInfo;
+						nearestGraph = i;
+						break;
+					}
 				} else {
-					// Choose the best node found so far
-					if (dist < minDist) {
-						minDist = dist;
+					if (distSqr < minDist) {
+						// Choose the best node found so far
+						minDist = distSqr;
 						nearestNode = nnInfo;
 						nearestGraph = i;
 					}
