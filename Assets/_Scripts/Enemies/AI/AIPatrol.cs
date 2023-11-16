@@ -101,6 +101,16 @@ public class AIPatrol : AIBase
     private Vector2 GetMovePos()
     {
         movePoint = startPos + Random.insideUnitCircle * patrolRadius;
+        // GridGraph gridGraph = AstarPath.active.data.gridGraph;
+
+        // bool anyObstaclesInTheWay = true;
+
+        // while(anyObstaclesInTheWay)
+        // {
+        //     movePoint = startPos + Random.insideUnitCircle * patrolRadius;
+        //     anyObstaclesInTheWay = gridGraph.Linecast(transform.position, movePoint, );
+        // }
+        
         return movePoint;
     }
 
