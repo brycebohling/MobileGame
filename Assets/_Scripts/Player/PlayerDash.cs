@@ -11,6 +11,9 @@ public class PlayerDash : PlayerBase
     [Header("Blocking States")]
     public PlayerStates.States[] BlockingActionStates;
 
+    [Header("Input")]
+    [SerializeField] InputReaderSO inputReaderSO;
+
     [Header("Dash")]
     [SerializeField] float dashSpeedMultiplayer;
     [SerializeField] float dashDuration;
@@ -19,14 +22,9 @@ public class PlayerDash : PlayerBase
     [Header("Animations")]
     [SerializeField] AnimationClip dashAnim;
 
-    [Header("Particles")]
-    [SerializeField] Transform particleSpawn;
-    [SerializeField] List<ParticleSystem> dashParticales;
-
     [Header("MMFeedbacks")]
     [SerializeField] MMF_Player dashFeedBackPlayer;
-
-    [SerializeField] InputReaderSO inputReaderSO;
+    
 
     bool isDashing;
     float dashingTimer;
@@ -89,7 +87,6 @@ public class PlayerDash : PlayerBase
         _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
 
         StartAnimation(_animator, dashAnim);
-        StartParticles(dashParticales, particleSpawn.position);
 
         dashFeedBackPlayer?.PlayFeedbacks();
     }
@@ -102,8 +99,6 @@ public class PlayerDash : PlayerBase
         _rb.velocity = Vector2.zero;
         
         StopAnimation(_animator);
-
-        StopParticles(dashParticales);
     }
 
     protected override void ProcessCooldowns()
