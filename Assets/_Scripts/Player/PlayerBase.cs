@@ -69,19 +69,21 @@ public class PlayerBase : MonoBehaviour
 
     }
 
-    // Runs onces when the ability is activated
     protected virtual void OnActionActivate()
     {
 
     }
 
-    // Runs onces when the ability is dectivated
     protected virtual void OnActionDeactivate()
     {
 
     }
 
-    // Handle ability cooldowns
+    protected virtual void OnActionCancel()
+    {
+
+    }
+
     protected virtual void ProcessCooldowns()
     {
 

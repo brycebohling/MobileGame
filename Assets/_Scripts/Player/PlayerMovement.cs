@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -10,21 +12,22 @@ public class PlayerMovement : PlayerBase
     [Header("Blocking States")]
     public PlayerStates.States[] BlockingActionStates;
 
+    [Header("Input")]
+    [SerializeField] InputReaderSO inputReaderSO;
+
     [Header("Speeds")]
     [SerializeField] float walkSpeed;
 
     [Header("Animations")]
     [SerializeField] AnimationClip walkAnim;
 
-    [Header("Particales")]
-    [SerializeField] Transform particleSpawn;
-    [SerializeField] List<ParticleSystem> walkParticles;
+    [Header("MMFeedbacks")]
+    [SerializeField] MMF_Player movementFeedBackPlayer;
 
-    [SerializeField] InputReaderSO inputReaderSO;
+    
 
     Vector2 moveDir;
     Vector2 movementSpeed;
-
     bool isActivated;
 
     protected override void Awake()
@@ -48,7 +51,7 @@ public class PlayerMovement : PlayerBase
         {
             if (isActivated)
             {
-                isActivated = false;
+                OnActionCancel();
             }
 
             return;
@@ -65,6 +68,12 @@ public class PlayerMovement : PlayerBase
         {
             ApplyAction();
         }
+    }
+
+    protected override void OnActionCancel()
+    {
+        isActivated = false;
+        movementFeedBackPlayer.ResumeFeedbacks();
     }
 
     private void SetMoveDirection(Vector2 moveDirection)
@@ -112,7 +121,7 @@ public class PlayerMovement : PlayerBase
 
         StartAnimation(_animator, walkAnim);
 
-        StartParticles(walkParticles, particleSpawn.position);
+        movementFeedBackPlayer?.PlayFeedbacks();
     }
 
     protected override void OnActionDeactivate()
@@ -123,7 +132,7 @@ public class PlayerMovement : PlayerBase
         _statesScript.State = PlayerStates.States.Idle;
 
         StopAnimation(_animator);
-
-        StopParticles(walkParticles);
+        
+        movementFeedBackPlayer.ResumeFeedbacks();
     }
 }
