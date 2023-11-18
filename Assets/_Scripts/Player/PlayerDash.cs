@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -21,6 +22,9 @@ public class PlayerDash : PlayerBase
     [Header("Particles")]
     [SerializeField] Transform particleSpawn;
     [SerializeField] List<ParticleSystem> dashParticales;
+
+    [Header("MMFeedbacks")]
+    [SerializeField] MMF_Player dashFeedBackPlayer;
 
     [SerializeField] InputReaderSO inputReaderSO;
 
@@ -85,8 +89,9 @@ public class PlayerDash : PlayerBase
         _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
 
         StartAnimation(_animator, dashAnim);
-
         StartParticles(dashParticales, particleSpawn.position);
+
+        dashFeedBackPlayer?.PlayFeedbacks();
     }
 
     protected override void OnActionDeactivate()
