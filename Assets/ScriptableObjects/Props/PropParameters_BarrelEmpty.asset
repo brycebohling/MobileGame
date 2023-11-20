@@ -24,12 +24,12 @@ MonoBehaviour:
   mustBeAccessible: 0
   isBrakable: 0
   placeOnePerFloor: 0
-  PlacementQuantityMin: 2
-  PlacementQuantityMax: 3
+  PlacementQuantityMin: 0
+  PlacementQuantityMax: 2
   PlaceAsGroup: 0
   GroupMinCount: 1
   GroupMaxCount: 1
-  HasVariants: 1
+  HasVariants: 0
   Variants:
   - {fileID: 43177533, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}
   - {fileID: -1612845867, guid: 50514be0f895e4ad48a49bd7a673b576, type: 3}

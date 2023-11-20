@@ -28,14 +28,14 @@ public class PropSO : ScriptableObject
     public bool isBrakable;
     public bool placeOnePerFloor;
     [Tooltip("Amount placed per room")]
-    [Min(1)] public int PlacementQuantityMin = 1;
+    [Min(0)] public int PlacementQuantityMin = 1;
     [Tooltip("Amount placed per room")]
     [Min(1)] public int PlacementQuantityMax = 1;
     
 
     [Space, Header("Group Placement")]
     public bool PlaceAsGroup;
-    [Min(1)] public int GroupMinCount = 1;
+    [Min(0)] public int GroupMinCount = 1;
     [Min(1)] public int GroupMaxCount = 1;
 
     [Header("Custom Inspector")]
