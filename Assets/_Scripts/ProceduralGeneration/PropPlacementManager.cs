@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -25,8 +24,6 @@ public class PropPlacementManager : MonoBehaviour
 
         foreach (Room room in dungeonGeneratorScript.RoomList)
         {
-            PlaceMustHaveProps(room);
-
             PlaceAccessibleProps(room);
             
             PlaceNormalProps(room);   
@@ -39,7 +36,7 @@ public class PropPlacementManager : MonoBehaviour
     {
         List<int> furthestRooms = FindFurthestRooms();
 
-        List<PropSO> ladderList = new () {ladder};
+        List<PropSO> ladderList = new () { ladder };
 
         PlaceProps(dungeonGeneratorScript.RoomList[furthestRooms[0]], ladderList);
 
@@ -62,14 +59,6 @@ public class PropPlacementManager : MonoBehaviour
             onceProps);
     }
 
-    private void PlaceMustHaveProps(Room room)
-    {
-        List<PropSO> mustHaveProps = propsToPlace.Where(x => x.mustBePlacedAndAccessible && !x.placeOnePerFloor)
-            .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
-
-        if (mustHaveProps.Count != 0) PlaceProps(room, mustHaveProps);
-    }
-
     private void PlaceAccessibleProps(Room room)
     {
         List<PropSO> accessibleProps = propsToPlace.Where(x => x.mustBeAccessible && !x.placeOnePerFloor)
@@ -80,7 +69,7 @@ public class PropPlacementManager : MonoBehaviour
 
     private void PlaceNormalProps(Room room)
     {
-        List<PropSO> normalProps = propsToPlace.Where(x => !x.mustBeAccessible && !x.mustBePlacedAndAccessible && !x.placeOnePerFloor)
+        List<PropSO> normalProps = propsToPlace.Where(x => !x.mustBeAccessible && !x.placeOnePerFloor)
             .OrderByDescending(x => x.PropSize.x * x.PropSize.y).ToList();
 
         if (normalProps.Count != 0) PlaceProps(room, normalProps);
@@ -148,21 +137,7 @@ public class PropPlacementManager : MonoBehaviour
     
             if (freePositionsAround.Count == propToPlace.PropSize.x * propToPlace.PropSize.y)
             {
-                // If on last iteration
-                if (possiblePositions.Count == i + 1 && propToPlace.mustBePlacedAndAccessible)
-                {
-                    if (!Helpers.CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround))
-                    {
-                        ClearAPathToProp(room, room.RoomCenterPos, freePositionsAround);
-                    }
-                
-                } else
-                {
-                    if (propToPlace.mustBeAccessible)
-                    {
-                        if (!Helpers.CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
-                    }
-                }
+                if (!Helpers.CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
 
                 PlacePropGameObjectAt(room, position, propToPlace);
 
@@ -217,24 +192,11 @@ public class PropPlacementManager : MonoBehaviour
         if (propToPlace.mustBeAccessible)
         {
             bool isAccessible = Helpers.CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
-                new List<Vector2Int>() {placementPosition});
+                new List<Vector2Int>() { placementPosition });
 
             if (!isAccessible)
             {
-                Debug.Log("not found (Accessible)");
-            }
-
-        } else if (propToPlace.mustBePlacedAndAccessible)
-        {
-            ClearAPathToProp(room, room.RoomCenterPos, new List<Vector2Int>() {placementPosition});
-
-
-            bool isAccessible = Helpers.CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
-                new List<Vector2Int>() {placementPosition});
-
-            if (!isAccessible)
-            {
-                Debug.LogWarning("not found (Accessible&Placed) " + prop.name);
+                Debug.Log("not found (Accessible) " + propToPlace.name);
             }
         }
 

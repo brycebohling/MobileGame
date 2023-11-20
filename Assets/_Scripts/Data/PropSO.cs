@@ -25,7 +25,6 @@ public class PropSO : ScriptableObject
     public bool NearWallRight;
     public bool NearWallLeft;
     public bool mustBeAccessible;
-    public bool mustBePlacedAndAccessible;
     public bool isBrakable;
     public bool placeOnePerFloor;
     [Tooltip("Amount placed per room")]
