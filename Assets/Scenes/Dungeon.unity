@@ -5772,7 +5772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a5b82b065da4a938547de02b9352e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 1660187515}
 --- !u!1001 &357142381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5881,7 +5880,6 @@ MonoBehaviour:
   dungeonGeneratorScript: {fileID: 2075197044}
   ladder: {fileID: 11400000, guid: 679f7b1e5ff4a4b8ea2a6151171a17ac, type: 2}
   propsToPlace:
-  - {fileID: 11400000, guid: 6abdd280b55394477b1b939b37097737, type: 2}
   - {fileID: 11400000, guid: 545a46afdf42d4b1f81f1ee866fb0221, type: 2}
   - {fileID: 11400000, guid: a3e8d1cc11e52435881309c70fca768f, type: 2}
   - {fileID: 11400000, guid: 320914976eb1440909d50da3b0789ae0, type: 2}
@@ -10041,7 +10039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
@@ -10060,7 +10058,7 @@ Canvas:
   m_GameObject: {fileID: 1765387546}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1752671970}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

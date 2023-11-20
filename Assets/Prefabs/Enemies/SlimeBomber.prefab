@@ -325,7 +325,7 @@ MonoBehaviour:
   explosionBuildUpTime: 1
   explosionRadius: 1
   explosionTargetingRadius: 0.9
-  explosionDamage: 10
+  explosionDamage: 20
   knockBackForce: 5
   explosionBuildUpAnim: {fileID: 7400000, guid: dbb9461d672ed418b98bae18a0bb2d14, type: 2}
   explosionVFXTransfrom: {fileID: 2096635210948159989, guid: 8c4d613b7b5484ffba7cae0a233ed8b0, type: 3}

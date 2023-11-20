@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding.Ionic.Zip;
 using UnityEngine;
 
 public static class Helpers

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3453044553222644595}
   - component: {fileID: -6601987504905014230}
   - component: {fileID: 3865783830464549890}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: DeadSkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6836914126763486632}
   - component: {fileID: 1719866865272564805}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
