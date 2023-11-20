@@ -19,15 +19,20 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] AStarGridSettings aStarGridSettings;
     [SerializeField] Vector2Int startPosition = Vector2Int.zero;
 
+    [Header("Dungeon")]
+    public int dungeonWidth = 20;
+    public int dungeonHeight = 20;
+    [Tooltip("Space between each room")]
+    [SerializeField, Range(0, 10)] int offset = 1;
+
     [Header("Rooms")]
     [SerializeField] RandomWalkSO randomWalkParameters;
     [SerializeField] int roomDifficulty;
     [SerializeField] int maxRoomWidth = 4;
     [SerializeField] int maxRoomHeight = 4;
-    public int dungeonWidth = 20;
-    public int dungeonHeight = 20;
-    [SerializeField] [Range(0, 10)] int offset = 1;
-    [SerializeField] bool randomWalkRooms = false;
+    [SerializeField] bool randomWalkRooms;
+
+    [Header("Advance")]
     [SerializeField] bool generateOnStart;
     [SerializeField] bool debugCreationTime;
 

@@ -20,13 +20,13 @@ public class EnemyPlacementManager : MonoBehaviour
         
         foreach (Room room in dungeonGeneratorScript.RoomList)
         {
-            PlaceProps(room, enemiesToPlace);
+            PlaceEnemies(room, enemiesToPlace);
         }
 
         OnFinishedEnemyPlacement?.Invoke();
     }
 
-    private void PlaceProps(Room room, List<EnemySO> enemyList)
+    private void PlaceEnemies(Room room, List<EnemySO> enemyList)
     {
         int curDifficulty = 0;
         while (curDifficulty < room.RoomDifficulty)
