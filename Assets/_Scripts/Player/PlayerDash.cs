@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
@@ -25,8 +22,7 @@ public class PlayerDash : PlayerBase
     [Header("MMFeedbacks")]
     [SerializeField] MMF_Player dashFeedBackPlayer;
     
-
-    bool isDashing;
+    bool isActive;
     float dashingTimer;
     float dashCooldownTimer;
     Vector2 velocityBeforeDash;
@@ -44,6 +40,14 @@ public class PlayerDash : PlayerBase
 
     private void Update()
     {
+        if (!IsActionAuth(BlockingActionStates))
+        {
+            if (isActive)
+            {
+                OnActionCancel();
+            }
+        }
+
         ProcessCooldowns();
     }
 
@@ -59,29 +63,16 @@ public class PlayerDash : PlayerBase
 
     private void DashPressed()
     {
-        if (!IsActionAuth(BlockingActionStates)) return;
+        if (!IsActionAuth(BlockingActionStates) || dashCooldownTimer < dashCooldown) return;
         
         OnActionActivate();
-    }
-
-    protected override bool IsActionAuth(PlayerStates.States[] blockingActionStates)
-    {
-        bool isNotBlockingAction = base.IsActionAuth(blockingActionStates);
-
-        if (isNotBlockingAction && dashCooldownTimer >= dashCooldown)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
     }
 
     protected override void OnActionActivate()
     {
         _statesScript.State = PlayerStates.States.Dashing;
         velocityBeforeDash = _rb.velocity;
-        isDashing = true;
+        isActive = true;
         dashCooldownTimer = 0;
 
         _rb.AddForce(velocityBeforeDash * dashSpeedMultiplayer, ForceMode2D.Impulse);
@@ -94,22 +85,29 @@ public class PlayerDash : PlayerBase
     protected override void OnActionDeactivate()
     {
         _statesScript.State = PlayerStates.States.Idle;
-        isDashing = false;
+        isActive = false;
         dashingTimer = 0;
         _rb.velocity = Vector2.zero;
         
         StopAnimation(_animator);
     }
 
+    protected override void OnActionCancel()
+    {
+        isActive = false;
+        dashingTimer = 0;
+    }
+
     protected override void ProcessCooldowns()
     {
-        if (isDashing)
+        if (isActive)
         {
             dashingTimer += Time.deltaTime;
             if (dashingTimer >= dashDuration)
             {
-                OnActionDeactivate();
+                OnActionDeactivate();   
             }
+
         } else
         {
             dashCooldownTimer += Time.deltaTime;

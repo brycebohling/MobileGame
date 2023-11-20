@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,11 +9,10 @@ public class PlayerDeath : PlayerBase
 {
     public UnityEvent OnDeath;
 
-    [Header("Weapon")]
-    [SerializeField] Transform weaponHolder;
 
-    [Header("Particles")]
-    [SerializeField] List<ParticleSystem> deathParticles = new();
+    [Header("MMFeedacks")]
+    [SerializeField] MMF_Player deathFeedbacks;
+    
 
 
     protected override void Awake()
@@ -35,11 +35,8 @@ public class PlayerDeath : PlayerBase
         _statesScript.State = PlayerStates.States.Dead;
         
         _rb.velocity = Vector2.zero;
-        _spriteRenderer.enabled = false;
 
-        weaponHolder?.gameObject.SetActive(false);
-
-        InstantiateParticales(deathParticles, transform.position);
+        deathFeedbacks?.PlayFeedbacks();
 
         OnDeath?.Invoke();
     }

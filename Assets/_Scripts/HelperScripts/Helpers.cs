@@ -15,7 +15,7 @@ public static class Helpers
     public static void ChangeAnimationState(Animator animator, string newState, float animSpeed)
     {
         animator.speed = animSpeed;
-        animator.Play(newState);
+        animator?.Play(newState);
     }
 
     public static bool IsAnimationPlaying(Animator animator, string stateName)
