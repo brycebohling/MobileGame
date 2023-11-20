@@ -5883,6 +5883,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 545a46afdf42d4b1f81f1ee866fb0221, type: 2}
   - {fileID: 11400000, guid: a3e8d1cc11e52435881309c70fca768f, type: 2}
   - {fileID: 11400000, guid: 320914976eb1440909d50da3b0789ae0, type: 2}
+  - {fileID: 11400000, guid: 1ce38261d1fcf4ee88cdc5b63da7009f, type: 2}
+  - {fileID: 11400000, guid: a6c4d6380112847f78e3dca6feb0de23, type: 2}
   propParentPrefab: {fileID: 6312586571603541136, guid: 17bf4c63592f84829be59717e9dc2a60, type: 3}
 --- !u!4 &399501401
 Transform:
@@ -8331,7 +8333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1035619238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9119,7 +9121,7 @@ MonoBehaviour:
       m_Calls: []
   maxHealth: 100
   startingHealth: 100
-  IFrames: 0.5
+  IFrames: 0.25
   healthAsInt: 0
   takeAConstantDamage: 0
   constantDamage: 0
@@ -15382,13 +15384,13 @@ Transform:
   m_Children:
   - {fileID: 2077694777}
   - {fileID: 37040487}
-  - {fileID: 1769074334}
-  - {fileID: 2075197045}
-  - {fileID: 399501401}
-  - {fileID: 1092998189}
   - {fileID: 306706964}
   - {fileID: 1668198400}
   - {fileID: 1622633292}
+  - {fileID: 2075197045}
+  - {fileID: 399501401}
+  - {fileID: 1769074334}
+  - {fileID: 1092998189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1919195187
@@ -16279,17 +16281,29 @@ MonoBehaviour:
         m_CallState: 1
   OnFinishedDungeonGeneration:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1035619237}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   tilemapSpawnerScript: {fileID: 22355247}
   aStarGridSettings: {fileID: 1769074335}
   startPosition: {x: 0, y: 0}
+  dungeonWidth: 75
+  dungeonHeight: 75
+  offset: 2
   randomWalkParameters: {fileID: 11400000, guid: d52ad4c40ccb5452c9fae30614b4ff1e, type: 2}
   roomDifficulty: 5
   maxRoomWidth: 15
   maxRoomHeight: 15
-  dungeonWidth: 75
-  dungeonHeight: 75
-  offset: 2
   randomWalkRooms: 1
   generateOnStart: 1
   debugCreationTime: 0

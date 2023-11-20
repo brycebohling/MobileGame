@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrelPosion : AbstractBarrel
+public class BarrelPosion : MonoBehaviour
 {
     [SerializeField] ParticleSystem brakeParticles;
 
-    public override void SpawnBarrelInsides(Vector2 senderPos)
+    public void OnBarrelBrake()
     {
-        Instantiate(brakeParticles, senderPos, Quaternion.identity);
+        Instantiate(brakeParticles, transform.position, Quaternion.identity);
     }
 }

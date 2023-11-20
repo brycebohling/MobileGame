@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2595217877829143947}
   - component: {fileID: 1517458045446577928}
+  - component: {fileID: 3324142320643729397}
   m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
@@ -73,17 +74,38 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -452728675, guid: 9bfcb2d382f7a4547a2e2fd706ed899b, type: 3}
+  m_Sprite: {fileID: 975075779, guid: 698a4709ed7e24bd68c7b16a8668e07b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!95 &3324142320643729397
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4746866966311357676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: faa01de2902d047c1908be391e92246b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7396410587778530055
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +159,13 @@ MonoBehaviour:
       m_Calls: []
   isBrakeable: 1
   brakeParticles: {fileID: 2739577515273609169, guid: 514a5748bd4e1442aaf1639a23faa32d, type: 3}
-  brakingAnimsList: []
+  brakingAnimsList:
+  - brakingAnim: {fileID: 7400000, guid: 9c1f5989b806a4ad08e05b849fce8f4f, type: 2}
+    triggerHp: 3
+  - brakingAnim: {fileID: 7400000, guid: 42173a361125b485096d7e365954441a, type: 2}
+    triggerHp: 2
+  - brakingAnim: {fileID: 7400000, guid: b32fb312f5f934b368568417aa7a57a0, type: 2}
+    triggerHp: 1
 --- !u!114 &4153367160198878823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a848de5e5cf8d4dd4b1cd9209da975d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealth: 3
   startingHealth: 3
   IFrames: 0
@@ -274,12 +305,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -37942210, guid: 9bfcb2d382f7a4547a2e2fd706ed899b, type: 3}
+  m_Sprite: {fileID: -699265723, guid: 698a4709ed7e24bd68c7b16a8668e07b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

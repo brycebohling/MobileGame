@@ -35,7 +35,7 @@ public class Prop : MonoBehaviour
 
     private void Start() 
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         if (!isBrakeable) return;
 
