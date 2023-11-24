@@ -5,10 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Gm { get; private set; }
+    
+    [Header("Time")]
+    [Range(0.1f, 10f)] public float timeScale;
     public Transform playerTransfrom;
 
 
-    void Awake()
+    private void Awake()
     {
         if (Gm != null && Gm != this)
         {
@@ -17,6 +20,11 @@ public class GameManager : MonoBehaviour
         {
             Gm = this;
         }
+    }
+
+    private void Update()
+    {
+        Time.timeScale = timeScale;
     }
 
     public void UnPauseGame()

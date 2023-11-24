@@ -11,7 +11,7 @@ public class AIBase : MonoBehaviour
     protected SpriteRenderer _spriteRenderer;
     protected Health _healthScript;
     protected AIPath _aiPathScript;
-    protected AISpriteFlipper _aiSpriteFlipper;
+    protected AIFlipper _aiFlipper;
 
 
     protected virtual void Awake()
@@ -32,7 +32,7 @@ public class AIBase : MonoBehaviour
         _healthScript = gameObject?.GetComponent<Health>();
         _aIStatesScript = gameObject?.GetComponent<AIStates>();
         _aiPathScript = gameObject?.GetComponent<AIPath>();
-        _aiSpriteFlipper = gameObject?.GetComponent<AISpriteFlipper>();
+        _aiFlipper = gameObject?.GetComponent<AIFlipper>();
     }
 
     protected virtual void OnEnable()

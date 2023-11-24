@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +18,10 @@ public class AIDamaged : AIBase
     [Header("Animations")]
     [SerializeField] AnimationClip damagedAnim;
 
+    [Header("MMFeedbacks")]
+    [SerializeField] MMF_Player damagedFeedbackPlayer;
+
+    MMHealthBar healthBar;
     AIStates.States revertToState;
     bool isRevertingToState;
 
@@ -23,6 +29,8 @@ public class AIDamaged : AIBase
     protected override void Awake()
     {
         base.Awake();
+
+        healthBar = gameObject?.GetComponent<MMHealthBar>();
     }
 
     protected override void OnEnable() 
@@ -40,7 +48,7 @@ public class AIDamaged : AIBase
         if (_aIStatesScript.State != AIStates.States.Damaged) return;
         
         damagedTimer += Time.deltaTime;
-
+        
         if (damagedTimer >= damagedTime)
         {
             RestDamagedState();
@@ -59,8 +67,6 @@ public class AIDamaged : AIBase
             
         } else
         {
-            _aiPathScript.canMove = true;
-
             _aIStatesScript.State = AIStates.States.Idle;
         }
     }
@@ -94,6 +100,17 @@ public class AIDamaged : AIBase
 
         _aIStatesScript.State = AIStates.States.Damaged;
 
+        // MMF_FloatingText floatingText = damagedFeedbackPlayer.GetFeedbackOfType<MMF_FloatingText>();
+        // floatingText.Value = dmg.ToString();
+        // floatingText.TargetTransform = transform;
+        
+        // damagedFeedbackPlayer?.PlayFeedbacks();
+
+        if (healthBar != null)
+        {
+            healthBar.UpdateBar(currentHealth, 0, _healthScript.maxHealth, true);
+        }
+    
         OnDamaged?.Invoke();
     }
 

@@ -45,12 +45,13 @@ public class AIPatrol : AIBase
         } 
         
         HandleAction();
-        isActivated = true;
     }
 
     protected override void OnActionActivate()
     {
-        base.OnActionActivate();
+        isActivated = true;
+        _aiPathScript.canMove = true;
+        _rb.velocity = Vector2.zero;
     }
 
     protected override void OnActionCancel()

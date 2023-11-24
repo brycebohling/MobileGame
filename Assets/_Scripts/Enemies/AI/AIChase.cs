@@ -39,10 +39,9 @@ public class AIChase : AIBase
 
     protected override void OnActionActivate()
     {
-        base.OnActionActivate();
-
         isActivated = true;
-
+        _aiPathScript.canMove = true;
+        _rb.velocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Chasing;
 
         StartAnimation(_animator, walkAnim);
@@ -59,7 +58,6 @@ public class AIChase : AIBase
     protected override void OnActionCancel()
     {
         isActivated = false;
-        agroCounter = 0;
     }
 
     protected override void HandleAction()

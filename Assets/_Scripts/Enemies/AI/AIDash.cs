@@ -67,10 +67,9 @@ public class AIDash : AIBase
 
     protected override void OnActionActivate()
     {
-        base.OnActionActivate();
-
         isActivated = true;
-
+        _aiPathScript.canMove = false;
+        _rb.velocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Dashing;
     }
 
@@ -126,7 +125,6 @@ public class AIDash : AIBase
     private void PreDash()
     {
         isPreDash = true;
-        _aiPathScript.canMove = false;
 
         StartAnimation(_animator, preDashAnim);
     }

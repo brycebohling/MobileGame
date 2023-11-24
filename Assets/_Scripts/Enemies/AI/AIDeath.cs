@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,10 +15,14 @@ public class AIDeath : AIBase
     [SerializeField] bool spawnParticlesOnDeath;
     [SerializeField] List<ParticleSystem> deathParticles;
 
+    MMHealthBar healthBar;
+
 
     protected override void Awake()
     {
         base.Awake();
+
+        healthBar = gameObject?.GetComponent<MMHealthBar>();
     }
 
     protected override void OnEnable() 
@@ -34,6 +39,11 @@ public class AIDeath : AIBase
     {
         _aIStatesScript.State = AIStates.States.Dead;
 
+        if (healthBar != null)
+        {
+            healthBar.UpdateBar(0, 0, 1, false);
+        }
+    
         if (spawnParticlesOnDeath)
         {
             InstantiateParticales(deathParticles, transform.position);

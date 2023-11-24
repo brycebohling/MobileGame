@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIBasicMeleeAttack : AIBase
@@ -52,10 +50,9 @@ public class AIBasicMeleeAttack : AIBase
 
     protected override void OnActionActivate()
     {
-        base.OnActionActivate();
-
         isActivated = true;
         _aiPathScript.canMove = false;
+        _rb.velocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Attacking;
     }
 
@@ -125,7 +122,7 @@ public class AIBasicMeleeAttack : AIBase
         float angleToPlayer = Mathf.Atan2(GameManager.Gm.playerTransfrom.position.y - transform.position.y,
         GameManager.Gm.playerTransfrom.position.x - transform.position.x) * Mathf.Rad2Deg;
 
-        _aiSpriteFlipper.FlipTowardsTarget(GameManager.Gm.playerTransfrom.position.x);
+        _aiFlipper.FlipTowardsTarget(GameManager.Gm.playerTransfrom.position.x);
 
         if (Mathf.Abs(angleToPlayer) <= 45)
         {

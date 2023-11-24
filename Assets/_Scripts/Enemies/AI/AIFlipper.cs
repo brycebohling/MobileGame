@@ -1,9 +1,13 @@
+using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class AISpriteFlipper : AIBase
+public class AIFlipper : AIBase
 {
     public AIStates.States[] BlockingActionStates;
+    [Tooltip("Automactically flips attached GameObject")]
+    [SerializeField] List<Transform> doNotFlipTransfroms;
 
     bool isFacingRight = true;
 
@@ -29,11 +33,18 @@ public class AISpriteFlipper : AIBase
 
     private void Flip()
     {
-        Vector2 tempScale = transform.localScale;
-        tempScale.x *= -1;
-        transform.localScale = tempScale;
-
+        Vector2 newScale = transform.localScale;
+        newScale.x *= -1;
+        transform.localScale = newScale;
+        
         isFacingRight = !isFacingRight;
+
+        foreach (Transform trans in doNotFlipTransfroms)
+        {
+            Vector2 revertFlipScale = trans.localScale;
+            revertFlipScale.x *= -1;
+            trans.localScale = revertFlipScale;           
+        }        
     } 
 
     public void FlipTowardsTarget(float targetXPos)
