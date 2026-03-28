@@ -60,7 +60,7 @@ public class AIBase : MonoBehaviour
 
     protected virtual void OnActionActivate()
     {
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         _aiPathScript.canMove = true;
     }
 

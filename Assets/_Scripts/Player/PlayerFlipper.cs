@@ -75,11 +75,11 @@ public class PlayerFlipper : PlayerBase
 
     private bool CanFlipTowardsVelocity()
     {
-        if (_rb.velocity.x > minimumVelocityToFlip && _spriteRenderer.transform.localScale.x != 1)
+        if (_rb.linearVelocity.x > minimumVelocityToFlip && _spriteRenderer.transform.localScale.x != 1)
         {
             return true;
 
-        } else if (_rb.velocity.x < -minimumVelocityToFlip && _spriteRenderer.transform.localScale.x != -1)
+        } else if (_rb.linearVelocity.x < -minimumVelocityToFlip && _spriteRenderer.transform.localScale.x != -1)
         {
             return true;
 

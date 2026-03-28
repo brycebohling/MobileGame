@@ -71,7 +71,7 @@ public class PlayerDash : PlayerBase
     protected override void OnActionActivate()
     {
         _statesScript.State = PlayerStates.States.Dashing;
-        velocityBeforeDash = _rb.velocity;
+        velocityBeforeDash = _rb.linearVelocity;
         isActive = true;
         dashCooldownTimer = 0;
 
@@ -87,7 +87,7 @@ public class PlayerDash : PlayerBase
         _statesScript.State = PlayerStates.States.Idle;
         isActive = false;
         dashingTimer = 0;
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         
         StopAnimation(_animator);
     }

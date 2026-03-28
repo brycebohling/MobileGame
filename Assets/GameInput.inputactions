@@ -1,5 +1,6 @@
 {
-    "name": "InputManager",
+    "version": 1,
+    "name": "GameInput",
     "maps": [
         {
             "name": "Player",

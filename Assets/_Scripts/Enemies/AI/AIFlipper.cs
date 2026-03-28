@@ -33,6 +33,7 @@ public class AIFlipper : AIBase
 
     private void Flip()
     {
+        Debug.Log("Flip");
         Vector2 newScale = transform.localScale;
         newScale.x *= -1;
         transform.localScale = newScale;
@@ -43,7 +44,7 @@ public class AIFlipper : AIBase
         {
             Vector2 revertFlipScale = trans.localScale;
             revertFlipScale.x *= -1;
-            trans.localScale = revertFlipScale;           
+            trans.localScale = revertFlipScale;
         }        
     } 
 

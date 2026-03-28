@@ -41,7 +41,7 @@ public class AIChase : AIBase
     {
         isActivated = true;
         _aiPathScript.canMove = true;
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Chasing;
 
         StartAnimation(_animator, walkAnim);

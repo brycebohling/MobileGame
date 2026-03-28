@@ -59,7 +59,7 @@ public class AIExplode : AIBase
     {
         _aiPathScript.canMove = false;
         
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
 
         Helpers.ChangeAnimationState(_animator, explosionBuildUpAnim.name, 1);
         StartCoroutine(PlayExplosionColors());

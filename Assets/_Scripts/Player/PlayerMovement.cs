@@ -110,7 +110,7 @@ public class PlayerMovement : PlayerBase
 
     protected override void ApplyAction()
     {
-        _rb.velocity = movementSpeed;
+        _rb.linearVelocity = movementSpeed;
 
         _statesScript.State = PlayerStates.States.Walking;
     }
@@ -128,7 +128,7 @@ public class PlayerMovement : PlayerBase
     {
         isActivated = false;
 
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         _statesScript.State = PlayerStates.States.Idle;
 
         StopAnimation(_animator);

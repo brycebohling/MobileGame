@@ -69,7 +69,7 @@ public class AIDash : AIBase
     {
         isActivated = true;
         _aiPathScript.canMove = false;
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Dashing;
     }
 
@@ -132,7 +132,7 @@ public class AIDash : AIBase
     private void Dash()
     {
         Vector2 direction = (GameManager.Gm.playerTransfrom.position - transform.position).normalized;
-        _rb.velocity = direction * dashSpeed;
+        _rb.linearVelocity = direction * dashSpeed;
 
         isDashing = true;
         isPreDash = false;

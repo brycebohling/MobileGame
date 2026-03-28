@@ -57,7 +57,7 @@ public class AIDamaged : AIBase
 
     public void RestDamagedState()
     {
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
 
         if (isRevertingToState)
         {
@@ -118,7 +118,7 @@ public class AIDamaged : AIBase
     {
         Vector2 dir = ((Vector2)transform.position - senderPos).normalized;
 
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
         _aiPathScript.canMove = false;

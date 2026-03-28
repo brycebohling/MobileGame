@@ -34,7 +34,7 @@ public class PlayerDeath : PlayerBase
     {
         _statesScript.State = PlayerStates.States.Dead;
         
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
 
         deathFeedbacks?.PlayFeedbacks();
 

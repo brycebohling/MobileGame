@@ -39,7 +39,7 @@ public class PlayerDamaged : PlayerBase
         damageCounter += Time.deltaTime;
         if (damageCounter >= damagedTime)
         {
-            _rb.velocity = Vector2.zero;
+            _rb.linearVelocity = Vector2.zero;
             _statesScript.State = PlayerStates.States.Idle;
         }
     }

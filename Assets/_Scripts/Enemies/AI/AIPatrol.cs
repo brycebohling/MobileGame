@@ -51,7 +51,7 @@ public class AIPatrol : AIBase
     {
         isActivated = true;
         _aiPathScript.canMove = true;
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
     }
 
     protected override void OnActionCancel()

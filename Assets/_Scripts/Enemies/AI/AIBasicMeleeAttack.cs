@@ -52,7 +52,7 @@ public class AIBasicMeleeAttack : AIBase
     {
         isActivated = true;
         _aiPathScript.canMove = false;
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Attacking;
     }
 

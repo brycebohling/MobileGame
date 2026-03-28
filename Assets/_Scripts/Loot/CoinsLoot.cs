@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoinsLoot : MonoBehaviour
 {
-    private void Start() 
+    private void Start()
     {
-        
+
     }
 }

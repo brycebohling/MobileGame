@@ -13,7 +13,7 @@ public class ProjectileBase : MonoBehaviour
         _dmg = dmg;
         _knockBackForece = knockBackForece;
         
-        GetComponent<Rigidbody2D>().velocity = direction.normalized * speed;
+        GetComponent<Rigidbody2D>().linearVelocity = direction.normalized * speed;
 
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
