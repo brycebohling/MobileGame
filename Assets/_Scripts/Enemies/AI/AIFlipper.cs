@@ -25,7 +25,8 @@ public class AIFlipper : AIBase
         {
             Flip();
 
-        } else if (_aiPathScript.velocity.x < 0 && isFacingRight)
+        }
+        else if (_aiPathScript.velocity.x < 0 && isFacingRight)
         {
             Flip();
         }
@@ -33,11 +34,10 @@ public class AIFlipper : AIBase
 
     private void Flip()
     {
-        Debug.Log("Flip");
         Vector2 newScale = transform.localScale;
         newScale.x *= -1;
         transform.localScale = newScale;
-        
+
         isFacingRight = !isFacingRight;
 
         foreach (Transform trans in doNotFlipTransfroms)
@@ -45,16 +45,17 @@ public class AIFlipper : AIBase
             Vector2 revertFlipScale = trans.localScale;
             revertFlipScale.x *= -1;
             trans.localScale = revertFlipScale;
-        }        
-    } 
+        }
+    }
 
     public void FlipTowardsTarget(float targetXPos)
     {
         if (targetXPos < transform.position.x && isFacingRight)
-        {   
+        {
             Flip();
 
-        } else if (targetXPos > transform.position.x && !isFacingRight)
+        }
+        else if (targetXPos > transform.position.x && !isFacingRight)
         {
             Flip();
         }
