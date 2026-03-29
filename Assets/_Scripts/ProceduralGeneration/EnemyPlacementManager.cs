@@ -11,13 +11,12 @@ public class EnemyPlacementManager : MonoBehaviour
 
     [SerializeField] DungeonGenerator dungeonGeneratorScript;
     [SerializeField] List<EnemySO> enemiesToPlace;
-    [SerializeField] Transform enemyParentPrefab;
 
 
     public void ProcessRooms()
     {
         if (dungeonGeneratorScript == null) return;
-        
+
         foreach (Room room in dungeonGeneratorScript.RoomList)
         {
             PlaceEnemies(room, enemiesToPlace);
@@ -42,8 +41,8 @@ public class EnemyPlacementManager : MonoBehaviour
             accessiblePositions.ExceptWith(room.ClearFloorTiles);
 
             List<Vector2Int> possiblePositions = accessiblePositions.OrderBy(x => Guid.NewGuid()).ToList();
-                
-            if (TryPlacingEnemyBruteForce(room, enemyList[randomEnemyIndex], possiblePositions)) 
+
+            if (TryPlacingEnemyBruteForce(room, enemyList[randomEnemyIndex], possiblePositions))
             {
                 curDifficulty += enemyList[randomEnemyIndex].EnemyDifficulty;
             }
@@ -57,14 +56,14 @@ public class EnemyPlacementManager : MonoBehaviour
             Vector2Int position = possiblePositions[i];
 
             List<Vector2Int> freePositionsAround = TryToFitEnemy(enemyToPlace, possiblePositions, position);
-            
+
             if (freePositionsAround.Count == enemyToPlace.EnemySize.x * enemyToPlace.EnemySize.y)
             {
                 if (enemyToPlace.MustBeAccessible)
                 {
                     if (!Helpers.CanPropBeAccessed(room, room.RoomCenterPos, freePositionsAround)) continue;
                 }
-                    
+
                 PlaceEnemyGameObjectAt(room, position, enemyToPlace);
 
                 // if (enemyToPlace.PlaceAsGroup)
@@ -98,19 +97,14 @@ public class EnemyPlacementManager : MonoBehaviour
 
     private void PlaceEnemyGameObjectAt(Room room, Vector2Int placementPosition, EnemySO enemyToPlace)
     {
-        Transform enemyParent = Instantiate(enemyParentPrefab);
-        Transform enemy = Instantiate(enemyToPlace.EnemyPrefab, Vector2.zero, Quaternion.identity, enemyParent.transform);
-
-        enemyParent.localPosition = (Vector2)placementPosition;
-        enemy.localPosition = enemyToPlace.Center;
-
+        Transform enemy = Instantiate(enemyToPlace.EnemyPrefab, (Vector2)placementPosition + enemyToPlace.Center, Quaternion.identity);
         room.EnemyPositions.Add(placementPosition);
-        room.EnemyTransfromReference.Add(enemyParent);
+        room.EnemyTransfromReference.Add(enemy);
 
         if (enemyToPlace.MustBeAccessible)
         {
             bool isAccessible = Helpers.CanPropBeAccessed(room, new Vector2Int(Mathf.RoundToInt(room.RoomCenterPos.x), Mathf.RoundToInt(room.RoomCenterPos.y)),
-                new List<Vector2Int>() {placementPosition});
+                new List<Vector2Int>() { placementPosition });
 
             if (!isAccessible)
             {
