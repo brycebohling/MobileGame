@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Pathfinding.Ionic.Zip;
 using UnityEngine;
 
 public static class Helpers
@@ -24,7 +23,8 @@ public static class Helpers
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(stateName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
@@ -37,7 +37,7 @@ public static class Helpers
 
         pathQueue.Enqueue(startPosition);
 
-        while (pathQueue.Count > 0) 
+        while (pathQueue.Count > 0)
         {
             Vector2Int currentTile = pathQueue.Dequeue();
 
@@ -55,7 +55,7 @@ public static class Helpers
 
                 if (!visitedPaths.Contains(edge) && room.FloorTiles.Contains(edge) &&
                     !room.PropPositions.Contains(edge))
-                {                    
+                {
                     visitedPaths.Add(edge);
                     pathQueue.Enqueue(edge);
                 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Pathfinding;
+using Pathfinding.Graphs.Grid;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,11 +21,11 @@ public class AStarGridSettings : MonoBehaviour
     uint gridIndex;
     string gridName = "PCG Grid";
     bool hasSpawnedGraph;
-    
+
 
     public void ScanGraphs()
     {
-        AstarData.active.Scan();
+        AstarPath.active.Scan();
 
         OnFinishedGridScan?.Invoke();
     }
@@ -33,7 +34,7 @@ public class AStarGridSettings : MonoBehaviour
     {
         // This holds all graph data
         astarData = AstarPath.active.data;
-        
+
         gridScript = astarData.AddGraph(typeof(GridGraph)) as GridGraph;
         GraphCollision gridCollisionsScript = new()
         {
@@ -64,7 +65,7 @@ public class AStarGridSettings : MonoBehaviour
     {
         if (!hasSpawnedGraph) return;
 
-        if (astarData.FindGraph(g => g.name == gridName) != null) 
+        if (astarData.FindGraph(g => g.name == gridName) != null)
         {
             astarData.RemoveGraph(astarData.graphs[gridIndex]);
         }
