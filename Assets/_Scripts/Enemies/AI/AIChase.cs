@@ -40,7 +40,7 @@ public class AIChase : AIBase
     protected override void OnActionActivate()
     {
         isActivated = true;
-        _aiPathScript.canMove = true;
+        _aiPathScript.simulateMovement = true;
         _rb.linearVelocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Chasing;
 
@@ -71,13 +71,15 @@ public class AIChase : AIBase
 
             ChaseClosestPlayer();
 
-        } else
+        }
+        else
         {
             if (IsTargetInRange(targetingRadius, playerLayer))
             {
                 agroCounter = agroTime;
 
-            } else if (_aIStatesScript.State == AIStates.States.Chasing)
+            }
+            else if (_aIStatesScript.State == AIStates.States.Chasing)
             {
                 OnActionDeactivate();
             }

@@ -25,12 +25,12 @@ public class AIDeath : AIBase
         healthBar = gameObject?.GetComponent<MMHealthBar>();
     }
 
-    protected override void OnEnable() 
+    protected override void OnEnable()
     {
         _healthScript.OnDeath += Death;
     }
 
-    protected override void OnDisable() 
+    protected override void OnDisable()
     {
         _healthScript.OnDeath -= Death;
     }
@@ -43,7 +43,7 @@ public class AIDeath : AIBase
         {
             healthBar.UpdateBar(0, 0, 1, false);
         }
-    
+
         if (spawnParticlesOnDeath)
         {
             InstantiateParticales(deathParticles, transform.position);

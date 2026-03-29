@@ -21,7 +21,7 @@ public class AIPatrol : AIBase
     Vector2 movePoint;
     bool isActivated;
 
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,17 +40,17 @@ public class AIPatrol : AIBase
             {
                 OnActionCancel();
             }
-            
+
             return;
-        } 
-        
+        }
+
         HandleAction();
     }
 
     protected override void OnActionActivate()
     {
         isActivated = true;
-        _aiPathScript.canMove = true;
+        _aiPathScript.simulateMovement = true;
         _rb.linearVelocity = Vector2.zero;
     }
 
@@ -73,7 +73,8 @@ public class AIPatrol : AIBase
                 isMovingToPoint = false;
                 nextMovementCounter = Random.Range(tbMovementMin, tbMovementMax);
 
-            } else
+            }
+            else
             {
                 timeTillReroute += Time.deltaTime;
 
@@ -83,13 +84,15 @@ public class AIPatrol : AIBase
                 }
             }
 
-        } else
+        }
+        else
         {
             if (nextMovementCounter <= 0)
             {
                 MoveToNextPoint(GetMovePos());
 
-            } else
+            }
+            else
             {
                 nextMovementCounter -= Time.deltaTime;
 
@@ -111,7 +114,7 @@ public class AIPatrol : AIBase
         //     movePoint = startPos + Random.insideUnitCircle * patrolRadius;
         //     anyObstaclesInTheWay = gridGraph.Linecast(transform.position, movePoint, );
         // }
-        
+
         return movePoint;
     }
 
@@ -121,12 +124,12 @@ public class AIPatrol : AIBase
 
         _aiPathScript.destination = nextPoint;
         _aiPathScript.maxSpeed = patrolSpeed;
-        
+
         isMovingToPoint = true;
         timeTillReroute = 0;
 
         _aIStatesScript.State = AIStates.States.Patrolling;
-        
+
 
         StartAnimation(_animator, walkAnim);
     }

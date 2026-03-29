@@ -33,22 +33,22 @@ public class AIDamaged : AIBase
         healthBar = gameObject?.GetComponent<MMHealthBar>();
     }
 
-    protected override void OnEnable() 
+    protected override void OnEnable()
     {
         _healthScript.OnDamaged += Damaged;
     }
 
-    protected override void OnDisable() 
+    protected override void OnDisable()
     {
         _healthScript.OnDamaged -= Damaged;
     }
 
-    private void Update() 
+    private void Update()
     {
         if (_aIStatesScript.State != AIStates.States.Damaged) return;
-        
+
         damagedTimer += Time.deltaTime;
-        
+
         if (damagedTimer >= damagedTime)
         {
             RestDamagedState();
@@ -64,8 +64,9 @@ public class AIDamaged : AIBase
             _aIStatesScript.State = revertToState;
 
             isRevertingToState = false;
-            
-        } else
+
+        }
+        else
         {
             _aIStatesScript.State = AIStates.States.Idle;
         }
@@ -80,7 +81,7 @@ public class AIDamaged : AIBase
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -103,14 +104,14 @@ public class AIDamaged : AIBase
         // MMF_FloatingText floatingText = damagedFeedbackPlayer.GetFeedbackOfType<MMF_FloatingText>();
         // floatingText.Value = dmg.ToString();
         // floatingText.TargetTransform = transform;
-        
+
         // damagedFeedbackPlayer?.PlayFeedbacks();
 
         if (healthBar != null)
         {
             healthBar.UpdateBar(currentHealth, 0, _healthScript.maxHealth, true);
         }
-    
+
         OnDamaged?.Invoke();
     }
 
@@ -121,6 +122,6 @@ public class AIDamaged : AIBase
         _rb.linearVelocity = Vector2.zero;
         _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
-        _aiPathScript.canMove = false;
+        _aiPathScript.simulateMovement = false;
     }
-}   
+}

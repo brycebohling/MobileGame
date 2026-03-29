@@ -15,8 +15,8 @@ public class AIBasicMeleeAttack : AIBase
     [SerializeField] float offsetFromCenter;
 
     [Header("Animations")]
-    [SerializeField] AnimationClip[] attackAnims; 
-    
+    [SerializeField] AnimationClip[] attackAnims;
+
     [Header("Gizmos")]
     [SerializeField] bool showAttackTargetingRadius;
     [SerializeField] bool showAttackRadius;
@@ -51,7 +51,7 @@ public class AIBasicMeleeAttack : AIBase
     protected override void OnActionActivate()
     {
         isActivated = true;
-        _aiPathScript.canMove = false;
+        _aiPathScript.simulateMovement = false;
         _rb.linearVelocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Attacking;
     }
@@ -69,7 +69,7 @@ public class AIBasicMeleeAttack : AIBase
 
     private void UpdateTimers()
     {
-        if (!isPlayingAttackAnim) 
+        if (!isPlayingAttackAnim)
         {
             attackCooldownCounter += Time.deltaTime;
         }
@@ -92,13 +92,15 @@ public class AIBasicMeleeAttack : AIBase
         {
             OnActionActivate();
 
-        } else if (!IsTargetInRange(attackTargetingRadius, targetLayer) && !isPlayingAttackAnim)
+        }
+        else if (!IsTargetInRange(attackTargetingRadius, targetLayer) && !isPlayingAttackAnim)
         {
-            if (isActivated && _aIStatesScript.State == AIStates.States.Attacking) 
+            if (isActivated && _aIStatesScript.State == AIStates.States.Attacking)
             {
                 OnActionDeactivate();
 
-            } else if (isActivated)
+            }
+            else if (isActivated)
             {
                 OnActionCancel();
             }
@@ -118,7 +120,7 @@ public class AIBasicMeleeAttack : AIBase
         }
 
         if (isPlayingAttackAnim) return;
-        
+
         float angleToPlayer = Mathf.Atan2(GameManager.Gm.playerTransfrom.position.y - transform.position.y,
         GameManager.Gm.playerTransfrom.position.x - transform.position.x) * Mathf.Rad2Deg;
 
@@ -129,23 +131,26 @@ public class AIBasicMeleeAttack : AIBase
             Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Right].name, 1);
             attackingDirection = Vector2.right;
 
-        } else if (Mathf.Abs(angleToPlayer) >= 135)
+        }
+        else if (Mathf.Abs(angleToPlayer) >= 135)
         {
             Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Left].name, 1);
             attackingDirection = Vector2.left;
 
-        } else if (angleToPlayer < 135 && angleToPlayer > 45)
+        }
+        else if (angleToPlayer < 135 && angleToPlayer > 45)
         {
             Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Up].name, 1);
             attackingDirection = Vector2.up;
 
-        } else
+        }
+        else
         {
             Helpers.ChangeAnimationState(_animator, attackAnims[(int)Helpers.Directions.Down].name, 1);
             attackingDirection = Vector2.down;
-        }   
+        }
 
-        isPlayingAttackAnim = true;   
+        isPlayingAttackAnim = true;
     }
 
     public void OnAttackFrame()
@@ -156,7 +161,7 @@ public class AIBasicMeleeAttack : AIBase
         Collider2D hitTarget = Physics2D.OverlapCircle(attackPoint, hitBoxRadius, targetLayer);
 
         if (hitTarget == null) return;
-        
+
         if (hitTarget.TryGetComponent(out Health healthScript))
         {
             healthScript.Damage(damage, knockBackForce, transform.position);
@@ -165,11 +170,11 @@ public class AIBasicMeleeAttack : AIBase
         attackCooldownCounter = 0;
     }
 
-    private void OnDrawGizmos() 
+    private void OnDrawGizmos()
     {
         if (showAttackTargetingRadius)
         {
-            Gizmos.DrawWireSphere(transform.position, attackTargetingRadius);    
+            Gizmos.DrawWireSphere(transform.position, attackTargetingRadius);
         }
 
         if (showAttackRadius)

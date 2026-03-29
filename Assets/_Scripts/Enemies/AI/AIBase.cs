@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AIBase : MonoBehaviour
 {
-    protected AIStates _aIStatesScript; 
+    protected AIStates _aIStatesScript;
     protected Rigidbody2D _rb;
     protected Animator _animator;
     protected SpriteRenderer _spriteRenderer;
@@ -19,7 +19,7 @@ public class AIBase : MonoBehaviour
         Initialization();
     }
 
-    protected virtual void Start() 
+    protected virtual void Start()
     {
         Initialization();
     }
@@ -37,7 +37,7 @@ public class AIBase : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-    
+
     }
 
     protected virtual void OnDisable()
@@ -54,14 +54,14 @@ public class AIBase : MonoBehaviour
                 return false;
             }
         }
-        
+
         return true;
     }
 
     protected virtual void OnActionActivate()
     {
         _rb.linearVelocity = Vector2.zero;
-        _aiPathScript.canMove = true;
+        _aiPathScript.simulateMovement = true;
     }
 
     protected virtual void OnActionDeactivate()
@@ -86,7 +86,7 @@ public class AIBase : MonoBehaviour
 
     protected virtual void HandleParticles()
     {
-        
+
     }
 
     protected virtual void StartParticles(List<ParticleSystem> particleList, Vector3 pos)
@@ -112,7 +112,7 @@ public class AIBase : MonoBehaviour
             {
                 particleSystem.Stop();
                 ParticleSystem.EmissionModule em = particleSystem.GetComponent<ParticleSystem>().emission;
-                em.enabled = false;   
+                em.enabled = false;
             }
         }
     }
@@ -137,7 +137,7 @@ public class AIBase : MonoBehaviour
 
     protected virtual void StopSFX()
     {
-        
+
     }
 
     protected virtual void StartAnimation(Animator anim, AnimationClip animClip)

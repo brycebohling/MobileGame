@@ -13,17 +13,17 @@ public class AICollisions : AIBase
     {
         if (!IsActionAuth(BlockingActionStates)) return;
 
-        if (other.gameObject.CompareTag("Player"))      
+        if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<Health>().Damage(collisionDmg, knockBackForce, transform.position);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) 
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (!IsActionAuth(BlockingActionStates)) return;
-        
-        if (other.gameObject.CompareTag("Player"))      
+
+        if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<Health>().Damage(collisionDmg, knockBackForce, transform.position);
         }

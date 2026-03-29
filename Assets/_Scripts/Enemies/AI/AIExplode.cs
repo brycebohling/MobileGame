@@ -44,7 +44,8 @@ public class AIExplode : AIBase
             Kill();
             explosionBuildUpCounter = 0;
 
-        } else if (IsTargetInRange(explosionTargetingRadius, targetLayer) && !startedBuildUpExplosion)
+        }
+        else if (IsTargetInRange(explosionTargetingRadius, targetLayer) && !startedBuildUpExplosion)
         {
             BuildUpExplosion();
         }
@@ -57,8 +58,8 @@ public class AIExplode : AIBase
 
     private void BuildUpExplosion()
     {
-        _aiPathScript.canMove = false;
-        
+        _aiPathScript.simulateMovement = false;
+
         _rb.linearVelocity = Vector2.zero;
 
         Helpers.ChangeAnimationState(_animator, explosionBuildUpAnim.name, 1);
@@ -98,17 +99,17 @@ public class AIExplode : AIBase
         Material parentMat = parentSpriteRenderer.material;
 
         Material explosionMat = explosionTransfrom.GetComponent<SpriteRenderer>().material;
-        
+
         explosionMat.SetFloat("_HsvShift", parentMat.GetInt("_HsvShift"));
         explosionMat.SetFloat("_Contrast", parentMat.GetInt("_Contrast"));
         explosionMat.SetFloat("_Brightness", parentMat.GetInt("_Brightness"));
 
         Collider2D hitTarget = Physics2D.OverlapCircle(transform.position, explosionRadius, targetLayer);
- 
+
         if (hitTarget != null && hitTarget.TryGetComponent(out Health healthScript))
         {
             healthScript.Damage(explosionDamage, knockBackForce, transform.position);
-        }        
+        }
     }
 
     private void OnDrawGizmos()

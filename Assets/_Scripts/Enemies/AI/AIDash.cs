@@ -33,8 +33,8 @@ public class AIDash : AIBase
     void Update()
     {
         UpdateTimers();
-        
-        if (!IsActionAuth(BlockingActionStates)) 
+
+        if (!IsActionAuth(BlockingActionStates))
         {
             if (isActivated)
             {
@@ -53,7 +53,7 @@ public class AIDash : AIBase
         {
             preDashCounter += Time.deltaTime;
         }
-        
+
         if (isDashing)
         {
             dashCounter += Time.deltaTime;
@@ -68,7 +68,7 @@ public class AIDash : AIBase
     protected override void OnActionActivate()
     {
         isActivated = true;
-        _aiPathScript.canMove = false;
+        _aiPathScript.simulateMovement = false;
         _rb.linearVelocity = Vector2.zero;
         _aIStatesScript.State = AIStates.States.Dashing;
     }
@@ -108,7 +108,7 @@ public class AIDash : AIBase
             }
         }
 
-        if ((!IsTargetInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing) 
+        if ((!IsTargetInRange(targetingRadius, playerLayer) && _aIStatesScript.State != AIStates.States.Dashing)
             || dashCooldownCounter < dashCooldownTime || isDashing) return;
 
         if (!isPreDash)
@@ -116,7 +116,8 @@ public class AIDash : AIBase
             OnActionActivate();
             PreDash();
 
-        } else if (preDashCounter >= preDashTime)
+        }
+        else if (preDashCounter >= preDashTime)
         {
             Dash();
         }
@@ -128,7 +129,7 @@ public class AIDash : AIBase
 
         StartAnimation(_animator, preDashAnim);
     }
-    
+
     private void Dash()
     {
         Vector2 direction = (GameManager.Gm.playerTransfrom.position - transform.position).normalized;
@@ -136,7 +137,7 @@ public class AIDash : AIBase
 
         isDashing = true;
         isPreDash = false;
-        
+
         StartAnimation(_animator, dashAnim);
     }
 }
