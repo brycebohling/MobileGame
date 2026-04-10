@@ -32,7 +32,6 @@ public class CameraController : MonoBehaviour
 
         cam = GetComponent<CinemachineCamera>();
         noisePerlin = GetComponent<CinemachineBasicMultiChannelPerlin>();
-        Debug.Log(noisePerlin);
     }
 
     void Update()

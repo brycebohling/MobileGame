@@ -1,16 +1,16 @@
 ﻿<Solution>
-  <Project Path="MoreMountains.Tools.csproj" />
   <Project Path="AstarPathfindingProject.csproj" />
+  <Project Path="MoreMountains.Tools.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="AstarPathfindingProjectEditor.csproj" />
   <Project Path="MoreMountains.Tools.Editor.csproj" />
-  <Project Path="Lofelt.NiceVibrations.csproj" />
+  <Project Path="Lofelt.NiceVibrations.Demo.csproj" />
   <Project Path="AllIn1SpriteShaderAssembly.csproj" />
   <Project Path="Drawing.csproj" />
-  <Project Path="AstarPackageToolsEditor.csproj" />
-  <Project Path="Lofelt.NiceVibrations.Demo.csproj" />
   <Project Path="Lofelt.NiceVibrations.Editor.csproj" />
+  <Project Path="AstarPackageToolsEditor.csproj" />
   <Project Path="andywiecko.BurstTriangulator.csproj" />
+  <Project Path="Lofelt.NiceVibrations.csproj" />
   <Project Path="PackageTools.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="DrawingEditor.csproj" />
