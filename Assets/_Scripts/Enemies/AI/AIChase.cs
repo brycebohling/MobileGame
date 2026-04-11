@@ -16,10 +16,12 @@ public class AIChase : AIBase
     bool isActivated;
     float agroCounter;
 
+    AIAlert _aiAlert;
 
     protected override void Awake()
     {
         base.Awake();
+        _aiAlert = GetComponent<AIAlert>();
     }
 
     void Update()
@@ -77,7 +79,7 @@ public class AIChase : AIBase
             if (IsTargetInRange(targetingRadius, playerLayer))
             {
                 agroCounter = agroTime;
-
+                _aiAlert?.OnAggro();
             }
             else if (_aIStatesScript.State == AIStates.States.Chasing)
             {
